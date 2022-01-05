@@ -1,6 +1,6 @@
-PWA Pool App
+Poolmate Web
 ------------
->PWA Pool maintenance app using Akka-Http, Quill, uPickle, ScalaJs, Laminar and Postgresql.
+>Mobile web Pool management app using Cask, Scalikejdbc, uPickle, ScalaJs, Laminar and Postgresql.
 
 Install
 -------
