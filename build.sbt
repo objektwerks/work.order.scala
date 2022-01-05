@@ -1,4 +1,4 @@
-name := "pwa.pool"
+name := "poolmate.web"
 
 lazy val akkaVersion = "2.6.18"
 lazy val akkaHttpVersion = "10.2.7"
