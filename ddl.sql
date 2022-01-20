@@ -1,9 +1,6 @@
-DROP SCHEMA PUBLIC CASCADE;
-CREATE SCHEMA PUBLIC;
-
 CREATE TABLE account (
   license VARCHAR(36) PRIMARY KEY,
-  email VARCHAR NOT NULL,
+  email_address VARCHAR NOT NULL,
   pin VARCHAR(9) NOT NULL,
   activated INT NOT NULL,
   deactivated INT NOT NULL
@@ -115,19 +112,21 @@ CREATE TABLE repair (
   cost NUMERIC(7, 2) NOT NULL
 );
 
+CREATE TABLE email (
+  id VARCHAR PRIMARY KEY,
+  license VARCHAR(36) REFERENCES account(license),
+  address VARCHAR NOT NULL,
+  message VARCHAR NOT NULL,
+  date_sent INT NOT NULL,
+  time_sent INT NOT NULL,
+  processed BOOL NOT NULL,
+  valid BOOL NOT NULL
+);
+
 CREATE TABLE fault (
   date_of INT NOT NULL,
   time_of INT NOT NULL,
   nano_of Int NOT NULL,
-  code INT NOT NULL,
   cause VARCHAR NOT NULL,
   PRIMARY KEY (date_of, time_of, nano_of)
-);
-
-CREATE TABLE email (
-  id VARCHAR PRIMARY KEY,
-  license VARCHAR(36) NOT NULL,
-  address VARCHAR NOT NULL,
-  processed BOOL NOT NULL,
-  valid BOOL NOT NULL
 );
