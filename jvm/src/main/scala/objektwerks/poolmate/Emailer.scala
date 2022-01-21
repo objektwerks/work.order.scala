@@ -1,6 +1,4 @@
-package objektwerks.service
-
-import objektwerks.entity.Email
+package objektwerks.poolmate
 
 object Emailer:
   def send(email: Email): Boolean = true
