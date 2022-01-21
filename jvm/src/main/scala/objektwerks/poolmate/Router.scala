@@ -1,4 +1,4 @@
-package objektwerks.router
+package objektwerks.poolmate
 
 import cask.main.Routes
 import cask.model.Request
