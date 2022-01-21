@@ -38,7 +38,7 @@ lazy val sharedJvm = shared.jvm
 
 lazy val js = (project in file("js"))
   .dependsOn(sharedJs)
-  .enablePlugins(ScalaJSPlugin, UniversalPlugin)
+  .enablePlugins(ScalaJSPlugin)
   .settings(common)
   .settings(
     libraryDependencies ++= Seq(
