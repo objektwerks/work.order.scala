@@ -1,6 +1,4 @@
-package objektwerks.service
-
-import objektwerks.entity.*
+package objektwerks.poolmate
 
 class Dispatcher(authorizer: Authorizer, validator: Validator, handler: Handler):
   def dispatch(command: Command): Event =
