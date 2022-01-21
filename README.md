@@ -8,34 +8,6 @@ Install
 2. brew install node
 3. npm install jsdom
 
-Configuration
--------------
->Provide valid configuration for:
-1. Postgresql
-2. SMTP
->in these conf files:
-1. jvm/src/it/resources/test.server.conf
-2. jvm/src/main/resoures/server.conf
-
-Bundling
---------
->None of the following Scalajs bundling options yield satisfactory results:
-1. ScalaJS Bundler: https://scalacenter.github.io/scalajs-bundler/index.html
-2. Sbt Web: https://github.com/sbt/sbt-web
-3. Sbt Web ScalaJS: https://github.com/vmunier/sbt-web-scalajs
->There is ***no*** Scalajs bundling standard.
-
-jsEnv
------
->Using ( libraryDependencies += "org.scala-js" %% "scalajs-env-jsdom-nodejs" % "1.1.0" ) in plugins.sbt
->provides access to a NodeJs environment ( github.com/scala-js/scala-js-env-jsdom-nodejs ) for testing.
->Yet the following jsEnv shortcomings exist:
-1. NodeJs - Window object not supported.
-2. NodeJs and Jsdom - Window object supported. IndexedDB not supported. Other Windows libraries likely not supported.
-3. PhantomJS - Throws exception. Advanced configuration not available.
-4. Selenium - Doesn't support headless.
->Use utest ( www.lihaoyi.com/post/uTesttheEssentialTestFrameworkforScala.html ) for testing.
-
 Dev
 ---
 >[ shared ]
@@ -85,12 +57,6 @@ Http Codes
 Client
 ------
 * Command => Fault | Event
-* Entity  => Fault | State
-
-Proxy
------
-* CommandProxy => EventHandler
-* EntityProxy => StateHandler
 
 Account
 -------
@@ -98,13 +64,6 @@ Account
 * Login( email, pin ) => LoggedIn( account )
 * Deactivate( license ) => Deactivated( account )
 * Reactivate( license ) => Reactivated( account )
-
-Dialogs
--------
-* Register ( email )
-* Login ( email, pin )
-* Account ( license, email, pin, activated, deactivated )
-* Pool ( pool )
 
 Views
 -----
@@ -127,53 +86,37 @@ Views
 Rest
 ----
 >Public url: /
-* /now
-* /register
-* /login
-* /deactivate
-* /reactivate
->API url: /api/v1/pool 
-* /pools           /add   /update
-* /surfaces        /add   /update
-* /pumps           /add   /update
-* /timers          /add   /update
-* /timersettings   /add   /update
-* /heaters         /add   /update
-* /heatersettings  /add   /update
-* /measurements    /add   /update
-* /cleanings       /add   /update
-* /chemicals       /add   /update
-* /supplies        /add   /update
-* /repairs         /add   /update
 
-Object Model
-------------
-* License(key)
-* Account(license, email, pin, activated, deactivated)
-* Pool(id, license, name, built, volume)
-* Surface(id, poolId, installed, kind)
-* Pump(id, poolId, installed, model)
-* Timer(id, poolId, installed, model)
-* TimerSetting(id, timerId, created, timeOn, timeOff)
-* Heater(id, poolId, installed, model)
-* HeaterSetting(id, heaterId, temp, dateOn, dateOff)
-* Measurement(id, poolId, measured, temp, totalHardness, totalChlorine, totalBromine, freeChlorine, ph, totalAlkalinity, cyanuricAcid)
-* Cleaning(id, poolId, cleaned, brush, net, vacuum, skimmerBasket, pumpBasket, pumpFilter, deck)
-* Chemical(id, poolId, added, chemical, amount, unit)
-* Supply(id, poolId, purchased, cost, supply, amount, unit)
-* Repair(id, poolId, repaired, cost, repair)
-* Email(id, license, address, processed, valid)
-* Fault(id, dateOf, timeOf, code, cause)
-
-Relational Model
-----------------
-* License
-* Account 1 ---> * Pool
-* Pool 1 ---> * Surface | Pump | Timer | Heater | Measurement | Cleaning | Chemical | Supply | Repair
-* Timer 1 ---> * TimerSetting
-* Heater 1 ---> * HeaterSetting
-* Email
+Entity
+------
+* Pool 1..n ---> 1 Account **
+* Pool 1 ---> 1..n Surface, Pump, Timer, TimerSetting, Heater, HeaterSetting, Measurement, Cleaning, Chemical, Supply, Repair
+* Email 1..n ---> 1 Account **
 * Fault
+* UoM ( unit of measure )
+>** Account contains a globally unique license.
+
+Model
+-----
+* Server 1 ---> 1 Router 1 ---> 1 Dispatcher
+* Service 1 ---> 1 Store 1 ---> 1 Emailer
+* Authorizer, Handler 1 ---> 1 Service
+* Dispatcher 1 ---> 1 Authorizer, Validator, Handler
+* Client
+
+Sequence
+--------
+1. Client --- Command ---> Server
+2. Server --- Command ---> Router
+3. Router --- Command ---> Dispatcher
+4. Dispatcher --- Command ---> Authorizer, Validator, Handler
+5. Handler --- T ---> Service
+6. Service --- T ---> Store --- Email ---> Emailer
+7. Service --- Either[Throwable, T] ---> Handler
+8. Handler --- Event ---> Dispatcher
+9. Dispatcher --- Event ---> Router
+10. Router --- Event ---> Server
+11. Server --- Event ---> Client
 
 Measurements
 ------------
@@ -274,13 +217,3 @@ Config
 >See these files:
 1. jvm/src/it/resources/test.server.conf
 2. jvm/src/main/resoures/server.conf
-
-Quill
------
->To eliminate unused ExecutionContext variable errors, this scalac option must be set in the build.sbt:
-```
-scalacOptions ++= Seq(
-  "-Ywarn-macros:after"
-)
-```
->Quill macros use the implicit ExecutionContext. The Quill ctx.transaction code does not.
