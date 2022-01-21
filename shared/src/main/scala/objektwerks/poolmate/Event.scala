@@ -1,7 +1,4 @@
-package objektwerks.entity
-
-import objektwerks.datetime.DateTime
-import objektwerks.entity.{Account, Entity}
+package objektwerks.poolmate
 
 sealed trait Event
 
