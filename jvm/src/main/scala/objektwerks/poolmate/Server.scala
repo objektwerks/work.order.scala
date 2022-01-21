@@ -1,13 +1,10 @@
-package objektwerks
+package objektwerks.poolmate
 
 import cask.main.Main
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
 import io.undertow.Undertow
-
-import objektwerks.router.Router
-import objektwerks.service.*
 
 import scala.io.StdIn
 
