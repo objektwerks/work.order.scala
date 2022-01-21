@@ -1,4 +1,4 @@
-package pool
+package objektwerks.poolmate
 
 import com.raquo.laminar.api.L._
 
