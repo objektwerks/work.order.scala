@@ -1,4 +1,4 @@
-package objektwerks.entity
+package objektwerks.poolmate
 
 object Serializers:
   import upickle.default.*
