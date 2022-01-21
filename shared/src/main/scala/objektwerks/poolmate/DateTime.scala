@@ -1,4 +1,4 @@
-package objektwerks.datetime
+package objektwerks.poolmate
 
 import java.time.{Instant, LocalDate, LocalTime, format}
 
