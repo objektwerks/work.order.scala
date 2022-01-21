@@ -1,7 +1,4 @@
-package objektwerks.service
-
-import objektwerks.entity.*
-import objektwerks.entity.Validators.*
+package objektwerks.poolmate
 
 class Validator():
   def validate(command: Command): Boolean =
