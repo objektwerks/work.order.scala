@@ -1,6 +1,4 @@
-package objektwerks.service
-
-import objektwerks.entity.*
+package objektwerks.poolmate
 
 class Authorizer(service: Service):
   def authorize(command: Command): Event =
