@@ -2,7 +2,7 @@ name := "poolmate.web"
 
 lazy val laminarVersion = "0.14.2"
 lazy val scalaJavaTimeVersion = "2.3.0"
-lazy val upickleVersion = "1.4.3"
+lazy val upickleVersion = "1.4.4"
 lazy val scalaTestVersion = "3.2.10"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
