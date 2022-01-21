@@ -4,9 +4,7 @@ import cask.main.Routes
 import cask.model.Request
 import com.typesafe.scalalogging.LazyLogging
 
-import objektwerks.entity.{Command, Event}
-import objektwerks.entity.Serializers.given
-import objektwerks.service.Dispatcher
+import Serializers.given
 
 import upickle.default.{read, write}
 

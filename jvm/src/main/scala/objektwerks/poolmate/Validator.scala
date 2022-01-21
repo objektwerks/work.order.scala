@@ -1,5 +1,7 @@
 package objektwerks.poolmate
 
+import Validators.*
+
 class Validator():
   def validate(command: Command): Boolean =
     command match
