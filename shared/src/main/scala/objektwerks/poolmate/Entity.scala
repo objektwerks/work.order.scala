@@ -1,7 +1,5 @@
 package objektwerks.poolmate
 
-import objektwerks.poolmate.DateTime
-
 import java.util.UUID
 
 import scala.util.Random
