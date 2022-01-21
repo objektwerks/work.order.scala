@@ -1,15 +1,10 @@
-package objektwerks
+package objektwerks.poolmate
 
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
-
-import objektwerks.entity.*
-import objektwerks.entity.UoM.*
-import objektwerks.entity.Validators.*
-import objektwerks.service.*
 
 class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   test("dispatcher using map store") {
