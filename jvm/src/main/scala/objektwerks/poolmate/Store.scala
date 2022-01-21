@@ -1,7 +1,4 @@
-package objektwerks.service
-
-import objektwerks.datetime.DateTime
-import objektwerks.entity.*
+package objektwerks.poolmate
 
 trait Store:
   def register(email: String): Option[Account]
