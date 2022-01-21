@@ -1,9 +1,6 @@
-package objektwerks.service
+package objektwerks.poolmate
 
 import com.typesafe.config.Config
-
-import objektwerks.datetime.DateTime
-import objektwerks.entity.*
 
 import scalikejdbc._
 
