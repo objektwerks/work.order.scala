@@ -1,5 +1,6 @@
 name := "poolmate.web"
 
+lazy val caskVersion = "0.8.0"
 lazy val laminarVersion = "0.14.2"
 lazy val waypointVersion = "0.5.0"
 lazy val upickleVersion = "1.4.4"
@@ -60,6 +61,12 @@ lazy val jvm = (project in file("jvm"))
     reStart / mainClass := Some("pool.Server"),
     libraryDependencies ++= {
       Seq(
+        "com.lihaoyi" %% "cask" % caskVersion,
+        "com.lihaoyi" %% "upickle" % upickleVersion,
+        "com.lihaoyi" %% "requests" % "0.7.0",
+        "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
+        "com.h2database" % "h2" % "2.0.206",
+        "io.github.cquiroz" %% "scala-java-time" % "2.3.0",
         "com.typesafe" % "config" % "1.4.1",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
         "ch.qos.logback" % "logback-classic" % "1.2.10",
