@@ -1,6 +1,4 @@
-package objektwerks.entity
-
-import objektwerks.entity.*
+package objektwerks.poolmate
 
 sealed trait License:
   val license: String
