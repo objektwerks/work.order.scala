@@ -5,7 +5,7 @@ import java.time.*
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
-import objektwerks.datetime.DateTime.*
+import DateTime.*
 
 class DateTimeTest extends AnyFunSuite with Matchers:
   test("low date") {
