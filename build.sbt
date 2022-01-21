@@ -54,11 +54,9 @@ lazy val js = (project in file("js"))
 lazy val jvm = (project in file("jvm"))
   .dependsOn(sharedJvm)
   .enablePlugins(JavaServerAppPackaging)
-  .configs(IntegrationTest)
   .settings(common)
   .settings(
-    Defaults.itSettings,
-    reStart / mainClass := Some("pool.Server"),
+    reStart / mainClass := Some("objektwerks.poolmate.Server"),
     libraryDependencies ++= {
       Seq(
         "com.lihaoyi" %% "cask" % caskVersion,
