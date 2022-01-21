@@ -86,7 +86,7 @@ object Validators:
 
   extension (measurement: Measurement)
     def isValid: Boolean =
-      import objektwerks.entity.Measurement.*
+      import Measurement.*
       measurement.id >= 0 &&
         measurement.poolId > 0 &&
         measurement.measured > 0 &&
