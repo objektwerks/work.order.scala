@@ -41,6 +41,7 @@ lazy val js = (project in file("js"))
   .settings(
     libraryDependencies ++= Seq(
       "com.raquo" %%% "laminar" % laminarVersion,
+      "com.raquo" %%% "waypoint" % "0.5.0",
       "com.lihaoyi" %%% "upickle" % upickleVersion,
       "io.github.cquiroz" %%% "scala-java-time" % scalaJavaTimeVersion
     ),
