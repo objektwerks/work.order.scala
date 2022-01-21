@@ -1,6 +1,6 @@
-package objektwerks.entity
+package objektwerks.poolmate
 
-import objektwerks.datetime.DateTime
+import objektwerks.poolmate.DateTime
 
 import java.util.UUID
 
