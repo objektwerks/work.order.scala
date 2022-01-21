@@ -1,6 +1,4 @@
-package objektwerks.service
-
-import objektwerks.entity.*
+package objektwerks.poolmate
 
 class Handler(service: Service):
   def handle(command: Command): Event =
