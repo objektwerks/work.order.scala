@@ -2,6 +2,10 @@ Poolmate Web
 ------------
 >Mobile web pool management app using Cask, Scalikejdbc, uPickle, ScalaJs, Laminar, Waypoint and Postgresql.
 
+Todo
+----
+1. Convert Cask client to test.
+
 Install
 -------
 1. brew install postgresql
