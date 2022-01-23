@@ -9,21 +9,8 @@ import org.scalatest.matchers.should.Matchers
 import Validators.*
 
 class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
-  test("dispatcher using map store") {
-    val store = MapStore()
-    val service = Service(store)
-    val authorizer = Authorizer(service)
-    val handler = Handler(service)
-    val validator = Validator()
-    val dispatcher = Dispatcher(authorizer, validator, handler)
-
-    testDispatcher(dispatcher)
-    testEmail(store)
-    testFault(store)
-  }
-
-  test("dispatcher using sql store") {
-    val store = SqlStore(ConfigFactory.load("test.store.conf"))
+  test("dispatcher") {
+    val store = Store(ConfigFactory.load("test.store.conf"))
     val service = Service(store)
     val authorizer = Authorizer(service)
     val handler = Handler(service)
