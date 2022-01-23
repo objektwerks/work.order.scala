@@ -193,34 +193,34 @@ Postgresql
 
 Database
 --------
->Example database url: postgresql://localhost:5432/pool?user=mycomputername&password='"
+>Example database url: postgresql://localhost:5432/poolmate?user=mycomputername&password=poolmate"
 1. psql postgres
-2. CREATE DATABASE pool OWNER [your computer name];
-3. GRANT ALL PRIVILEGES ON DATABASE pool TO [your computer name];
+2. CREATE DATABASE poolmate OWNER [your computer name];
+3. GRANT ALL PRIVILEGES ON DATABASE poolmate TO [your computer name];
 4. \l
 5. \q
-6. psql pool
+6. psql poolmate
 7. \i ddl.sql
 8. \q
 
 DDL
 ---
->Alternatively run: psql -d pool -f ddl.sql ( see RouterTest )
-1. psql pool
+>Alternatively run: psql -d poolmate -f ddl.sql
+1. psql poolmate
 2. \i ddl.sql
 3. \q
 
 Drop
 ----
 1. psql postgres
-2. drop database pool;
+2. drop database poolmate;
 3. \q
 
 Config
 ------
 >See these files:
-1. jvm/src/it/resources/test.server.conf
-2. jvm/src/main/resoures/server.conf
+1. jvm/src/main/resoures/server.conf
+2. jvm/src/test/resources/test.server.conf
 
 Documentation
 -------------
