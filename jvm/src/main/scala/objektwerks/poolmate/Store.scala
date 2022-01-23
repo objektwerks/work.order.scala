@@ -5,12 +5,10 @@ import com.typesafe.config.Config
 import scalikejdbc._
 
 class Store(conf: Config):
-  val driver = conf.getString("db.driver")
   val url = conf.getString("db.url")
   val user = conf.getString("db.user")
   val password = conf.getString("db.password")
 
-  Class.forName(driver)
   ConnectionPool.singleton(url, user, password)
 
   def register(emailAddress: String): Option[Account] =
