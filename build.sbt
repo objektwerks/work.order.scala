@@ -5,6 +5,7 @@ lazy val laminarVersion = "0.14.2"
 lazy val waypointVersion = "0.5.0"
 lazy val upickleVersion = "1.4.4"
 lazy val scalaJavaTimeVersion = "2.3.0"
+lazy val postgresqlVersion = "42.3.1"
 lazy val scalaTestVersion = "3.2.10"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
@@ -64,6 +65,7 @@ lazy val jvm = (project in file("jvm"))
         "com.lihaoyi" %% "requests" % "0.7.0",
         "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
         "com.h2database" % "h2" % "2.0.206",
+        //"org.postgresql" % "postgresql" % "42.3.1",
         "io.github.cquiroz" %% "scala-java-time" % "2.3.0",
         "com.typesafe" % "config" % "1.4.1",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
