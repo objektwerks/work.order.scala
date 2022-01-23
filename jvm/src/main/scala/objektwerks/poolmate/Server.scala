@@ -9,7 +9,7 @@ import io.undertow.Undertow
 import scala.io.StdIn
 
 object Server extends Main with LazyLogging:
-  val store = SqlStore(ConfigFactory.load("store.conf"))
+  val store = Store(ConfigFactory.load("store.conf"))
   val service = Service(store)
   val authorizer = Authorizer(service)
   val handler = Handler(service)
