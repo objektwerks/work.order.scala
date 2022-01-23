@@ -4,7 +4,7 @@ import com.typesafe.config.Config
 
 import scalikejdbc._
 
-class SqlStore(conf: Config) extends Store:
+class Store(conf: Config):
   val driver = conf.getString("db.driver")
   val url = conf.getString("db.url")
   val user = conf.getString("db.user")
