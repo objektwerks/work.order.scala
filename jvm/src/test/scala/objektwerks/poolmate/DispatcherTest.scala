@@ -11,7 +11,7 @@ import org.scalatest.matchers.should.Matchers
 import Validators.*
 
 class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
-  // Process("psql -d pool -f ddl.sql").run().exitValue()
+  // Process("psql -d poolmate -f ddl.sql").run().exitValue()
 
   test("dispatcher") {
     val store = Store(ConfigFactory.load("test.store.conf"))
