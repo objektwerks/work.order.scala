@@ -8,8 +8,16 @@ class Store(conf: Config):
   val url = conf.getString("db.url")
   val user = conf.getString("db.user")
   val password = conf.getString("db.password")
+  val initialSize = conf.getInt("db.initialSize")
+  val maxSize = conf.getInt("db.maxSize")
+  val connectionTimeoutMillis = conf.getLong("db.connectionTimeoutMillis")
 
-  ConnectionPool.singleton(url, user, password)
+  val settings = ConnectionPoolSettings(
+    initialSize = initialSize,
+    maxSize = maxSize,
+    connectionTimeoutMillis = connectionTimeoutMillis)  
+
+  ConnectionPool.singleton(url, user, password, settings)
 
   def register(emailAddress: String): Option[Account] =
     val account = Account(emailAddress = emailAddress)
