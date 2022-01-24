@@ -20,9 +20,9 @@ Dev
 >[ js ]
 1. sbt [ interactive session ]
 2. project js/clean | fastLinkJS | fullLinkJS
-3. open target/scala-3.x.x/classes/public/index.html and:
-    1. via **VSCode**, right click open with Live Server
-4. open developer tools in index.html browser tab
+3. select target/scala-3.x.x/classes/public/index.html and:
+    1. right click open with Live Server
+    2. open developer tools in index.html browser tab
 
 Test
 ----
@@ -34,9 +34,9 @@ Run
 >jvm
 1. sbt jvm/run  [ curl -v http://localhost:7979/now ]
 >js
-1. open target/scala-2.13/classes/public/index.html and:
-   1. via **VSCode**, right click open with Live Server
-2. open developer tools in index.html browser tab
+1. select target/scala-3.x.x/classes/public/index.html and:
+   1. right click open with Live Server
+   2. open developer tools in index.html browser tab
 
 Package
 -------
