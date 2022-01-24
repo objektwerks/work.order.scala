@@ -31,6 +31,34 @@ class Store(conf: Config):
       Some(account)
     else None
 
+  def listEmails: Seq[Email] =
+    DB readOnly { implicit session =>
+      sql"select * from email where processed = false"
+        .map(rs => 
+          Email(rs.string("id"), rs.string("license"), rs.string("address"), rs.string("message"),
+                rs.int("date_sent"), rs.int("time_sent"), rs.boolean("processed"), rs.boolean("valid")
+              )
+        )
+        .list()
+    }
+
+  def addEmail(email: Email): Unit =
+    DB localTx { implicit session =>
+      sql"""insert into email(id, license, address, message, date_sent, time_sent, processed, valid)
+            values(${email.id}, ${email.license}, ${email.address}, ${email.message}, ${email.dateSent},
+             ${email.timeSent}, ${email.processed}, ${email.valid})
+         """
+        .stripMargin
+        .update()
+    }
+
+  def updateEmail(email: Email): Unit =
+    DB localTx { implicit session =>
+      sql"update email set processed = ${email.processed}, valid = ${email.valid} where id = ${email.id}"
+        .update()
+    }
+    ()
+    
   def login(email: String, pin: String): Option[Account] =
     DB readOnly { implicit session =>
       sql"select * from account where email_address = $email and pin = $pin"
@@ -350,34 +378,6 @@ class Store(conf: Config):
     DB localTx { implicit session =>
       sql"update repair set repaired = ${repair.repaired}, repair = ${repair.repair}, cost = ${repair.cost} where id = ${repair.id}"
       .update()
-    }
-    ()
-
-  def listEmails: Seq[Email] =
-    DB readOnly { implicit session =>
-      sql"select * from email where processed = false"
-        .map(rs => 
-          Email(rs.string("id"), rs.string("license"), rs.string("address"), rs.string("message"),
-                rs.int("date_sent"), rs.int("time_sent"), rs.boolean("processed"), rs.boolean("valid")
-              )
-        )
-        .list()
-    }
-
-  def addEmail(email: Email): Unit =
-    DB localTx { implicit session =>
-      sql"""insert into email(id, license, address, message, date_sent, time_sent, processed, valid)
-            values(${email.id}, ${email.license}, ${email.address}, ${email.message}, ${email.dateSent},
-             ${email.timeSent}, ${email.processed}, ${email.valid})
-         """
-        .stripMargin
-        .update()
-    }
-
-  def updateEmail(email: Email): Unit =
-    DB localTx { implicit session =>
-      sql"update email set processed = ${email.processed}, valid = ${email.valid} where id = ${email.id}"
-        .update()
     }
     ()
 
