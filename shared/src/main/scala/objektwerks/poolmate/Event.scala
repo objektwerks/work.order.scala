@@ -5,7 +5,7 @@ sealed trait Event
 final case class Authorized(license: String) extends Event
 final case class Unauthorized(license: String) extends Event
 
-final case class Registered(account: Account) extends Event
+final case class Registering() extends Event
 final case class LoggedIn(account: Account) extends Event
 
 final case class Deactivated(account: Account) extends Event
