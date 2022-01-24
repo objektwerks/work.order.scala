@@ -7,6 +7,7 @@ Install
 1. brew install postgresql
 2. brew install node
 3. npm install jsdom
+4. install **VSCode** Live Server extension
 
 Dev
 ---
@@ -19,9 +20,8 @@ Dev
 >[ js ]
 1. sbt [ interactive session ]
 2. project js/clean | fastLinkJS | fullLinkJS
-3. open target/scala-2.13/classes/public/index.html and:
-    1. via **Intellij**, click target browser in right top corner **OR**
-    2. via **VSCode**, right click open with Live Server ( VSCode ) ( must install Live Server extension )
+3. open target/scala-3.x.x/classes/public/index.html and:
+    1. via **VSCode**, right click open with Live Server
 4. open developer tools in index.html browser tab
 
 Test
@@ -35,24 +35,19 @@ Run
 1. sbt jvm/run  [ curl -v http://localhost:7979/now ]
 >js
 1. open target/scala-2.13/classes/public/index.html and:
-   1. via **Intellij**, click target browser in right top corner **OR**
-   2. via **VSCode**, right click open with Live Server ( VSCode ) ( must install Live Server extension )
+   1. via **VSCode**, right click open with Live Server
 2. open developer tools in index.html browser tab
 
 Package
 -------
->See sbt-native-packager ( www.scala-sbt.org/sbt-native-packager/formats/universal.html ) for
->details on universal:packageZipTarball.
+>See sbt-native-packager ( www.scala-sbt.org/sbt-native-packager/formats/universal.html )
+>for details on universal:packageZipTarball.
 
 >jvm
 1. sbt jvm/universal:packageZipTarball
 >js
 1. sbt js/clean fullLinkJS
 2. sbt js/universal:packageZipTarball
-
-Http Codes
-----------
->The Router only emits: 200, 400, 401, 500
 
 Client
 ------
