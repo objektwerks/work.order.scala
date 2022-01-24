@@ -88,7 +88,7 @@ object Serializers:
     addRepairRW, updateRepairRW
   )
 
-  given registeredRW: ReadWriter[Registering] = macroRW
+  given registeredRW: ReadWriter[Registered] = macroRW
   given loggedInRW: ReadWriter[LoggedIn] = macroRW
 
   given deactivatedRW: ReadWriter[Deactivated] = macroRW
