@@ -99,14 +99,14 @@ class Store(conf: Config):
   def listPools(): Seq[Pool] =
     DB readOnly { implicit session =>
       sql"select * from pool order by built desc"
-        .map(rs => Pool(rs.int("id"), rs.string("license"), rs.string("name"), rs.int("built"), rs.int("volume")))
+        .map(rs => Pool(rs.long("id"), rs.string("license"), rs.string("name"), rs.int("built"), rs.int("volume")))
         .list()
     }
 
   def addPool(pool: Pool): Pool =
     val id = DB localTx { implicit session =>
       sql"insert into pool(license, name, built, volume) values(${pool.license}, ${pool.name}, ${pool.built}, ${pool.volume})"
-      .updateAndReturnGeneratedKey().toInt
+      .updateAndReturnGeneratedKey()
     }
     pool.copy(id = id)
     
@@ -120,14 +120,14 @@ class Store(conf: Config):
   def listSurfaces(): Seq[Surface] =
     DB readOnly { implicit session =>
       sql"select * from surface order by installed desc"
-        .map(rs => Surface(rs.int("id"), rs.int("pool_id"), rs.int("installed"), rs.string("kind")))
+        .map(rs => Surface(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind")))
         .list()
     }
 
   def addSurface(surface: Surface): Surface =
     val id = DB localTx { implicit session =>
       sql"insert into surface(pool_id, installed, kind) values(${surface.poolId}, ${surface.installed}, ${surface.kind})"
-      .updateAndReturnGeneratedKey().toInt
+      .updateAndReturnGeneratedKey()
     }
     surface.copy(id = id)
 
@@ -141,14 +141,14 @@ class Store(conf: Config):
   def listPumps(): Seq[Pump] =
     DB readOnly { implicit session =>
       sql"select * from pump order by installed desc"
-        .map(rs => Pump(rs.int("id"), rs.int("pool_id"), rs.int("installed"), rs.string("model")))
+        .map(rs => Pump(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model")))
         .list()
     }
 
   def addPump(pump: Pump): Pump =
     val id = DB localTx { implicit session =>
       sql"insert into pump(pool_id, installed, model) values(${pump.poolId}, ${pump.installed}, ${pump.model})"
-      .updateAndReturnGeneratedKey().toInt
+      .updateAndReturnGeneratedKey()
     }
     pump.copy(id = id)  
   
@@ -162,14 +162,14 @@ class Store(conf: Config):
   def listTimers(): Seq[Timer] =
     DB readOnly { implicit session =>
       sql"select * from timer order by installed desc"
-        .map(rs => Timer(rs.int("id"), rs.int("pool_id"), rs.int("installed"), rs.string("model")))
+        .map(rs => Timer(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model")))
         .list()
     }
 
   def addTimer(timer: Timer): Timer =
     val id = DB localTx { implicit session =>
       sql"insert into timer(pool_id, installed, model) values(${timer.poolId}, ${timer.installed}, ${timer.model})"
-      .updateAndReturnGeneratedKey().toInt
+      .updateAndReturnGeneratedKey()
     }
     timer.copy(id = id)
   
@@ -183,14 +183,14 @@ class Store(conf: Config):
   def listTimerSettings(): Seq[TimerSetting] =
     DB readOnly { implicit session =>
       sql"select * from timer_setting order by created desc"
-        .map(rs => TimerSetting(rs.int("id"), rs.int("timer_id"), rs.int("created"), rs.int("time_on"), rs.int("time_off")))
+        .map(rs => TimerSetting(rs.long("id"), rs.long("timer_id"), rs.int("created"), rs.int("time_on"), rs.int("time_off")))
         .list()
     }
 
   def addTimerSetting(timerSetting: TimerSetting): TimerSetting =
     val id = DB localTx { implicit session =>
       sql"insert into timer_setting(timer_id, created, time_on, time_off) values(${timerSetting.timerId}, ${timerSetting.created}, ${timerSetting.timeOn}, ${timerSetting.timeOff})"
-      .updateAndReturnGeneratedKey().toInt
+      .updateAndReturnGeneratedKey()
     }
     timerSetting.copy(id = id)
 
@@ -204,14 +204,14 @@ class Store(conf: Config):
   def listHeaters(): Seq[Heater] =
     DB readOnly { implicit session =>
       sql"select * from heater order by installed desc"
-        .map(rs => Heater(rs.int("id"), rs.int("pool_id"), rs.int("installed"), rs.string("model")))
+        .map(rs => Heater(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model")))
         .list()
     }
 
   def addHeater(heater: Heater): Heater =
     val id = DB localTx { implicit session =>
       sql"insert into heater(pool_id, installed, model) values(${heater.poolId}, ${heater.installed}, ${heater.model})"
-      .updateAndReturnGeneratedKey().toInt
+      .updateAndReturnGeneratedKey()
     }
     heater.copy(id = id)
 
@@ -225,14 +225,14 @@ class Store(conf: Config):
   def listHeaterSettings(): Seq[HeaterSetting] =
     DB readOnly { implicit session =>
       sql"select * from heater_setting order by date_on desc"
-        .map(rs => HeaterSetting(rs.int("id"), rs.int("heater_id"), rs.int("temp"), rs.int("date_on"), rs.int("date_off")))
+        .map(rs => HeaterSetting(rs.long("id"), rs.long("heater_id"), rs.int("temp"), rs.int("date_on"), rs.int("date_off")))
         .list()
     }
 
   def addHeaterSetting(heaterSetting: HeaterSetting): HeaterSetting =
     val id = DB localTx { implicit session =>
       sql"insert into heater_setting(heater_id, temp, date_on, date_off) values(${heaterSetting.heaterId}, ${heaterSetting.temp}, ${heaterSetting.dateOn}, ${heaterSetting.dateOff})"
-      .updateAndReturnGeneratedKey().toInt
+      .updateAndReturnGeneratedKey()
     }
     heaterSetting.copy(id = id)
 
@@ -248,7 +248,7 @@ class Store(conf: Config):
       sql"select * from measurement order by measured desc"
         .map(rs =>
           Measurement(
-            rs.int("id"), rs.int("pool_id"), rs.int("measured"), rs.int("temp"), rs.int("total_hardness"), rs.int("total_chlorine"),
+            rs.long("id"), rs.long("pool_id"), rs.int("measured"), rs.int("temp"), rs.int("total_hardness"), rs.int("total_chlorine"),
             rs.int("total_bromine"), rs.int("free_chlorine"), rs.float("ph"), rs.int("total_alkalinity"), rs.int("cyanuric_acid")
           )
         )
@@ -265,7 +265,7 @@ class Store(conf: Config):
         """
         .stripMargin
         .updateAndReturnGeneratedKey()
-        .toInt
+        
     }
     measurement.copy(id = id)
 
@@ -286,7 +286,7 @@ class Store(conf: Config):
       sql"select * from cleaning order by cleaned desc"
         .map(rs =>
           Cleaning(
-            rs.int("id"), rs.int("pool_id"), rs.int("cleaned"), rs.boolean("brush"), rs.boolean("net"), rs.boolean("vacuum"),
+            rs.long("id"), rs.long("pool_id"), rs.int("cleaned"), rs.boolean("brush"), rs.boolean("net"), rs.boolean("vacuum"),
             rs.boolean("skimmer_basket"), rs.boolean("pump_basket"), rs.boolean("pump_filter"), rs.boolean("deck")
           )
         )
@@ -302,7 +302,7 @@ class Store(conf: Config):
         """
         .stripMargin
         .updateAndReturnGeneratedKey()
-        .toInt
+        
     }
     cleaning.copy(id = id)
 
@@ -321,14 +321,14 @@ class Store(conf: Config):
   def listChemicals(): Seq[Chemical] =
     DB readOnly { implicit session =>
       sql"select * from chemical order by added desc"
-        .map(rs => Chemical(rs.int("id"), rs.int("pool_id"), rs.int("added"), rs.string("chemical"), rs.double("amount"), rs.string("unit")))
+        .map(rs => Chemical(rs.long("id"), rs.long("pool_id"), rs.int("added"), rs.string("chemical"), rs.double("amount"), rs.string("unit")))
         .list()
     }
 
   def addChemical(chemical: Chemical): Chemical =
     val id = DB localTx { implicit session =>
       sql"insert into chemical(pool_id, added, chemical, amount, unit) values(${chemical.poolId}, ${chemical.added}, ${chemical.chemical}, ${chemical.amount}, ${chemical.unit})"
-      .updateAndReturnGeneratedKey().toInt
+      .updateAndReturnGeneratedKey()
     }
     chemical.copy(id = id)
 
@@ -342,14 +342,14 @@ class Store(conf: Config):
   def listSupplies(): Seq[Supply] =
     DB readOnly { implicit session =>
       sql"select * from supply order by purchased desc"
-        .map(rs => Supply(rs.int("id"), rs.int("pool_id"), rs.int("purchased"), rs.string("item"), rs.double("amount"), rs.string("unit"), rs.double("cost")))
+        .map(rs => Supply(rs.long("id"), rs.long("pool_id"), rs.int("purchased"), rs.string("item"), rs.double("amount"), rs.string("unit"), rs.double("cost")))
         .list()
     }
 
   def addSupply(supply: Supply): Supply =
     val id = DB localTx { implicit session =>
       sql"insert into supply(pool_id, purchased, item, amount, unit, cost) values(${supply.poolId}, ${supply.purchased}, ${supply.item}, ${supply.amount}, ${supply.unit}, ${supply.cost})"
-      .updateAndReturnGeneratedKey().toInt
+      .updateAndReturnGeneratedKey()
     }
     supply.copy(id = id)
 
@@ -363,14 +363,14 @@ class Store(conf: Config):
   def listRepairs(): Seq[Repair] =
     DB readOnly { implicit session =>
       sql"select * from repair order by repaired desc"
-        .map(rs => Repair(rs.int("id"), rs.int("pool_id"), rs.int("repaired"), rs.string("repair"), rs.double("cost")))
+        .map(rs => Repair(rs.long("id"), rs.long("pool_id"), rs.int("repaired"), rs.string("repair"), rs.double("cost")))
         .list()
     }
 
   def addRepair(repair: Repair): Repair =
     val id = DB localTx { implicit session =>
       sql"insert into repair(pool_id, repaired, repair, cost) values(${repair.poolId}, ${repair.repaired}, ${repair.repair}, ${repair.cost})"
-      .updateAndReturnGeneratedKey().toInt
+      .updateAndReturnGeneratedKey()
     }
     repair.copy(id = id)
 

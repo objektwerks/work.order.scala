@@ -42,46 +42,46 @@ final case class Email(id: String,
                        processed: Boolean = false,
                        valid: Boolean = false) extends Entity
 
-final case class Pool(id: Int = 0,
+final case class Pool(id: Long = 0,
                       license: String = "",
                       name: String = "",
                       built: Int = 0,
                       volume: Int = 1000) extends Entity
 
-final case class Surface(id: Int = 0,
-                         poolId: Int = 0,
+final case class Surface(id: Long = 0,
+                         poolId: Long = 0,
                          installed: Int = 0,
                          kind: String = "") extends Entity
 
-final case class Pump(id: Int = 0,
-                      poolId: Int = 0,
+final case class Pump(id: Long = 0,
+                      poolId: Long = 0,
                       installed: Int = 0,
                       model: String = "") extends Entity
 
-final case class Timer(id: Int = 0,
-                       poolId: Int = 0,
+final case class Timer(id: Long = 0,
+                       poolId: Long = 0,
                        installed: Int = 0,
                        model: String = "") extends Entity
 
-final case class TimerSetting(id: Int = 0,
-                              timerId: Int = 0,
+final case class TimerSetting(id: Long = 0,
+                              timerId: Long = 0,
                               created: Int = 0,
                               timeOn: Int = 0,
                               timeOff: Int = 0) extends Entity
 
-final case class Heater(id: Int = 0,
-                        poolId: Int = 0,
+final case class Heater(id: Long = 0,
+                        poolId: Long = 0,
                         installed: Int = 0,
                         model: String = "") extends Entity
 
-final case class HeaterSetting(id: Int = 0,
-                               heaterId: Int = 0,
+final case class HeaterSetting(id: Long = 0,
+                               heaterId: Long = 0,
                                temp: Int = 0,
                                dateOn: Int = 0,
                                dateOff: Int = 0) extends Entity
 
-final case class Measurement(id: Int = 0,
-                             poolId: Int = 0,
+final case class Measurement(id: Long = 0,
+                             poolId: Long = 0,
                              measured: Int = 0,
                              temp: Int = 85,
                              totalHardness: Int = 375,
@@ -90,7 +90,7 @@ final case class Measurement(id: Int = 0,
                              freeChlorine: Int = 3,
                              ph: Double = 7.4,
                              totalAlkalinity: Int = 100,
-                             cyanuricAcid: Int = 50) extends Entity
+                             cyanuricAcid: Long = 50) extends Entity
 
 object Measurement:
   val tempRange = 0 to 100
@@ -101,8 +101,8 @@ object Measurement:
   val totalAlkalinityRange = 0 to 240
   val cyanuricAcidRange = 0 to 300
 
-final case class Cleaning(id: Int = 0,
-                          poolId: Int = 0,
+final case class Cleaning(id: Long = 0,
+                          poolId: Long = 0,
                           cleaned: Int = 0,
                           brush: Boolean = true,
                           net: Boolean = true,
@@ -112,23 +112,23 @@ final case class Cleaning(id: Int = 0,
                           pumpFilter: Boolean = false,
                           deck: Boolean = false) extends Entity
 
-final case class Chemical(id: Int = 0,
-                          poolId: Int = 0,
+final case class Chemical(id: Long = 0,
+                          poolId: Long = 0,
                           added: Int = 0,
                           chemical: String = "",
                           amount: Double = 0.0,
                           unit: String = "") extends Entity
 
-final case class Supply(id: Int = 0,
-                        poolId: Int = 0,
+final case class Supply(id: Long = 0,
+                        poolId: Long = 0,
                         purchased: Int = 0,
                         item: String = "",
                         amount: Double = 0.0,
                         unit: String = "",
                         cost: Double = 0.0) extends Entity
 
-final case class Repair(id: Int = 0,
-                        poolId: Int = 0,
+final case class Repair(id: Long = 0,
+                        poolId: Long = 0,
                         repaired: Int = 0,
                         repair: String = "",
                         cost: Double = 0.0) extends Entity

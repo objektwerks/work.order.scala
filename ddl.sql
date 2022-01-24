@@ -19,28 +19,28 @@ CREATE TABLE pool (
 
 CREATE TABLE surface (
   id SERIAL PRIMARY KEY,
-  pool_id INT REFERENCES pool(id),
+  pool_id BIGINT REFERENCES pool(id),
   installed INT NOT NULL,
   kind VARCHAR NOT NULL
 );
 
 CREATE TABLE pump (
   id SERIAL PRIMARY KEY,
-  pool_id INT REFERENCES pool(id),
+  pool_id BIGINT REFERENCES pool(id),
   installed INT NOT NULL,
   model VARCHAR NOT NULL
 );
 
 CREATE TABLE timer (
   id SERIAL PRIMARY KEY,
-  pool_id INT REFERENCES pool(id),
+  pool_id BIGINT REFERENCES pool(id),
   installed INT NOT NULL,
   model VARCHAR NOT NULL
 );
 
 CREATE TABLE timer_setting (
   id SERIAL PRIMARY KEY,
-  timer_id INT REFERENCES timer(id),
+  timer_id BIGINT REFERENCES timer(id),
   created INT NOT NULL,
   time_on SMALLINT NOT NULL,
   time_off SMALLINT NOT NULL
@@ -48,14 +48,14 @@ CREATE TABLE timer_setting (
 
 CREATE TABLE heater (
   id SERIAL PRIMARY KEY,
-  pool_id INT REFERENCES pool(id),
+  pool_id BIGINT REFERENCES pool(id),
   installed INT NOT NULL,
   model VARCHAR NOT NULL
 );
 
 CREATE TABLE heater_setting (
   id SERIAL PRIMARY KEY,
-  heater_id INT REFERENCES heater(id),
+  heater_id BIGINT REFERENCES heater(id),
   temp INT NOT NULL,
   date_on INT NOT NULL,
   date_off INT NOT NULL
@@ -63,7 +63,7 @@ CREATE TABLE heater_setting (
 
 CREATE TABLE measurement (
   id SERIAL PRIMARY KEY,
-  pool_id INT REFERENCES pool(id),
+  pool_id BIGINT REFERENCES pool(id),
   measured INT NOT NULL,
   temp INT NOT NULL,
   total_hardness INT NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE measurement (
 
 CREATE TABLE cleaning (
   id SERIAL PRIMARY KEY,
-  pool_id INT REFERENCES pool(id),
+  pool_id BIGINT REFERENCES pool(id),
   cleaned INT NOT NULL,
   brush BOOL NOT NULL,
   net BOOL NOT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE cleaning (
 
 CREATE TABLE chemical (
   id SERIAL PRIMARY KEY,
-  pool_id INT REFERENCES pool(id),
+  pool_id BIGINT REFERENCES pool(id),
   added INT NOT NULL,
   chemical VARCHAR NOT NULL,
   amount NUMERIC(5, 2),
@@ -99,7 +99,7 @@ CREATE TABLE chemical (
 
 CREATE TABLE supply (
   id SERIAL PRIMARY KEY,
-  pool_id INT REFERENCES pool(id),
+  pool_id BIGINT REFERENCES pool(id),
   purchased INT NOT NULL,
   item VARCHAR NOT NULL,
   amount NUMERIC(4, 2) NOT NULL,
@@ -109,7 +109,7 @@ CREATE TABLE supply (
 
 CREATE TABLE repair (
   id SERIAL PRIMARY KEY,
-  pool_id INT REFERENCES pool(id),
+  pool_id BIGINT REFERENCES pool(id),
   repaired INT NOT NULL,
   repair VARCHAR NOT NULL,
   cost NUMERIC(7, 2) NOT NULL
