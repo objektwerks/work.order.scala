@@ -20,11 +20,11 @@ class Store(conf: Config):
   ConnectionPool.singleton(url, user, password, settings)
 
   def register(emailAddress: String): Option[Account] =
-    val account = Account(emailAddress = emailAddress)
     val email = Email(id = "1", license = account.license, address = emailAddress, message = "message")
-    Emailer.send(email)
-    addAccount(account)
     addEmail(email)
+    
+    val account = Account(emailAddress = emailAddress)
+    addAccount(account)
     Some(account)
 
   def addAccount(account: Account): Unit =
