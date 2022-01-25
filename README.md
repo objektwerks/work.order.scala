@@ -6,29 +6,18 @@ Install
 -------
 1. brew install postgresql
 2. brew install node
-3. npm install jsdom
-4. install **VSCode** Live Server extension
-
-Dev
----
->[ shared ]
-1. sbt [ interactive session ]
-2. project shared/clean | compile | test
->[ jvm ]
-1. sbt [ interactive session ]
-2. project jvm/clean | compile | test | run
->[ js ]
-1. sbt [ interactive session ]
-2. project js/clean | fastLinkJS | fullLinkJS
+3. npm install jsdom ( **locally** )
 
 Test
 ----
-1. sbt sharedJVM/clean test
-2. sbt jvm/clean test
+1. sbt clean test
 
+Build
+-----
+1. sbt clean test fastLinkJS package
+   
 Run
 ---
->jvm
 1. sbt jvm/run
 
 Package
