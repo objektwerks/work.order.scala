@@ -15,14 +15,14 @@ object Router:
   val utf8 = Codec.UTF8.name
   val html = Using( Source.fromInputStream(getClass.getResourceAsStream("/public/index.html"), utf8) ) { 
     source => source.mkString
-  }.getOrElse( "Error loading /public/index.html" )
+  }.getOrElse( "*** Error loading /public/index.html" )
 
 class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   @cask.get("/")
   def index() = Router.html
 
-  @cask.staticResources("/")
-  def public() = "public"
+  @cask.staticResources("/public")
+  def public() = "."
 
   @cask.post("/command")
   def command(request: Request) =
