@@ -28,9 +28,9 @@ class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   def index() =
     Response(Router.html, 200, Seq("Content-Type" -> "text/html; charset=UTF-8"))
 
-  @cask.get(Router.prefix)
+  @cask.get(Router.prefix, subpath = true)
   def resources(request: Request) =
-    Response(Router.loadResource( request.remainingPathSegments.head ), 200, Seq("Content-Type" -> "image/*"))
+    Response(Router.loadResource(request.remainingPathSegments.head), 200, Seq("Content-Type" -> "image/*"))
 
   @cask.post("/command")
   def command(request: Request) =
