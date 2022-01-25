@@ -1,7 +1,7 @@
 package objektwerks.poolmate
 
 import cask.main.Routes
-import cask.model.Request
+import cask.model.{Request, Response}
 import com.typesafe.scalalogging.LazyLogging
 
 import scala.io.{Codec, Source}
@@ -25,10 +25,12 @@ object Router extends LazyLogging:
 
 class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   @cask.get("/")
-  def index() = cask.Response(Router.html, 200, Seq("Content-Type" -> "text/html; charset=UTF-8"))
+  def index() =
+    Response(Router.html, 200, Seq("Content-Type" -> "text/html; charset=UTF-8"))
 
-  @cask.staticResources(Router.prefix)
-  def resources() = "."
+  @cask.get(Router.prefix)
+  def resources(request: Request) =
+    Response(Router.loadResource( request.remainingPathSegments.head ), 200, Seq("Content-Type" -> "image/*"))
 
   @cask.post("/command")
   def command(request: Request) =
