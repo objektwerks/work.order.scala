@@ -16,13 +16,10 @@ Dev
 2. project shared/clean | compile | test
 >[ jvm ]
 1. sbt [ interactive session ]
-2. project jvm/clean | compile | test | it:test | run
+2. project jvm/clean | compile | test | run
 >[ js ]
 1. sbt [ interactive session ]
 2. project js/clean | fastLinkJS | fullLinkJS
-3. select target/scala-3.x.x/classes/public/index.html and:
-    1. right click open with Live Server
-    2. open developer tools in index.html browser tab
 
 Test
 ----
@@ -32,11 +29,7 @@ Test
 Run
 ---
 >jvm
-1. sbt jvm/run  [ curl -v http://localhost:7979/now ]
->js
-1. select target/scala-3.x.x/classes/public/index.html and:
-   1. right click open with Live Server
-   2. open developer tools in index.html browser tab
+1. sbt jvm/run
 
 Package
 -------
