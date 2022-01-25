@@ -62,7 +62,6 @@ lazy val jvm = (project in file("jvm"))
         "com.lihaoyi" %% "upickle" % upickleVersion,
         "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
         "org.postgresql" % "postgresql" % postgresqlVersion,
-        "com.h2database" % "h2" % "2.0.206",
         "io.github.cquiroz" %% "scala-java-time" % "2.3.0",
         "com.typesafe" % "config" % "1.4.1",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
