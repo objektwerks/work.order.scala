@@ -12,10 +12,13 @@ import Serializers.given
 import upickle.default.{read, write}
 
 object Router:
-  val utf8 = Codec.UTF8.name
-  val html = Using( Source.fromInputStream(getClass.getResourceAsStream("/public/index.html"), utf8) ) { 
+  private val utf8 = Codec.UTF8.name
+  private val html = loadResource("/public/index.html")
+
+  def loadResource(resource: String): String =
+    Using( Source.fromInputStream(getClass.getResourceAsStream(resource), utf8) ) { 
     source => source.mkString
-  }.getOrElse( "*** Error loading /public/index.html" )
+  }.getOrElse(s"*** Failed to load: $resource")
 
 class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   @cask.get("/")
