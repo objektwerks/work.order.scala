@@ -22,11 +22,10 @@ class Store(conf: Config):
   def register(emailAddress: String): Option[Account] =
     val account = Account(emailAddress = emailAddress)
     val email = Email(id = "1", license = account.license, address = emailAddress, message = "message")
-    if Emailer.send(email) then
-      addAccount(account)
-      addEmail(email)
-      Some(account)
-    else None
+    Emailer.send(email)
+    addAccount(account)
+    addEmail(email)
+    Some(account)
 
   def addAccount(account: Account): Unit =
     DB localTx { implicit session =>
