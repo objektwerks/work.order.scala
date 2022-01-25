@@ -28,7 +28,7 @@ class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   def index() = cask.Response(Router.html, 200, Seq("Content-Type" -> "text/html; charset=UTF-8"))
 
   @cask.staticResources("/public")
-  def public() = "."
+  def public() = "/"
 
   @cask.post("/command")
   def command(request: Request) =
