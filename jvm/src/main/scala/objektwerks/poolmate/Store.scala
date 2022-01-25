@@ -23,13 +23,16 @@ class Store(conf: Config):
     val account = Account(emailAddress = emailAddress)
     val email = Email(id = "1", license = account.license, address = emailAddress, message = "message")
     if Emailer.send(email) then
-      DB localTx { implicit session =>
-        sql"insert into account(license, email_address, pin, activated, deactivated) values(${account.license}, ${account.emailAddress}, ${account.pin}, ${account.activated}, ${account.deactivated})"
-        .update()
-      }
+      addAccount(account)
       addEmail(email)
       Some(account)
     else None
+
+  def addAccount(account: Account): Unit =
+    DB localTx { implicit session =>
+      sql"insert into account(license, email_address, pin, activated, deactivated) values(${account.license}, ${account.emailAddress}, ${account.pin}, ${account.activated}, ${account.deactivated})"
+      .update()
+    }
 
   def listEmails: Seq[Email] =
     DB readOnly { implicit session =>
