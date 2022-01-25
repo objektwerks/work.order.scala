@@ -13,10 +13,11 @@ import upickle.default.{read, write}
 
 object Router extends LazyLogging:
   private val utf8 = Codec.UTF8.name
+  private val prefix = "/public/"
   private val html = loadResource("index.html")
 
   def loadResource(resource: String): String =
-    val path = s"/publc/$resource"
+    val path = s"$prefix$resource"
     logger.debug(s"*** Load resource: $path")
     Using( Source.fromInputStream(getClass.getResourceAsStream(path), utf8) ) { 
       source => source.mkString
