@@ -18,7 +18,7 @@ Build
    
 Run
 ---
-1. sbt jvm/run
+1. sbt jvm/run ( curl -v http://localhost:7272/ )
 
 Package
 -------
