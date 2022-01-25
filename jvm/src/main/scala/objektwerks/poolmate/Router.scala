@@ -13,7 +13,7 @@ import upickle.default.{read, write}
 
 object Router extends LazyLogging:
   private val utf8 = Codec.UTF8.name
-  private val prefix = "/public/"
+  private val prefix = "/"
   private val html = loadResource("index.html")
 
   def loadResource(resource: String): String =
