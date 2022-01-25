@@ -9,6 +9,9 @@ import Serializers.given
 import upickle.default.{read, write}
 
 case class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
+  @cask.staticResources("/public")
+  def public() = "."
+
   @cask.post("/command")
   def command(request: Request) =
     val command = read[Command](request.text())
