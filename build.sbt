@@ -60,7 +60,6 @@ lazy val jvm = (project in file("jvm"))
       Seq(
         "com.lihaoyi" %% "cask" % caskVersion,
         "com.lihaoyi" %% "upickle" % upickleVersion,
-        "com.lihaoyi" %% "requests" % "0.7.0",
         "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
         "org.postgresql" % "postgresql" % postgresqlVersion,
         "com.h2database" % "h2" % "2.0.206",
