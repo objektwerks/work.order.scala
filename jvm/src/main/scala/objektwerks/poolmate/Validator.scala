@@ -3,7 +3,7 @@ package objektwerks.poolmate
 import Validators.*
 
 class Validator():
-  def validate(command: Command): Boolean =
+  def isValid(command: Command): Boolean =
     command match
       case register: Register => register.isValid
       case login: Login => login.isValid
