@@ -4,13 +4,22 @@ import cask.main.Routes
 import cask.model.Request
 import com.typesafe.scalalogging.LazyLogging
 
+import scala.io.{Codec, Source}
+import scala.util.{Try, Using}
+
 import Serializers.given
 
 import upickle.default.{read, write}
 
-case class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
+object Router:
+  val utf8 = Codec.UTF8.name
+  val html = Using( Source.fromInputStream(getClass.getResourceAsStream("/public/index.html"), utf8) ) { 
+    source => source.mkString
+  }.getOrElse( "Error loading /public/index.html" )
+
+class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   @cask.get("/")
-  def index() = "poolmate"
+  def index() = Router.html
 
   @cask.staticResources("/public")
   def public() = "."
