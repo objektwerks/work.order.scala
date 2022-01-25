@@ -24,7 +24,7 @@ Dev
 Test
 ----
 1. sbt sharedJVM/clean test
-2. sbt jvm/clean it:test
+2. sbt jvm/clean test
 
 Run
 ---
@@ -34,13 +34,7 @@ Run
 Package
 -------
 >See sbt-native-packager ( www.scala-sbt.org/sbt-native-packager/formats/universal.html )
->for details on universal:packageZipTarball.
-
->jvm
 1. sbt jvm/universal:packageZipTarball
->js
-1. sbt js/clean fullLinkJS
-2. sbt js/universal:packageZipTarball
 
 Client
 ------
