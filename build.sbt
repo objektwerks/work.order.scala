@@ -14,7 +14,7 @@ lazy val common = Defaults.coreDefaultSettings ++ Seq(
   scalaVersion := "3.1.1"
 )
 
-lazy val pool = project.in(file("."))
+lazy val poolmate = project.in(file("."))
   .aggregate(sharedJs, sharedJvm, js, jvm)
   .settings(common)
   .settings(
@@ -47,13 +47,11 @@ lazy val js = (project in file("js"))
       "com.raquo" %%% "waypoint" % waypointVersion,
       "com.lihaoyi" %%% "upickle" % upickleVersion,
       "io.github.cquiroz" %%% "scala-java-time" % scalaJavaTimeVersion
-    ),
-    Compile / fastLinkJS / scalaJSLinkerOutputDirectory := target.value / "scala-3.1.1" / "classes" / "js",
-    Compile / fullLinkJS / scalaJSLinkerOutputDirectory := target.value / "scala-3.1.1" / "classes" / "js"
+    )
   )
 
 lazy val jvm = (project in file("jvm"))
-  .dependsOn(sharedJvm)
+  .dependsOn(sharedJvm, js)
   .enablePlugins(JavaServerAppPackaging)
   .settings(common)
   .settings(
