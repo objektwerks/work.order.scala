@@ -14,12 +14,12 @@ import upickle.default.{read, write}
 object Router extends LazyLogging:
   private val utf8 = Codec.UTF8.name
   private val contentType = "Content-Type"
-  private val prefix = "/public/"
+  private val basePath = "/public/"
   private val indexHtml = loadResource("index.html")
   private val indexHtmlHeader = contentType -> "text/html; charset=UTF-8"
 
   def loadResource(resource: String): Array[Byte] =
-    val path = s"$prefix$resource"
+    val path = s"$basePath$resource"
     logger.debug(s"*** load resource: $path")
     Using( Source.fromInputStream(getClass.getResourceAsStream(path), utf8) ) { 
       source => source.mkString.getBytes
@@ -41,7 +41,7 @@ class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   @cask.get("/")
   def index() = Response(indexHtml, 200, Seq(indexHtmlHeader))
 
-  @cask.get(Router.prefix, subpath = true)
+  @cask.get(Router.basePath, subpath = true)
   def resources(request: Request) =
     val resource = request.remainingPathSegments.head
     val content = loadResource(resource)
