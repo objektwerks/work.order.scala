@@ -11,4 +11,4 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 @JSExportTopLevel("Client")
 class Client(publicUrl: String, apiUrl: String) extends js.Object:
   log(s"public url: $publicUrl api url: $apiUrl")
-  render(document.getElementById("content"), div(h3("content")))
+  render(document.getElementById("content"), div())
