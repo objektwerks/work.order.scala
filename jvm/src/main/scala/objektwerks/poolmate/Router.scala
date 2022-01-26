@@ -31,6 +31,11 @@ object Router extends LazyLogging:
       source => source.mkString
     }.getOrElse(s"failed to load resource: $path")
 
+  def isImage(resource: String): Boolean =
+    resource.split('.').last match
+      case "ico" | "png"  => true
+      case _      => false
+
   def loadImage(resource: String): BufferedImage =
     val path = toPath(resource)
     val file = new File(getClass.getResource(path).getFile())
