@@ -5,7 +5,6 @@ import cask.model.{Request, Response}
 import com.typesafe.scalalogging.LazyLogging
 
 import java.awt.image.BufferedImage
-import java.io.File
 import javax.imageio.ImageIO
 
 import scala.io.{Codec, Source}
@@ -14,6 +13,7 @@ import scala.util.{Try, Using}
 import Serializers.given
 
 import upickle.default.{read, write}
+import java.io.ByteArrayOutputStream
 
 object Router extends LazyLogging:
   private val utf8 = Codec.UTF8.name
@@ -22,24 +22,33 @@ object Router extends LazyLogging:
   private val indexHtml = loadResource("index.html")
   private val indexHtmlHeader = contentType -> "text/html; charset=UTF-8"
 
+  def toContentType(resource: String): String = resource.split('.').last
+
   def toPath(resource: String): String = s"$basePath$resource"
 
-  def loadResource(resource: String): String =
+  def loadResource(resource: String): Array[Byte] =
     val path = toPath(resource)
     logger.debug(s"*** load resource: $path")
     Using( Source.fromInputStream(getClass.getResourceAsStream(path), utf8) ) {
-      source => source.mkString
-    }.getOrElse(s"failed to load resource: $path")
+      source => source.mkString.getBytes
+    }.getOrElse(Array.empty[Byte])
 
   def isImage(resource: String): Boolean =
-    resource.split('.').last match
-      case "ico" | "png"  => true
+    toContentType(resource) match
+      case "png"  => true
       case _      => false
 
-  def loadImage(resource: String): BufferedImage =
+  def loadImage(resource: String): Array[Byte] =
     val path = toPath(resource)
-    val file = new File(getClass.getResource(path).getFile())
-    ImageIO.read(file)
+    logger.debug(s"*** load image: $path")
+    val url = getClass.getResource(path)
+    logger.debug(s"*** load image file: ${url.toString}")
+    val image = ImageIO.read(url)
+    val contentType = toContentType(resource)
+    logger.debug(s"*** content type: $contentType")
+    val baos = new ByteArrayOutputStream()
+    ImageIO.write(image, contentType, baos)
+    baos.toByteArray
 
   def toHeader(resource: String): (String, String) =
     logger.debug(s"*** to header: ${resource.split('.').last}")
@@ -61,10 +70,10 @@ class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   @cask.get(basePath, subpath = true)
   def resources(request: Request) =
     val resource = request.remainingPathSegments.head
-    val content = loadResource(resource)
     val headers = Seq(toHeader(resource))
     logger.debug(s"*** headers: $headers")
-    Response(content, 200, headers)
+    if isImage(resource) then Response(loadImage(resource), 200, headers)
+    else Response(loadResource(resource), 200, headers)
 
   @cask.post("/command")
   def command(request: Request) =
