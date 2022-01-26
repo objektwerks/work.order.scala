@@ -21,7 +21,7 @@ object Router extends LazyLogging:
   def loadResource(resource: String): String =
     val path = s"$basePath$resource"
     logger.debug(s"*** load resource: $path")
-    Using( Source.fromInputStream(getClass.getResourceAsStream(path), utf8) ) { 
+    Using( Source.fromInputStream(getClass.getResourceAsStream(path), utf8) ) {
       source => source.mkString
     }.getOrElse("")
 
