@@ -46,6 +46,7 @@ class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
     val resource = request.remainingPathSegments.head
     val content = loadResource(resource)
     val headers = Seq(toHeader(resource))
+    logger.debug(s"*** headers: $headers")
     Response(content, 200, headers)
 
   @cask.post("/command")
