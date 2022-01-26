@@ -23,7 +23,7 @@ object Router extends LazyLogging:
     logger.debug(s"*** load resource: $path")
     Using( Source.fromInputStream(getClass.getResourceAsStream(path), utf8) ) {
       source => source.mkString
-    }.getOrElse("")
+    }.getOrElse(s"failed to load resource: $path")
 
   def toHeader(resource: String): (String, String) =
     logger.debug(s"*** to header: ${resource.split('.').last}")
