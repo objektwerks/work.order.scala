@@ -25,15 +25,19 @@ object Router extends LazyLogging:
 
 class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   val indexHeaders = Seq("Content-Type" -> "text/html; charset=UTF-8")
-  val resourceHeaders = Seq("Content-Type" -> "image/png", "Content-Type" -> "text/javascript")
+  val imageResourceHeaders = Seq("Content-Type" -> "image/*")
+  val textResourceHeaders = Seq("Content-Type" -> "text/*")
 
   @cask.get("/")
-  def index() =
-    Response(Router.html, 200, indexHeaders)
+  def index() = Response(Router.html, 200, indexHeaders)
 
   @cask.get(Router.prefix, subpath = true)
   def resources(request: Request) =
-    Response(Router.loadResource(request.remainingPathSegments.head), 200, resourceHeaders)
+    val contentType = request.remainingPathSegments.head
+    if contentType.contains("ico") || contentType.contains("png") then
+      Response(Router.loadResource(contentType), 200, imageResourceHeaders)
+    else
+      Response(Router.loadResource(contentType), 200, textResourceHeaders)
 
   @cask.post("/command")
   def command(request: Request) =
