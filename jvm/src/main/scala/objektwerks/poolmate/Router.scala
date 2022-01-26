@@ -42,7 +42,7 @@ class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   @cask.get("/")
   def index() = Response(indexHtml, 200, Seq(indexHtmlHeader))
 
-  @cask.get(Router.basePath, subpath = true)
+  @cask.get(basePath, subpath = true)
   def resources(request: Request) =
     val resource = request.remainingPathSegments.head
     val content = loadResource(resource)
