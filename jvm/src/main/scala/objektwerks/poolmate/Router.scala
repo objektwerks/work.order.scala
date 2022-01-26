@@ -18,12 +18,12 @@ object Router extends LazyLogging:
   private val indexHtml = loadResource("index.html")
   private val indexHtmlHeader = contentType -> "text/html; charset=UTF-8"
 
-  def loadResource(resource: String): Array[Byte] =
+  def loadResource(resource: String): String =
     val path = s"$basePath$resource"
     logger.debug(s"*** load resource: $path")
     Using( Source.fromInputStream(getClass.getResourceAsStream(path), utf8) ) { 
-      source => source.mkString.getBytes
-    }.getOrElse(Array.empty[Byte])
+      source => source.mkString
+    }.getOrElse("")
 
   def toHeader(resource: String): (String, String) =
     logger.debug(s"*** to header: ${resource.split('.').tail(0)}")
