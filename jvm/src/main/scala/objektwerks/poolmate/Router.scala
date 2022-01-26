@@ -28,6 +28,7 @@ object Router extends LazyLogging:
   def toHeader(resource: String): (String, String) =
     logger.debug(s"*** to header: ${resource.split('.').tail(0)}")
     resource.split('.').tail(0) match
+      case "css"  => contentType -> "text/css"
       case "ico"  => contentType -> "image/x-icon"
       case "png"  => contentType -> "image/png"
       case "js"   => contentType -> "text/javascript"
