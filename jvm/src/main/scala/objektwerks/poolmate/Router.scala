@@ -4,6 +4,10 @@ import cask.main.Routes
 import cask.model.{Request, Response}
 import com.typesafe.scalalogging.LazyLogging
 
+import java.awt.image.BufferedImage
+import java.io.File
+import javax.imageio.ImageIO
+
 import scala.io.{Codec, Source}
 import scala.util.{Try, Using}
 
@@ -18,12 +22,19 @@ object Router extends LazyLogging:
   private val indexHtml = loadResource("index.html")
   private val indexHtmlHeader = contentType -> "text/html; charset=UTF-8"
 
+  def toPath(resource: String): String = s"$basePath$resource"
+
   def loadResource(resource: String): String =
-    val path = s"$basePath$resource"
+    val path = toPath(resource)
     logger.debug(s"*** load resource: $path")
     Using( Source.fromInputStream(getClass.getResourceAsStream(path), utf8) ) {
       source => source.mkString
     }.getOrElse(s"failed to load resource: $path")
+
+  def loadImage(resource: String): BufferedImage =
+    val path = toPath(resource)
+    val file = new File(getClass.getResource(path).getFile())
+    ImageIO.read(file)
 
   def toHeader(resource: String): (String, String) =
     logger.debug(s"*** to header: ${resource.split('.').last}")
