@@ -24,13 +24,16 @@ object Router extends LazyLogging:
     }.getOrElse(s"*** Failed to load: $path")
 
 class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
+  val indexHeaders = Seq("Content-Type" -> "text/html; charset=UTF-8")
+  val resourceHeaders = Seq("Content-Type" -> "image/png", "Content-Type" -> "text/javascript")
+
   @cask.get("/")
   def index() =
-    Response(Router.html, 200, Seq("Content-Type" -> "text/html; charset=UTF-8"))
+    Response(Router.html, 200, indexHeaders)
 
   @cask.get(Router.prefix, subpath = true)
   def resources(request: Request) =
-    Response(Router.loadResource(request.remainingPathSegments.head), 200, Seq("Content-Type" -> "image/*"))
+    Response(Router.loadResource(request.remainingPathSegments.head), 200, resourceHeaders)
 
   @cask.post("/command")
   def command(request: Request) =
