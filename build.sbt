@@ -6,6 +6,7 @@ lazy val waypointVersion = "0.5.0"
 lazy val upickleVersion = "1.4.4"
 lazy val scalaJavaTimeVersion = "2.3.0"
 lazy val postgresqlVersion = "42.3.1"
+lazy val twelveMonkeysVersion = "3.8.1"
 lazy val scalaTestVersion = "3.2.10"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
@@ -63,6 +64,8 @@ lazy val jvm = (project in file("jvm"))
         "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
         "org.postgresql" % "postgresql" % postgresqlVersion,
         "io.github.cquiroz" %% "scala-java-time" % "2.3.0",
+        "com.twelvemonkeys.imageio" % "imageio-core" % twelveMonkeysVersion,
+        "com.twelvemonkeys.imageio" % "imageio-bmp" % twelveMonkeysVersion,
         "com.typesafe" % "config" % "1.4.1",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
         "ch.qos.logback" % "logback-classic" % "1.2.10",
