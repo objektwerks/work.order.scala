@@ -71,7 +71,6 @@ class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   def resources(request: Request) =
     val resource = request.remainingPathSegments.head
     val headers = Seq(toHeader(resource))
-    logger.debug(s"*** headers: $headers")
     if isImage(resource) then Response(loadImage(resource), 200, headers)
     else Response(loadResource(resource), 200, headers)
 
