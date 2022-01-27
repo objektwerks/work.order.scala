@@ -51,7 +51,7 @@ trait Resources(val basePath: String) extends LazyLogging:
   /**
    * Loading ico depends on:
    *  "com.twelvemonkeys.imageio" % "imageio-core" % "3.8.1",
-   *  "com.twelvemonkeys.imageio" % "imageio-ico" % "3.0.2"
+   *  "com.twelvemonkeys.imageio" % "imageio-bmp" % "3.8.1"
    */
   def loadImage(resource: String): Array[Byte] =
     val path = toPath(resource)
