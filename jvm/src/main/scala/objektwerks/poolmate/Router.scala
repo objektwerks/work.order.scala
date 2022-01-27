@@ -41,13 +41,6 @@ trait Resources(val basePath: String) extends LazyLogging:
       case "ico" | "png"  => true
       case _              => false
 
-  def loadResource(resource: String): Array[Byte] =
-    val path = toPath(resource)
-    logger.debug(s"*** load resource: $path")
-    Using( Source.fromInputStream(getClass.getResourceAsStream(path), utf8) ) {
-      source => source.mkString.getBytes
-    }.getOrElse(Array.empty[Byte])
-
   def loadImage(resource: String): Array[Byte] =
     val path = toPath(resource)
     logger.debug(s"*** load image: $path")
@@ -57,6 +50,13 @@ trait Resources(val basePath: String) extends LazyLogging:
     val contentType = toContentType(resource)
     ImageIO.write(image, contentType, baos)
     baos.toByteArray
+
+  def loadResource(resource: String): Array[Byte] =
+    val path = toPath(resource)
+    logger.debug(s"*** load resource: $path")
+    Using( Source.fromInputStream(getClass.getResourceAsStream(path), utf8) ) {
+      source => source.mkString.getBytes
+    }.getOrElse(Array.empty[Byte])
 
 class Router(dispatcher: Dispatcher) extends Routes with LazyLogging with Resources("/public/"):
   @cask.get("/")
