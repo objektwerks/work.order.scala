@@ -26,30 +26,6 @@ object Router extends LazyLogging:
 
   def toPath(resource: String): String = s"$basePath$resource"
 
-  def loadResource(resource: String): Array[Byte] =
-    val path = toPath(resource)
-    logger.debug(s"*** load resource: $path")
-    Using( Source.fromInputStream(getClass.getResourceAsStream(path), utf8) ) {
-      source => source.mkString.getBytes
-    }.getOrElse(Array.empty[Byte])
-
-  def isImage(resource: String): Boolean =
-    toContentType(resource) match
-      case "ico" | "png"  => true
-      case _      => false
-
-  def loadImage(resource: String): Array[Byte] =
-    val path = toPath(resource)
-    logger.debug(s"*** load image: $path")
-    val url = getClass.getResource(path)
-    logger.debug(s"*** load image file: ${url.toString}")
-    val image = ImageIO.read(url)
-    val contentType = toContentType(resource)
-    logger.debug(s"*** content type: $contentType")
-    val baos = new ByteArrayOutputStream()
-    ImageIO.write(image, contentType, baos)
-    baos.toByteArray
-
   def toHeader(resource: String): (String, String) =
     logger.debug(s"*** to header: ${resource.split('.').last}")
     resource.split('.').last match
@@ -60,6 +36,28 @@ object Router extends LazyLogging:
       case "map"  => contentType -> "application/json"
       case "html" => indexHtmlHeader
       case _      => contentType -> "text/plain"
+  
+  def isImage(resource: String): Boolean =
+    toContentType(resource) match
+      case "ico" | "png"  => true
+      case _      => false
+
+  def loadResource(resource: String): Array[Byte] =
+    val path = toPath(resource)
+    logger.debug(s"*** load resource: $path")
+    Using( Source.fromInputStream(getClass.getResourceAsStream(path), utf8) ) {
+      source => source.mkString.getBytes
+    }.getOrElse(Array.empty[Byte])
+
+  def loadImage(resource: String): Array[Byte] =
+    val path = toPath(resource)
+    logger.debug(s"*** load image: $path")
+    val url = getClass.getResource(path)
+    val image = ImageIO.read(url)
+    val baos = new ByteArrayOutputStream()
+    val contentType = toContentType(resource)
+    ImageIO.write(image, contentType, baos)
+    baos.toByteArray
 
 class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   import Router._
