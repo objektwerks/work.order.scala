@@ -9,6 +9,6 @@ import scala.scalajs.js
 import scala.scalajs.js.annotation.JSExportTopLevel
 
 @JSExportTopLevel("Client")
-class Client(publicUrl: String, apiUrl: String) extends js.Object:
-  log(s"public url: $publicUrl api url: $apiUrl")
+class Client(apiUrl: String) extends js.Object:
+  log(s"api url: $apiUrl")
   render(document.getElementById("content"), div())
