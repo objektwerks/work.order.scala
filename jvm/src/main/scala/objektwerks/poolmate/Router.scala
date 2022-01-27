@@ -15,12 +15,11 @@ import Serializers.given
 import upickle.default.{read, write}
 import java.io.ByteArrayOutputStream
 
-object Router extends LazyLogging:
-  private val utf8 = Codec.UTF8.name
-  private val contentType = "Content-Type"
-  private val basePath = "/public/"
-  private val indexHtml = loadResource("index.html")
-  private val indexHtmlHeader = contentType -> "text/html; charset=UTF-8"
+trait Resources(val basePath: String) extends LazyLogging:
+  val utf8 = Codec.UTF8.name
+  val contentType = "Content-Type"
+  val indexHtml = loadResource("index.html")
+  val indexHtmlHeader = contentType -> "text/html; charset=UTF-8"
 
   def toContentType(resource: String): String = resource.split('.').last
 
@@ -59,9 +58,7 @@ object Router extends LazyLogging:
     ImageIO.write(image, contentType, baos)
     baos.toByteArray
 
-class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
-  import Router._
-
+class Router(dispatcher: Dispatcher) extends Routes with LazyLogging with Resources("/public/"):
   @cask.get("/")
   def index() = Response(indexHtml, 200, Seq(indexHtmlHeader))
 
