@@ -26,8 +26,8 @@ trait Resources(val basePath: String) extends LazyLogging:
   def toPath(resource: String): String = s"$basePath$resource"
 
   def toHeader(resource: String): (String, String) =
-    logger.debug(s"*** to header: ${resource.split('.').last}")
-    resource.split('.').last match
+    logger.debug(s"*** to header: ${toContentType(resource)}")
+    toContentType(resource) match
       case "css"  => contentType -> "text/css"
       case "ico"  => contentType -> "image/x-icon"
       case "png"  => contentType -> "image/png"
@@ -48,11 +48,6 @@ trait Resources(val basePath: String) extends LazyLogging:
       source => source.mkString.getBytes
     }.getOrElse(Array.empty[Byte])
 
-  /**
-   * Loading ico depends on:
-   *  "com.twelvemonkeys.imageio" % "imageio-core" % "3.8.1",
-   *  "com.twelvemonkeys.imageio" % "imageio-bmp" % "3.8.1"
-   */
   def loadImage(resource: String): Array[Byte] =
     val path = toPath(resource)
     logger.debug(s"*** load image: $path")
