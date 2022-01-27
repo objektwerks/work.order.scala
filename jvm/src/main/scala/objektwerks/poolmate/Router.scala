@@ -35,7 +35,7 @@ object Router extends LazyLogging:
 
   def isImage(resource: String): Boolean =
     toContentType(resource) match
-      case "png"  => true
+      case "ico" | "png"  => true
       case _      => false
 
   def loadImage(resource: String): Array[Byte] =
