@@ -39,7 +39,7 @@ trait Resources(val basePath: String) extends LazyLogging:
   def isImage(resource: String): Boolean =
     toContentType(resource) match
       case "ico" | "png"  => true
-      case _      => false
+      case _              => false
 
   def loadResource(resource: String): Array[Byte] =
     val path = toPath(resource)
