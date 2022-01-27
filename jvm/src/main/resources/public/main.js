@@ -7991,14 +7991,12 @@ var $b_Lobjektwerks_poolmate_Client;
 function $a_Lobjektwerks_poolmate_Client() {
   if ((!$b_Lobjektwerks_poolmate_Client)) {
     $b_Lobjektwerks_poolmate_Client = class $b_Lobjektwerks_poolmate_Client extends Object {
-      constructor(arg, arg$2) {
-        var publicUrl = null;
+      constructor(arg) {
         var apiUrl = null;
-        publicUrl = $as_T(arg);
-        apiUrl = $as_T(arg$2);
+        apiUrl = $as_T(arg);
         var overload = 0;
         super();
-        console.log(((("public url: " + publicUrl) + " api url: ") + apiUrl));
+        console.log(("api url: " + apiUrl));
         $m_Lcom_raquo_laminar_api_package$().L__Lcom_raquo_laminar_api_Laminar$().render__Lorg_scalajs_dom_Element__Lcom_raquo_laminar_nodes_ReactiveElement__Lcom_raquo_laminar_nodes_RootNode(document.getElementById("content"), $as_Lcom_raquo_laminar_builders_HtmlTag($m_Lcom_raquo_laminar_api_package$().L__Lcom_raquo_laminar_api_Laminar$().div__O()).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lcom_raquo_domtypes_generic_Modifier.getArrayOf().constr)([]))))
       };
     }
