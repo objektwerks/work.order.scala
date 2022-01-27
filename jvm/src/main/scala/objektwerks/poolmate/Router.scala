@@ -5,6 +5,7 @@ import cask.model.{Request, Response}
 import com.typesafe.scalalogging.LazyLogging
 
 import java.awt.image.BufferedImage
+import java.io.ByteArrayOutputStream
 import javax.imageio.ImageIO
 
 import scala.io.{Codec, Source}
@@ -13,7 +14,6 @@ import scala.util.{Try, Using}
 import Serializers.given
 
 import upickle.default.{read, write}
-import java.io.ByteArrayOutputStream
 
 trait Resources(val basePath: String) extends LazyLogging:
   val utf8 = Codec.UTF8.name
