@@ -74,6 +74,5 @@ lazy val jvm = (project in file("jvm"))
         "org.scalatest" %% "scalatest" % scalaTestVersion % Test
       )
     },
-    // (resources in Compile) += (fastLinkJS in (js, Compile)).value.data
-    Compile / fastLinkJS / scalaJSLinkerOutputDirectory := target.value / public / "js"
+    js / fastLinkJS / crossTarget := target.value / public / "js"
   )
