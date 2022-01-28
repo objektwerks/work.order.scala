@@ -14,12 +14,12 @@ lazy val jsfull = taskKey[Unit]("rename fullLinkJS > js-opt to js")
 
 jsfast := {
   val logger = sLog.value
-  logger.info("jsfast ...")
+  logger.info("*** jsfast ...")
 }
 
 jsfull := {
   val logger = sLog.value
-  logger.info("jsfull ...")
+  logger.info("*** jsfull ...")
 }
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
