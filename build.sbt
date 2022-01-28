@@ -35,9 +35,9 @@ jsfull := {
   io.IO.createDirectory(jsDir)
   logger.info(s"*** jsfull makeDir: $jsDir")
   io.IO.copyDirectory(jsFullDir, jsDir)
-  logger.info(s"*** jsfulll copy: $jsFullDir to $jsDir")
+  logger.info(s"*** jsfull copy: $jsFullDir to $jsDir")
   io.IO.delete(jsFullDir)
-  logger.info(s"*** jsfast delete: $jsFullDir")
+  logger.info(s"*** jsfull delete: $jsFullDir")
 }
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
