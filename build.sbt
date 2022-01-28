@@ -51,6 +51,8 @@ lazy val js = (project in file("js"))
     )
   )
 
+lazy val public = "scala-3.1.1/classes/public"
+
 lazy val jvm = (project in file("jvm"))
   .dependsOn(sharedJvm, js)
   .enablePlugins(JavaServerAppPackaging)
@@ -71,5 +73,7 @@ lazy val jvm = (project in file("jvm"))
         "ch.qos.logback" % "logback-classic" % "1.2.10",
         "org.scalatest" %% "scalatest" % scalaTestVersion % Test
       )
-    }
+    },
+    // (resources in Compile) += (fastLinkJS in (js, Compile)).value.data
+    Compile / fastLinkJS / scalaJSLinkerOutputDirectory := target.value / public / "js"
   )
