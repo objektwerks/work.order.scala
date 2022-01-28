@@ -9,6 +9,19 @@ lazy val postgresqlVersion = "42.3.1"
 lazy val twelvemonkeysVersion = "3.8.1"
 lazy val scalaTestVersion = "3.2.10"
 
+lazy val jsfast = taskKey[Unit]("rename fastLinkJS > js-fastopt to js")
+lazy val jsfull = taskKey[Unit]("rename fullLinkJS > js-opt to js")
+
+jsfast := {
+  val logger = sLog.value
+  logger.info("jsfast ...")
+}
+
+jsfull := {
+  val logger = sLog.value
+  logger.info("jsfull ...")
+}
+
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.1-SNAPSHOT",
