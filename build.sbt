@@ -9,17 +9,38 @@ lazy val postgresqlVersion = "42.3.1"
 lazy val twelvemonkeysVersion = "3.8.1"
 lazy val scalaTestVersion = "3.2.10"
 
+lazy val public = "scala-3.1.1/classes/public"
+lazy val jsFastDir = "target/scala-3.1.1/classes/public/js-fastopt"
+lazy val jsFullDir = "target/scala-3.1.1/classes/public/js-opt"
+lazy val jsDir = "target/scala-3.1.1/classes/public/js"
+
 lazy val jsfast = taskKey[Unit]("rename fastLinkJS > js-fastopt to js")
 lazy val jsfull = taskKey[Unit]("rename fullLinkJS > js-opt to js")
 
 jsfast := {
   val logger = sLog.value
   logger.info("*** jsfast ...")
+  if (os.exists(jsFastDir)) {
+    os.makeDir(jsDir)
+    logger.info(s"*** jsfast makeDir: $jsDir")
+    os.copy(jsFastDir, jsDir)
+    logger.info(s"*** jsfast copy: $jsFastDir to $jsDir")
+    os.remove.all(jsFastDir)
+    logger.info(s"*** jsfast remove: $jsFastDir")
+  }
 }
 
 jsfull := {
   val logger = sLog.value
   logger.info("*** jsfull ...")
+  if (os.exists(jsFullDir)) {
+    os.makeDir(jsDir)
+    logger.info(s"*** jsfull makeDir: $jsDir")
+    os.copy(jsFullDir, jsDir)
+    logger.info(s"*** jsfull copy: $jsFastDir to $jsDir")
+    os.remove.all(jsFullDir)
+    logger.info(s"*** jsfull remove: $jsFullDir")
+  }
 }
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
@@ -63,8 +84,6 @@ lazy val js = (project in file("js"))
       "io.github.cquiroz" %%% "scala-java-time" % scalaJavaTimeVersion
     )
   )
-
-lazy val public = "scala-3.1.1/classes/public"
 
 lazy val jvm = (project in file("jvm"))
   .dependsOn(sharedJvm, js)
