@@ -74,5 +74,6 @@ lazy val jvm = (project in file("jvm"))
         "org.scalatest" %% "scalatest" % scalaTestVersion % Test
       )
     },
-    js / fastLinkJS / crossTarget := target.value / public / "js"
+    js / fastLinkJS / crossTarget := target.value / public,
+    js / fullLinkJS / crossTarget := target.value / public
   )
