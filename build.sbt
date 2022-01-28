@@ -48,9 +48,7 @@ lazy val js = (project in file("js"))
       "com.raquo" %%% "waypoint" % waypointVersion,
       "com.lihaoyi" %%% "upickle" % upickleVersion,
       "io.github.cquiroz" %%% "scala-java-time" % scalaJavaTimeVersion
-    ),
-    Compile / fastLinkJS / scalaJSLinkerOutputDirectory := target.value / "js",
-    Compile / fullLinkJS / scalaJSLinkerOutputDirectory := target.value / "js"
+    )
   )
 
 lazy val public = "scala-3.1.1/classes/public"
