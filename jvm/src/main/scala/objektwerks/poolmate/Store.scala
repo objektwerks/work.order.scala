@@ -24,8 +24,8 @@ class Store(conf: Config):
     val email = Email(id = "1", license = account.license, address = emailAddress, message = "message")
     
     addEmail(email)
-    addAccount(account)
-    Some(account)
+    addAccount(account) // remove
+    Some(account) // remove, return unit
 
   def addAccount(account: Account): Unit =
     DB localTx { implicit session =>
