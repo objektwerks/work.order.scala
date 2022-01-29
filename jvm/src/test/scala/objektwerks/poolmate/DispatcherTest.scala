@@ -13,20 +13,24 @@ import Validators.*
 class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   test("dispatcher") {
     Process("psql -d poolmate -f ddl.sql").run().exitValue()
-    val store = Store(ConfigFactory.load("test.store.conf"))
+    val conf = ConfigFactory.load("test.store.conf")
+    val store = Store(conf)
+    val emailer = Emailer(conf, store)
     val service = Service(store)
     val authorizer = Authorizer(service)
-    val handler = Handler(service)
+    val handler = Handler(emailer, service)
     val validator = Validator()
     val dispatcher = Dispatcher(authorizer, validator, handler)
 
-    testDispatcher(dispatcher)
+    testDispatcher(dispatcher, store)
     testEmail(store)
     testFault(store)
   }
 
-  def testDispatcher(dispatcher: Dispatcher): Unit = {
-    var account = testRegister(dispatcher)
+  def testDispatcher(dispatcher: Dispatcher, store: Store): Unit = {
+    testRegister(dispatcher)
+    var account = store.listAccounts().head
+
     testLogin(dispatcher, account)
     account = testDeactivate(dispatcher, account)
     account = testReactivate(dispatcher, account)
@@ -92,12 +96,10 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     testUpdateRepair(dispatcher, pool, repair.copy(cost = 105.0))
   }
 
-  def testRegister(dispatcher: Dispatcher): Account =
+  def testRegister(dispatcher: Dispatcher): Unit =
     val command = Register(emailAddress = "test@test.com")
     dispatcher.dispatch(command) match
-      case Registered(account) =>
-        account.isActivated shouldBe true
-        account
+      case Registered() =>
       case event: Event => logger.error(event.toString); fail()
 
   def testLogin(dispatcher: Dispatcher, account: Account): Unit =

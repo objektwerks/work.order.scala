@@ -19,13 +19,12 @@ final class Store(conf: Config):
 
   ConnectionPool.singleton(url, user, password, settings)
 
-  def register(emailAddress: String): Option[Account] =
-    val account = Account(emailAddress = emailAddress)
-    val email = Email(id = "1", license = account.license, address = emailAddress)
-    
-    addEmail(email)
-    addAccount(account) // remove
-    Some(account) // remove, return unit
+  def listAccounts(): Seq[Account] =
+    DB readOnly { implicit session =>
+      sql"select * from account"
+        .map(rs => Account(rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+        .list()
+    }
 
   def addAccount(account: Account): Unit =
     DB localTx { implicit session =>
@@ -37,8 +36,8 @@ final class Store(conf: Config):
     DB readOnly { implicit session =>
       sql"select * from email where processed = false"
         .map(rs => 
-          Email(rs.string("id"), rs.string("license"), rs.string("address"), rs.string("message"),
-                rs.int("date_sent"), rs.int("time_sent"), rs.boolean("processed"), rs.boolean("valid")
+          Email(rs.string("id"), rs.string("license"), rs.string("address"), rs.int("date_sent"),
+                rs.int("time_sent"), rs.boolean("processed"), rs.boolean("valid")
               )
         )
         .list()
@@ -47,7 +46,7 @@ final class Store(conf: Config):
   def addEmail(email: Email): Unit =
     DB localTx { implicit session =>
       sql"""insert into email(id, license, address, message, date_sent, time_sent, processed, valid)
-            values(${email.id}, ${email.license}, ${email.address}, ${email.message}, ${email.dateSent},
+            values(${email.id}, ${email.license}, ${email.address}, ${email.dateSent},
              ${email.timeSent}, ${email.processed}, ${email.valid})
          """
         .stripMargin

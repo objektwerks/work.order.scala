@@ -14,16 +14,16 @@ import scala.util.{Failure, Success, Using}
 
 final class Emailer(conf: Config,
                     store: Store) extends LazyLogging:
-  private val host = conf.getString("email.host")
-  private val user = conf.getString("email.user")
-  private val password = conf.getString("email.password")
-  private val from = conf.getString("email.from")
-  private val subject = conf.getString("email.subject")
-  private val message = conf.getString("email.message")
-  private val email = conf.getString("email.email")
-  private val lic = conf.getString("email.lic")
-  private val pin = conf.getString("email.pin")
-  private val instructions = conf.getString("email.instructions")
+  val host = conf.getString("email.host")
+  val user = conf.getString("email.user")
+  val password = conf.getString("email.password")
+  val from = conf.getString("email.from")
+  val subject = conf.getString("email.subject")
+  val message = conf.getString("email.message")
+  val email = conf.getString("email.email")
+  val lic = conf.getString("email.lic")
+  val pin = conf.getString("email.pin")
+  val instructions = conf.getString("email.instructions")
 
   private val smtpServer: SmtpServer = MailServer.create()
     .ssl(true)

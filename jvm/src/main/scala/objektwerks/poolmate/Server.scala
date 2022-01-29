@@ -11,13 +11,13 @@ import scala.io.StdIn
 object Server extends Main with LazyLogging:
   val conf = ConfigFactory.load("store.conf")
   val store = Store(conf)
+  val emailer = Emailer(conf, store)
   val service = Service(store)
   val authorizer = Authorizer(service)
-  val handler = Handler(service)
+  val handler = Handler(emailer, service)
   val validator = Validator()
   val dispatcher = Dispatcher(authorizer, validator, handler)
 
-  val emailer = Emailer(conf, store)
   val scheduler = Scheduler(emailer)
 
   val allRoutes = Seq(Router(dispatcher))
