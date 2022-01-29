@@ -1,8 +1,8 @@
 package objektwerks.poolmate
 
-class Dispatcher(authorizer: Authorizer,
-                 validator: Validator,
-                 handler: Handler):
+final class Dispatcher(authorizer: Authorizer,
+                       validator: Validator,
+                       handler: Handler):
   def dispatch(command: Command): Event =
     authorizer.authorize(command) match
       case unauthorized: Unauthorized => unauthorized
