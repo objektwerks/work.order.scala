@@ -90,9 +90,17 @@ final class Emailer(conf: Config,
             logger.info("*** Emailer receiveEmailAndMarkSeen messages: {}", messages.size)
             store.listEmails.foreach { email =>
               messages.foreach { message =>
-                if message.messageId() == email.id then
+                logger.info("*** Emailer subject {}", message.subject())
+                logger.info("*** Emailer message id: {}, email id: {}", message.messageId, email.id)
+                if message.subject != subject && message.messageId() == email.id then
+                  store.processedEmail( email.copy(processed = true) )
+                  logger.info("*** Emailer [invalid] processedEmail: {}", email.id)
+                  store.removeAccount(email.license)
+                  logger.info("*** Emailer removeAccount: {}", email.license)
+                else if message.messageId() == email.id then
                   store.processedEmail( email.copy(processed = true, valid = true) )
                   logger.info("*** Emailer email processed and valid: {}", email)
+                else logger.error("*** Emailer invalid message: {}", message.messageId())
               }
             }
           else logger.error("*** Emailer imap server session is NOT connected!")

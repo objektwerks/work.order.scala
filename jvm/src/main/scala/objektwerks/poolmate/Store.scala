@@ -32,6 +32,9 @@ final class Store(conf: Config):
       .update()
     }
 
+  def removeAccount(license: String): Unit = ()
+
+
   def listEmails: Seq[Email] =
     DB readOnly { implicit session =>
       sql"select * from email where processed = false"
