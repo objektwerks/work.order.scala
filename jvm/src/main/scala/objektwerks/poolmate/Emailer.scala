@@ -92,14 +92,17 @@ final class Emailer(conf: Config,
               messages.foreach { message =>
                 logger.info("*** Emailer subject {}", message.subject())
                 logger.info("*** Emailer message id: {}, email id: {}", message.messageId, email.id)
+                
                 if message.subject != subject && message.messageId() == email.id then
                   store.processedEmail( email.copy(processed = true) )
                   logger.warn("*** Emailer [invalid] processed email: {}", email.id)
                   store.removeAccount(email.license)
                   logger.warn("*** Emailer removed account: {}", email.license)
+
                 else if message.messageId() == email.id then
                   store.processedEmail( email.copy(processed = true, valid = true) )
                   logger.info("*** Emailer email processed and valid: {}", email)
+
                 else logger.error("*** Emailer invalid message: {}", message.messageId())
               }
             }
