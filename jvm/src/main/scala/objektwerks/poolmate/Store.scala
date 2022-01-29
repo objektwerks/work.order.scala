@@ -4,7 +4,7 @@ import com.typesafe.config.Config
 
 import scalikejdbc._
 
-class Store(conf: Config):
+final class Store(conf: Config):
   val url = conf.getString("db.url")
   val user = conf.getString("db.user")
   val password = conf.getString("db.password")
