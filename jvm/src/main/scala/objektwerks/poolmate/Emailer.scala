@@ -89,7 +89,7 @@ final class Emailer(conf: Config,
               if ( message.subject != subject && message.messageId() == email.id ) then
                 store.updateEmail( email.copy(processed = true) )
                 logger.info("*** Emailer [invalid] updateEmail: {}", email.id)
-                // store.removeAccount( email.license )
+                // store.removeAccount( email.license ) why???
                 logger.info("*** Emailer removeAccount: {}", email.license)
               else if message.messageId() == email.id then
                 store.updateEmail( email.copy(processed = true, valid = true) )
