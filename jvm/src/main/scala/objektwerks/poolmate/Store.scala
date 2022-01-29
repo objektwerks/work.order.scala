@@ -32,8 +32,12 @@ final class Store(conf: Config):
       .update()
     }
 
-  def removeAccount(license: String): Unit = ()
-
+  def removeAccount(license: String): Unit =
+    DB localTx { implicit session =>
+      sql"delete account where license = $license"
+      .update()
+    }
+    ()
 
   def listEmails: Seq[Email] =
     DB readOnly { implicit session =>
