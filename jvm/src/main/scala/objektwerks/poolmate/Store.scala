@@ -45,7 +45,7 @@ final class Store(conf: Config):
 
   def addEmail(email: Email): Unit =
     DB localTx { implicit session =>
-      sql"""insert into email(id, license, address, message, date_sent, time_sent, processed, valid)
+      sql"""insert into email(id, license, address, date_sent, time_sent, processed, valid)
             values(${email.id}, ${email.license}, ${email.address}, ${email.dateSent},
              ${email.timeSent}, ${email.processed}, ${email.valid})
          """

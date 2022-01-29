@@ -5,7 +5,6 @@ final class Handler(emailer: Emailer, service: Service):
     command match
       case register: Register =>
         emailer.sendEmail(register)
-        Registered()
       case login: Login =>
         service.login(login.emailAddress, login.pin).fold(throwable => Fault(throwable), account => LoggedIn(account))
       
