@@ -65,10 +65,11 @@ final class Emailer(conf: Config,
     Using( smtpServer.createSession ) { session =>
       session.open()
       if session.isConnected then
+        val account = Account(emailAddress = register.emailAddress)
+
         val messageId = session.sendMail( buildEmail(account) )
         logger.info("*** Emailer sent message id: {}", messageId)
 
-        val account = Account(emailAddress = register.emailAddress)
         store.addAccount(account)
         logger.info("*** Emailer added account: {}", account)
 
@@ -90,7 +91,7 @@ final class Emailer(conf: Config,
             store.listEmails.foreach { email =>
               messages.foreach { message =>
                 if message.messageId() == email.id then
-                  store.updateEmail( email.copy(processed = true, valid = true) )
+                  store.processedEmail( email.copy(processed = true, valid = true) )
                   logger.info("*** Emailer email processed and valid: {}", email)
               }
             }

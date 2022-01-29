@@ -344,7 +344,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   def testEmail(store: Store): Unit =
     store.listEmails.size shouldBe 1
     val email = store.listEmails.head
-    store.updateEmail(email.copy(processed = true, valid = true))
+    store.processedEmail(email.copy(processed = true, valid = true))
     store.listEmails.size shouldBe 0
 
   def testFault(store: Store): Unit =
