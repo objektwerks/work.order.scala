@@ -2,7 +2,7 @@ package objektwerks.poolmate
 
 import Validators.*
 
-class Validator():
+final class Validator():
   def isValid(command: Command): Boolean =
     command match
       case register: Register => register.isValid
