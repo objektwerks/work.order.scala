@@ -3,8 +3,8 @@ package objektwerks.poolmate
 import java.util.concurrent._
 
 object Scheduler:
-  val initialDelay = 3L
-  val period = 30L
+  val initialDelay = 1L
+  val period = 11L
 
 final class Scheduler(emailer: Emailer):
   import Scheduler.*
