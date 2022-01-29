@@ -75,24 +75,25 @@ final class Emailer(conf: Config,
         val email = objektwerks.poolmate.Email(messageId, account.license, account.emailAddress)
         store.addEmail(email)
         logger.info("*** Emailer added email: {}", email)
-
       else logger.error("*** Emailer smtp server session is NOT connected!")
       Registering()
     }.get
 
-  def receiveEmail(): Runnable = new Runnable() {
-    override def run(): Unit =
-      Using( imapServer.createSession ) { session =>
-        session.open()
-        if session.isConnected then
-          val messages = session.receiveEmailAndMarkSeen( filter.flag(Flags.Flag.SEEN, false) )
-          logger.info("*** Emailer receiveEmailAndMarkSeen messages: {}", messages.size)
-          store.listEmails.foreach { email =>
-            messages.foreach { message =>
-              if message.messageId() == email.id then
-                store.updateEmail( email.copy(processed = true, valid = true) )
-                logger.info("*** Emailer email processed and valid: {}", email)
+  def receiveEmail(): Runnable =
+    new Runnable() {
+      override def run(): Unit =
+        Using( imapServer.createSession ) { session =>
+          session.open()
+          if session.isConnected then
+            val messages = session.receiveEmailAndMarkSeen( filter.flag(Flags.Flag.SEEN, false) )
+            logger.info("*** Emailer receiveEmailAndMarkSeen messages: {}", messages.size)
+            store.listEmails.foreach { email =>
+              messages.foreach { message =>
+                if message.messageId() == email.id then
+                  store.updateEmail( email.copy(processed = true, valid = true) )
+                  logger.info("*** Emailer email processed and valid: {}", email)
+              }
             }
-          }
+          else logger.error("*** Emailer imap server session is NOT connected!")
         }.get
-      }
+    }
