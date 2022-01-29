@@ -15,7 +15,7 @@ import scala.util.{Failure, Success, Using}
 final class Emailer(conf: Config,
                     store: Store) extends LazyLogging:
   val host = conf.getString("email.host")
-  val user = conf.getString("email.user")
+  val to = conf.getString("email.to")
   val password = conf.getString("email.password")
   val from = conf.getString("email.from")
   val subject = conf.getString("email.subject")
@@ -28,13 +28,13 @@ final class Emailer(conf: Config,
   private val smtpServer: SmtpServer = MailServer.create()
     .ssl(true)
     .host(host)
-    .auth(user, password)
+    .auth(to, password)
     .buildSmtpMailServer()
 
   private val imapServer: ImapServer = MailServer.create()
     .ssl(true)
     .host(host)
-    .auth(user, password)
+    .auth(to, password)
     .buildImapMailServer()
 
   private def buildEmail(account: Account): Email = {
