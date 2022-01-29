@@ -31,7 +31,7 @@ Client
 
 Account
 -------
-* Register( email ) => Registering( inProgress )
+* Register( email ) => Registering()
 * Login( email, pin ) => LoggedIn( account )
 * Deactivate( license ) => Deactivated( account )
 * Reactivate( license ) => Reactivated( account )
