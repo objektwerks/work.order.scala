@@ -2,7 +2,7 @@ package objektwerks.poolmate
 
 import scala.util.Try
 
-class Service(store: Store):
+final class Service(store: Store):
   def register(email: String): Either[Throwable, Account] =
     store.register(email) match
       case Some(account) => Right(account)
