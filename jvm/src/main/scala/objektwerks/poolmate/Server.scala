@@ -9,13 +9,17 @@ import io.undertow.Undertow
 import scala.io.StdIn
 
 object Server extends Main with LazyLogging:
-  val store = Store(ConfigFactory.load("store.conf"))
+  val conf = ConfigFactory.load("store.conf")
+  val store = Store(conf)
   val service = Service(store)
   val authorizer = Authorizer(service)
   val handler = Handler(service)
   val validator = Validator()
   val dispatcher = Dispatcher(authorizer, validator, handler)
-  
+
+  val emailer = Emailer(conf, store)
+  val scheduler = Scheduler(emailer)
+
   val allRoutes = Seq(Router(dispatcher))
 
   override def port: Int = 7272
