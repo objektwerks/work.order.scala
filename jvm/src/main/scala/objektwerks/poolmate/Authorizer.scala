@@ -1,6 +1,6 @@
 package objektwerks.poolmate
 
-class Authorizer(service: Service):
+final class Authorizer(service: Service):
   def authorize(command: Command): Event =
     command match
       case license: License => service.authorize(license.license)
