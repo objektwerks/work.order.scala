@@ -99,7 +99,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   def testRegister(dispatcher: Dispatcher): Unit =
     val command = Register(emailAddress = "test@test.com")
     dispatcher.dispatch(command) match
-      case Registered() =>
+      case Registering() =>
       case event: Event => logger.error(event.toString); fail()
 
   def testLogin(dispatcher: Dispatcher, account: Account): Unit =

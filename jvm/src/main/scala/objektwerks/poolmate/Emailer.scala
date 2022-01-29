@@ -61,7 +61,7 @@ final class Emailer(conf: Config,
       .htmlMessage(html, "UTF-8")
   }
 
-  def sendEmail(register: Register): Registered =
+  def sendEmail(register: Register): Registering =
     Using( smtpServer.createSession ) { session =>
       session.open()
       if session.isConnected then
@@ -70,12 +70,12 @@ final class Emailer(conf: Config,
         logger.info("*** Emailer added account: {}", account)
 
         val messageId = session.sendMail( buildEmail(account) )
-        
+
         val email = objektwerks.poolmate.Email(messageId, account.license, account.emailAddress)
         store.addEmail(email)
         logger.info("*** Emailer sent email: {}", email)
       else logger.error("*** Emailer smtp server session is NOT connected!")
-      Registered()
+      Registering()
     }.get
 
   def receiveEmail(): Runnable = new Runnable() {
