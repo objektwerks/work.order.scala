@@ -8,7 +8,7 @@ import Serializers.given
 
 import upickle.default.{read, write}
 
-class Router(dispatcher: Dispatcher) extends Routes with LazyLogging with Resources("/public/"):
+final class Router(dispatcher: Dispatcher) extends Routes with LazyLogging with Resources("/public/"):
   @cask.get("/")
   def index() = Response(indexHtml, 200, Seq(indexHtmlHeader))
 
