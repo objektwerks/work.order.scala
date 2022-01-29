@@ -1,6 +1,6 @@
 package objektwerks.poolmate
 
-class Handler(service: Service):
+final class Handler(service: Service):
   def handle(command: Command): Event =
     command match
       case register: Register =>
