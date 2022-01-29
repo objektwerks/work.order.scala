@@ -61,7 +61,7 @@ final class Emailer(conf: Config,
       .htmlMessage(html, "UTF-8")
   }
 
-  private def sendEmail(register: Register): Unit =
+  def sendEmail(register: Register): Unit =
     Using( smtpServer.createSession ) { session =>
       session.open()
       if (session.isConnected) {
@@ -77,7 +77,7 @@ final class Emailer(conf: Config,
       ()
     }.get
 
-  private def receiveEmail(): Runnable = new Runnable() {
+  def receiveEmail(): Runnable = new Runnable() {
     override def run(): Unit =
       Using( imapServer.createSession ) { session =>
         session.open()
