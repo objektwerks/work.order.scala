@@ -21,7 +21,7 @@ final class Store(conf: Config):
 
   def register(emailAddress: String): Option[Account] =
     val account = Account(emailAddress = emailAddress)
-    val email = Email(id = "1", license = account.license, address = emailAddress, message = "message")
+    val email = Email(id = "1", license = account.license, address = emailAddress)
     
     addEmail(email)
     addAccount(account) // remove

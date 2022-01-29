@@ -64,16 +64,15 @@ final class Emailer(conf: Config,
   def sendEmail(register: Register): Unit =
     Using( smtpServer.createSession ) { session =>
       session.open()
-      if (session.isConnected) {
+      if session.isConnected then
         val account = Account(emailAddress = register.emailAddress)
         val messageId = session.sendMail( buildEmail(account) )
-        val email = objektwerks.poolmate.Email(id = messageId, license = account.license, address = account.emailAddress, message = "message")
-        logger.info("*** Emailer sent: {}", email)
+        val email = objektwerks.poolmate.Email(messageId, account.license, account.emailAddress)
         store.addEmail(email)
-        logger.info("*** Emailer added: {}", email)
-        store.addAccount(account) // retry once
-        logger.info("*** Emailer registered account: {}", account)
-      } else logger.error("*** Emailer smtp server session is NOT connected!")
+        logger.info("*** Emailer sent email: {}", email)
+        store.addAccount(account)
+        logger.info("*** Emailer added account: {}", account)
+      else logger.error("*** Emailer smtp server session is NOT connected!")
       ()
     }.get
 
@@ -86,15 +85,9 @@ final class Emailer(conf: Config,
           logger.info("*** Emailer receiveEmailAndMarkSeen messages: {}", messages.size)
           store.listEmails.foreach { email =>
             messages.foreach { message =>
-              if ( message.subject != subject && message.messageId() == email.id ) then
-                store.updateEmail( email.copy(processed = true) )
-                logger.info("*** Emailer [invalid] updateEmail: {}", email.id)
-                // store.removeAccount( email.license ) why???
-                logger.info("*** Emailer removeAccount: {}", email.license)
-              else if message.messageId() == email.id then
+              if message.messageId() == email.id then
                 store.updateEmail( email.copy(processed = true, valid = true) )
-                logger.info("*** Emailer [valid] updateEmail: {}", email.id)
-              else logger.info("*** Emailer invalid message: {}", message.messageId())
+                logger.info("*** Emailer email processed and valid: {}", email)
             }
           }
         }.get
