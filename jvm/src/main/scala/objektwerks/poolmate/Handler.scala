@@ -1,10 +1,10 @@
 package objektwerks.poolmate
 
-final class Handler(emailer: Emailer, service: Service):
+final class Handler(emailSender: EmailSender, service: Service):
   def handle(command: Command): Event =
     command match
       case register: Register =>
-        emailer.sendEmail(register)
+        emailSender.send(register)
       case login: Login =>
         service.login(login.emailAddress, login.pin).fold(throwable => Fault(throwable), account => LoggedIn(account))
       
