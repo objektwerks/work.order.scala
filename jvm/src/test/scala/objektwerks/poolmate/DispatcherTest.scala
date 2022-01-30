@@ -15,6 +15,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   test("dispatcher") {
     Process("psql -d poolmate -f ddl.sql").run().exitValue()
+    
     val store = Store(conf)
     val emailSender = EmailSender(conf, store)
     val service = Service(store)
