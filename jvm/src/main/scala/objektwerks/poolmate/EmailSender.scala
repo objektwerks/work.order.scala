@@ -13,8 +13,8 @@ import scala.concurrent.duration._
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Using}
 
-final class Emailer(conf: Config, store: Store)
-                   (using context: Context) extends SimpleActor[Register] with LazyLogging:
+final class EmailSender(conf: Config, store: Store)
+                       (using context: Context) extends SimpleActor[Register] with LazyLogging:
   val host = conf.getString("email.host")
   val to = conf.getString("email.to")
   val password = conf.getString("email.password")

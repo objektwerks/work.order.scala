@@ -6,10 +6,10 @@ object Scheduler:
   val initialDelay = 1L
   val period = 11L
 
-final class Scheduler(emailer: Emailer):
+final class Scheduler(emailSender: EmailSender):
   import Scheduler.*
   
   val executor = new ScheduledThreadPoolExecutor(1)
-  val task = emailer.receiveEmail()
+  val task = emailSender.send
   val scheduler = executor.scheduleAtFixedRate(task, initialDelay, period, TimeUnit.SECONDS)
   scheduler.cancel(false)
