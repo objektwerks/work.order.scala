@@ -1,5 +1,6 @@
 package objektwerks.poolmate
 
+import castor.{Context, SimpleActor}
 import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
 
@@ -12,8 +13,8 @@ import scala.concurrent.duration._
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Using}
 
-final class Emailer(conf: Config,
-                    store: Store) extends LazyLogging:
+final class Emailer(conf: Config, store: Store)
+                   (using context: Context) extends SimpleActor[Register] with LazyLogging:
   val host = conf.getString("email.host")
   val to = conf.getString("email.to")
   val password = conf.getString("email.password")
@@ -109,3 +110,5 @@ final class Emailer(conf: Config,
           else logger.error("*** Emailer imap server session is NOT connected!")
         }.get
     }
+
+  def run(register: Register) = sendEmail(register)
