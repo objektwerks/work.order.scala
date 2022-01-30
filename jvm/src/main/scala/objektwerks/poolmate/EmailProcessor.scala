@@ -30,23 +30,23 @@ class EmailProcessor(conf: Config, store: Store) extends LazyLogging:
         Using( imapServer.createSession ) { session =>
           session.open()
           val messages = session.receiveEmailAndMarkSeen( filter.flag(Flags.Flag.SEEN, false) )
-          logger.info("*** Emailer processed email and mark-seen messages: {}", messages.size)
-          store.listEmails.foreach { email =>
+          logger.info("*** EmailProcesor processed email and mark-seen messages: {}", messages.size)
+          store.listUnprocessedEmails.foreach { email =>
             messages.foreach { message =>
-              logger.info("*** Emailer subject {}", message.subject())
-              logger.info("*** Emailer message id: {}, email id: {}", message.messageId, email.id)
+              logger.info("*** EmailProcesor subject {}", message.subject())
+              logger.info("*** EmailProcesor message id: {}, email id: {}", message.messageId, email.id)
               
               if message.subject != subject && message.messageId() == email.id then
                 store.processedEmail( email.copy(processed = true) )
-                logger.warn("*** Emailer [invalid] processed email: {}", email.id)
+                logger.warn("*** EmailProcesor [invalid] processed email: {}", email.id)
                 store.removeAccount(email.license)
-                logger.warn("*** Emailer removed account: {}", email.license)
+                logger.warn("*** EmailProcesor removed account: {}", email.license)
 
               else if message.messageId() == email.id then
                 store.processedEmail( email.copy(processed = true, valid = true) )
-                logger.info("*** Emailer email processed and valid: {}", email)
+                logger.info("*** EmailProcesor email processed and valid: {}", email)
 
-              else logger.error("*** Emailer invalid message: {}", message.messageId())
+              else logger.error("*** EmailProcesor invalid message: {}", message.messageId())
             }
           }
         }.get

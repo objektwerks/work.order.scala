@@ -39,7 +39,7 @@ final class Store(conf: Config):
     }
     ()
 
-  def listEmails: Seq[Email] =
+  def listUnprocessedEmails: Seq[Email] =
     DB readOnly { implicit session =>
       sql"select * from email where processed = false"
         .map(rs => 
