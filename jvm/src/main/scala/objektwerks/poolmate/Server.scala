@@ -10,6 +10,7 @@ import scala.io.StdIn
 
 object Server extends Main with LazyLogging:
   val conf = ConfigFactory.load("store.conf")
+  
   val store = Store(conf)
   val emailSender = EmailSender(conf, store)
   val service = Service(store)
@@ -21,7 +22,8 @@ object Server extends Main with LazyLogging:
   val emailProcesor = EmailProcessor(conf, store)
   val scheduler = Scheduler(emailProcesor)
 
-  val allRoutes = Seq(Router(dispatcher))
+  val router = Router(dispatcher, store)
+  val allRoutes = Seq(router)
 
   override def port: Int = 7272
 

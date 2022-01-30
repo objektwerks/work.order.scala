@@ -8,7 +8,7 @@ import Serializers.given
 
 import upickle.default.{read, write}
 
-final class Router(dispatcher: Dispatcher) extends Routes with LazyLogging with Resources("/public/"):
+final class Router(dispatcher: Dispatcher, store: Store) extends Routes with LazyLogging with Resources("/public/"):
   @cask.get("/")
   def index() = Response(indexHtml, 200, Seq(indexHtmlHeader))
 
@@ -26,6 +26,10 @@ final class Router(dispatcher: Dispatcher) extends Routes with LazyLogging with 
 
     val event = dispatcher.dispatch(command)
     logger.debug(s"*** Event: $event")
+    event match {
+      case fault: Fault => store.addFault(fault)
+      case _ =>
+    }
     write[Event](event)
 
   initialize()
