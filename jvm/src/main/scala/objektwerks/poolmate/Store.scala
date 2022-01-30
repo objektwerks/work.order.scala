@@ -5,17 +5,17 @@ import com.typesafe.config.Config
 import scalikejdbc._
 
 final class Store(conf: Config):
-  val url = conf.getString("db.url")
-  val user = conf.getString("db.user")
-  val password = conf.getString("db.password")
-  val initialSize = conf.getInt("db.initialSize")
-  val maxSize = conf.getInt("db.maxSize")
-  val connectionTimeoutMillis = conf.getLong("db.connectionTimeoutMillis")
+  private val url = conf.getString("db.url")
+  private val user = conf.getString("db.user")
+  private val password = conf.getString("db.password")
+  private val initialSize = conf.getInt("db.initialSize")
+  private val maxSize = conf.getInt("db.maxSize")
+  private val connectionTimeoutMillis = conf.getLong("db.connectionTimeoutMillis")
 
-  val settings = ConnectionPoolSettings(
+  private val settings = ConnectionPoolSettings(
     initialSize = initialSize,
     maxSize = maxSize,
-    connectionTimeoutMillis = connectionTimeoutMillis)  
+    connectionTimeoutMillis = connectionTimeoutMillis)
 
   ConnectionPool.singleton(url, user, password, settings)
 
