@@ -8,9 +8,10 @@ import javax.mail.Flags
 import jodd.mail.{Email, ImapServer, MailServer, SmtpServer}
 import jodd.mail.EmailFilter._
 
+import scala.annotation.tailrec
 import scala.concurrent.duration._
 import scala.language.postfixOps
-import scala.util.{Failure, Success, Using}
+import scala.util.{Failure, Success, Using, Try}
 
 final class EmailSender(conf: Config, store: Store) extends LazyLogging:
   private val host = conf.getString("email.host")
@@ -54,7 +55,15 @@ final class EmailSender(conf: Config, store: Store) extends LazyLogging:
       .htmlMessage(html, "UTF-8")
   }
 
-  def send(register: Register): Either[Throwable, Registering] =
+  @tailrec
+  private def retry[T](n: Int)(fn: => T): T =
+    Try { fn } match {
+      case Success(result) => result
+      case _ if n >= 1 => retry(n - 1)(fn)
+      case Failure(error) => throw error
+    }
+
+  private def sendEmail(register: Register): Either[Throwable, Registering] =
     Using( smtpServer.createSession ) { session =>
       session.open()
 
@@ -71,3 +80,6 @@ final class EmailSender(conf: Config, store: Store) extends LazyLogging:
       
       Registering()
     }.toEither
+
+  def send(register: Register): Either[Throwable, Registering] =
+    retry[Either[Throwable, Registering]](1)(sendEmail(register))
