@@ -57,18 +57,16 @@ final class EmailSender(conf: Config, store: Store) extends LazyLogging:
   def send(register: Register): Either[Throwable, Registering] =
     Using( smtpServer.createSession ) { session =>
       session.open()
-      if session.isConnected then
-        val account = Account(emailAddress = register.emailAddress)
+      val account = Account(emailAddress = register.emailAddress)
 
-        val messageId = session.sendMail(buildEmail(account))
-        logger.info("*** Emailer sent message id: {}", messageId)
+      val messageId = session.sendMail(buildEmail(account))
+      logger.info("*** Emailer sent message id: {}", messageId)
 
-        store.addAccount(account)
-        logger.info("*** Emailer added account: {}", account)
+      store.addAccount(account)
+      logger.info("*** Emailer added account: {}", account)
 
-        val email = objektwerks.poolmate.Email(messageId, account.license, account.emailAddress)
-        store.addEmail(email)
-        logger.info("*** Emailer added email: {}", email)
-      else logger.error("*** Emailer smtp server session is NOT connected!")
+      val email = objektwerks.poolmate.Email(messageId, account.license, account.emailAddress)
+      store.addEmail(email)
+      logger.info("*** Emailer added email: {}", email)
       Registering()
     }.toEither
