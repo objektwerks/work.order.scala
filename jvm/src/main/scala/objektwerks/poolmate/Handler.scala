@@ -4,7 +4,7 @@ final class Handler(emailSender: EmailSender, service: Service):
   def handle(command: Command): Event =
     command match
       case register: Register =>
-        emailSender.send(register)
+        emailSender.send(register).fold(throwable => Fault(throwable), registering => registering)
       case login: Login =>
         service.login(login.emailAddress, login.pin).fold(throwable => Fault(throwable), account => LoggedIn(account))
       

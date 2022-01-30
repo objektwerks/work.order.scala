@@ -54,13 +54,13 @@ final class EmailSender(conf: Config, store: Store) extends LazyLogging:
       .htmlMessage(html, "UTF-8")
   }
 
-  def send(register: Register): Registering =
+  def send(register: Register): Either[Throwable, Registering] =
     Using( smtpServer.createSession ) { session =>
       session.open()
       if session.isConnected then
         val account = Account(emailAddress = register.emailAddress)
 
-        val messageId = session.sendMail( buildEmail(account) )
+        val messageId = session.sendMail(buildEmail(account))
         logger.info("*** Emailer sent message id: {}", messageId)
 
         store.addAccount(account)
@@ -71,4 +71,4 @@ final class EmailSender(conf: Config, store: Store) extends LazyLogging:
         logger.info("*** Emailer added email: {}", email)
       else logger.error("*** Emailer smtp server session is NOT connected!")
       Registering()
-    }.get
+    }.toEither
