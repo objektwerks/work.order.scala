@@ -1,6 +1,5 @@
 package objektwerks.poolmate
 
-import castor.{Context, SimpleActor}
 import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
 
@@ -13,30 +12,23 @@ import scala.concurrent.duration._
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Using}
 
-final class EmailSender(conf: Config, store: Store)
-                       (using context: Context) extends SimpleActor[Register] with LazyLogging:
-  val host = conf.getString("email.host")
-  val to = conf.getString("email.to")
-  val password = conf.getString("email.password")
-  val from = conf.getString("email.from")
-  val subject = conf.getString("email.subject")
-  val message = conf.getString("email.message")
-  val email = conf.getString("email.email")
-  val lic = conf.getString("email.lic")
-  val pin = conf.getString("email.pin")
-  val instructions = conf.getString("email.instructions")
+final class EmailSender(conf: Config, store: Store) extends LazyLogging:
+  private val host = conf.getString("email.host")
+  private val to = conf.getString("email.to")
+  private val password = conf.getString("email.password")
+  private val from = conf.getString("email.from")
+  private val subject = conf.getString("email.subject")
+  private val message = conf.getString("email.message")
+  private val email = conf.getString("email.email")
+  private val lic = conf.getString("email.lic")
+  private val pin = conf.getString("email.pin")
+  private val instructions = conf.getString("email.instructions")
 
   private val smtpServer: SmtpServer = MailServer.create()
     .ssl(true)
     .host(host)
     .auth(to, password)
     .buildSmtpMailServer()
-
-  private val imapServer: ImapServer = MailServer.create()
-    .ssl(true)
-    .host(host)
-    .auth(to, password)
-    .buildImapMailServer()
 
   private def buildEmail(account: Account): Email = {
     val html = s"""
@@ -62,7 +54,7 @@ final class EmailSender(conf: Config, store: Store)
       .htmlMessage(html, "UTF-8")
   }
 
-  def sendEmail(register: Register): Registering =        
+  def send(register: Register): Registering =
     Using( smtpServer.createSession ) { session =>
       session.open()
       if session.isConnected then
@@ -80,35 +72,3 @@ final class EmailSender(conf: Config, store: Store)
       else logger.error("*** Emailer smtp server session is NOT connected!")
       Registering()
     }.get
-
-  def receiveEmail(): Runnable =
-    new Runnable() {
-      override def run(): Unit =
-        Using( imapServer.createSession ) { session =>
-          session.open()
-          if session.isConnected then
-            val messages = session.receiveEmailAndMarkSeen( filter.flag(Flags.Flag.SEEN, false) )
-            logger.info("*** Emailer received email and mark-seen messages: {}", messages.size)
-            store.listEmails.foreach { email =>
-              messages.foreach { message =>
-                logger.info("*** Emailer subject {}", message.subject())
-                logger.info("*** Emailer message id: {}, email id: {}", message.messageId, email.id)
-                
-                if message.subject != subject && message.messageId() == email.id then
-                  store.processedEmail( email.copy(processed = true) )
-                  logger.warn("*** Emailer [invalid] processed email: {}", email.id)
-                  store.removeAccount(email.license)
-                  logger.warn("*** Emailer removed account: {}", email.license)
-
-                else if message.messageId() == email.id then
-                  store.processedEmail( email.copy(processed = true, valid = true) )
-                  logger.info("*** Emailer email processed and valid: {}", email)
-
-                else logger.error("*** Emailer invalid message: {}", message.messageId())
-              }
-            }
-          else logger.error("*** Emailer imap server session is NOT connected!")
-        }.get
-    }
-
-  def run(register: Register) = sendEmail(register)
