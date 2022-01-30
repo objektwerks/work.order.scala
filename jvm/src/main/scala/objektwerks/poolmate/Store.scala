@@ -60,7 +60,7 @@ final class Store(conf: Config):
         .update()
     }
 
-  def processedEmail(email: Email): Unit =
+  def processEmail(email: Email): Unit =
     DB localTx { implicit session =>
       sql"update email set processed = ${email.processed}, valid = ${email.valid} where id = ${email.id}"
         .update()

@@ -39,16 +39,16 @@ class EmailProcessor(conf: Config, store: Store) extends LazyLogging:
               logger.info("*** EmailProcesor message id: {}, email id: {}", message.messageId, email.id)
               
               if message.subject != subject && message.messageId() == email.id then
-                store.processedEmail( email.copy(processed = true) )
-                logger.warn("*** EmailProcesor [invalid] processed email: {}", email.id)
+                store.processEmail( email.copy(processed = true) )
+                logger.warn("*** EmailProcesor processed [invalid] email: {}", email.id)
                 store.removeAccount(email.license)
-                logger.warn("*** EmailProcesor removed account: {}", email.license)
+                logger.warn("*** EmailProcesor removed [invalid] account: {}", email.license)
 
               else if message.messageId() == email.id then
-                store.processedEmail( email.copy(processed = true, valid = true) )
-                logger.info("*** EmailProcesor email processed and valid: {}", email)
+                store.processEmail( email.copy(processed = true, valid = true) )
+                logger.info("*** EmailProcesor processed [valid] email: {}", email)
 
-              else logger.error("*** EmailProcesor invalid message: {}", message.messageId())
+              else logger.error("*** EmailProcesor [invalid] message: {}", message.messageId())
             }
           }
         }.get
