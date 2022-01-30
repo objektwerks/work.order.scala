@@ -29,27 +29,25 @@ class EmailProcessor(conf: Config, store: Store) extends LazyLogging:
       override def run(): Unit =
         Using( imapServer.createSession ) { session =>
           session.open()
-          if session.isConnected then
-            val messages = session.receiveEmailAndMarkSeen( filter.flag(Flags.Flag.SEEN, false) )
-            logger.info("*** Emailer processed email and mark-seen messages: {}", messages.size)
-            store.listEmails.foreach { email =>
-              messages.foreach { message =>
-                logger.info("*** Emailer subject {}", message.subject())
-                logger.info("*** Emailer message id: {}, email id: {}", message.messageId, email.id)
-                
-                if message.subject != subject && message.messageId() == email.id then
-                  store.processedEmail( email.copy(processed = true) )
-                  logger.warn("*** Emailer [invalid] processed email: {}", email.id)
-                  store.removeAccount(email.license)
-                  logger.warn("*** Emailer removed account: {}", email.license)
+          val messages = session.receiveEmailAndMarkSeen( filter.flag(Flags.Flag.SEEN, false) )
+          logger.info("*** Emailer processed email and mark-seen messages: {}", messages.size)
+          store.listEmails.foreach { email =>
+            messages.foreach { message =>
+              logger.info("*** Emailer subject {}", message.subject())
+              logger.info("*** Emailer message id: {}, email id: {}", message.messageId, email.id)
+              
+              if message.subject != subject && message.messageId() == email.id then
+                store.processedEmail( email.copy(processed = true) )
+                logger.warn("*** Emailer [invalid] processed email: {}", email.id)
+                store.removeAccount(email.license)
+                logger.warn("*** Emailer removed account: {}", email.license)
 
-                else if message.messageId() == email.id then
-                  store.processedEmail( email.copy(processed = true, valid = true) )
-                  logger.info("*** Emailer email processed and valid: {}", email)
+              else if message.messageId() == email.id then
+                store.processedEmail( email.copy(processed = true, valid = true) )
+                logger.info("*** Emailer email processed and valid: {}", email)
 
-                else logger.error("*** Emailer invalid message: {}", message.messageId())
-              }
+              else logger.error("*** Emailer invalid message: {}", message.messageId())
             }
-          else logger.error("*** Emailer imap server session is NOT connected!")
+          }
         }.get
     }
