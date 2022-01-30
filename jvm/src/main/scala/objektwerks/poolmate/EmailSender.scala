@@ -60,13 +60,13 @@ final class EmailSender(conf: Config, store: Store) extends LazyLogging:
       val account = Account(emailAddress = register.emailAddress)
 
       val messageId = session.sendMail(buildEmail(account))
-      logger.info("*** Emailer sent message id: {}", messageId)
+      logger.info("*** EmailSender sent message id: {}", messageId)
 
       store.addAccount(account)
-      logger.info("*** Emailer added account: {}", account)
+      logger.info("*** EmailSender added account: {}", account)
 
       val email = objektwerks.poolmate.Email(messageId, account.license, account.emailAddress)
       store.addEmail(email)
-      logger.info("*** Emailer added email: {}", email)
+      logger.info("*** EmailSender added email: {}", email)
       Registering()
     }.toEither
