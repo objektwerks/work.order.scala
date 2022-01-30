@@ -29,9 +29,11 @@ class EmailProcessor(conf: Config, store: Store) extends LazyLogging:
       override def run(): Unit =
         Using( imapServer.createSession ) { session =>
           session.open()
+
           val messages = session.receiveEmailAndMarkSeen( filter.flag(Flags.Flag.SEEN, false) )
           logger.info("*** EmailProcesor processed email and mark-seen messages: {}", messages.size)
-          store.listUnprocessedEmails.foreach { email =>
+
+          store.listUnprocessedEmails.foreach { email =>            
             messages.foreach { message =>
               logger.info("*** EmailProcesor subject {}", message.subject())
               logger.info("*** EmailProcesor message id: {}, email id: {}", message.messageId, email.id)
