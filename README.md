@@ -70,13 +70,13 @@ Entity
 
 Model
 -----
-* Server 1 ---> 1 Router 1 ---> 1 Dispatcher
+* Router 1 ---> 1 Dispatcher, Store
 * Service 1 ---> 1 Store
 * Authorizer, Handler 1 ---> 1 Service
 * Handler 1 ---> 1 EmailSender
 * Dispatcher 1 ---> 1 Authorizer, Validator, Handler
 * Scheduler 1 ---> 1 EmailProcesor 1 ---> 1 Store
-* Server 1 ---> 1 Router 1 ---> 1 Dispatcher, Store
+* Server 1 ---> 1 Router
 * Client
 
 Sequence
