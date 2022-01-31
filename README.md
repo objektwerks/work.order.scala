@@ -68,18 +68,6 @@ Entity
 * UoM ( unit of measure )
 >** Account contains a globally unique license.
 
-  val store = Store(conf)
-  val emailSender = EmailSender(conf, store)
-  val service = Service(store)
-  val authorizer = Authorizer(service)
-  val handler = Handler(emailSender, service)
-  val validator = Validator()
-  val dispatcher = Dispatcher(authorizer, validator, handler)
-
-  val emailProcesor = EmailProcessor(conf, store)
-  val scheduler = Scheduler(emailProcesor)
-
-  val router = Router(dispatcher, store)
 Model
 -----
 * Server 1 ---> 1 Router 1 ---> 1 Dispatcher
