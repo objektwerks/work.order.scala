@@ -89,7 +89,7 @@ Sequence
 6. Service --- Either[Throwable, T] ---> Handler
 7. Handler --- Event ---> Dispatcher
 8. Dispatcher --- Event ---> Router
-9.  Router --- Event ---> Server
+9. Router --- Event ---> Server
 10. Server --- Event ---> Client
 11. Scheduler ---> EmailProcessor
 
