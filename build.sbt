@@ -22,22 +22,22 @@ jsfast := {
   val logger = sLog.value
   logger.info("*** jsfast ...")
   io.IO.createDirectory(jsDir)
-  logger.info(s"*** jsfast makeDir: $jsDir")
+  logger.info(s"*** jsfast created: $jsDir")
   io.IO.copyDirectory(jsFastDir, jsDir)
-  logger.info(s"*** jsfast copy: $jsFastDir to $jsDir")
+  logger.info(s"*** jsfast copy from: $jsFastDir to $jsDir")
   io.IO.delete(jsFastDir)
-  logger.info(s"*** jsfast delete: $jsFastDir")
+  logger.info(s"*** jsfast deleted: $jsFastDir")
 }
 
 jsfull := {
   val logger = sLog.value
   logger.info("*** jsfull ...")
   io.IO.createDirectory(jsDir)
-  logger.info(s"*** jsfull makeDir: $jsDir")
+  logger.info(s"*** jsfull created: $jsDir")
   io.IO.copyDirectory(jsFullDir, jsDir)
-  logger.info(s"*** jsfull copy: $jsFullDir to $jsDir")
+  logger.info(s"*** jsfull copy from: $jsFullDir to $jsDir")
   io.IO.delete(jsFullDir)
-  logger.info(s"*** jsfull delete: $jsFullDir")
+  logger.info(s"*** jsfull deleted: $jsFullDir")
 }
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
