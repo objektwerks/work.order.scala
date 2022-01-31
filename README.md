@@ -86,7 +86,7 @@ Sequence
 3. Router --- Command ---> Dispatcher
 4. Dispatcher --- Command ---> Authorizer, Validator, Handler
 5. Handler --- Command ---> EmailSender, Service
-6. Service --- Either[Throwable, T] ---> Handler
+6. EmailSender, Service --- Either[Throwable, T] ---> Handler
 7. Handler --- Event ---> Dispatcher
 8. Dispatcher --- Event ---> Router
 9. Router --- Event ---> Server
