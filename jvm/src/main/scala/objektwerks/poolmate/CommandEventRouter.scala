@@ -8,7 +8,7 @@ import Serializers.given
 
 import upickle.default.{read, write}
 
-final class CommandRouter(dispatcher: Dispatcher, store: Store) extends Routes with LazyLogging:
+final class CommandEventRouter(dispatcher: Dispatcher, store: Store) extends Routes with LazyLogging:
   @cask.post("/command")
   def command(request: Request) =
     val command = read[Command](request.text())
