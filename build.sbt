@@ -20,7 +20,6 @@ lazy val jsfull = taskKey[Unit]("rename fullLinkJS > js-opt to js")
 
 jsfast := {
   val logger = sLog.value
-  logger.info("*** jsfast ...")
   io.IO.createDirectory(jsDir)
   logger.info(s"*** jsfast created: $jsDir")
   io.IO.copyDirectory(jsFastDir, jsDir)
@@ -31,7 +30,6 @@ jsfast := {
 
 jsfull := {
   val logger = sLog.value
-  logger.info("*** jsfull ...")
   io.IO.createDirectory(jsDir)
   logger.info(s"*** jsfull created: $jsDir")
   io.IO.copyDirectory(jsFullDir, jsDir)
