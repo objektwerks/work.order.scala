@@ -4,7 +4,7 @@ import com.raquo.laminar.api.L.*
 
 import org.scalajs.dom.console.log
 
-import Validator.*
+import Validators.*
 
 object LoginView:
   def apply(emailAddress: Var[String], pin: Var[String]): HtmlElement =
