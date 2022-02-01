@@ -8,9 +8,11 @@ import upickle.default.*
 
 import org.scalajs.dom
 
-import Serializer.given
+import Serializers.given
 
 object PageRouter:
+  given pageRW: ReadWriter[Page] = macroRW
+
   val routes = List(
     Route.static(IndexPage, root / endOfSegments),
     Route.static(RegisterPage, root / "register" / endOfSegments),
