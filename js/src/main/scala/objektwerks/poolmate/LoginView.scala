@@ -54,6 +54,6 @@ object LoginView:
       onSubmit --> { event =>
         event.preventDefault()
         log(s"email address: ${emailAddress.now()} pin: ${pin.now()}")
-        Router.router.pushState(TasksPage)
+        PageRouter.router.pushState(TasksPage)
       }  
     )

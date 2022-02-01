@@ -8,7 +8,7 @@ import upickle.default.*
 
 import org.scalajs.dom
 
-import Serializers.given
+import Serializer.given
 
 object PageRouter:
   val routes = List(
@@ -29,6 +29,5 @@ object PageRouter:
 
   val splitter = SplitRender[Page, HtmlElement](router.$currentPage)
     .collectStatic(IndexPage) { IndexView() }
-    .collectStatic(RegisterPage) { RegisterView(Store.emailAddress) }
-    .collectStatic(LoginPage) { LoginView(Store.emailAddress, Store.pin) }
-    .collectStatic(TasksPage) { TasksView(Store.tasks) }
+    .collectStatic(RegisterPage) { RegisterView(State.emailAddress) }
+    .collectStatic(LoginPage) { LoginView(State.emailAddress, State.pin) }
