@@ -35,6 +35,6 @@ object RegisterView:
       onSubmit --> { event =>
         event.preventDefault()
         log(s"email address: ${emailAddress.now()}")
-        Router.router.pushState(LoginPage)
+        PageRouter.router.pushState(LoginPage)
       }  
     )
