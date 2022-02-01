@@ -21,7 +21,7 @@ object RegisterView:
         value <-- emailAddress,
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddress,
         onKeyUp.mapToValue --> { value =>
-          if value.isEmailAddress() then emailAddressError.emit("")
+          if value.isEmailAddress then emailAddressError.emit("")
           else emailAddressError.emit("Enter a valid email address.")
         }
       ),
@@ -29,7 +29,7 @@ object RegisterView:
       div(cls("w3-bar w3-margin-top w3-center"),
         button(cls("w3-button w3-round-xxlarge w3-light-gray w3-text-indigo"),
           "Register",
-          disabled <-- emailAddress.signal.map(email => !email.isEmailAddress())
+          disabled <-- emailAddress.signal.map(email => !email.isEmailAddress)
         )
       ),
       onSubmit --> { event =>
