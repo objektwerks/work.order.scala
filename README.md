@@ -29,6 +29,11 @@ Client
 ------
 * Command => Event
 
+Server
+------
+>Resource url: /
+>Api url: /command
+
 Account
 -------
 * Register( email ) => Registering()
@@ -54,11 +59,6 @@ Views
    * Repairs -> Repair **
 
 ** Charts -> measurements, cleanings, chemicals, supplies and repairs.
-
-Rest
-----
->Public url: /
->Api url: /command
 
 Entity
 ------
