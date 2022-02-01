@@ -4,7 +4,7 @@ import com.raquo.laminar.api.L.*
 
 import org.scalajs.dom.console.log
 
-import Validator.*
+import Validators.*
 
 object RegisterView:
   def apply(emailAddress: Var[String]): HtmlElement =
