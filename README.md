@@ -38,17 +38,18 @@ Account
 
 Views
 -----
-1. Pool
+1. IndexView, LoginView, RegisterView
+2. Pool
    * Pools -> Pool
    * Surfaces -> Surface
    * Pumps -> Pump
    * Timers -> Timer -> TimerSettings
    * Heaters -> Heater -> HeaterSettings -> HeaterSetting
-2. Maintenance
-   * Measurments -> Measurement **
+3. Maintenance
+   * Measurements -> Measurement **
    * Cleanings -> Cleaning **
    * Chemicals -> Chemical **
-3. Expenses
+4. Expenses
    * Supplies -> Supply **
    * Repairs -> Repair **
 
