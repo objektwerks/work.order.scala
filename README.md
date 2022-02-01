@@ -27,7 +27,7 @@ Package
 
 Client
 ------
-* Command => Fault | Event
+* Command => Event
 
 Account
 -------
