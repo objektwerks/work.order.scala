@@ -16,7 +16,7 @@ lazy val jsFullDir = file("./jvm/target/scala-3.1.1/classes/public/js-opt")
 lazy val jsDir = file("./jvm/target/scala-3.1.1/classes/public/js")
 
 lazy val fastjs = taskKey[Unit]("rename fastLinkJS > js-fastopt to js")
-lazy val jsfull = taskKey[Unit]("rename fullLinkJS > js-opt to js")
+lazy val fulljs = taskKey[Unit]("rename fullLinkJS > js-opt to js")
 
 fastjs := {
   val logger = sLog.value
@@ -28,14 +28,14 @@ fastjs := {
   logger.info(s"*** fastjs deleted: $jsFastDir")
 }
 
-jsfull := {
+fulljs := {
   val logger = sLog.value
   io.IO.createDirectory(jsDir)
-  logger.info(s"*** jsfull created: $jsDir")
+  logger.info(s"*** fulljs created: $jsDir")
   io.IO.copyDirectory(jsFullDir, jsDir)
-  logger.info(s"*** jsfull copy from: $jsFullDir to $jsDir")
+  logger.info(s"*** fulljs copy from: $jsFullDir to $jsDir")
   io.IO.delete(jsFullDir)
-  logger.info(s"*** jsfull deleted: $jsFullDir")
+  logger.info(s"*** fulljs deleted: $jsFullDir")
 }
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
