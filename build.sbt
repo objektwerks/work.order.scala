@@ -11,7 +11,7 @@ lazy val scalaTestVersion = "3.2.10"
 
 lazy val public = "scala-3.1.1/classes/public"
 
-lazy val jsFastDir = file("./jvm/target/scala-3.1.1/classes/public/js-fastopt")
+lazy val fastjsdir = file("./jvm/target/scala-3.1.1/classes/public/js-fastopt")
 lazy val jsFullDir = file("./jvm/target/scala-3.1.1/classes/public/js-opt")
 lazy val jsDir = file("./jvm/target/scala-3.1.1/classes/public/js")
 
@@ -22,10 +22,10 @@ fastjs := {
   val logger = sLog.value
   io.IO.createDirectory(jsDir)
   logger.info(s"*** fastjs created: $jsDir")
-  io.IO.copyDirectory(jsFastDir, jsDir)
-  logger.info(s"*** fastjs copy from: $jsFastDir to $jsDir")
-  io.IO.delete(jsFastDir)
-  logger.info(s"*** fastjs deleted: $jsFastDir")
+  io.IO.copyDirectory(fastjsdir, jsDir)
+  logger.info(s"*** fastjs copy from: $fastjsdir to $jsDir")
+  io.IO.delete(fastjsdir)
+  logger.info(s"*** fastjs deleted: $fastjsdir")
 }
 
 fulljs := {
