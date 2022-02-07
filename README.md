@@ -7,6 +7,7 @@ Install
 1. brew install postgresql
 2. brew install node
 3. npm install jsdom ( **locally** )
+4. graalvm ( https://www.graalvm.org/docs/getting-started/ )
 
 Test
 ----
