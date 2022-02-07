@@ -208,3 +208,5 @@ Documentation
 5. H2 - https://h2database.com/html/main.html
 6. Scala-Java-Time - https://github.com/cquiroz/scala-java-time
 7. Scalatags - https://com-lihaoyi.github.io/scalatags/#ScalaTags
+8. Packager - https://www.scala-sbt.org/sbt-native-packager/formats/graalvm-native-image.html
+9. Gaalvm - https://www.graalvm.org/docs/introduction/
