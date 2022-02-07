@@ -21,10 +21,14 @@ Run
 ---
 1. sbt jvm/run ( curl -v http://localhost:7272/ )
 
-Package
+Package ( Tar )
 -------
 >See sbt-native-packager ( www.scala-sbt.org/sbt-native-packager/formats/universal.html )
 1. sbt jvm/universal:packageZipTarball
+
+Package ( Graalvm Image )
+-------
+1. sbt 'show graalvm-native-image:packageBin'
 
 Client
 ------
