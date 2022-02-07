@@ -30,6 +30,10 @@ Package ( Graalvm Image )
 -------
 1. sbt 'show graalvm-native-image:packageBin'
 
+Execute
+-------
+1. ./target/graalvm-native-image/scala.graalvm
+
 Client
 ------
 * Command => Event
