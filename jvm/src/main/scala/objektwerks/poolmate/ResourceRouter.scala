@@ -6,7 +6,7 @@ import com.typesafe.scalalogging.LazyLogging
 
 final class ResourceRouter(dispatcher: Dispatcher) extends Routes with LazyLogging with Resources("/public/"):
   @cask.get("/")
-  def index() = Response(indexHtml, 200, Seq(indexHtmlHeader))
+  def index() = Response(indexHtml, 200, Seq(htmlHeader))
 
   @cask.get(basePath, subpath = true)
   def resources(request: Request) =
