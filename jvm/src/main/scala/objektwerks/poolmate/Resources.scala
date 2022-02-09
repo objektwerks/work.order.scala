@@ -22,6 +22,7 @@ trait Resources(val basePath: String) extends LazyLogging:
   private val jsmapHeader = contentType -> "application/json"
   private val textHeader = contentType -> "text/plain"
   val htmlHeader = contentType -> "text/html; charset=UTF-8"
+  val indexHtml = "index.html"
 
   private val cache: Cache[String, Array[Byte]] =
     Scaffeine()
@@ -29,8 +30,6 @@ trait Resources(val basePath: String) extends LazyLogging:
       .expireAfterWrite(24.hour)
       .maximumSize(100)
       .build[String, Array[Byte]]()
-
-  val indexHtml = loadResource("index.html")    
 
   def toContentType(resource: String): String = resource.split('.').last
 
