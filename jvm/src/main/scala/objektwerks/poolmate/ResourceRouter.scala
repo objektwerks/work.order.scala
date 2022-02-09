@@ -4,10 +4,17 @@ import cask.main.Routes
 import cask.model.{Request, Response}
 import com.typesafe.scalalogging.LazyLogging
 
+import java.util.concurrent.TimeUnit
+
+import scala.concurrent.duration._
+
 final class ResourceRouter(dispatcher: Dispatcher)
   extends Routes
   with LazyLogging
-  with Resources(basePath = "/public/", indexHtml = "index.html"):
+  with Resources(
+    basePath = "/public/",
+    indexHtml = "index.html",
+    cache = ResourcesCache(minSize = 4, maxSize = 10, expireAfter = 24.hour)):
   @cask.get("/")
   def index() = Response(loadResource(indexHtml), 200, Seq(htmlHeader))
 

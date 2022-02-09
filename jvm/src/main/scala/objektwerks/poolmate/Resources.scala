@@ -12,7 +12,17 @@ import scala.concurrent.duration._
 import scala.io.{Codec, Source}
 import scala.util.{Try, Using}
 
-trait Resources(val basePath: String, val indexHtml: String) extends LazyLogging:
+object ResourcesCache:
+  def apply(minSize: Int, maxSize: Int, expireAfter: FiniteDuration): Cache[String, Array[Byte]] =
+    Scaffeine()
+      .initialCapacity(minSize)
+      .maximumSize(maxSize)
+      .expireAfterWrite(expireAfter)
+      .build[String, Array[Byte]]()
+
+trait Resources(val basePath: String,
+                val indexHtml: String,
+                val cache: Cache[String, Array[Byte]]) extends LazyLogging:
   private val utf8 = Codec.UTF8.name
   private val contentType = "Content-Type"
   private val cssHeader = contentType -> "text/css"
@@ -22,13 +32,6 @@ trait Resources(val basePath: String, val indexHtml: String) extends LazyLogging
   private val jsmapHeader = contentType -> "application/json"
   private val textHeader = contentType -> "text/plain"
   protected val htmlHeader = contentType -> "text/html; charset=UTF-8"
-
-  private val cache: Cache[String, Array[Byte]] =
-    Scaffeine()
-      .initialCapacity(4)
-      .maximumSize(10)
-      .expireAfterWrite(24.hour)
-      .build[String, Array[Byte]]()
 
   def toContentType(resource: String): String = resource.split('.').last
 
