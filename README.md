@@ -211,6 +211,7 @@ Resources
 > See jvm/Resources and jvm/ResourcesRouter for an approach to loading:
 1. index.html at /base-path/index.html
 2. web resources at /base-path/*.*
+>The index.html value is passed into the Resources trait constructor, allowing for a different name.
 
 Logs
 ----
