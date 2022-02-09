@@ -95,7 +95,7 @@ lazy val jvm = (project in file("jvm"))
         "io.github.cquiroz" %% "scala-java-time" % "2.3.0",
         "com.twelvemonkeys.imageio" % "imageio-core" % twelveMonkeysVersion,
         "com.twelvemonkeys.imageio" % "imageio-bmp" % twelveMonkeysVersion,
-        "com.github.ben-manes.caffeine" % "caffeine" % "3.0.5",
+        "com.github.blemale" %% "scaffeine" % "5.1.2",
         "org.jodd" % "jodd-mail" % "6.0.5",
         "com.typesafe" % "config" % "1.4.1",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
