@@ -46,18 +46,28 @@ trait Resources(val basePath: String) extends LazyLogging:
       case _              => false
 
   def loadImage(resource: String): Array[Byte] =
-    val path = toPath(resource)
-    logger.debug(s"*** load image: $path")
-    val url = getClass.getResource(path)
-    val image = ImageIO.read(url)
-    val baos = new ByteArrayOutputStream()
-    val contentType = toContentType(resource)
-    ImageIO.write(image, contentType, baos)
-    baos.toByteArray
+    cache.getIfPresent(resource) match
+      case Some(bytes) => bytes
+      case None =>
+        val path = toPath(resource)
+        logger.debug(s"*** load image: $path")
+        val url = getClass.getResource(path)
+        val image = ImageIO.read(url)
+        val baos = new ByteArrayOutputStream()
+        val contentType = toContentType(resource)
+        ImageIO.write(image, contentType, baos)
+        val bytes = baos.toByteArray
+        cache.put(resource, bytes)
+        bytes
 
   def loadResource(resource: String): Array[Byte] =
-    val path = toPath(resource)
-    logger.debug(s"*** load resource: $path")
-    Using( Source.fromInputStream(getClass.getResourceAsStream(path), utf8) ) {
-      source => source.mkString.getBytes
-    }.getOrElse(Array.empty[Byte])
+    cache.getIfPresent(resource) match
+      case Some(bytes) => bytes
+      case None =>
+        val path = toPath(resource)
+        logger.debug(s"*** load resource: $path")
+        val bytes = Using( Source.fromInputStream(getClass.getResourceAsStream(path), utf8) ) {
+          source => source.mkString.getBytes
+        }.getOrElse(Array.empty[Byte])
+        cache.put(resource, bytes)
+        bytes
