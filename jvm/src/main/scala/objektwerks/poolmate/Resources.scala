@@ -65,6 +65,7 @@ trait Resources(val basePath: String) extends LazyLogging:
         ImageIO.write(image, contentType, baos)
         val bytes = baos.toByteArray
         cache.put(resource, bytes)
+        logger.debug(s"*** cache put: $resource")
         bytes
 
   def loadResource(resource: String): Array[Byte] =
