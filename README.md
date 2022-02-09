@@ -134,10 +134,13 @@ Solutions
 7. algae - Algaecide, Shock
 8. stains - Stain Identification Kit, Stain Remover
 
-Resources
----------
-* descriptions - cleanings, measurements
-* images - add, edit, chart
+Descriptions
+------------
+* cleanings, measurements
+
+Images
+------
+* add, edit, chart
 
 Charts
 ------
@@ -202,6 +205,18 @@ Config
 >See these files:
 1. jvm/src/main/resoures/server.conf
 2. jvm/src/test/resources/test.server.conf
+
+Resources
+---------
+> See jvm/Resources and jvm/ResourcesRouter for an approach to loading:
+1. index.html at /base-path/index.html
+2. web resources at /base-path/*.*
+
+Logs
+----
+>See logs at target/
+1. cask.log
+2. test.log
 
 Documentation
 -------------
