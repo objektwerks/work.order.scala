@@ -4,9 +4,10 @@ lazy val caskVersion = "0.8.0"
 lazy val laminarVersion = "0.14.2"
 lazy val waypointVersion = "0.5.0"
 lazy val upickleVersion = "1.5.0"
-lazy val scalaJavaTimeVersion = "2.3.0"
 lazy val postgresqlVersion = "42.3.1"
-lazy val twelvemonkeysVersion = "3.8.1"
+lazy val scalaJavaTimeVersion = "2.3.0"
+lazy val scalaCacheVersion = "1.0.0-M6"
+lazy val twelveMonkeysVersion = "3.8.1"
 lazy val scalaTestVersion = "3.2.10"
 
 lazy val public = "scala-3.1.1/classes/public"
@@ -93,10 +94,10 @@ lazy val jvm = (project in file("jvm"))
         "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
         "org.postgresql" % "postgresql" % postgresqlVersion,
         "io.github.cquiroz" %% "scala-java-time" % "2.3.0",
-        "com.twelvemonkeys.imageio" % "imageio-core" % twelvemonkeysVersion,
-        "com.twelvemonkeys.imageio" % "imageio-bmp" % twelvemonkeysVersion,
-        "com.github.cb372" %% "scalacache-core" % "1.0.0-M6",
-        "com.github.cb372" %% "scalacache-caffeine" % "1.0.0-M6",
+        "com.twelvemonkeys.imageio" % "imageio-core" % twelveMonkeysVersion,
+        "com.twelvemonkeys.imageio" % "imageio-bmp" % twelveMonkeysVersion,
+        "com.github.cb372" %% "scalacache-core" % scalaCacheVersion,
+        "com.github.cb372" %% "scalacache-caffeine" % scalaCacheVersion,
         "org.jodd" % "jodd-mail" % "6.0.5",
         "com.typesafe" % "config" % "1.4.1",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
