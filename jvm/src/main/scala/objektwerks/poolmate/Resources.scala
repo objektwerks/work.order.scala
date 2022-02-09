@@ -15,15 +15,21 @@ import scala.util.{Try, Using}
 trait Resources(val basePath: String) extends LazyLogging:
   private val utf8 = Codec.UTF8.name
   private val contentType = "Content-Type"
+  private val cssHeader = contentType -> "text/css"
+  private val icoHeader = contentType -> "image/x-icon"
+  private val pngHeader = contentType -> "image/png"
+  private val jsHeader = contentType -> "text/javascript"
+  private val jsmapHeader = contentType -> "application/json"
+  private val textHeader = contentType -> "text/plain"
+  val indexHtmlHeader = contentType -> "text/html; charset=UTF-8"
+  val indexHtml = loadResource("index.html")
+
   private val cache: Cache[String, Array[Byte]] =
     Scaffeine()
       .recordStats()
       .expireAfterWrite(24.hour)
       .maximumSize(100)
       .build[String, Array[Byte]]()
-
-  val indexHtml = loadResource("index.html")
-  val indexHtmlHeader = contentType -> "text/html; charset=UTF-8"
 
   def toContentType(resource: String): String = resource.split('.').last
 
@@ -32,13 +38,13 @@ trait Resources(val basePath: String) extends LazyLogging:
   def toHeader(resource: String): (String, String) =
     logger.debug(s"*** to header: ${toContentType(resource)}")
     toContentType(resource) match
-      case "css"  => contentType -> "text/css"
-      case "ico"  => contentType -> "image/x-icon"
-      case "png"  => contentType -> "image/png"
-      case "js"   => contentType -> "text/javascript"
-      case "map"  => contentType -> "application/json"
+      case "css"  => cssHeader
+      case "ico"  => icoHeader
+      case "png"  => pngHeader
+      case "js"   => jsHeader
+      case "map"  => jsmapHeader
       case "html" => indexHtmlHeader
-      case _      => contentType -> "text/plain"
+      case _      => textHeader
   
   def isImage(resource: String): Boolean =
     toContentType(resource) match
