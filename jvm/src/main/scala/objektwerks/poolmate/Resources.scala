@@ -1,11 +1,14 @@
 package objektwerks.poolmate
 
+import com.github.blemale.scaffeine.{ Cache, Scaffeine }
 import com.typesafe.scalalogging.LazyLogging
 
 import java.awt.image.BufferedImage
 import java.io.ByteArrayOutputStream
+import java.util.concurrent.TimeUnit
 import javax.imageio.ImageIO
 
+import scala.concurrent.duration._
 import scala.io.{Codec, Source}
 import scala.util.{Try, Using}
 
@@ -14,6 +17,13 @@ trait Resources(val basePath: String) extends LazyLogging:
   val contentType = "Content-Type"
   val indexHtml = loadResource("index.html")
   val indexHtmlHeader = contentType -> "text/html; charset=UTF-8"
+
+  val cache: Cache[String, Array[Byte]] =
+    Scaffeine()
+      .recordStats()
+      .expireAfterWrite(24.hour)
+      .maximumSize(100)
+      .build[String, Array[Byte]]()
 
   def toContentType(resource: String): String = resource.split('.').last
 
