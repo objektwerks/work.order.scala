@@ -21,7 +21,7 @@ trait Resources(val basePath: String, val indexHtml: String) extends LazyLogging
   private val jsHeader = contentType -> "text/javascript"
   private val jsmapHeader = contentType -> "application/json"
   private val textHeader = contentType -> "text/plain"
-  val htmlHeader = contentType -> "text/html; charset=UTF-8"
+  protected val htmlHeader = contentType -> "text/html; charset=UTF-8"
 
   private val cache: Cache[String, Array[Byte]] =
     Scaffeine()
