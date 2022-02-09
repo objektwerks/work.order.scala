@@ -13,17 +13,17 @@ import scala.io.{Codec, Source}
 import scala.util.{Try, Using}
 
 trait Resources(val basePath: String) extends LazyLogging:
-  val utf8 = Codec.UTF8.name
-  val contentType = "Content-Type"
-  val indexHtml = loadResource("index.html")
-  val indexHtmlHeader = contentType -> "text/html; charset=UTF-8"
-
-  val cache: Cache[String, Array[Byte]] =
+  private val utf8 = Codec.UTF8.name
+  private val contentType = "Content-Type"
+  private val cache: Cache[String, Array[Byte]] =
     Scaffeine()
       .recordStats()
       .expireAfterWrite(24.hour)
       .maximumSize(100)
       .build[String, Array[Byte]]()
+
+  val indexHtml = loadResource("index.html")
+  val indexHtmlHeader = contentType -> "text/html; charset=UTF-8"
 
   def toContentType(resource: String): String = resource.split('.').last
 
