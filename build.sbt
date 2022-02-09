@@ -6,7 +6,6 @@ lazy val waypointVersion = "0.5.0"
 lazy val upickleVersion = "1.5.0"
 lazy val postgresqlVersion = "42.3.1"
 lazy val scalaJavaTimeVersion = "2.3.0"
-lazy val scalaCacheVersion = "1.0.0-M6"
 lazy val twelveMonkeysVersion = "3.8.1"
 lazy val scalaTestVersion = "3.2.10"
 
@@ -96,8 +95,7 @@ lazy val jvm = (project in file("jvm"))
         "io.github.cquiroz" %% "scala-java-time" % "2.3.0",
         "com.twelvemonkeys.imageio" % "imageio-core" % twelveMonkeysVersion,
         "com.twelvemonkeys.imageio" % "imageio-bmp" % twelveMonkeysVersion,
-        "com.github.cb372" %% "scalacache-core" % scalaCacheVersion,
-        "com.github.cb372" %% "scalacache-caffeine" % scalaCacheVersion,
+        "com.github.ben-manes.caffeine" % "caffeine" % "3.0.5",
         "org.jodd" % "jodd-mail" % "6.0.5",
         "com.typesafe" % "config" % "1.4.1",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
