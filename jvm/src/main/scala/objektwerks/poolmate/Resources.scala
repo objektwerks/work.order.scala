@@ -12,8 +12,8 @@ import scala.concurrent.duration._
 import scala.io.{Codec, Source}
 import scala.util.{Try, Using}
 
-object ResourcesCache:
-  def apply(minSize: Int, maxSize: Int, expireAfter: FiniteDuration): Cache[String, Array[Byte]] =
+object Resources:
+  def cache(minSize: Int, maxSize: Int, expireAfter: FiniteDuration): Cache[String, Array[Byte]] =
     Scaffeine()
       .initialCapacity(minSize)
       .maximumSize(maxSize)
