@@ -208,10 +208,9 @@ Config
 
 Resources
 ---------
-> See jvm/Resources and jvm/ResourcesRouter for an approach to loading:
-1. index.html at /base-path/index.html
-2. web resources at /base-path/*.*
->The index.html value is passed into the Resources trait constructor, allowing for a different name.
+> See jvm/Resources and jvm/ResourceRouter on resource loading:
+1. index.html at /public/index.html
+2. web resources at /public/
 
 Logs
 ----
