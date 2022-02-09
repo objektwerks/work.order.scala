@@ -12,7 +12,7 @@ import scala.concurrent.duration._
 import scala.io.{Codec, Source}
 import scala.util.{Try, Using}
 
-trait Resources(val basePath: String) extends LazyLogging:
+trait Resources(val basePath: String, val indexHtml: String) extends LazyLogging:
   private val utf8 = Codec.UTF8.name
   private val contentType = "Content-Type"
   private val cssHeader = contentType -> "text/css"
@@ -22,7 +22,6 @@ trait Resources(val basePath: String) extends LazyLogging:
   private val jsmapHeader = contentType -> "application/json"
   private val textHeader = contentType -> "text/plain"
   val htmlHeader = contentType -> "text/html; charset=UTF-8"
-  val indexHtml = "index.html"
 
   private val cache: Cache[String, Array[Byte]] =
     Scaffeine()
