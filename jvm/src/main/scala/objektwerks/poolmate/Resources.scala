@@ -26,8 +26,9 @@ trait Resources(val basePath: String, val indexHtml: String) extends LazyLogging
   private val cache: Cache[String, Array[Byte]] =
     Scaffeine()
       .recordStats()
+      .initialCapacity(4)
+      .maximumSize(10)
       .expireAfterWrite(24.hour)
-      .maximumSize(100)
       .build[String, Array[Byte]]()
 
   def toContentType(resource: String): String = resource.split('.').last
