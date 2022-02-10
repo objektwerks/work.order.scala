@@ -206,6 +206,10 @@ Config
 1. jvm/src/main/resoures/server.conf
 2. jvm/src/test/resources/test.server.conf
 
+Cache
+-----
+>See jvm/Resources.cache and jvm/Store.cache
+
 Resources
 ---------
 > See jvm/Resources and jvm/ResourceRouter on resource loading:
