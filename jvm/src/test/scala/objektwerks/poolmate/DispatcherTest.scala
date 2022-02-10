@@ -3,9 +3,12 @@ package objektwerks.poolmate
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
+import java.util.concurrent.TimeUnit
+
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
+import scala.concurrent.duration._
 import scala.sys.process.Process
 
 import Validators.*
@@ -16,7 +19,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   test("dispatcher") {
     Process("psql -d poolmate -f ddl.sql").run().exitValue()
     
-    val store = Store(conf)
+    val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
     val emailSender = EmailSender(conf, store)
     val service = Service(store)
     val authorizer = Authorizer(service)
