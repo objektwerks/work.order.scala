@@ -6,6 +6,9 @@ import com.typesafe.scalalogging.LazyLogging
 
 import io.undertow.Undertow
 
+import java.util.concurrent.TimeUnit
+
+import scala.concurrent.duration._
 import scala.io.StdIn
 
 object Server extends Main with LazyLogging:
