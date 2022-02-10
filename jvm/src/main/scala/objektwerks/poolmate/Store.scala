@@ -1,8 +1,18 @@
 package objektwerks.poolmate
 
+import com.github.blemale.scaffeine.{Cache, Scaffeine}
 import com.typesafe.config.Config
 
-import scalikejdbc._
+import scalikejdbc.*
+import scala.concurrent.duration.FiniteDuration
+
+object Store:
+  def cache(minSize: Int, maxSize: Int, expireAfter: FiniteDuration): Cache[String, String] =
+    Scaffeine()
+      .initialCapacity(minSize)
+      .maximumSize(maxSize)
+      .expireAfterWrite(expireAfter)
+      .build[String, String]()
 
 final class Store(conf: Config):
   private val url = conf.getString("db.url")
