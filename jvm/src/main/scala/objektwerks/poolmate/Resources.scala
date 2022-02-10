@@ -56,7 +56,7 @@ trait Resources(val basePath: String,
   def loadImage(resource: String): Array[Byte] =
     cache.getIfPresent(resource) match
       case Some(bytes) =>
-        logger.debug(s"*** cache get: $resource")
+        logger.debug(s"*** resources cache get: $resource")
         bytes
       case None =>
         val path = toPath(resource)
@@ -68,13 +68,13 @@ trait Resources(val basePath: String,
         ImageIO.write(image, contentType, baos)
         val bytes = baos.toByteArray
         cache.put(resource, bytes)
-        logger.debug(s"*** cache put: $resource")
+        logger.debug(s"*** resources cache put: $resource")
         bytes
 
   def loadResource(resource: String): Array[Byte] =
     cache.getIfPresent(resource) match
       case Some(bytes) =>
-        logger.debug(s"*** cache get: $resource")
+        logger.debug(s"*** resources cache get: $resource")
         bytes
       case None =>
         val path = toPath(resource)
@@ -83,5 +83,5 @@ trait Resources(val basePath: String,
           source => source.mkString.getBytes
         }.getOrElse(Array.empty[Byte])
         cache.put(resource, bytes)
-        logger.debug(s"*** cache put: $resource")
+        logger.debug(s"*** resources cache put: $resource")
         bytes
