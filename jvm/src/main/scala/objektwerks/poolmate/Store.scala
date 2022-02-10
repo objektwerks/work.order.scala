@@ -2,6 +2,7 @@ package objektwerks.poolmate
 
 import com.github.blemale.scaffeine.{Cache, Scaffeine}
 import com.typesafe.config.Config
+import com.typesafe.scalalogging.LazyLogging
 
 import scalikejdbc.*
 import scala.concurrent.duration.FiniteDuration
@@ -14,7 +15,7 @@ object Store:
       .expireAfterWrite(expireAfter)
       .build[String, String]()
 
-final class Store(conf: Config):
+final class Store(conf: Config, cache: Cache[String, String]) extends LazyLogging:
   private val url = conf.getString("db.url")
   private val user = conf.getString("db.user")
   private val password = conf.getString("db.password")
@@ -85,12 +86,21 @@ final class Store(conf: Config):
     }
 
   def isAuthorized(license: String): Boolean =
-    val optionalLicense = DB readOnly { implicit session =>
-      sql"select license from account where license = $license"
-        .map(rs => rs.string("license"))
-        .single()
-    }
-    if optionalLicense.isDefined then true else false
+    cache.getIfPresent(license) match
+      case Some(_) =>
+        logger.debug(s"*** store cache get: $license")
+        true
+      case None =>
+        val optionalLicense = DB readOnly { implicit session =>
+          sql"select license from account where license = $license"
+            .map(rs => rs.string("license"))
+            .single()
+        }
+        if optionalLicense.isDefined then
+          cache.put(license, license)
+          logger.debug(s"*** store cache put: $license")
+          true
+        else false
 
   def deactivate(license: String): Option[Account] =
     DB localTx { implicit session =>
