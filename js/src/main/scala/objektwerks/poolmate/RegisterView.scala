@@ -26,7 +26,7 @@ object RegisterView:
         }
       },
       err(emailAddressError),
-      bar_submit(
+      bar_ctr(
         btn("Register").amend {
           disabled <-- emailAddress.signal.map(email => !email.isEmailAddress)
         }
