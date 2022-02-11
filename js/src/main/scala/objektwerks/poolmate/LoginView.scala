@@ -26,7 +26,7 @@ object LoginView:
           else emailAddressError.emit("Enter a valid email address.")
         }
       },
-      div(cls("w3-border-white w3-text-red"), child.text <-- emailAddressError.events),
+      err(emailAddressError),
       lbl("Pin"),
       txt.amend {
         typ("text")
@@ -41,7 +41,7 @@ object LoginView:
           else pinError.emit("Enter a valid 6-character pin.")
         }      
       },
-      div(cls("w3-border-white w3-text-red"), child.text <-- pinError.events),
+      err(pinError),
       div(cls("w3-bar w3-margin-top w3-center"),
         btn("Login").amend {
           disabled <-- emailAddress.signal.combineWithFn(pin.signal) {
