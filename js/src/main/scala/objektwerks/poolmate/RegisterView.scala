@@ -12,7 +12,7 @@ object RegisterView:
     val emailAddressError = new EventBus[String]
     form(cls("w3-container"),
       hdr("Register"),
-      label(cls("w3-left-align w3-text-indigo"), "Email"),
+      lbl("Email"),
       txt.amend {
         typ("email")
         minLength(3)
