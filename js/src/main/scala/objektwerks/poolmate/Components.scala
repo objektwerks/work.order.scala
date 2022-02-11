@@ -15,5 +15,5 @@ object Components:
   def hdr(text: String): HtmlElement =
     h5(cls("w3-light-grey w3-text-indigo"), text)
 
-  def txt(): HtmlElement =
+  def txt: HtmlElement =
     input(cls("w3-input w3-hover-light-gray w3-text-indigo"))

@@ -14,7 +14,7 @@ object LoginView:
     form(cls("w3-container"),
       hdr("Login"),
       lbl("Email"),
-      txt().amend {
+      txt.amend {
         typ("email")
         minLength(3)
         required(true)
@@ -28,7 +28,7 @@ object LoginView:
       },
       div(cls("w3-border-white w3-text-red"), child.text <-- emailAddressError.events),
       lbl("Pin"),
-      txt().amend {
+      txt.amend {
         typ("text")
         minLength(6)
         maxLength(6)
