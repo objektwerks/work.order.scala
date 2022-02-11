@@ -49,7 +49,8 @@ object LoginView:
           disabled <-- emailAddress.signal.combineWithFn(pin.signal) {
             (email, pin) => !(email.isEmailAddress && pin.isPin)
           }
-        },
+        }
+      ),
       onSubmit --> { event =>
         event.preventDefault()
         log(s"email address: ${emailAddress.now()} pin: ${pin.now()}")
