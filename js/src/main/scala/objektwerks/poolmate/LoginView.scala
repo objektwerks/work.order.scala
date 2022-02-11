@@ -45,13 +45,11 @@ object LoginView:
       ),
       div(cls("w3-border-white w3-text-red"), child.text <-- pinError.events),
       div(cls("w3-bar w3-margin-top w3-center"),
-        button(cls("w3-button w3-round-xxlarge w3-light-gray w3-text-indigo"),
-          "Login",
+        btn("Login").amend {
           disabled <-- emailAddress.signal.combineWithFn(pin.signal) {
             (email, pin) => !(email.isEmailAddress && pin.isPin)
           }
-        )
-      ),
+        },
       onSubmit --> { event =>
         event.preventDefault()
         log(s"email address: ${emailAddress.now()} pin: ${pin.now()}")
