@@ -9,7 +9,7 @@ import Components.*
 object IndexView:
     def apply(): HtmlElement =
       div(
-        div(cls("w3-bar"),
+        bar(
           btn("Login").amend {
             onClick --> { _ =>
               log("Login onClick")
