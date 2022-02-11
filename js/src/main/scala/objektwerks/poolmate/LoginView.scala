@@ -11,7 +11,7 @@ object LoginView:
   def apply(emailAddress: Var[String], pin: Var[String]): HtmlElement =
     val emailAddressError = new EventBus[String]
     val pinError = new EventBus[String]
-    form(cls("w3-container"),
+    frm(
       hdr("Login"),
       lbl("Email"),
       txt.amend {
@@ -48,10 +48,11 @@ object LoginView:
             (email, pin) => !(email.isEmailAddress && pin.isPin)
           }
         }
-      ),
-      onSubmit --> { event =>
-        event.preventDefault()
-        log(s"email address: ${emailAddress.now()} pin: ${pin.now()}")
-        PageRouter.router.pushState(IndexPage)
-      }  
+      ).amend {
+        onSubmit --> { event =>
+          event.preventDefault()
+          log(s"email address: ${emailAddress.now()} pin: ${pin.now()}")
+          PageRouter.router.pushState(IndexPage)
+        }  
+      }
     )
