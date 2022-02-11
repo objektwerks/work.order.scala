@@ -3,11 +3,11 @@ package objektwerks.poolmate
 import com.raquo.laminar.api.L.*
 
 object Components:
-  def bar(btns: HtmlElement*): HtmlElement =
-    div(cls("w3-bar"), btns)
+  def bar(elms: HtmlElement*): HtmlElement =
+    div(cls("w3-bar"), elms)
 
-  def submit_bar: HtmlElement =
-    div(cls("w3-bar w3-margin-top w3-center"))
+  def bar_submit(elms: HtmlElement*): HtmlElement =
+    div(cls("w3-bar w3-margin-top w3-center"), elms)
 
   def btn(text: String): HtmlElement =
     button(cls("w3-button w3-round-xxlarge w3-light-grey w3-text-indigo"), text)
