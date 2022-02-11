@@ -42,7 +42,7 @@ object LoginView:
         }      
       },
       err(pinError),
-      div(cls("w3-bar w3-margin-top w3-center"),
+      bar_submit(
         btn("Login").amend {
           disabled <-- emailAddress.signal.combineWithFn(pin.signal) {
             (email, pin) => !(email.isEmailAddress && pin.isPin)
