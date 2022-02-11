@@ -4,13 +4,14 @@ import com.raquo.laminar.api.L.*
 
 import org.scalajs.dom.console.log
 
+import Components.*
 import Validators.*
 
 object RegisterView:
   def apply(emailAddress: Var[String]): HtmlElement =
     val emailAddressError = new EventBus[String]
     form(cls("w3-container"),
-      h5(cls("w3-light-grey w3-text-indigo"), "Login"),
+      hdr("Register"),
       label(cls("w3-left-align w3-text-indigo"), "Email"),
       input(
         cls("w3-input w3-hover-light-gray w3-text-indigo"),
