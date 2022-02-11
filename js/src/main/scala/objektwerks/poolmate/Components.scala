@@ -12,5 +12,5 @@ object Components:
   def lbl(text: String): HtmlElement =
     label(cls("w3-left-align w3-text-indigo"), text)
 
-  def header(text: String): HtmlElement =
+  def hdr(text: String): HtmlElement =
     h5(cls("w3-light-grey w3-text-indigo"), text)
