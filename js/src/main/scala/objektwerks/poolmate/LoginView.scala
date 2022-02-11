@@ -4,6 +4,7 @@ import com.raquo.laminar.api.L.*
 
 import org.scalajs.dom.console.log
 
+import Components.*
 import Validators.*
 
 object LoginView:
@@ -12,7 +13,7 @@ object LoginView:
     val pinError = new EventBus[String]
     form(cls("w3-container"),
       h5(cls("w3-light-grey w3-text-indigo"), "Login"),
-      label(cls("w3-left-align w3-text-indigo"), "Email"),
+      lbl("Email"),
       input(
         cls("w3-input w3-hover-light-gray w3-text-indigo"),
         typ("email"),
@@ -27,7 +28,7 @@ object LoginView:
         }
       ),
       div(cls("w3-border-white w3-text-red"), child.text <-- emailAddressError.events),
-      label(cls("w3-left-align w3-text-indigo"), "Pin"),
+      lbl("Pin"),
       input(
         cls("w3-input w3-hover-light-gray w3-text-indigo"),
         typ("text"),
