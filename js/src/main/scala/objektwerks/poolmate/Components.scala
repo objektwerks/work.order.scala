@@ -17,3 +17,6 @@ object Components:
 
   def txt: HtmlElement =
     input(cls("w3-input w3-hover-light-gray w3-text-indigo"))
+
+  def err(errBus: EventBus[String]): HtmlElement =
+    div(cls("w3-border-white w3-text-red"), child.text <-- errBus.events)
