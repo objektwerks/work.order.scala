@@ -26,3 +26,6 @@ object Components:
 
   def err(errBus: EventBus[String]): HtmlElement =
     div(cls("w3-border-white w3-text-red"), child.text <-- errBus.events)
+
+  def frm(elms: HtmlElement*): HtmlElement =
+    form(cls("w3-container"), elms)
