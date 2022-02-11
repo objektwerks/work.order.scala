@@ -14,35 +14,33 @@ object LoginView:
     form(cls("w3-container"),
       hdr("Login"),
       lbl("Email"),
-      input(
-        cls("w3-input w3-hover-light-gray w3-text-indigo"),
-        typ("email"),
-        minLength(3),
-        required(true),
-        placeholder("address@email.com"),
-        value <-- emailAddress,
-        onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddress,
+      txt().amend {
+        typ("email")
+        minLength(3)
+        required(true)
+        placeholder("address@email.com")
+        value <-- emailAddress
+        onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddress
         onKeyUp.mapToValue --> { value =>
           if value.isEmailAddress then emailAddressError.emit("")
           else emailAddressError.emit("Enter a valid email address.")
         }
-      ),
+      },
       div(cls("w3-border-white w3-text-red"), child.text <-- emailAddressError.events),
       lbl("Pin"),
-      input(
-        cls("w3-input w3-hover-light-gray w3-text-indigo"),
-        typ("text"),
-        minLength(6),
-        maxLength(6),
-        required(true),
-        placeholder("abc123"),
-        value <-- pin,
-        onInput.mapToValue.filter(_.nonEmpty).setAsValue --> pin,
+      txt().amend {
+        typ("text")
+        minLength(6)
+        maxLength(6)
+        required(true)
+        placeholder("abc123")
+        value <-- pin
+        onInput.mapToValue.filter(_.nonEmpty).setAsValue --> pin
         onKeyUp.mapToValue --> { value =>
           if value.isPin then pinError.emit("")
           else pinError.emit("Enter a valid 6-character pin.")
         }      
-      ),
+      },
       div(cls("w3-border-white w3-text-red"), child.text <-- pinError.events),
       div(cls("w3-bar w3-margin-top w3-center"),
         btn("Login").amend {
