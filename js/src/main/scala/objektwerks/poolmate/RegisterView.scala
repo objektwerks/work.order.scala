@@ -10,7 +10,7 @@ import Validators.*
 object RegisterView:
   def apply(emailAddress: Var[String]): HtmlElement =
     val emailAddressError = new EventBus[String]
-    form(cls("w3-container"),
+    frm(
       hdr("Register"),
       lbl("Email"),
       txt.amend {
@@ -30,10 +30,11 @@ object RegisterView:
         btn("Register").amend {
           disabled <-- emailAddress.signal.map(email => !email.isEmailAddress)
         }
-      ),
-      onSubmit --> { event =>
-        event.preventDefault()
-        log(s"email address: ${emailAddress.now()}")
-        PageRouter.router.pushState(LoginPage)
-      }  
+      ).amend {
+        onSubmit --> { event =>
+          event.preventDefault()
+          log(s"email address: ${emailAddress.now()}")
+          PageRouter.router.pushState(LoginPage)
+        }
+      } 
     )
