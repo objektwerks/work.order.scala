@@ -13,19 +13,18 @@ object RegisterView:
     form(cls("w3-container"),
       hdr("Register"),
       label(cls("w3-left-align w3-text-indigo"), "Email"),
-      input(
-        cls("w3-input w3-hover-light-gray w3-text-indigo"),
-        typ("email"),
-        minLength(3),
-        required(true),
-        placeholder("address@email.com"),
-        value <-- emailAddress,
-        onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddress,
+      txt.amend {
+        typ("email")
+        minLength(3)
+        required(true)
+        placeholder("address@email.com")
+        value <-- emailAddress
+        onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddress
         onKeyUp.mapToValue --> { value =>
           if value.isEmailAddress then emailAddressError.emit("")
           else emailAddressError.emit("Enter a valid email address.")
         }
-      ),
+      },
       div(cls("w3-border-white w3-text-red"), child.text <-- emailAddressError.events),     
       div(cls("w3-bar w3-margin-top w3-center"),
         button(cls("w3-button w3-round-xxlarge w3-light-gray w3-text-indigo"),
