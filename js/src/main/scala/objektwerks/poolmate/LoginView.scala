@@ -12,7 +12,7 @@ object LoginView:
     val emailAddressError = new EventBus[String]
     val pinError = new EventBus[String]
     form(cls("w3-container"),
-      h5(cls("w3-light-grey w3-text-indigo"), "Login"),
+      hdr("Login"),
       lbl("Email"),
       input(
         cls("w3-input w3-hover-light-gray w3-text-indigo"),
