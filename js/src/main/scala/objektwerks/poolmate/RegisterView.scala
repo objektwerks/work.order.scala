@@ -26,7 +26,7 @@ object RegisterView:
         }
       },
       err(emailAddressError),
-      div(cls("w3-bar w3-margin-top w3-center"),
+      bar_submit(
         btn("Register").amend {
           disabled <-- emailAddress.signal.map(email => !email.isEmailAddress)
         }
