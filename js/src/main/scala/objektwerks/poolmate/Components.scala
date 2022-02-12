@@ -6,7 +6,7 @@ object Components:
   def bar(elms: HtmlElement*): HtmlElement =
     div(cls("w3-bar"), elms)
 
-  def bar_ctr(elms: HtmlElement*): HtmlElement =
+  def cbar(elms: HtmlElement*): HtmlElement =
     div(cls("w3-bar w3-margin-top w3-center"), elms)
 
   def btn(text: String): HtmlElement =
