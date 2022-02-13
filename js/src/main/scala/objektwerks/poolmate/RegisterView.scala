@@ -8,14 +8,14 @@ import Components.*
 import Validators.*
 
 object RegisterView:
-  def apply(emailAddress: Var[String]): HtmlElement =
+  def apply(emailAddressVar: Var[String]): HtmlElement =
     val emailAddressError = new EventBus[String]
     frm(
       hdr("Register"),
       lbl("Email"),
       email.amend {
-        value <-- emailAddress
-        onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddress
+        value <-- emailAddressVar
+        onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
         onKeyUp.mapToValue --> { value =>
           if value.isEmailAddress then emailAddressError.emit("")
           else emailAddressError.emit("Enter a valid email address.")
@@ -24,12 +24,12 @@ object RegisterView:
       err(emailAddressError),
       cbar(
         btn("Register").amend {
-          disabled <-- emailAddress.signal.map(email => !email.isEmailAddress)
+          disabled <-- emailAddressVar.signal.map(email => !email.isEmailAddress)
         }
       ).amend {
         onSubmit --> { event =>
           event.preventDefault()
-          log(s"email address: ${emailAddress.now()}")
+          log(s"email address: ${emailAddressVar.now()}")
           PageRouter.router.pushState(LoginPage)
         }
       } 
