@@ -29,7 +29,7 @@ object LoginView:
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> pinVar
         onKeyUp.mapToValue --> { value =>
           if value.isPin then pinError.emit("")
-          else pinError.emit("Enter a valid 6-character pin.")
+          else pinError.emit("Enter a valid 9-character pin.")
         }      
       },
       err(pinError),
