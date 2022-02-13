@@ -27,6 +27,6 @@ object Components:
 
   def frm(elms: HtmlElement*): FormElement = form(cls("w3-container"), elms)
 
-  def int(): Input = input(cls(textCss), typ("number"), pattern("\\d*"), stepAttr("1"), required(true))
+  def int: Input = input(cls(textCss), typ("number"), pattern("\\d*"), stepAttr("1"), required(true))
 
-  def dbl(): Input = input(cls(textCss), typ("number"), pattern("[0-9]+([.,][0-9]+)?"), stepAttr("0.01"), required(true))
+  def dbl: Input = input(cls(textCss), typ("number"), pattern("[0-9]+([.,][0-9]+)?"), stepAttr("0.01"), required(true))
