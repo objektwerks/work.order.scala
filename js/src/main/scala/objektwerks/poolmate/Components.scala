@@ -13,7 +13,7 @@ object Components:
 
   def rbtn(text: String): HtmlElement = button(cls("w3-button w3-round-xxlarge w3-light-grey w3-text-indigo w3-right"), text)
 
-  def email: Input = input(cls(textCss), typ("email"), required(true))
+  def email: Input = input(cls(textCss), typ("email"), minLength(3), placeholder("address@email.com"), required(true))
 
   def lbl(text: String): Label = label(cls("w3-left-align w3-text-indigo"), text)
 
