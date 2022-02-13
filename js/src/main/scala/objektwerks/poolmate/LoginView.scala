@@ -24,12 +24,7 @@ object LoginView:
       },
       err(emailAddressError),
       lbl("Pin"),
-      txt.amend {
-        typ("text")
-        minLength(6)
-        maxLength(6)
-        required(true)
-        placeholder("abc123")
+      pin.amend {
         value <-- pinVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> pinVar
         onKeyUp.mapToValue --> { value =>
