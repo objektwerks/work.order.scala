@@ -5,6 +5,7 @@ import com.raquo.laminar.api.L.*
 import org.scalajs.dom.console.log
 
 import Components.*
+import Errors.*
 import Validators.*
 
 object RegisterView:
@@ -18,7 +19,7 @@ object RegisterView:
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
         onKeyUp.mapToValue --> { value =>
           if value.isEmailAddress then emailAddressError.emit("")
-          else emailAddressError.emit("Enter a valid email address.")
+          else emailAddressError.emit(emailError)
         }
       },
       err(emailAddressError),
