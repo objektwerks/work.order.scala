@@ -10,7 +10,7 @@ import Validators.*
 
 object RegisterView:
   def apply(emailAddressVar: Var[String]): HtmlElement =
-    val emailAddressError = new EventBus[String]
+    val emailAddressErrors = new EventBus[String]
     frm(
       hdr("Register"),
       lbl("Email"),
@@ -18,11 +18,11 @@ object RegisterView:
         value <-- emailAddressVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
         onKeyUp.mapToValue --> { value =>
-          if value.isEmailAddress then emailAddressError.emit("")
-          else emailAddressError.emit(emailError)
+          if value.isEmailAddress then emailAddressErrors.emit("")
+          else emailAddressErrors.emit(emailAddressError)
         }
       },
-      err(emailAddressError),
+      err(emailAddressErrors),
       cbar(
         btn("Register").amend {
           disabled <-- emailAddressVar.signal.map(email => !email.isEmailAddress)

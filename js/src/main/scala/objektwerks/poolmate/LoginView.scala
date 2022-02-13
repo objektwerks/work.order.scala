@@ -5,12 +5,13 @@ import com.raquo.laminar.api.L.*
 import org.scalajs.dom.console.log
 
 import Components.*
+import Errors.*
 import Validators.*
 
 object LoginView:
   def apply(emailAddressVar: Var[String], pinVar: Var[String]): HtmlElement =
-    val emailAddressError = new EventBus[String]
-    val pinError = new EventBus[String]
+    val emailAddressErrors = new EventBus[String]
+    val pinErrors = new EventBus[String]
     frm(
       hdr("Login"),
       lbl("Email"),
@@ -18,21 +19,21 @@ object LoginView:
         value <-- emailAddressVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
         onKeyUp.mapToValue --> { value =>
-          if value.isEmailAddress then emailAddressError.emit("")
-          else emailAddressError.emit("Enter a valid email address.")
+          if value.isEmailAddress then emailAddressErrors.emit("")
+          else emailAddressErrors.emit(emailAddressError)
         }
       },
-      err(emailAddressError),
+      err(emailAddressErrors),
       lbl("Pin"),
       pin.amend {
         value <-- pinVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> pinVar
         onKeyUp.mapToValue --> { value =>
-          if value.isPin then pinError.emit("")
-          else pinError.emit("Enter a valid 9-character pin.")
+          if value.isPin then pinErrors.emit("")
+          else pinErrors.emit(pinError)
         }      
       },
-      err(pinError),
+      err(pinErrors),
       cbar(
         btn("Login").amend {
           disabled <-- emailAddressVar.signal.combineWithFn(pinVar.signal) {
