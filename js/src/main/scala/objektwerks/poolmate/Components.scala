@@ -15,6 +15,8 @@ object Components:
 
   def email: Input = input(cls(textCss), typ("email"), minLength(3), placeholder("address@email.com"), required(true))
 
+  def pin: Input = input(cls(textCss), typ("text"), minLength(9), maxLength(9), required(true), placeholder("a1b2c3d4e"))
+
   def lbl(text: String): Label = label(cls("w3-left-align w3-text-indigo"), text)
 
   def hdr(text: String): HtmlElement = h5(cls("w3-light-grey w3-text-indigo"), text)
