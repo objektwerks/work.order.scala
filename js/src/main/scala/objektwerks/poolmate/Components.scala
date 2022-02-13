@@ -25,10 +25,7 @@ object Components:
     input(cls("w3-input w3-hover-light-gray w3-text-indigo"))
 
   def rotext: Input =
-    input(
-      cls("w3-input w3-hover-light-gray w3-text-indigo"),
-      readOnly(true)
-    )
+    input(cls("w3-input w3-hover-light-gray w3-text-indigo"), readOnly(true))
 
   def err(errBus: EventBus[String]): HtmlElement =
     div(cls("w3-border-white w3-text-red"), child.text <-- errBus.events)
