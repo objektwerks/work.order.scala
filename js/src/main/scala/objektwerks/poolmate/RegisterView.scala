@@ -13,11 +13,7 @@ object RegisterView:
     frm(
       hdr("Register"),
       lbl("Email"),
-      txt.amend {
-        typ("email")
-        minLength(3)
-        required(true)
-        placeholder("address@email.com")
+      email.amend {
         value <-- emailAddress
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddress
         onKeyUp.mapToValue --> { value =>
