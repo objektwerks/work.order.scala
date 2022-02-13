@@ -8,7 +8,7 @@ import Components.*
 import Validators.*
 
 object LoginView:
-  def apply(emailAddressVar: Var[String], pin: Var[String]): HtmlElement =
+  def apply(emailAddressVar: Var[String], pinVar: Var[String]): HtmlElement =
     val emailAddressError = new EventBus[String]
     val pinError = new EventBus[String]
     frm(
@@ -30,8 +30,8 @@ object LoginView:
         maxLength(6)
         required(true)
         placeholder("abc123")
-        value <-- pin
-        onInput.mapToValue.filter(_.nonEmpty).setAsValue --> pin
+        value <-- pinVar
+        onInput.mapToValue.filter(_.nonEmpty).setAsValue --> pinVar
         onKeyUp.mapToValue --> { value =>
           if value.isPin then pinError.emit("")
           else pinError.emit("Enter a valid 6-character pin.")
@@ -40,14 +40,14 @@ object LoginView:
       err(pinError),
       cbar(
         btn("Login").amend {
-          disabled <-- emailAddressVar.signal.combineWithFn(pin.signal) {
+          disabled <-- emailAddressVar.signal.combineWithFn(pinVar.signal) {
             (email, pin) => !(email.isEmailAddress && pin.isPin)
           }
         }
       ).amend {
         onSubmit --> { event =>
           event.preventDefault()
-          log(s"email address: ${emailAddressVar.now()} pin: ${pin.now()}")
+          log(s"email address: ${emailAddressVar.now()} pin: ${pinVar.now()}")
           PageRouter.router.pushState(IndexPage)
         }  
       }
