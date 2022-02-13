@@ -26,3 +26,5 @@ object Components:
   def err(errBus: EventBus[String]): Div = div(cls("w3-border-white w3-text-red"), child.text <-- errBus.events)
 
   def frm(elms: HtmlElement*): FormElement = form(cls("w3-container"), elms)
+
+  def int(): Input = input(cls(textCss), typ("number"), pattern("\\d*"), stepAttr("1"), required(true))
