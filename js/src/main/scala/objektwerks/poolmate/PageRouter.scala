@@ -17,7 +17,8 @@ object PageRouter:
     Route.static(IndexPage, root / endOfSegments),
     Route.static(RegisterPage, root / "register" / endOfSegments),
     Route.static(LoginPage, root / "login" / endOfSegments),
-    Route.static(PoolsPage, root / "pools" / endOfSegments)
+    Route.static(PoolsPage, root / "pools" / endOfSegments),
+    Route.static(AccountPage, root / "account" / endOfSegments)
   )
 
   val router = new com.raquo.waypoint.Router[Page](
