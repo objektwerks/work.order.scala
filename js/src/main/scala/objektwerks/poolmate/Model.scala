@@ -2,7 +2,7 @@ package objektwerks.poolmate
 
 import com.raquo.laminar.api.L.*
 
-object State:
+object Model:
   val emailAddressVar = Var("")
   val pinVar = Var("")
   val account = Var(Account.empty)
