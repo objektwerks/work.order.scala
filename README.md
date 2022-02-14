@@ -50,6 +50,10 @@ Account
 * Deactivate( license ) => Deactivated( account )
 * Reactivate( license ) => Reactivated( account )
 
+Model
+-----
+1. Model
+
 Views
 -----
 1. IndexView, LoginView, RegisterView, PoolsView, AccountView
