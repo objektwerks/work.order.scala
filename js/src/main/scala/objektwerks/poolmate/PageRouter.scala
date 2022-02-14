@@ -35,5 +35,5 @@ object PageRouter:
     .collectStatic(IndexPage) { IndexView() }
     .collectStatic(RegisterPage) { RegisterView(Model.emailAddressVar) }
     .collectStatic(LoginPage) { LoginView(Model.emailAddressVar, Model.pinVar) }
-    .collectStatic(PoolsPage) { PoolsView() }
-    .collectStatic(AccountPage) { AccountView() }
+    .collectStatic(PoolsPage) { PoolsView(Model.pools, Model.selectedPool) }
+    .collectStatic(AccountPage) { AccountView(Model.account) }
