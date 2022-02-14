@@ -33,6 +33,14 @@ object Account:
         .appended(newSpecialChar)
     ).mkString
 
+  val empty = Account(
+    license = "",
+    emailAddress = "",
+    pin = "",
+    activated = 0,
+    deactivated = 0
+  )
+
 final case class Email(id: String,
                        license: String,
                        address: String,
