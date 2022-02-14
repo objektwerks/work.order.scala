@@ -52,7 +52,7 @@ Account
 
 Views
 -----
-1. IndexView, LoginView, RegisterView
+1. IndexView, LoginView, RegisterView, PoolsView, AccountView
 2. Pool
    * Pools -> Pool
    * Surfaces -> Surface
