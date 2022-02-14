@@ -15,7 +15,7 @@ Test
 
 Build
 -----
-1. sbt clean test fastLinkJS package fastjs | 1. sbt clean test fullLinkJS package fulljs
+1. sbt clean test fastLinkJS package fastjs | sbt clean test fullLinkJS package fulljs
 
 Run
 ---
