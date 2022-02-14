@@ -31,6 +31,8 @@ object Components:
 
   def int: Input = input(cls(textCss), typ("number"), pattern("\\d*"), stepAttr("1"), required(true))
 
-  def roint: Input = input(cls(textCss), typ("number"), readOnly(true))
+  def roint: Input = input(cls(textCss), typ("number"), pattern("\\d*"), readOnly(true))
 
   def dbl: Input = input(cls(textCss), typ("number"), pattern("[0-9]+([.,][0-9]+)?"), stepAttr("0.01"), required(true))
+
+  def rodbl: Input = input(cls(textCss), typ("number"), pattern("[0-9]+([.,][0-9]+)?"), readOnly(true))
