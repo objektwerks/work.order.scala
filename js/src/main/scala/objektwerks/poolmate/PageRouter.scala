@@ -47,4 +47,4 @@ object PageRouter:
     .collectStatic(LoginPage) { LoginView(Model.emailAddressVar, Model.pinVar) }
     .collectStatic(PoolsPage) { PoolsView(Model.pools) }
     .collectStatic(AccountPage) { AccountView(Model.account) }
-    .collectSignal[PoolPage] { signal => PoolView(signal) }
+    .collect[PoolPage] { page => PoolView(Model.pools.now().find(_.id == page.id).getOrElse(Pool())) }

@@ -7,8 +7,8 @@ import org.scalajs.dom.console.log
 import Components.*
 
 object PoolView:
-  def apply(signal: Signal[PoolPage]): HtmlElement =
-    log(s"pool id: ${signal.map(page => page.id)}")
+  def apply(pool: Pool): HtmlElement =
+    log(s"pool id: $pool")
     div(
       bar(
         btn("Pools").amend {
