@@ -11,7 +11,7 @@ import Validators.*
 object RegisterView:
   def apply(emailAddressVar: Var[String]): HtmlElement =
     val emailAddressErrors = new EventBus[String]
-    frm(
+    div(
       hdr("Register"),
       lbl("Email"),
       email.amend {
@@ -26,11 +26,10 @@ object RegisterView:
       cbar(
         btn("Register").amend {
           disabled <-- emailAddressVar.signal.map(email => !email.isEmailAddress)
-        }
-      ),
-      onSubmit --> { event =>
-        event.preventDefault()
-        log(s"email address: ${emailAddressVar.now()}")
-        PageRouter.router.pushState(LoginPage)
-      }
+          onClick --> { _ =>
+            log(s"email address: ${emailAddressVar.now()}")
+            PageRouter.router.pushState(LoginPage)
+          }
+        },
+      )
     )
