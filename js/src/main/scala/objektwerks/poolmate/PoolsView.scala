@@ -9,7 +9,7 @@ import Components.*
 object PoolsView:
   def apply(pools: Var[Seq[Pool]], selectedPool: Var[Pool]): HtmlElement =
     def split: Signal[Seq[Li]] = pools.signal.split(_.id)( (id, _, poolSignal) =>
-      toLi(poolSignal.map(_.name)).amend {
+      item(poolSignal.map(_.name)).amend {
         onClick --> { _ =>
           pools.now().find(_.id == id).foreach { pool =>
             selectedPool.set(pool)

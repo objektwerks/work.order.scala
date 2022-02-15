@@ -33,4 +33,4 @@ object Components:
 
   def list(liSignal: Signal[Seq[Li]]): Div = div(cls("w3-container"), ul(cls("w3-ul w3-hoverable"), children <-- liSignal))
 
-  def toLi(strSignal: Signal[String]): Li = li(cls("w3-text-indigo w3-display-container"), child.text <-- strSignal)
+  def item(strSignal: Signal[String]): Li = li(cls("w3-text-indigo w3-display-container"), child.text <-- strSignal)
