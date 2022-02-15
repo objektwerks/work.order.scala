@@ -27,11 +27,10 @@ object RegisterView:
         btn("Register").amend {
           disabled <-- emailAddressVar.signal.map(email => !email.isEmailAddress)
         }
-      ).amend {
-        onSubmit --> { event =>
-          event.preventDefault()
-          log(s"email address: ${emailAddressVar.now()}")
-          PageRouter.router.pushState(LoginPage)
-        }
-      } 
+      ),
+      onSubmit --> { event =>
+        event.preventDefault()
+        log(s"email address: ${emailAddressVar.now()}")
+        PageRouter.router.pushState(LoginPage)
+      }
     )
