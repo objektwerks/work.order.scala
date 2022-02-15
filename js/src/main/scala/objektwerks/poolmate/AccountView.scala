@@ -18,6 +18,6 @@ object AccountView:
         }      
       ),
       div(
-        hdr("Register")
+        hdr("Account")
       )
     )
