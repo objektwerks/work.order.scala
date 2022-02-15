@@ -39,7 +39,7 @@ object AccountView:
         rotxt.amend {
           value <-- account.signal.map(_.deactivated.toString)
         },
-        bar(
+        cbar(
           btn("Deactivate").amend {
             onClick --> { _ =>
               log("Deactivate onClick")
