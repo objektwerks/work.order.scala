@@ -16,5 +16,8 @@ object AccountView:
             PageRouter.router.pushState(PoolsPage)
           }
         }      
-      )      
+      ),
+      div(
+        hdr("Register")
+      )
     )
