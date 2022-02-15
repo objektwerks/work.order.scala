@@ -12,12 +12,20 @@ import Serializers.given
 
 object PageRouter:
   given pageRW: ReadWriter[Page] = macroRW
+  given poolPageRW: ReadWriter[PoolPage] = macroRW
+
+  val poolRoute = Route[PoolPage, Long](
+    encode = poolPage => poolPage.id,
+    decode = arg => PoolPage(id = arg),
+    pattern = root / "app" / "pool" / segment[Long] / endOfSegments
+  )
 
   val routes = List(
     Route.static(IndexPage, root / endOfSegments),
     Route.static(RegisterPage, root / "register" / endOfSegments),
     Route.static(LoginPage, root / "login" / endOfSegments),
     Route.static(PoolsPage, root / "app" / "pools" / endOfSegments),
+    poolRoute,
     Route.static(AccountPage, root / "app" / "account" / endOfSegments)
   )
 
@@ -37,3 +45,4 @@ object PageRouter:
     .collectStatic(LoginPage) { LoginView(Model.emailAddressVar, Model.pinVar) }
     .collectStatic(PoolsPage) { PoolsView(Model.pools) }
     .collectStatic(AccountPage) { AccountView(Model.account) }
+    .collectSignal[PoolPage] { poolPage => div() }
