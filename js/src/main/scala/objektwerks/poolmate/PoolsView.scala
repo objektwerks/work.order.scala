@@ -16,5 +16,8 @@ object PoolsView:
             PageRouter.router.pushState(PoolsPage)
           }
         }      
-      )      
+      ),
+      div(
+        hdr("Pools")
+      )
     )
