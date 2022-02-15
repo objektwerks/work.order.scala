@@ -19,7 +19,8 @@ final case class Email(id: String,
 
 sealed trait Entity
 
-final case class Account(license: String = newLicense,
+final case class Account(id: Long = 0,
+                         license: String = newLicense,
                          emailAddress: String,
                          pin: String = newPin,
                          activated: Int = DateTime.currentDate,

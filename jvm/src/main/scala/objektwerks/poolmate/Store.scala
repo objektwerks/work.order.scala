@@ -33,15 +33,16 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
   def listAccounts(): Seq[Account] =
     DB readOnly { implicit session =>
       sql"select * from account"
-        .map(rs => Account(rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+        .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
         .list()
     }
 
   def addAccount(account: Account): Unit =
-    DB localTx { implicit session =>
+    val id = DB localTx { implicit session =>
       sql"insert into account(license, email_address, pin, activated, deactivated) values(${account.license}, ${account.emailAddress}, ${account.pin}, ${account.activated}, ${account.deactivated})"
       .update()
     }
+    account.copy(id = id)
 
   def removeAccount(license: String): Unit =
     DB localTx { implicit session =>
@@ -81,7 +82,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
   def login(email: String, pin: String): Option[Account] =
     DB readOnly { implicit session =>
       sql"select * from account where email_address = $email and pin = $pin"
-        .map(rs => Account(rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+        .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
         .single()
     }
 
@@ -108,7 +109,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
       .update()
       if deactivated > 0 then
         sql"select * from account where license = $license"
-          .map(rs => Account(rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+          .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
           .single()
       else None
     }
@@ -119,7 +120,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
       .update()
       if activated > 0 then
         sql"select * from account where license = $license"
-          .map(rs => Account(rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+          .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
           .single()
       else None
     }
