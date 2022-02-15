@@ -39,3 +39,9 @@ object Components:
         children <-- itemsSignal
       )
     )
+
+  def render(itemSignal: Signal[String]): Li =
+    li(
+      cls("w3-text-indigo w3-display-container"),
+      child.text <-- itemSignal
+    )
