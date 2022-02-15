@@ -8,6 +8,16 @@ import Components.*
 
 object PoolsView:
   def apply(pools: Var[Seq[Pool]], selectedPool: Var[Pool]): HtmlElement =
+    def split: Signal[Seq[Li]] = pools.signal.split(_.id)( (id, _, poolSignal) =>
+      toLi(poolSignal.map(_.name)).amend {
+        onClick --> { _ =>
+          pools.now().find(_.id == id).foreach { pool =>
+            selectedPool.set(pool)
+            //Todo show pool view
+          }
+        }
+      }
+    )
     div(
       bar(
         btn("Account").amend {
@@ -18,6 +28,7 @@ object PoolsView:
         }      
       ),
       div(
-        hdr("Pools")
+        hdr("Pools"),
+        list(split)
       )
     )
