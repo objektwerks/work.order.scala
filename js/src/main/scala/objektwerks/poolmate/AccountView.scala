@@ -18,6 +18,26 @@ object AccountView:
         }      
       ),
       div(
-        hdr("Account")
+        hdr("Account"),
+        lbl("License"),
+        rotxt.amend {
+          value <-- account.signal.map(_.license)
+        },
+        lbl("Email Address"),
+        rotxt.amend {
+          value <-- account.signal.map(_.emailAddress)
+        },
+        lbl("Pin"),
+        rotxt.amend {
+          value <-- account.signal.map(_.pin)
+        },
+        lbl("Activated"),
+        rotxt.amend {
+          value <-- account.signal.map(_.activated.toString)
+        },
+        lbl("Deactivated"),
+        rotxt.amend {
+          value <-- account.signal.map(_.deactivated.toString)
+        }
       )
     )
