@@ -31,17 +31,6 @@ object Components:
 
   def err(errBus: EventBus[String]): Div = div(cls("w3-border-white w3-text-red"), child.text <-- errBus.events)
 
-  def list(itemsSignal: Signal[Seq[Li]]): Div =
-    div(
-      cls("w3-container"),
-      ul(
-        cls("w3-ul w3-hoverable"),
-        children <-- itemsSignal
-      )
-    )
+  def list(itemsSignal: Signal[Seq[Li]]): Div = div(cls("w3-container"), ul(cls("w3-ul w3-hoverable"), children <-- itemsSignal))
 
-  def render(itemSignal: Signal[String]): Li =
-    li(
-      cls("w3-text-indigo w3-display-container"),
-      child.text <-- itemSignal
-    )
+  def render(itemSignal: Signal[String]): Li = li(cls("w3-text-indigo w3-display-container"), child.text <-- itemSignal)
