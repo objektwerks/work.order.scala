@@ -12,7 +12,7 @@ object LoginView:
   def apply(emailAddressVar: Var[String], pinVar: Var[String]): HtmlElement =
     val emailAddressErrors = new EventBus[String]
     val pinErrors = new EventBus[String]
-    frm(
+    div(
       hdr("Login"),
       lbl("Email"),
       email.amend {
@@ -39,11 +39,10 @@ object LoginView:
           disabled <-- emailAddressVar.signal.combineWithFn(pinVar.signal) {
             (email, pin) => !(email.isEmailAddress && pin.isPin)
           }
+          onClick --> { _ =>
+            log(s"email address: ${emailAddressVar.now()} pin: ${pinVar.now()}")
+            PageRouter.router.pushState(PoolsPage)
+          }
         }
-      ),
-      onSubmit --> { event =>
-        event.preventDefault()
-        log(s"email address: ${emailAddressVar.now()} pin: ${pinVar.now()}")
-        PageRouter.router.pushState(PoolsPage)
-      }  
+      )
     )
