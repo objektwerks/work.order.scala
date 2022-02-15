@@ -40,11 +40,10 @@ object LoginView:
             (email, pin) => !(email.isEmailAddress && pin.isPin)
           }
         }
-      ).amend {
-        onSubmit --> { event =>
-          event.preventDefault()
-          log(s"email address: ${emailAddressVar.now()} pin: ${pinVar.now()}")
-          PageRouter.router.pushState(PoolsPage)
-        }  
-      }
+      ),
+      onSubmit --> { event =>
+        event.preventDefault()
+        log(s"email address: ${emailAddressVar.now()} pin: ${pinVar.now()}")
+        PageRouter.router.pushState(PoolsPage)
+      }  
     )
