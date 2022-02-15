@@ -45,13 +45,13 @@ object AccountView:
               log("Deactivate onClick")
               PageRouter.router.pushState(PoolsPage)
             }
+          },
+          btn("Reactivate").amend {
+            onClick --> { _ =>
+              log("Reactivate onClick")
+              PageRouter.router.pushState(PoolsPage)
+            }
           }      
-        ),
-        btn("Reactivate").amend {
-          onClick --> { _ =>
-            log("Reactivate onClick")
-            PageRouter.router.pushState(PoolsPage)
-          }
-        }      
+        )
       )
     )
