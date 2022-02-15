@@ -23,7 +23,7 @@ object Components:
 
   def txt: Input = input(cls(textCss), required(true))
 
-  def readonly: Input = input(cls(textCss), readOnly(true))
+  def rotxt: Input = input(cls(textCss), readOnly(true))
 
   def err(errBus: EventBus[String]): Div = div(cls("w3-border-white w3-text-red"), child.text <-- errBus.events)
 
