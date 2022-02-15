@@ -30,3 +30,12 @@ object Components:
   def hdr(text: String): HtmlElement = h5(cls("w3-light-grey w3-text-indigo"), text)
 
   def err(errBus: EventBus[String]): Div = div(cls("w3-border-white w3-text-red"), child.text <-- errBus.events)
+
+  def list(itemsSignal: Signal[Seq[Li]]): Div =
+    div(
+      cls("w3-container"),
+      ul(
+        cls("w3-ul w3-hoverable"),
+        children <-- itemsSignal
+      )
+    )
