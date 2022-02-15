@@ -14,7 +14,7 @@ object PoolsView:
           onClick --> { _ =>
             pools.now().find(_.id == id).foreach { pool =>
               selectedPool.set(pool)
-              //Todo show pool view
+              //PageRouter.router.pushState(PoolPage)
             }
           }
         }
