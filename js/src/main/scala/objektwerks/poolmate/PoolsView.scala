@@ -7,18 +7,7 @@ import org.scalajs.dom.console.log
 import Components.*
 
 object PoolsView:
-  def apply(pools: Var[Seq[Pool]], selectedPool: Var[Pool]): HtmlElement =
-    def split(poolsSignal: StrictSignal[Seq[Pool]]): Signal[Seq[Li]] =
-      poolsSignal.split(_.id)( (id, _, poolSignal) =>
-        item(poolSignal.map(_.name)).amend {
-          onClick --> { _ =>
-            pools.now().find(_.id == id).foreach { pool =>
-              selectedPool.set(pool)
-              //PageRouter.router.pushState(PoolPage)
-            }
-          }
-        }
-      )
+  def apply(pools: Var[Seq[Pool]]): HtmlElement =
     div(
       bar(
         btn("Account").amend {
@@ -30,6 +19,6 @@ object PoolsView:
       ),
       div(
         hdr("Pools"),
-        list(split(pools.signal))
+        list(split(pools))
       )
     )

@@ -7,4 +7,3 @@ object Model:
   val pinVar = Var("")
   val account = Var(Account.empty)
   val pools = Var(Seq.empty[Pool])
-  val selectedPool = Var[Pool](Pool())
