@@ -17,14 +17,17 @@ final case class Email(id: String,
                        processed: Boolean = false,
                        valid: Boolean = false)
 
-sealed trait Entity
+sealed trait Entity:
+  val id: Long
+  def display: String
 
 final case class Account(id: Long = 0,
                          license: String = newLicense,
                          emailAddress: String,
                          pin: String = newPin,
                          activated: Int = DateTime.currentDate,
-                         deactivated: Int = 0) extends Entity
+                         deactivated: Int = 0) extends Entity:
+  def display = emailAddress
 
 object Account:
   private val specialChars = "~!@#$%^&*{}-+<>?/:;".toList
@@ -54,39 +57,46 @@ final case class Pool(id: Long = 0,
                       license: String = "",
                       name: String = "",
                       built: Int = 0,
-                      volume: Int = 1000) extends Entity
+                      volume: Int = 1000) extends Entity:
+  def display = name
 
 final case class Surface(id: Long = 0,
                          poolId: Long = 0,
                          installed: Int = 0,
-                         kind: String = "") extends Entity
+                         kind: String = "") extends Entity:
+  def display = kind
 
 final case class Pump(id: Long = 0,
                       poolId: Long = 0,
                       installed: Int = 0,
-                      model: String = "") extends Entity
+                      model: String = "") extends Entity:
+  def display = model
 
 final case class Timer(id: Long = 0,
                        poolId: Long = 0,
                        installed: Int = 0,
-                       model: String = "") extends Entity
+                       model: String = "") extends Entity:
+  def display = model
 
 final case class TimerSetting(id: Long = 0,
                               timerId: Long = 0,
                               created: Int = 0,
                               timeOn: Int = 0,
-                              timeOff: Int = 0) extends Entity
+                              timeOff: Int = 0) extends Entity:
+  def display = s"$created: $timeOn - $timeOff"
 
 final case class Heater(id: Long = 0,
                         poolId: Long = 0,
                         installed: Int = 0,
-                        model: String = "") extends Entity
+                        model: String = "") extends Entity:
+  def display = installed.toString
 
 final case class HeaterSetting(id: Long = 0,
                                heaterId: Long = 0,
                                temp: Int = 0,
                                dateOn: Int = 0,
-                               dateOff: Int = 0) extends Entity
+                               dateOff: Int = 0) extends Entity:
+  def display = s"$dateOn: $temp"
 
 final case class Measurement(id: Long = 0,
                              poolId: Long = 0,
@@ -98,7 +108,8 @@ final case class Measurement(id: Long = 0,
                              freeChlorine: Int = 3,
                              ph: Double = 7.4,
                              totalAlkalinity: Int = 100,
-                             cyanuricAcid: Long = 50) extends Entity
+                             cyanuricAcid: Long = 50) extends Entity:
+  def display = s"$measured: $ph ph"
 
 object Measurement:
   val tempRange = 0 to 100
@@ -118,14 +129,16 @@ final case class Cleaning(id: Long = 0,
                           skimmerBasket: Boolean = true,
                           pumpBasket: Boolean = false,
                           pumpFilter: Boolean = false,
-                          deck: Boolean = false) extends Entity
+                          deck: Boolean = false) extends Entity:
+  def display = cleaned.toString
 
 final case class Chemical(id: Long = 0,
                           poolId: Long = 0,
                           added: Int = 0,
                           chemical: String = "",
                           amount: Double = 0.0,
-                          unit: String = "") extends Entity
+                          unit: String = "") extends Entity:
+  def display = s"$added: $chemical"
 
 final case class Supply(id: Long = 0,
                         poolId: Long = 0,
@@ -133,10 +146,12 @@ final case class Supply(id: Long = 0,
                         item: String = "",
                         amount: Double = 0.0,
                         unit: String = "",
-                        cost: Double = 0.0) extends Entity
+                        cost: Double = 0.0) extends Entity:
+  def display = s"$purchased: $item"
 
 final case class Repair(id: Long = 0,
                         poolId: Long = 0,
                         repaired: Int = 0,
                         repair: String = "",
-                        cost: Double = 0.0) extends Entity
+                        cost: Double = 0.0) extends Entity:
+  def display = s"$repaired: $repair"
