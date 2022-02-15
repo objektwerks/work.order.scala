@@ -19,6 +19,8 @@ object PoolsView:
       ),
       div(
         hdr("Pools"),
-        list(split(pools))
+        list(
+          split(pools, (id: Long) => PoolPage(id))
+        )
       )
     )

@@ -11,9 +11,11 @@ import org.scalajs.dom
 import Serializers.given
 
 object PageRouter:
-  given pageRW: ReadWriter[Page] = macroRW
   given poolPageRW: ReadWriter[PoolPage] = macroRW
-
+  given pageRW: ReadWriter[Page] = ReadWriter.merge(
+    poolPageRW
+  )
+  
   val poolRoute = Route[PoolPage, Long](
     encode = poolPage => poolPage.id,
     decode = arg => PoolPage(id = arg),
