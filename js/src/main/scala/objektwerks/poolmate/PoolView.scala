@@ -8,8 +8,7 @@ import Components.*
 import Errors.*
 
 object PoolView:
-  def apply(model: Pools, id: Long): HtmlElement =
-    model.set(id)
+  def apply(model: Pools): HtmlElement =
     val nameErrors = new EventBus[String]
     div(
       bar(
