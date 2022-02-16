@@ -7,7 +7,7 @@ import org.scalajs.dom.console.log
 import Components.*
 
 object PoolsView:
-  def apply(pools: Var[Seq[Pool]]): HtmlElement =
+  def apply(model: Pools): HtmlElement =
     div(
       bar(
         btn("Account").amend {
@@ -20,7 +20,7 @@ object PoolsView:
       div(
         hdr("Pools"),
         list(
-          split(pools, (id: Long) => PoolPage(id))
+          split(model.poolsVar, (id: Long) => PoolPage(id))
         )
       )
     )

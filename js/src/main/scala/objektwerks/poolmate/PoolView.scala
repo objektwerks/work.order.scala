@@ -8,12 +8,9 @@ import Components.*
 import Errors.*
 
 object PoolView:
-  def apply(poolsVar: Var[Seq[Pool]], id: Long): HtmlElement =
-    val poolVar = Var(poolsVar.now().find(_.id == id).getOrElse(Pool()))
+  def apply(model: Pools, id: Long): HtmlElement =
+    model.update(id)
     val nameErrors = new EventBus[String]
-    def update(pool: Pool): Pool =
-      poolVar.set(pool)
-      poolVar.now()
     div(
       bar(
         btn("Pools").amend {
@@ -27,13 +24,13 @@ object PoolView:
         hdr("Pool"),
         lbl("License"),
         rotxt.amend {
-          value <-- poolVar.signal.map(_.license)
+          value <-- model.poolVar.signal.map(_.license)
         },
         lbl("Name"),
         txt.amend {
-          value <-- poolVar.signal.map(_.name)
+          value <-- model.poolVar.signal.map(_.name)
           onInput.mapToValue.filter(_.nonEmpty) --> { name =>
-            poolsVar.update( _.map( pool => if pool.id == id then update(pool.copy(name = name)) else pool ))
+            model.poolsVar.update( _.map( pool => if pool.id == id then model.update(pool.copy(name = name)) else pool ) )
           }
           onKeyUp.mapToValue --> { name =>
             if name.nonEmpty then nameErrors.emit("") else nameErrors.emit(nonEmptyError)
