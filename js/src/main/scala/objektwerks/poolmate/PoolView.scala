@@ -8,7 +8,7 @@ import Components.*
 import Errors.*
 
 object PoolView:
-  def apply(model: Pools): HtmlElement =
+  def apply(model: Entities[Pool]): HtmlElement =
     val nameErrors = new EventBus[String]
     div(
       bar(
@@ -23,13 +23,13 @@ object PoolView:
         hdr("Pool"),
         lbl("License"),
         rotxt.amend {
-          value <-- model.poolVar.signal.map(_.license)
+          value <-- model.entityVar.signal.map(_.license)
         },
         lbl("Name"),
         txt.amend {
-          value <-- model.poolVar.signal.map(_.name)
+          value <-- model.entityVar.signal.map(_.name)
           onInput.mapToValue.filter(_.nonEmpty) --> { name =>
-            model.update( model.poolVar.now().copy(name = name) )
+            model.update( model.entityVar.now().copy(name = name) )
           }
           onKeyUp.mapToValue --> { name =>
             if name.nonEmpty then nameErrors.emit("") else nameErrors.emit(nonEmptyError)

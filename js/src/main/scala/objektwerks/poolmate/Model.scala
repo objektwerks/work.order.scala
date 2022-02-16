@@ -6,8 +6,9 @@ object Model:
   val emailAddressVar = Var("")
   val pinVar = Var("")
   val account = Var(Account.empty)
-  val pools = Pools(Pool())
+  val pools = Entities[Pool](Pool(), Var(Seq.empty[Pool]), Var(Pool()))
 
+/*
 class Pools(val emptyPool: Pool):
   val poolsVar = Var(Seq.empty[Pool])
   val poolVar = Var(emptyPool)
@@ -24,10 +25,11 @@ class Pools(val emptyPool: Pool):
         pool
       else p
     ))
+*/
 
-class Entities[E <: Entity](val emptyEntity: E):
-  val entitiesVar = Var(Seq.empty[E])
-  val entityVar = Var(emptyEntity)
+case class Entities[E <: Entity](emptyEntity: E,
+                                 entitiesVar: Var[Seq[E]],
+                                 entityVar: Var[E]):
   def setEntities(entities: Seq[E]): Entities[E] =
     entitiesVar.set(entities)
     this
