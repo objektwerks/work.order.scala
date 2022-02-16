@@ -8,9 +8,9 @@ object Model:
   val account = Var(Account.empty)
   val pools = Entities[Pool](Pool(), Var(Seq.empty[Pool]), Var(Pool()))
 
-case class Entities[E <: Entity](emptyEntity: E,
-                                 entitiesVar: Var[Seq[E]],
-                                 entityVar: Var[E]):
+final case class Entities[E <: Entity](emptyEntity: E,
+                                       entitiesVar: Var[Seq[E]],
+                                       entityVar: Var[E]):
   def setEntities(entities: Seq[E]): Entities[E] =
     entitiesVar.set(entities)
     this
