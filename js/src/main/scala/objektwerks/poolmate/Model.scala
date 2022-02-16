@@ -2,6 +2,12 @@ package objektwerks.poolmate
 
 import com.raquo.laminar.api.L.*
 
+object Model:
+  val emailAddressVar = Var("")
+  val pinVar = Var("")
+  val account = Var(Account.empty)
+  val pools = Pools()
+
 class Pools:
   val poolsVar = Var(Seq.empty[Pool])
   val poolVar = Var(Pool())
@@ -9,9 +15,3 @@ class Pools:
   def update(pool: Pool): Pool =
     poolVar.set(pool)
     poolVar.now()
-
-object Model:
-  val emailAddressVar = Var("")
-  val pinVar = Var("")
-  val account = Var(Account.empty)
-  val pools = Pools()
