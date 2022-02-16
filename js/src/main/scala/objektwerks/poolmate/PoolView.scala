@@ -5,10 +5,12 @@ import com.raquo.laminar.api.L.*
 import org.scalajs.dom.console.log
 
 import Components.*
+import Errors.*
 
 object PoolView:
-  def apply(pool: Pool): HtmlElement =
-    log(s"pool id: $pool")
+  def apply(poolsVar: Var[Seq[Pool]], id: Long): HtmlElement =
+    val poolVar = Var(poolsVar.now().find(_.id == id).getOrElse(Pool()))
+    val nameErrors = new EventBus[String]
     div(
       bar(
         btn("Pools").amend {
@@ -19,6 +21,22 @@ object PoolView:
         }      
       ),
       div(
-        hdr("Pool")
+        hdr("Pool"),
+        lbl("License"),
+        rotxt.amend {
+          value <-- poolVar.signal.map(_.license)
+        },
+        lbl("Name"),
+        txt.amend {
+          value <-- poolVar.signal.map(_.name)
+          onInput.mapToValue.filter(_.nonEmpty) --> { name =>
+            poolsVar.update(_.map(pool => if pool.id == id then pool.copy(name = name) else pool))
+          }
+          onKeyUp.mapToValue --> { value =>
+            if value.length >= 3 then nameErrors.emit("")
+            else nameErrors.emit(nameError)
+          }
+        },
+        err(nameErrors)
       )
     )
