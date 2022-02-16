@@ -20,9 +20,11 @@ final case class EntityModel[E <: Entity](emptyEntity: E,
   def setEntities(entities: Seq[E]): EntityModel[E] =
     entitiesVar.set(entities)
     this
+
   def setEntity(id: Long): EntityModel[E] =
     entityVar.set(entitiesVar.now().find(_.id == id).getOrElse(emptyEntity))
     this
+
   def updateEntity(entity: E): Unit =
     entitiesVar.update( _.map( e =>
       if e.id == entity.id then
