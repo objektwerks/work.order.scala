@@ -32,8 +32,8 @@ object PoolView:
           onInput.mapToValue.filter(_.nonEmpty) --> { name =>
             poolsVar.update(_.map(pool => if pool.id == id then pool.copy(name = name) else pool))
           }
-          onKeyUp.mapToValue --> { value =>
-            if value.nonEmpty then nameErrors.emit("") else nameErrors.emit(nonEmptyError)
+          onKeyUp.mapToValue --> { name =>
+            if name.nonEmpty then nameErrors.emit("") else nameErrors.emit(nonEmptyError)
           }
         },
         err(nameErrors)
