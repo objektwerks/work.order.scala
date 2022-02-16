@@ -19,5 +19,9 @@ class Pools:
     poolVar.set(poolsVar.now().find(_.id == id).getOrElse(emptyPool))
     this
   def update(pool: Pool): Unit =
-    poolsVar.update( _.map( p => if p.id == pool.id then pool else p ) )
-    poolVar.set(pool)
+    poolsVar.update( _.map( p =>
+      if p.id == pool.id then
+        poolVar.set(pool)
+        pool
+      else p
+    ))
