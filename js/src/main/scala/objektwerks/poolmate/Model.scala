@@ -6,12 +6,11 @@ object Model:
   val emailAddressVar = Var("")
   val pinVar = Var("")
   val account = Var(Account.empty)
-  val pools = Pools()
+  val pools = Pools(Pool())
 
-class Pools:
-  val emptyPool = Pool()
+class Pools(val emptyPool: Pool):
   val poolsVar = Var(Seq.empty[Pool])
-  val poolVar = Var(Pool())
+  val poolVar = Var(emptyPool)
   def set(pools: Seq[Pool]): Pools =
     poolsVar.set(pools)
     this
