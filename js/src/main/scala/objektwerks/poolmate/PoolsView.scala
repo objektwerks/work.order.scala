@@ -7,7 +7,7 @@ import org.scalajs.dom.console.log
 import Components.*
 
 object PoolsView:
-  def apply(model: Entities[Pool]): HtmlElement =
+  def apply(model: EntityModel[Pool]): HtmlElement =
     div(
       bar(
         btn("Account").amend {
