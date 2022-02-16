@@ -11,6 +11,9 @@ object PoolView:
   def apply(poolsVar: Var[Seq[Pool]], id: Long): HtmlElement =
     val poolVar = Var(poolsVar.now().find(_.id == id).getOrElse(Pool()))
     val nameErrors = new EventBus[String]
+    def update(pool: Pool): Pool =
+      poolVar.set(pool)
+      poolVar.now()
     div(
       bar(
         btn("Pools").amend {
@@ -30,12 +33,7 @@ object PoolView:
         txt.amend {
           value <-- poolVar.signal.map(_.name)
           onInput.mapToValue.filter(_.nonEmpty) --> { name =>
-            poolsVar.update( _.map { pool =>
-              if pool.id == id then
-                poolVar.set(pool.copy(name = name))
-                poolVar.now()
-              else pool
-            } )
+            poolsVar.update( _.map( pool => if pool.id == id then update(pool.copy(name = name)) else pool ))
           }
           onKeyUp.mapToValue --> { name =>
             if name.nonEmpty then nameErrors.emit("") else nameErrors.emit(nonEmptyError)
