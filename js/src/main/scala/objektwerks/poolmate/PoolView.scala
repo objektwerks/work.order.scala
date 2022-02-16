@@ -34,7 +34,7 @@ object PoolView:
           }
           onKeyUp.mapToValue --> { value =>
             if value.nonEmpty then nameErrors.emit("")
-            else nameErrors.emit(nameError)
+            else nameErrors.emit(nonEmptyError)
           }
         },
         err(nameErrors)
