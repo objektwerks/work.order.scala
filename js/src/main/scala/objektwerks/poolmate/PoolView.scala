@@ -9,7 +9,7 @@ import Errors.*
 
 object PoolView:
   def apply(model: Pools, id: Long): HtmlElement =
-    model.update(id)
+    model.set(id)
     val nameErrors = new EventBus[String]
     div(
       bar(
@@ -30,7 +30,7 @@ object PoolView:
         txt.amend {
           value <-- model.poolVar.signal.map(_.name)
           onInput.mapToValue.filter(_.nonEmpty) --> { name =>
-            model.poolsVar.update( _.map( pool => if pool.id == id then model.update(pool.copy(name = name)) else pool ) )
+            model.update( model.poolVar.now().copy(name = name) )
           }
           onKeyUp.mapToValue --> { name =>
             if name.nonEmpty then nameErrors.emit("") else nameErrors.emit(nonEmptyError)

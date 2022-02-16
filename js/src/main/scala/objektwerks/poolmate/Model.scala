@@ -12,8 +12,8 @@ class Pools:
   val emptyPool = Pool()
   val poolsVar = Var(Seq.empty[Pool])
   val poolVar = Var(Pool())
-  def update(pools: Seq[Pool]): Unit = poolsVar.set(pools)
-  def update(id: Long): Unit = poolVar.set(poolsVar.now().find(_.id == id).getOrElse(emptyPool))
-  def update(pool: Pool): Pool =
+  def set(pools: Seq[Pool]): Unit = poolsVar.set(pools)
+  def set(id: Long): Unit = poolVar.set(poolsVar.now().find(_.id == id).getOrElse(emptyPool))
+  def update(pool: Pool): Unit =
+    poolsVar.update( _.map( p => if p.id == pool.id then pool else p ) )
     poolVar.set(pool)
-    poolVar.now()
