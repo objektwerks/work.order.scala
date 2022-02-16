@@ -33,7 +33,7 @@ object PoolView:
             poolsVar.update(_.map(pool => if pool.id == id then pool.copy(name = name) else pool))
           }
           onKeyUp.mapToValue --> { value =>
-            if value.length >= 3 then nameErrors.emit("")
+            if value.nonEmpty then nameErrors.emit("")
             else nameErrors.emit(nameError)
           }
         },
