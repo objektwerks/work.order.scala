@@ -9,9 +9,10 @@ object Model:
   val pools = Pools()
 
 class Pools:
+  val emptyPool = Pool()
   val poolsVar = Var(Seq.empty[Pool])
   val poolVar = Var(Pool())
-  def update(id: Long): Unit = poolVar.set(poolsVar.now().find(_.id == id).getOrElse(Pool()))
+  def update(id: Long): Unit = poolVar.set(poolsVar.now().find(_.id == id).getOrElse(emptyPool))
   def update(pool: Pool): Pool =
     poolVar.set(pool)
     poolVar.now()
