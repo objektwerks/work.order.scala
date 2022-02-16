@@ -24,3 +24,20 @@ class Pools(val emptyPool: Pool):
         pool
       else p
     ))
+
+class Entities[E <: Entity](val emptyEntity: E):
+  val entitiesVar = Var(Seq.empty[E])
+  val entityVar = Var(emptyEntity)
+  def setEntities(entities: Seq[E]): Entities[E] =
+    entitiesVar.set(entities)
+    this
+  def setEntity(id: Long): Entities[E] =
+    entityVar.set(entitiesVar.now().find(_.id == id).getOrElse(emptyEntity))
+    this
+  def update(entity: E): Unit =
+    entitiesVar.update( _.map( e =>
+      if e.id == entity.id then
+        entityVar.set(entity)
+        entity
+      else e
+    ))
