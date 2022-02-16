@@ -2,6 +2,8 @@ package objektwerks.poolmate
 
 import com.raquo.laminar.api.L.*
 
+import org.scalajs.dom.console.log
+
 object Model:
   val emailAddressVar = Var("")
   val pinVar = Var("")
@@ -11,6 +13,9 @@ object Model:
 final case class EntityModel[E <: Entity](emptyEntity: E,
                                           entitiesVar: Var[Seq[E]],
                                           entityVar: Var[E]):
+  given owner: Owner = new Owner {}
+  entitiesVar.signal.foreach(entities => log(s"entities change event -> ${entities.toString}"))
+
   def setEntities(entities: Seq[E]): EntityModel[E] =
     entitiesVar.set(entities)
     this
