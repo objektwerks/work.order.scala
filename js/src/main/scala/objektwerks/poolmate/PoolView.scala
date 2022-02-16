@@ -30,7 +30,12 @@ object PoolView:
         txt.amend {
           value <-- poolVar.signal.map(_.name)
           onInput.mapToValue.filter(_.nonEmpty) --> { name =>
-            poolsVar.update(_.map(pool => if pool.id == id then pool.copy(name = name) else pool))
+            poolsVar.update( _.map { pool =>
+              if pool.id == id then
+                poolVar.set(pool.copy(name = name))
+                poolVar.now()
+              else pool
+            } )
           }
           onKeyUp.mapToValue --> { name =>
             if name.nonEmpty then nameErrors.emit("") else nameErrors.emit(nonEmptyError)
