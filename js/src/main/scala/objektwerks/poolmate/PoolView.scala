@@ -11,6 +11,7 @@ object PoolView:
   def apply(model: EntityModel[Pool]): HtmlElement =
     val nameErrors = new EventBus[String]
     val builtErrors = new EventBus[String]
+    val volumeErrors = new EventBus[String]
     div(
       bar(
         btn("Pools").amend {
@@ -43,6 +44,17 @@ object PoolView:
             if built > 0 then builtErrors.emit("") else builtErrors.emit(nonZeroError)
           }
         },
-        err(builtErrors)
+        err(builtErrors),
+        lbl("Volume"),
+        txt.amend {
+          value <-- model.entityVar.signal.map(_.volume.toString)
+          onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { volume =>
+            model.updateEntity( model.entityVar.now().copy(volume = volume) )
+          }
+          onKeyUp.mapToValue.map(_.toInt) --> { volume =>
+            if volume > 0 then volumeErrors.emit("") else volumeErrors.emit(nonZeroError)
+          }
+        },
+        err(volumeErrors)
       )
     )
