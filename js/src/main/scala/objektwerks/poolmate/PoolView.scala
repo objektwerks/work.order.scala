@@ -39,8 +39,8 @@ object PoolView:
           onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { built =>
             model.updateEntity( model.entityVar.now().copy(built = built) )
           }
-          onKeyUp.mapToValue --> { built.toInt =>
-            if built > 0 then builtErrors.emit("") else builtErrors.emit(nonZeroErrors)
+          onKeyUp.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { built =>
+            if built > 0 then builtErrors.emit("") else builtErrors.emit(nonZeroError)
           }
         },
         err(nameErrors)
