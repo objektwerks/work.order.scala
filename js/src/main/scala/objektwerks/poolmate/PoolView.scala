@@ -6,6 +6,7 @@ import org.scalajs.dom.console.log
 
 import Components.*
 import Errors.*
+import Validators.*
 
 object PoolView:
   def apply(model: EntityModel[Pool]): HtmlElement =
@@ -59,12 +60,14 @@ object PoolView:
       ),
       cbar(
         btn("Add").amend {
+          disabled <-- model.entityVar.signal.map { pool => !(pool.id == 0 && pool.isValid()) }
           onClick --> { _ =>
             log(s"Add onClick")
             PageRouter.router.pushState(PoolsPage)
           }
         },
         btn("Update").amend {
+          disabled <-- model.entityVar.signal.map { pool => !(pool.id > 0 && pool.isValid()) }
           onClick --> { _ =>
             log(s"Update onClick")
             PageRouter.router.pushState(PoolsPage)
