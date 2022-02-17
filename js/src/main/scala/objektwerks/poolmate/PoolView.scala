@@ -10,6 +10,7 @@ import Errors.*
 object PoolView:
   def apply(model: EntityModel[Pool]): HtmlElement =
     val nameErrors = new EventBus[String]
+    val builtErrors = new EventBus[String]
     div(
       bar(
         btn("Pools").amend {
@@ -29,6 +30,17 @@ object PoolView:
           }
           onKeyUp.mapToValue --> { name =>
             if name.nonEmpty then nameErrors.emit("") else nameErrors.emit(nonEmptyError)
+          }
+        },
+        err(nameErrors),
+        lbl("Built"),
+        txt.amend {
+          value <-- model.entityVar.signal.map(_.built.toString)
+          onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { built =>
+            model.updateEntity( model.entityVar.now().copy(built = built) )
+          }
+          onKeyUp.mapToValue --> { built.toInt =>
+            if built > 0 then builtErrors.emit("") else builtErrors.emit(nonZeroErrors)
           }
         },
         err(nameErrors)
