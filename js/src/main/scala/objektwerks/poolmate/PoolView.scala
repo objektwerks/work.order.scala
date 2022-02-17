@@ -43,6 +43,6 @@ object PoolView:
             if built > 0 then builtErrors.emit("") else builtErrors.emit(nonZeroError)
           }
         },
-        err(nameErrors)
+        err(builtErrors)
       )
     )
