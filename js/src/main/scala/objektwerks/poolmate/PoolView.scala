@@ -42,7 +42,7 @@ object PoolView:
             model.updateEntity( model.entityVar.now().copy(built = built) )
           }
           onKeyUp.mapToValue.map(_.toInt) --> { built =>
-            if built > 0 then builtErrors.emit("") else builtErrors.emit(nonZeroError)
+            if built.isGreaterThanZero then builtErrors.emit("") else builtErrors.emit(nonZeroError)
           }
         },
         err(builtErrors),
@@ -53,7 +53,7 @@ object PoolView:
             model.updateEntity( model.entityVar.now().copy(volume = volume) )
           }
           onKeyUp.mapToValue.map(_.toInt) --> { volume =>
-            if volume > 0 then volumeErrors.emit("") else volumeErrors.emit(nonZeroError)
+            if volume.isGreaterThanZero then volumeErrors.emit("") else volumeErrors.emit(nonZeroError)
           }
         },
         err(volumeErrors)
