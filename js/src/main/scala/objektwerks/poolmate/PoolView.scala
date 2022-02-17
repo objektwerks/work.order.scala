@@ -60,14 +60,14 @@ object PoolView:
       ),
       cbar(
         btn("Add").amend {
-          disabled <-- model.entityVar.signal.map { pool => !(pool.id.isIdZero && pool.isValid) }
+          disabled <-- model.entityVar.signal.map { pool => !(pool.id.isZero && pool.isValid) }
           onClick --> { _ =>
             log(s"Add onClick")
             PageRouter.router.pushState(PoolsPage)
           }
         },
         btn("Update").amend {
-          disabled <-- model.entityVar.signal.map { pool => !(pool.id.isIdGreaterThanZero && pool.isValid) }
+          disabled <-- model.entityVar.signal.map { pool => !(pool.id.isGreaterThanZero && pool.isValid) }
           onClick --> { _ =>
             log(s"Update onClick")
             PageRouter.router.pushState(PoolsPage)
