@@ -18,8 +18,7 @@ object RegisterView:
         value <-- emailAddressVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
         onKeyUp.mapToValue --> { emailAddress =>
-          if emailAddress.isEmailAddress then emailAddressErrors.emit("")
-          else emailAddressErrors.emit(emailAddressError)
+          if emailAddress.isEmailAddress then emailAddressErrors.emit("") else emailAddressErrors.emit(emailAddressError)
         }
       },
       err(emailAddressErrors),
