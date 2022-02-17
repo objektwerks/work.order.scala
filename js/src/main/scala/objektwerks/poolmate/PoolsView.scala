@@ -22,5 +22,13 @@ object PoolsView:
         list(
           split(model.entitiesVar, (id: Long) => PoolPage(id))
         )
+      ),
+      cbar(
+        btn("Add").amend {
+          onClick --> { _ =>
+            log(s"Add onClick")
+            PageRouter.router.pushState(PoolPage)
+          }
+        }
       )
     )
