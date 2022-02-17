@@ -56,5 +56,19 @@ object PoolView:
           }
         },
         err(volumeErrors)
+      ),
+      cbar(
+        btn("Add").amend {
+          onClick --> { _ =>
+            log(s"Add onClick")
+            PageRouter.router.pushState(PoolsPage)
+          }
+        },
+        btn("Update").amend {
+          onClick --> { _ =>
+            log(s"Update onClick")
+            PageRouter.router.pushState(PoolsPage)
+          }
+        }
       )
     )
