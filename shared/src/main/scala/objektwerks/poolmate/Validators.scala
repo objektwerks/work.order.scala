@@ -6,6 +6,10 @@ object Validators:
     def isEmailAddress: Boolean = value.nonEmpty && value.length >= 3 && value.contains("@")
     def isPin: Boolean = value.length == 9
 
+  extension (integer: Int)
+    def isZero: Boolean = integer == 0
+    def isGreaterThanZero: Boolean = integer > 0
+
   extension (register: Register)
     def isValid: Boolean = register.emailAddress.isEmailAddress
 
