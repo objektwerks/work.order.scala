@@ -21,10 +21,6 @@ object PoolView:
       ),
       div(
         hdr("Pool"),
-        lbl("License"),
-        rotxt.amend {
-          value <-- model.entityVar.signal.map(_.license)
-        },
         lbl("Name"),
         txt.amend {
           value <-- model.entityVar.signal.map(_.name)
