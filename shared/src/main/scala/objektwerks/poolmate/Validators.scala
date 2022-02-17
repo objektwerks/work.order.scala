@@ -20,6 +20,7 @@ object Validators:
 
   extension (account: Account)
     def isActivated: Boolean =
+      account.id >= 0 &&
       account.license.isLicense &&
       account.emailAddress.isEmailAddress &&
       account.pin.isPin &&
