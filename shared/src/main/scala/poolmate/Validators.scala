@@ -1,4 +1,4 @@
-package objektwerks.poolmate
+package poolmate
 
 object Validators:
   extension (value: String)

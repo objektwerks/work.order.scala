@@ -1,4 +1,4 @@
-package objektwerks.poolmate
+package poolmate
 
 sealed trait License:
   val license: String
