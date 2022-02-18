@@ -29,10 +29,9 @@ object Server extends Main with LazyLogging:
   val resourceRouter = ResourceRouter()
   val commandEventRouter = CommandEventRouter(dispatcher, store)
   val allRoutes = Seq(nowRouter, resourceRouter, commandEventRouter)
+  override def host: String = conf.getString("host")
 
-  override def port: Int = 7272
-
-  override def host: String = "localhost"
+  override def port: Int = conf.getInt("port")
 
   override def main(args: Array[String]): Unit =
     if (!verbose) Main.silenceJboss()
