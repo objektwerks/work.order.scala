@@ -13,6 +13,12 @@ class Client(rootUrl: String) extends js.Object:
   Context.rootUrl = rootUrl
   log(s"root url: ${Context.rootUrl}")
 
+  Context.nowUrl = s"$rootUrl/now"
+  log(s"now url: ${Context.nowUrl}")
+
+  Context.commandUrl = s"$rootUrl/command"
+  log(s"command url: ${Context.commandUrl}")
+
   render(
     container = document.getElementById("content"),
     rootNode = div( child <-- PageRouter.splitter.$view )
