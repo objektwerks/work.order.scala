@@ -222,9 +222,10 @@ Resources
 
 Logs
 ----
->See logs at target/
-1. cask.log
-2. test.log
+>See logs at /target/
+1. jvm.log
+2. test.jvm.log
+2. test.shared.log
 
 Documentation
 -------------
