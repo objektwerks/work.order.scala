@@ -10,7 +10,9 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 
 @JSExportTopLevel("Client")
 class Client(rootUrl: String) extends js.Object:
+  Context.rootUrl = rootUrl
   log(s"root url: $rootUrl")
+
   render(
     container = document.getElementById("content"),
     rootNode = div( child <-- PageRouter.splitter.$view )
