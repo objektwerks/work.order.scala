@@ -29,6 +29,7 @@ object Server extends Main with LazyLogging:
   val resourceRouter = ResourceRouter()
   val commandEventRouter = CommandEventRouter(dispatcher, store)
   val allRoutes = Seq(nowRouter, resourceRouter, commandEventRouter)
+  
   override def host: String = conf.getString("host")
 
   override def port: Int = conf.getInt("port")
