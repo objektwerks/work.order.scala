@@ -10,14 +10,14 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 
 @JSExportTopLevel("Client")
 class Client(rootUrl: String) extends js.Object:
-  Context.rootUrl = rootUrl
-  log(s"root url: ${Context.rootUrl}")
+  Url.root = rootUrl
+  log(s"root url: ${Url.root}")
 
-  Context.nowUrl = s"$rootUrl/now"
-  log(s"now url: ${Context.nowUrl}")
+  Url.now = s"$rootUrl/now"
+  log(s"now url: ${Url.now}")
 
-  Context.commandUrl = s"$rootUrl/command"
-  log(s"command url: ${Context.commandUrl}")
+  Url.command = s"$rootUrl/command"
+  log(s"command url: ${Url.command}")
 
   render(
     container = document.getElementById("content"),
