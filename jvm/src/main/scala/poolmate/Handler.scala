@@ -1,4 +1,4 @@
-package objektwerks.poolmate
+package poolmate
 
 final class Handler(emailSender: EmailSender, service: Service):
   def handle(command: Command): Event =

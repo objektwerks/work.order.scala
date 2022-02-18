@@ -1,4 +1,4 @@
-package objektwerks.poolmate
+package poolmate
 
 import cask.main.Main
 import com.typesafe.config.ConfigFactory

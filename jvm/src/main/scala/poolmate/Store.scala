@@ -1,4 +1,4 @@
-package objektwerks.poolmate
+package poolmate
 
 import com.github.blemale.scaffeine.{Cache, Scaffeine}
 import com.typesafe.config.Config

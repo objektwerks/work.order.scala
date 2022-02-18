@@ -1,4 +1,4 @@
-package objektwerks.poolmate
+package poolmate
 
 final class Dispatcher(authorizer: Authorizer,
                        validator: Validator,

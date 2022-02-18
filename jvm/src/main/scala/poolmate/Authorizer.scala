@@ -1,4 +1,4 @@
-package objektwerks.poolmate
+package poolmate
 
 final class Authorizer(service: Service):
   def authorize(command: Command): Event =

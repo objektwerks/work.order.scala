@@ -1,4 +1,4 @@
-package objektwerks.poolmate
+package poolmate
 
 import scala.util.Try
 
