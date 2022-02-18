@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 import scala.concurrent.duration._
 
-final class ResourceRouter(dispatcher: Dispatcher)
+final class ResourceRouter()
   extends Routes
   with LazyLogging
   with Resources(
