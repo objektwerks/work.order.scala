@@ -13,10 +13,10 @@ class Client(rootUrl: String) extends js.Object:
   Url.root = rootUrl
   log(s"root url: ${Url.root}")
 
-  Url.now = s"$rootUrl/now"
+  Url.now = s"${Url.root}/now"
   log(s"now url: ${Url.now}")
 
-  Url.command = s"$rootUrl/command"
+  Url.command = s"${Url.root}/command"
   log(s"command url: ${Url.command}")
 
   render(
