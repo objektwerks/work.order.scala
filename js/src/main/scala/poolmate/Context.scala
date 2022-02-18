@@ -8,4 +8,4 @@ import scala.scalajs.js.annotation.JSGlobalScope
 object Context extends js.Object:
   var rootUrl: String = js.native
   var nowUrl: String = js.native
-  val commandUrl: String = js.native
+  var commandUrl: String = js.native
