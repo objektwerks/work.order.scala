@@ -1,4 +1,4 @@
-package objektwerks.poolmate
+package poolmate
 
 object Errors:
   val emailAddressError = "Enter a valid email address."
