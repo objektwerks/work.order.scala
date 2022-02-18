@@ -11,7 +11,7 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 @JSExportTopLevel("Client")
 class Client(rootUrl: String) extends js.Object:
   Context.rootUrl = rootUrl
-  log(s"root url: $rootUrl")
+  log(s"root url: ${Context.rootUrl}")
 
   render(
     container = document.getElementById("content"),
