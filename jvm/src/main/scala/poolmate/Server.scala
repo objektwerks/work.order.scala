@@ -12,7 +12,7 @@ import scala.concurrent.duration._
 import scala.io.StdIn
 
 object Server extends Main with LazyLogging:
-  val conf = ConfigFactory.load("store.conf")
+  val conf = ConfigFactory.load("server.conf")
   
   val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
   val emailSender = EmailSender(conf, store)
