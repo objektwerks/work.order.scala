@@ -43,3 +43,8 @@ class DateTimeTest extends AnyFunSuite with Matchers:
     localTimeAsStringToInt(localTimeToString(localTime)) shouldEqual 1814
     localTimeAsIntToString(localTimeToInt(localTime)) shouldEqual "18:14"
   }
+
+  test("current year") {
+    currentYearAsString shouldEqual LocalDate.now().getYear.toString
+    currentYearToInt(currentYearAsString) shouldEqual LocalDate.now().getYear
+ }
