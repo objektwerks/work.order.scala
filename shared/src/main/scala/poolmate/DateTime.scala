@@ -6,6 +6,10 @@ object DateTime:
   val dateFormatter = format.DateTimeFormatter.ofPattern("yyyy-MM-dd")
   val timeFormatter = format.DateTimeFormatter.ofPattern("HH:mm")
 
+  def currentYearAsString: String = LocalDate.now().getYear.toString
+
+  def currentYearToInt(currentYear: String): Int = currentYear.toInt
+
   def currentDate: Int = localDateToInt(LocalDate.now)
 
   def localDateToInt(localDate: LocalDate): Int =
