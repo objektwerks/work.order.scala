@@ -36,7 +36,7 @@ object PoolView:
         },
         err(nameErrors),
         lbl("Built"),
-        txt.amend {
+        year.amend {
           value <-- model.entityVar.signal.map(_.built.toString)
           onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { built =>
             model.updateEntity( model.entityVar.now().copy(built = built) )
