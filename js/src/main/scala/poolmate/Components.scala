@@ -23,6 +23,8 @@ object Components:
 
   def pin: Input = input(cls(inputCss), typ("text"), minLength(9), maxLength(9), required(true), placeholder("a1b2c3d4e"))
 
+  def year: Input = input(typ("number"), pattern("\\d*"), stepAttr("1"), required(true), minAttr("1900"), maxAttr("2022") )
+
   def int: Input = input(cls(inputCss), typ("number"), pattern("\\d*"), stepAttr("1"), required(true))
 
   def dbl: Input = input(cls(inputCss), typ("number"), pattern("[0-9]+([.,][0-9]+)?"), stepAttr("0.01"), required(true))
