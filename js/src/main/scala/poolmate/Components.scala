@@ -2,8 +2,11 @@ package poolmate
 
 import com.raquo.laminar.api.L.*
 
+import java.time.LocalDate
+
 object Components:
   private val inputCss = "w3-input w3-hover-light-gray w3-text-indigo"
+  private val currentYear = LocalDate.now().getYear.toString
 
   def bar(elms: HtmlElement*): Div = div(cls("w3-bar"), elms)
 
@@ -23,7 +26,7 @@ object Components:
 
   def pin: Input = input(cls(inputCss), typ("text"), minLength(9), maxLength(9), required(true), placeholder("a1b2c3d4e"))
 
-  def year: Input = input(cls(inputCss), typ("number"), pattern("\\d*"), stepAttr("1"), minAttr("1900"), maxAttr("2022"), placeholder("year"), required(true))
+  def year: Input = input(cls(inputCss), typ("number"), pattern("\\d*"), stepAttr("1"), minAttr("1900"), maxAttr(currentYear), placeholder("year"), required(true))
 
   def int: Input = input(cls(inputCss), typ("number"), pattern("\\d*"), stepAttr("1"), required(true))
 
