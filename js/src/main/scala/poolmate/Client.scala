@@ -7,6 +7,7 @@ import org.scalajs.dom.console.log
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSExportTopLevel
+import scala.concurrent.ExecutionContext.Implicits.global
 
 @JSExportTopLevel("Client")
 class Client(rootUrl: String) extends js.Object:
@@ -18,6 +19,8 @@ class Client(rootUrl: String) extends js.Object:
 
   Url.command = s"${Url.root}/command"
   log(s"command url: ${Url.command}")
+
+  Proxy.fetch(Url.now).foreach( now => log(s"[now] $now") )
 
   render(
     container = document.getElementById("content"),
