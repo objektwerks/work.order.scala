@@ -28,6 +28,8 @@ object Components:
 
   def date: Input = input(cls(inputCss), tpe("date"), required(true))
  
+  def time: Input = input(cls(inputCss), tpe("time"), required(true))
+
   def int: Input = input(cls(inputCss), typ("number"), pattern("\\d*"), stepAttr("1"), required(true))
 
   def dbl: Input = input(cls(inputCss), typ("number"), pattern("[0-9]+([.,][0-9]+)?"), stepAttr("0.01"), required(true))
