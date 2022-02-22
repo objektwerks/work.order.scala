@@ -11,8 +11,8 @@ object Model:
   val pools = EntitiesModel[Pool](Var(Seq.empty[Pool]), Var(Pool()), Pool())
 
 final case class EntitiesModel[E <: Entity](entitiesVar: Var[Seq[E]],
-                                           currentEntityVar: Var[E],
-                                           emptyEntity: E):
+                                            currentEntityVar: Var[E],
+                                            emptyEntity: E):
   given owner: Owner = new Owner {}
   entitiesVar.signal.foreach(entities => log(s"entities var change -> ${entities.toString}"))
   currentEntityVar.signal.foreach(entity => log(s"current entity var change -> ${entity.toString}"))
