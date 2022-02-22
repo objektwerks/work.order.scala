@@ -12,12 +12,11 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 @JSExportTopLevel("Client")
 class Client(rootUrl: String) extends js.Object:
   Url.root = rootUrl
-  log(s"root url: ${Url.root}")
-
   Url.now = s"${Url.root}/now"
-  log(s"now url: ${Url.now}")
-
   Url.command = s"${Url.root}/command"
+
+  log(s"root url: ${Url.root}")
+  log(s"now url: ${Url.now}")
   log(s"command url: ${Url.command}")
 
   Proxy.now.foreach( now => log(s"[now] $now") )
