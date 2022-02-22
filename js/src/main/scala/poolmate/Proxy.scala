@@ -23,6 +23,11 @@ object Proxy:
       )
     }
 
+  private val params = new RequestInit {
+    method = HttpMethod.POST
+    headers = hdrs
+  }
+
   def now: Future[String] =
     ( 
       for {
@@ -36,14 +41,10 @@ object Proxy:
     }
 
   def post(command: Command): Future[Event] =
-    val init = new RequestInit {
-      method = HttpMethod.POST
-      body = write[Command](command)
-      headers = hdrs
-    }
+    params.body = write[Command](command)
     ( 
       for {
-        response <- dom.fetch(Url.command, init)
+        response <- dom.fetch(Url.command, params)
         text     <- response.text()
       } yield {
         read[Event](text)
