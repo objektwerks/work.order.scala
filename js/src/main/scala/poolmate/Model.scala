@@ -8,11 +8,11 @@ object Model:
   val emailAddressVar = Var("")
   val pinVar = Var("")
   val account = Var(Account.empty)
-  val pools = EntityModel[Pool](Pool(), Var(Seq.empty[Pool]), Var(Pool()))
+  val pools = EntityModel[Pool](Var(Seq.empty[Pool]), Var(Pool()), Pool())
 
-final case class EntityModel[E <: Entity](emptyEntity: E,
-                                          entitiesVar: Var[Seq[E]],
-                                          entityVar: Var[E]):
+final case class EntityModel[E <: Entity](entitiesVar: Var[Seq[E]],
+                                          entityVar: Var[E],
+                                          emptyEntity: E):
   given owner: Owner = new Owner {}
   entitiesVar.signal.foreach(entities => log(s"entities change -> ${entities.toString}"))
   entityVar.signal.foreach(entity => log(s"entity change -> ${entity.toString}"))
