@@ -12,14 +12,13 @@ import Serializers.given
 import upickle.default.{read, write}
 
 object Proxy:
-  def fetch(url: String): Future[String] = {
+  def fetch(url: String): Future[String] =
     ( for {
       response <- dom.fetch(url)
       text     <- response.text()
     } yield {
       text
     } ).recover { case error: Exception => error.getMessage }
-  }
 
   def post(url: String, command: Command): Future[Event] =
     ( for {
