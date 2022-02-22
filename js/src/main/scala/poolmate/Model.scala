@@ -11,20 +11,20 @@ object Model:
   val pools = EntitiesModel[Pool](Var(Seq.empty[Pool]), Var(Pool()), Pool())
 
 final case class EntitiesModel[E <: Entity](entitiesVar: Var[Seq[E]],
-                                            currentEntityVar: Var[E],
+                                            selectedEntityVar: Var[E],
                                             emptyEntity: E):
   given owner: Owner = new Owner {}
   entitiesVar.signal.foreach(entities => log(s"entities model -> ${entities.toString}"))
-  currentEntityVar.signal.foreach(entity => log(s"selected entity -> ${entity.toString}"))
+  selectedEntityVar.signal.foreach(entity => log(s"selected entity -> ${entity.toString}"))
 
   def setCurrentEntityById(id: Long): EntitiesModel[E] =
-    currentEntityVar.set(entitiesVar.now().find(_.id == id).getOrElse(emptyEntity))
+    selectedEntityVar.set(entitiesVar.now().find(_.id == id).getOrElse(emptyEntity))
     this
 
   def updateCurrentEntity(entity: E): Unit =
     entitiesVar.update( _.map( e =>
       if e.id == entity.id then
-        currentEntityVar.set(entity)
+        selectedEntityVar.set(entity)
         entity
       else e
     ))
