@@ -14,8 +14,8 @@ final case class EntitiesModel[E <: Entity](entitiesVar: Var[Seq[E]],
                                             currentEntityVar: Var[E],
                                             emptyEntity: E):
   given owner: Owner = new Owner {}
-  entitiesVar.signal.foreach(entities => log(s"entities model change -> ${entities.toString}"))
-  currentEntityVar.signal.foreach(entity => log(s"current entity change -> ${entity.toString}"))
+  entitiesVar.signal.foreach(entities => log(s"entities model -> ${entities.toString}"))
+  currentEntityVar.signal.foreach(entity => log(s"selected entity -> ${entity.toString}"))
 
   def setCurrentEntityById(id: Long): EntitiesModel[E] =
     currentEntityVar.set(entitiesVar.now().find(_.id == id).getOrElse(emptyEntity))
