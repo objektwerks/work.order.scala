@@ -17,7 +17,7 @@ object Proxy:
     "Accept" -> "application/json"
   )
 
-  def fetch(url: String): Future[String] =
+  def get(url: String): Future[String] =
     ( for {
       response <- dom.fetch(url)
       text     <- response.text()
