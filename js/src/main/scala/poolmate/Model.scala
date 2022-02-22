@@ -22,9 +22,11 @@ final case class EntitiesModel[E <: Entity](entitiesVar: Var[Seq[E]],
     this
 
   def updateSelectedEntity(entity: E): Unit =
-    entitiesVar.update( _.map( e =>
-      if e.id == entity.id then
-        selectedEntityVar.set(entity)
-        entity
-      else e
-    ))
+    entitiesVar.update { entities =>
+      entities.map( e =>
+        if e.id == entity.id then
+          selectedEntityVar.set(entity)
+          entity
+        else e
+      )
+    }
