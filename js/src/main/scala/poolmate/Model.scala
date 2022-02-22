@@ -17,7 +17,7 @@ final case class EntityModel[E <: Entity](entitiesVar: Var[Seq[E]],
   entitiesVar.signal.foreach(entities => log(s"entities var change -> ${entities.toString}"))
   currentEntityVar.signal.foreach(entity => log(s"entity var change -> ${entity.toString}"))
 
-  def setEntity(id: Long): EntityModel[E] =
+  def setCurrentEntity(id: Long): EntityModel[E] =
     currentEntityVar.set(entitiesVar.now().find(_.id == id).getOrElse(emptyEntity))
     this
 
