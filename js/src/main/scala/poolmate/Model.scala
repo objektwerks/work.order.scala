@@ -21,12 +21,12 @@ final case class EntitiesModel[E <: Entity](entitiesVar: Var[Seq[E]],
     selectedEntityVar.set(entitiesVar.now().find(_.id == id).getOrElse(emptyEntity))
     this
 
-  def updateSelectedEntity(entity: E): Unit =
+  def updateSelectedEntity(updatedSelectedEntity: E): Unit =
     entitiesVar.update { entities =>
-      entities.map { e =>
-        if e.id == entity.id then
-          selectedEntityVar.set(entity)
-          entity
-        else e
+      entities.map { entity =>
+        if entity.id == updatedSelectedEntity.id then
+          selectedEntityVar.set(updatedSelectedEntity)
+          updatedSelectedEntity
+        else entity
       }
     }
