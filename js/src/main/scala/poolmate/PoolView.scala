@@ -26,9 +26,9 @@ object PoolView:
         hdr("Pool"),
         lbl("Name"),
         txt.amend {
-          value <-- model.entityVar.signal.map(_.name)
+          value <-- model.currentEntityVar.signal.map(_.name)
           onInput.mapToValue.filter(_.nonEmpty) --> { name =>
-            model.updateEntity( model.entityVar.now().copy(name = name) )
+            model.updateEntity( model.currentEntityVar.now().copy(name = name) )
           }
           onKeyUp.mapToValue --> { name =>
             if name.nonEmpty then nameErrors.emit("") else nameErrors.emit(nonEmptyError)
@@ -37,9 +37,9 @@ object PoolView:
         err(nameErrors),
         lbl("Built"),
         year.amend {
-          value <-- model.entityVar.signal.map(_.built.toString)
+          value <-- model.currentEntityVar.signal.map(_.built.toString)
           onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { built =>
-            model.updateEntity( model.entityVar.now().copy(built = built) )
+            model.updateEntity( model.currentEntityVar.now().copy(built = built) )
           }
           onKeyUp.mapToValue.map(_.toInt) --> { built =>
             if built.isGreaterThanZero then builtErrors.emit("") else builtErrors.emit(nonZeroError)
@@ -48,9 +48,9 @@ object PoolView:
         err(builtErrors),
         lbl("Volume"),
         txt.amend {
-          value <-- model.entityVar.signal.map(_.volume.toString)
+          value <-- model.currentEntityVar.signal.map(_.volume.toString)
           onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { volume =>
-            model.updateEntity( model.entityVar.now().copy(volume = volume) )
+            model.updateEntity( model.currentEntityVar.now().copy(volume = volume) )
           }
           onKeyUp.mapToValue.map(_.toInt) --> { volume =>
             if volume.isGreaterThanZero then volumeErrors.emit("") else volumeErrors.emit(nonZeroError)
@@ -60,14 +60,14 @@ object PoolView:
       ),
       cbar(
         btn("Add").amend {
-          disabled <-- model.entityVar.signal.map { pool => !(pool.id.isZero && pool.isValid) }
+          disabled <-- model.currentEntityVar.signal.map { pool => !(pool.id.isZero && pool.isValid) }
           onClick --> { _ =>
             log(s"Add onClick")
             PageRouter.router.pushState(PoolsPage)
           }
         },
         btn("Update").amend {
-          disabled <-- model.entityVar.signal.map { pool => !(pool.id.isGreaterThanZero && pool.isValid) }
+          disabled <-- model.currentEntityVar.signal.map { pool => !(pool.id.isGreaterThanZero && pool.isValid) }
           onClick --> { _ =>
             log(s"Update onClick")
             PageRouter.router.pushState(PoolsPage)
