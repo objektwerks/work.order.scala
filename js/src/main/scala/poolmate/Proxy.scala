@@ -12,6 +12,11 @@ import Serializers.given
 import upickle.default.{read, write}
 
 object Proxy:
+  private val headers = Map(
+    "Content-Type" -> "application/json; charset=utf-8",
+    "Accept" -> "application/json"
+  )
+
   def fetch(url: String): Future[String] =
     ( for {
       response <- dom.fetch(url)
