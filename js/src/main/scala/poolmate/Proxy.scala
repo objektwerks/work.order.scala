@@ -33,8 +33,7 @@ object Proxy:
       for
         response <- dom.fetch(Url.now)
         text     <- response.text()
-      yield
-        text
+      yield text
     ).recover {
       case error: Exception => error.getMessage
     }
@@ -45,8 +44,7 @@ object Proxy:
       for
         response <- dom.fetch(Url.command, params)
         text     <- response.text()
-      yield
-        read[Event](text)
+      yield read[Event](text)
     ).recover {
       case error: Exception => Fault(error.getMessage)
     }
