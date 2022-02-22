@@ -22,7 +22,6 @@ object Proxy:
         js.Array("Accept", "application/json")
       )
     }
-
   private val params = new RequestInit {
     method = HttpMethod.POST
     headers = hdrs
@@ -34,9 +33,7 @@ object Proxy:
         response <- dom.fetch(Url.now)
         text     <- response.text()
       yield text
-    ).recover {
-      case error: Exception => error.getMessage
-    }
+    ).recover { case error: Exception => error.getMessage }
 
   def post(command: Command): Future[Event] =
     params.body = write[Command](command)
@@ -45,6 +42,4 @@ object Proxy:
         response <- dom.fetch(Url.command, params)
         text     <- response.text()
       yield read[Event](text)
-    ).recover {
-      case error: Exception => Fault(error.getMessage)
-    }
+    ).recover { case error: Exception => Fault(error.getMessage) }
