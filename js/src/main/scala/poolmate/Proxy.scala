@@ -30,12 +30,11 @@ object Proxy:
 
   def now: Future[String] =
     ( 
-      for {
+      for
         response <- dom.fetch(Url.now)
         text     <- response.text()
-      } yield {
+      yield
         text
-      } 
     ).recover {
       case error: Exception => error.getMessage
     }
@@ -43,12 +42,11 @@ object Proxy:
   def post(command: Command): Future[Event] =
     params.body = write[Command](command)
     ( 
-      for {
+      for
         response <- dom.fetch(Url.command, params)
         text     <- response.text()
-      } yield {
+      yield
         read[Event](text)
-      } 
     ).recover {
       case error: Exception => Fault(error.getMessage)
     }
