@@ -14,8 +14,8 @@ final case class EntityModel[E <: Entity](entitiesVar: Var[Seq[E]],
                                           entityVar: Var[E],
                                           emptyEntity: E):
   given owner: Owner = new Owner {}
-  entitiesVar.signal.foreach(entities => log(s"entities change -> ${entities.toString}"))
-  entityVar.signal.foreach(entity => log(s"entity change -> ${entity.toString}"))
+  entitiesVar.signal.foreach(entities => log(s"entities var change -> ${entities.toString}"))
+  entityVar.signal.foreach(entity => log(s"entity var change -> ${entity.toString}"))
 
   def setEntities(entities: Seq[E]): EntityModel[E] =
     entitiesVar.set(entities)
