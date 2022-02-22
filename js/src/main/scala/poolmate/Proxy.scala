@@ -18,7 +18,9 @@ object Proxy:
       text     <- response.text()
     } yield {
       text
-    } ).recover { case error: Exception => error.getMessage }
+    } ).recover {
+      case error: Exception => error.getMessage
+    }
 
   def post(url: String, command: Command): Future[Event] =
     ( for {
