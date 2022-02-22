@@ -23,10 +23,10 @@ object Proxy:
       )
     }
 
-  def get(url: String): Future[String] =
+  def now: Future[String] =
     ( 
       for {
-        response <- dom.fetch(url)
+        response <- dom.fetch(Url.now)
         text     <- response.text()
       } yield {
         text
