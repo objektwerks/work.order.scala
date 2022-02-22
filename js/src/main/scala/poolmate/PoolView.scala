@@ -9,7 +9,7 @@ import Error.*
 import Validators.*
 
 object PoolView:
-  def apply(model: EntitiesModel[Pool]): HtmlElement =
+  def apply(model: Model[Pool]): HtmlElement =
     val nameErrors = new EventBus[String]
     val builtErrors = new EventBus[String]
     val volumeErrors = new EventBus[String]
