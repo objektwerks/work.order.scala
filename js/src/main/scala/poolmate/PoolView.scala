@@ -28,7 +28,7 @@ object PoolView:
         txt.amend {
           value <-- model.currentEntityVar.signal.map(_.name)
           onInput.mapToValue.filter(_.nonEmpty) --> { name =>
-            model.updateEntity( model.currentEntityVar.now().copy(name = name) )
+            model.updateCurrentEntity( model.currentEntityVar.now().copy(name = name) )
           }
           onKeyUp.mapToValue --> { name =>
             if name.nonEmpty then nameErrors.emit("") else nameErrors.emit(nonEmptyError)
@@ -39,7 +39,7 @@ object PoolView:
         year.amend {
           value <-- model.currentEntityVar.signal.map(_.built.toString)
           onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { built =>
-            model.updateEntity( model.currentEntityVar.now().copy(built = built) )
+            model.updateCurrentEntity( model.currentEntityVar.now().copy(built = built) )
           }
           onKeyUp.mapToValue.map(_.toInt) --> { built =>
             if built.isGreaterThanZero then builtErrors.emit("") else builtErrors.emit(nonZeroError)
@@ -50,7 +50,7 @@ object PoolView:
         txt.amend {
           value <-- model.currentEntityVar.signal.map(_.volume.toString)
           onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { volume =>
-            model.updateEntity( model.currentEntityVar.now().copy(volume = volume) )
+            model.updateCurrentEntity( model.currentEntityVar.now().copy(volume = volume) )
           }
           onKeyUp.mapToValue.map(_.toInt) --> { volume =>
             if volume.isGreaterThanZero then volumeErrors.emit("") else volumeErrors.emit(nonZeroError)

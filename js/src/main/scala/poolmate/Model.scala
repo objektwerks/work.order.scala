@@ -21,7 +21,7 @@ final case class EntityModel[E <: Entity](entitiesVar: Var[Seq[E]],
     currentEntityVar.set(entitiesVar.now().find(_.id == id).getOrElse(emptyEntity))
     this
 
-  def updateEntity(entity: E): Unit =
+  def updateCurrentEntity(entity: E): Unit =
     entitiesVar.update( _.map( e =>
       if e.id == entity.id then
         currentEntityVar.set(entity)
