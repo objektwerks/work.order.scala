@@ -7,7 +7,6 @@ import org.scalajs.dom.RequestInit
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
-
 import scala.scalajs.js
 import scala.scalajs.js.Thenable.Implicits._
 
