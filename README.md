@@ -63,13 +63,13 @@ Views
    * Pumps -> Pump
    * Timers -> Timer -> TimerSettings -> HeaterSetting
    * Heaters -> Heater -> HeaterSettings -> HeaterSetting
-3. Maintenance
-   * Measurements -> Measurement **
-   * Cleanings -> Cleaning **
-   * Chemicals -> Chemical **
-4. Expenses
-   * Supplies -> Supply **
-   * Repairs -> Repair **
+3. Maintenance **
+   * Measurements -> Measurement
+   * Cleanings -> Cleaning
+   * Chemicals -> Chemical
+4. Expenses **
+   * Supplies -> Supply
+   * Repairs -> Repair
 
 ** Charts:
 1. measurements, cleanings, chemicals
