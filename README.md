@@ -58,7 +58,8 @@ View(Menu)
 ----------
 1. Home
    * Index(Login, Register)
-   * Register -> Index
+   * Register(Index)
+   * Login(Pools)
 2. Pool
    * Pools(Account) -> Pool(Pools)
    * Surfaces(Pool) -> Surface(Surfaces)
