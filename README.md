@@ -65,12 +65,12 @@ View(Menu)
    * Timers(Pool) -> Timer(Timers) -> TimerSettings(Timer) -> HeaterSetting(TimerSettings)
    * Heaters(Pool) -> Heater(Heaters) -> HeaterSettings(Heater) -> HeaterSetting(HeaterSettins)
 3. Maintenance **
-   * Measurements -> Measurement
-   * Cleanings -> Cleaning
-   * Chemicals -> Chemical
+   * Measurements(Pool) -> Measurement
+   * Cleanings(Pool) -> Cleaning
+   * Chemicals(Pool) -> Chemical
 4. Expenses **
-   * Supplies -> Supply
-   * Repairs -> Repair
+   * Supplies(Pool) -> Supply
+   * Repairs(Pool) -> Repair
 
 ** Charts:
 1. measurements, cleanings, chemicals
