@@ -60,10 +60,10 @@ View(Menu)
    * Index(Login, Register)
 2. Pool
    * Pools(Account) -> Pool(Pools)
-   * Surfaces(Pools) -> Surface(Surfaces)
-   * Pumps(Pools) -> Pump(Pumps)
-   * Timers(Pools) -> Timer(Timers) -> TimerSettings(Timer) -> HeaterSetting(TimerSettings)
-   * Heaters(Pools) -> Heater(Heaters) -> HeaterSettings(Heater) -> HeaterSetting(HeaterSettins)
+   * Surfaces(Pool) -> Surface(Surfaces)
+   * Pumps(Pool) -> Pump(Pumps)
+   * Timers(Pool) -> Timer(Timers) -> TimerSettings(Timer) -> HeaterSetting(TimerSettings)
+   * Heaters(Pool) -> Heater(Heaters) -> HeaterSettings(Heater) -> HeaterSetting(HeaterSettins)
 3. Maintenance **
    * Measurements -> Measurement
    * Cleanings -> Cleaning
