@@ -63,7 +63,7 @@ View(Menu)
    * Surfaces(Pool) -> Surface(Surfaces)
    * Pumps(Pool) -> Pump(Pumps)
    * Timers(Pool) -> Timer(Timers) -> TimerSettings(Timer) -> HeaterSetting(TimerSettings)
-   * Heaters(Pool) -> Heater(Heaters) -> HeaterSettings(Heater) -> HeaterSetting(HeaterSettins)
+   * Heaters(Pool) -> Heater(Heaters) -> HeaterSettings(Heater) -> HeaterSetting(HeaterSettings)
 3. Maintenance **
    * Measurements(Pool) -> Measurement(Measurements)
    * Cleanings(Pool) -> Cleaning(Cleanings)
