@@ -54,11 +54,11 @@ Model
 -----
 1. Model
 
-Views
------
-1. IndexView, LoginView, RegisterView, PoolsView, AccountView
+View(Menu)
+----------
+1. Index, Login, Register
 2. Pool
-   * Pools -> Pool
+   * Pools(Account) -> Pool(Pools)
    * Surfaces -> Surface
    * Pumps -> Pump
    * Timers -> Timer -> TimerSettings -> HeaterSetting
