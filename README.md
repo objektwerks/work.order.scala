@@ -69,8 +69,8 @@ View(Menu)
    * Cleanings(Pool) -> Cleaning(Cleanings)
    * Chemicals(Pool) -> Chemical(Chemicals)
 4. Expenses **
-   * Supplies(Pool) -> Supply
-   * Repairs(Pool) -> Repair
+   * Supplies(Pool) -> Supply(Supplies)
+   * Repairs(Pool) -> Repair(Repairs)
 
 ** Charts:
 1. measurements, cleanings, chemicals
