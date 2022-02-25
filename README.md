@@ -61,7 +61,7 @@ Views
    * Pools -> Pool
    * Surfaces -> Surface
    * Pumps -> Pump
-   * Timers -> Timer -> TimerSettings
+   * Timers -> Timer -> TimerSettings -> HeaterSetting
    * Heaters -> Heater -> HeaterSettings -> HeaterSetting
 3. Maintenance
    * Measurements -> Measurement **
