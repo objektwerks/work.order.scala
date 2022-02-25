@@ -27,7 +27,7 @@ object RegisterView:
           disabled <-- emailAddressVar.signal.map(email => !email.isEmailAddress)
           onClick --> { _ =>
             log(s"email address: ${emailAddressVar.now()}")
-            PageRouter.router.pushState(LoginPage)
+            PageRouter.router.pushState(IndexPage)
           }
         },
       )
