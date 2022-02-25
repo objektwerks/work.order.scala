@@ -56,7 +56,8 @@ Model
 
 View(Menu)
 ----------
-1. Index(Login, Register)
+1. Home
+   * Index(Login, Register)
 2. Pool
    * Pools(Account) -> Pool(Pools)
    * Surfaces -> Surface
