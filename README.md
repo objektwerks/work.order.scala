@@ -85,8 +85,8 @@ Entity
 * UoM ( unit of measure )
 >** Account contains a globally unique license.
 
-Model
------
+Object Model
+------------
 * Router 1 ---> 1 Dispatcher, Store
 * Service 1 ---> 1 Store
 * Authorizer 1 ---> 1 Service
