@@ -71,7 +71,9 @@ Views
    * Supplies -> Supply **
    * Repairs -> Repair **
 
-** Charts -> measurements, cleanings, chemicals, supplies and repairs.
+** Charts:
+1. measurements, cleanings, chemicals
+2. supplies, repairs
 
 Entity
 ------
