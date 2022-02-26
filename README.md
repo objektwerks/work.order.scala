@@ -55,7 +55,7 @@ Model
 1. Model
 
 View(Menu) ! Action -> Page
-----------
+---------------------------
 1. Home
    * Index(Login, Register)
    * Register ! Register -> Index
