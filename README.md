@@ -54,12 +54,12 @@ Model
 -----
 1. Model
 
-View(Menu)
+View(Menu) ! Action -> Page
 ----------
 1. Home
    * Index(Login, Register)
-   * Register -> Index
-   * Login -> Pools
+   * Register ! Register/Registered -> Index
+   * Login ! Login/LoggedIn -> Pools
 2. Pool
    * Pools(Account) -> Pool(Pools)
    * Surfaces(Pool) -> Surface(Surfaces)
