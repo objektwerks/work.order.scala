@@ -65,9 +65,9 @@ View(Menu) ! Action -> Page
    * Surfaces(Pool) ! Add -> Surface(Surfaces) ! Add, Update -> Surfaces
    * Pumps(Pool) ! Add -> Pump(Pumps) ! Add, Update -> Pumps
    * Timers(Pool) ! Add -> Timer(Timers) ! Add, Update -> Timers
-     * TimerSettings(Timer) ! Add -> TimerSetting ! Add, Update -> TimerSettings
+     * Timer ! Add -> TimerSettings(Timer) ! Add -> TimerSetting ! Add, Update -> TimerSettings
    * Heaters(Pool) ! Add -> Heater(Heaters) ! Add, Update -> Heaters
-     * HeaterSettings(Heater) ! Add -> HeaterSetting ! Add, Update -> HeaterSettings
+     * Heater ! Add -> HeaterSettings(Heater) ! Add -> HeaterSetting ! Add, Update -> HeaterSettings
 3. Maintenance **
    * Measurements(Pool) ! Add -> Measurement(Measurements) ! Add, Update -> Measurements
    * Cleanings(Pool) ! Add -> Cleaning(Cleanings) ! Add, Update -> Cleanings
