@@ -58,10 +58,10 @@ View(Menu) ! Action -> Page
 ----------
 1. Home
    * Index(Login, Register)
-   * Register ! Register/Registered -> Index
-   * Login ! Login/LoggedIn -> Pools
+   * Register ! Register -> Index
+   * Login ! Login -> Pools
 2. Pool
-   * Pools(Account) -> Pool(Pools)
+   * Pools(Account) ! Add -> Pool(Pools) ! Add, Update -> Pools
    * Surfaces(Pool) -> Surface(Surfaces)
    * Pumps(Pool) -> Pump(Pumps)
    * Timers(Pool) -> Timer(Timers) -> TimerSettings(Timer) -> HeaterSetting(TimerSettings)
