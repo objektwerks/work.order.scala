@@ -62,17 +62,19 @@ View(Menu) ! Action -> Page
    * Login ! Login -> Pools
 2. Pool
    * Pools(Account) ! Add -> Pool(Pools) ! Add, Update -> Pools
-   * Surfaces(Pool) -> Surface(Surfaces)
-   * Pumps(Pool) -> Pump(Pumps)
-   * Timers(Pool) -> Timer(Timers) -> TimerSettings(Timer) -> HeaterSetting(TimerSettings)
-   * Heaters(Pool) -> Heater(Heaters) -> HeaterSettings(Heater) -> HeaterSetting(HeaterSettings)
+   * Surfaces(Pool) ! Add -> Surface(Surfaces) ! Add, Update -> Surfaces
+   * Pumps(Pool) ! Add -> Pump(Pumps) ! Add, Update -> Pumps
+   * Timers(Pool) ! Add -> Timer(Timers) ! Add, Update -> Timers
+     * TimerSettings(Timer) ! Add -> TimerSetting ! Add, Update -> TimerSettings
+   * Heaters(Pool) ! Add -> Heater(Heaters) ! Add, Update -> Heaters
+     * HeaterSettings(Heater) ! Add -> HeaterSetting ! Add, Update -> HeaterSettings
 3. Maintenance **
-   * Measurements(Pool) -> Measurement(Measurements)
-   * Cleanings(Pool) -> Cleaning(Cleanings)
-   * Chemicals(Pool) -> Chemical(Chemicals)
+   * Measurements(Pool) ! Add -> Measurement(Measurements) ! Add, Update -> Measurements
+   * Cleanings(Pool) ! Add -> Cleaning(Cleanings) ! Add, Update -> Cleanings
+   * Chemicals(Pool) ! Add -> Chemical(Chemicals) ! Add, Update -> Chemicals
 4. Expenses **
-   * Supplies(Pool) -> Supply(Supplies)
-   * Repairs(Pool) -> Repair(Repairs)
+   * Supplies(Pool) ! Add -> Supply(Supplies) ! Add, Update -> Supplies
+   * Repairs(Pool) ! Add -> Repair(Repairs) ! Add, Update -> Repairs
 
 ** Charts:
 1. measurements, cleanings, chemicals
