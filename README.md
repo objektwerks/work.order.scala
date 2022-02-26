@@ -77,8 +77,8 @@ View(Menu) ! Action -> Page
    * Repairs(Pool) ! Add -> Repair(Repairs) ! Add, Update -> Repairs
 
 ** Charts:
-1. measurements, cleanings, chemicals
-2. supplies, repairs
+* measurements, cleanings, chemicals
+* supplies, repairs
 
 Entity Model
 ------------
