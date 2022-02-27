@@ -62,14 +62,14 @@ object PoolView:
         btn("Add").amend {
           disabled <-- model.selectedEntityVar.signal.map { pool => !(pool.id.isZero && pool.isValid) }
           onClick --> { _ =>
-            log(s"Add onClick")
+            log(s"Pool Add onClick")
             PageRouter.router.pushState(PoolsPage)
           }
         },
         btn("Update").amend {
           disabled <-- model.selectedEntityVar.signal.map { pool => !(pool.id.isGreaterThanZero && pool.isValid) }
           onClick --> { _ =>
-            log(s"Update onClick")
+            log(s"Pool Update onClick")
             PageRouter.router.pushState(PoolsPage)
           }
         }
