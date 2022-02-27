@@ -12,7 +12,7 @@ object AccountView:
       bar(
         btn("Pools").amend {
           onClick --> { _ =>
-            log("Pools onClick")
+            log("Account -> Pools onClick")
             PageRouter.router.pushState(PoolsPage)
           }
         }      
