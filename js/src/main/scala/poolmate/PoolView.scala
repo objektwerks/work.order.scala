@@ -17,7 +17,7 @@ object PoolView:
       bar(
         btn("Pools").amend {
           onClick --> { _ =>
-            log("Pools onClick")
+            log("Pool -> Pools onClick")
             PageRouter.router.pushState(PoolsPage)
           }
         }      
