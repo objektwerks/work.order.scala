@@ -38,7 +38,7 @@ object LoginView:
             (email, pin) => !(email.isEmailAddress && pin.isPin)
           }
           onClick --> { _ =>
-            log(s"email address: ${emailAddressVar.now()} pin: ${pinVar.now()}")
+            log(s"Login onClick -> email address: ${emailAddressVar.now()} pin: ${pinVar.now()}")
             PageRouter.router.pushState(PoolsPage)
           }
         }
