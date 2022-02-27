@@ -26,7 +26,7 @@ object RegisterView:
         btn("Register").amend {
           disabled <-- emailAddressVar.signal.map(email => !email.isEmailAddress)
           onClick --> { _ =>
-            log(s"email address: ${emailAddressVar.now()}")
+            log(s"Register onClick -> email address: ${emailAddressVar.now()}")
             PageRouter.router.pushState(IndexPage)
           }
         },
