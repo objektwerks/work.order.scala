@@ -26,7 +26,7 @@ object PoolsView:
       cbar(
         btn("Add").amend {
           onClick --> { _ =>
-            log(s"Add onClick")
+            log(s"Pools Add onClick")
             PageRouter.router.pushState(PoolPage())
           }
         }
