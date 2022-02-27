@@ -13,7 +13,7 @@ object RegisterView:
     val emailAddressErrors = new EventBus[String]
     div(
       hdr("Register"),
-      lbl("Email"),
+      lbl("Email Address"),
       email.amend {
         value <-- emailAddressVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
