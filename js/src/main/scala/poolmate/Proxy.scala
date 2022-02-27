@@ -32,7 +32,7 @@ object Proxy:
         response <- dom.fetch(Url.now)
         text     <- response.text()
       yield text
-    ).recover { case error: Exception => s"Now call failed: ${error.getMessage}" }
+    ).recover { case error: Exception => s"Now failed: ${error.getMessage}" }
 
   def post(command: Command): Future[Event] =
     params.body = write[Command](command)
