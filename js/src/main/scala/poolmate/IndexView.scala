@@ -12,13 +12,13 @@ object IndexView:
         bar(
           btn("Login").amend {
             onClick --> { _ =>
-              log("Login onClick")
+              log("Index -> Login menu item onClick")
               PageRouter.router.pushState(LoginPage)
             }
           },
           rbtn("Register").amend {
             onClick --> { _ =>
-              log("Register onClick")
+              log("Index -> Register menu item onClick")
               PageRouter.router.pushState(RegisterPage)
             }
           }          
