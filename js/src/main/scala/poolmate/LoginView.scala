@@ -14,7 +14,7 @@ object LoginView:
     val pinErrors = new EventBus[String]
     div(
       hdr("Login"),
-      lbl("Email"),
+      lbl("Email Address"),
       email.amend {
         value <-- emailAddressVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
