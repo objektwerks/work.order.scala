@@ -41,4 +41,4 @@ object Proxy:
         response <- dom.fetch(Url.command, params)
         text     <- response.text()
       yield read[Event](text)
-    ).recover { case error: Exception => Fault(error.getMessage) }
+    ).recover { case error: Exception => Fault(s"$command failed: ${error.getMessage}") }
