@@ -35,7 +35,7 @@ object PoolView:
           }
         },
         err(nameErrors),
-        lbl("Built"),
+        lbl("Year Built"),
         year.amend {
           value <-- model.selectedEntityVar.signal.map(_.built.toString)
           onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { built =>
