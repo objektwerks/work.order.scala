@@ -42,13 +42,13 @@ object AccountView:
         cbar(
           btn("Deactivate").amend {
             onClick --> { _ =>
-              log("Deactivate onClick")
+              log("Account -> Deactivate onClick")
               PageRouter.router.pushState(PoolsPage)
             }
           },
           btn("Reactivate").amend {
             onClick --> { _ =>
-              log("Reactivate onClick")
+              log("Account -> Reactivate onClick")
               PageRouter.router.pushState(PoolsPage)
             }
           }      
