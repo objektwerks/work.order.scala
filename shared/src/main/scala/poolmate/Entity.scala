@@ -32,8 +32,6 @@ final case class Account(id: Long = 0,
 object Account:
   private val specialChars = "~!@#$%^&*{}-+<>?/:;".toList
   private val random = new Random
-
-  private def newLicense: String = UUID.randomUUID.toString
   private def newSpecialChar: Char = specialChars(random.nextInt(specialChars.length))
   private def newPin: String =
     Random.shuffle(
@@ -44,6 +42,7 @@ object Account:
         .prepended(newSpecialChar)
         .appended(newSpecialChar)
     ).mkString
+  private def newLicense: String = UUID.randomUUID.toString
 
   val empty = Account(
     license = "",
