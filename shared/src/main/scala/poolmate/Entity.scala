@@ -30,14 +30,14 @@ final case class Account(id: Long = 0,
   def display = emailAddress
 
 object Account:
-  private val specialChars = "~!@#$%^&*{}-+<>?/:;".toList
+  private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
   private val random = new Random
   private def newSpecialChar: Char = specialChars(random.nextInt(specialChars.length))
   private def newPin: String =
     Random.shuffle(
       Random
         .alphanumeric
-        .take(7)
+        .take(4)
         .mkString
         .prepended(newSpecialChar)
         .appended(newSpecialChar)
