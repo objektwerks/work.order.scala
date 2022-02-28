@@ -22,7 +22,7 @@ object Components:
 
   def email: Input = input(cls(inputCss), typ("email"), minLength(3), placeholder("address@email.com"), required(true))
 
-  def pin: Input = input(cls(inputCss), typ("text"), minLength(9), maxLength(9), required(true), placeholder("a1b2c3d4e"))
+  def pin: Input = input(cls(inputCss), typ("text"), minLength(6), maxLength(6), required(true), placeholder("a$b2c#"))
 
   def year: Input = input(cls(inputCss), typ("number"), pattern("\\d*"), stepAttr("1"), minAttr("1900"), maxAttr(currentYear), placeholder(currentYear), required(true))
 
