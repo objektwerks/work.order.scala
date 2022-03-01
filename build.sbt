@@ -38,7 +38,7 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
 lazy val sharedJs = shared.js
 lazy val sharedJvm = shared.jvm
 
-lazy val public = "scala-2.13/classes/public"
+lazy val public = "scala-3.1.1/classes/public"
 
 import NativePackagerHelper._
 
