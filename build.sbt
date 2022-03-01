@@ -44,7 +44,7 @@ import NativePackagerHelper._
 
 lazy val js = (project in file("js"))
   .dependsOn(sharedJs)
-  .enablePlugins(ScalaJSPlugin)
+  .enablePlugins(ScalaJSPlugin, UniversalPlugin)
   .settings(common)
   .settings(
     libraryDependencies ++= Seq(
@@ -52,7 +52,13 @@ lazy val js = (project in file("js"))
       "com.raquo" %%% "waypoint" % waypointVersion,
       "com.lihaoyi" %%% "upickle" % upickleVersion,
       "io.github.cquiroz" %%% "scala-java-time" % scalaJavaTimeVersion
-    )
+    ),
+    Compile / scalacOptions ~= (_ filter (_ == "-deprecation")),
+    Compile / fastLinkJS / scalaJSLinkerOutputDirectory := target.value / public / "js",
+    Compile / fullLinkJS / scalaJSLinkerOutputDirectory := target.value / public / "js",
+    fastLinkJS / crossTarget := target.value / public,
+    fullLinkJS / crossTarget := target.value / public,
+    Universal / mappings := (Universal / mappings).value ++ contentOf(target.value / public)
   )
 
 lazy val jvm = (project in file("jvm"))
