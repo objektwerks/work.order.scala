@@ -17,8 +17,8 @@ Test
 ----
 1. sbt clean test fastLinkJS | sbt clean test fullLinkJS
 
-Run
----
+Run Server
+----------
 1. sbt jvm/run ( curl -v http://localhost:7272/ )
 
 Package ( Tar )
