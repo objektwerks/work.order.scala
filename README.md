@@ -20,7 +20,7 @@ Test
 
 Run Server
 ----------
-1. sbt jvm/run ( curl -v http://localhost:7272/ )
+1. sbt jvm/run ( curl -v http://localhost:7272/now )
 
 Run Client
 ----------
