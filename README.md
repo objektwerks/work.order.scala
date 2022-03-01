@@ -48,6 +48,7 @@ Client
 Server
 ------
 >Resource url: /
+>Now url: /now
 >Api url: /command
 
 Account
