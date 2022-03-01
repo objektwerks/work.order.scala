@@ -8,6 +8,7 @@ Install
 2. brew install node
 3. npm install jsdom ( **locally** )
 4. graalvm ( https://www.graalvm.org/docs/getting-started/ )
+5. vscode live server extension
 
 Build
 -----
@@ -20,6 +21,11 @@ Test
 Run Server
 ----------
 1. sbt jvm/run ( curl -v http://localhost:7272/ )
+
+Run Client
+----------
+1. open target/scala-2.13/classes/public/index.html and right click open with Live Server
+2. open developer tools in index.html browser tab
 
 Package ( Tar )
 -------
