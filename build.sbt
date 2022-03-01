@@ -55,9 +55,9 @@ lazy val js = (project in file("js"))
     ),
     Compile / fastLinkJS / scalaJSLinkerOutputDirectory := target.value / public / "js",
     Compile / fullLinkJS / scalaJSLinkerOutputDirectory := target.value / public / "js",
+    Universal / mappings := (Universal / mappings).value ++ contentOf(target.value / public),
     fastLinkJS / crossTarget := target.value / public,
-    fullLinkJS / crossTarget := target.value / public,
-    Universal / mappings := (Universal / mappings).value ++ contentOf(target.value / public)
+    fullLinkJS / crossTarget := target.value / public
   )
 
 lazy val jvm = (project in file("jvm"))
