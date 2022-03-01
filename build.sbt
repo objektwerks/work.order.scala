@@ -38,6 +38,10 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
 lazy val sharedJs = shared.js
 lazy val sharedJvm = shared.jvm
 
+lazy val public = "scala-2.13/classes/public"
+
+import NativePackagerHelper._
+
 lazy val js = (project in file("js"))
   .dependsOn(sharedJs)
   .enablePlugins(ScalaJSPlugin)
