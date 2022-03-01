@@ -27,17 +27,18 @@ Run Client
 1. open target/scala-3.1.1/classes/public/index.html with live server
 2. open developer tools in browser
 
-Package ( Tar )
--------
+Package Server
+--------------
 >See sbt-native-packager ( www.scala-sbt.org/sbt-native-packager/formats/universal.html )
-1. sbt jvm/universal:packageZipTarball
+1. sbt jvm/universal:packageZipTarball | sbt 'show graalvm-native-image:packageBin'
 
-Package ( Graalvm Image )
--------
-1. sbt 'show graalvm-native-image:packageBin'
+Package Client
+--------------
+1. sbt js/clean fullLinkJS
+2. sbt js/universal:packageZipTarball
 
-Execute
--------
+Execute Graalvm Image
+---------------------
 1. ./target/graalvm-native-image/scala.graalvm
 
 Client
