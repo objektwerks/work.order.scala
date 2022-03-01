@@ -9,12 +9,12 @@ Install
 3. npm install jsdom ( **locally** )
 4. graalvm ( https://www.graalvm.org/docs/getting-started/ )
 
-Test
-----
-1. sbt clean test
-
 Build
 -----
+1. sbt clean compile fastLinkJS | sbt clean compile fullLinkJS
+
+Test
+----
 1. sbt clean test fastLinkJS | sbt clean test fullLinkJS
 
 Run
