@@ -24,8 +24,8 @@ Run Server
 
 Run Client
 ----------
-1. open target/scala-2.13/classes/public/index.html and right click open with Live Server
-2. open developer tools in index.html browser tab
+1. open target/scala-3.1.1/classes/public/index.html with live server
+2. open developer tools in browser
 
 Package ( Tar )
 -------
