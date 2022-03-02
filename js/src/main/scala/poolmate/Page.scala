@@ -15,4 +15,4 @@ case object AccountPage extends Page
 sealed trait EntityPage extends Page:
   val id: Long
 
-case class PoolPage(id: Long = 0) extends EntityPage
+final case class PoolPage(id: Long = 0) extends EntityPage
