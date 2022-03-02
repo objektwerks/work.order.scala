@@ -3,10 +3,11 @@ package poolmate
 import java.time.{Instant, LocalDate, LocalTime, format}
 
 object DateTime:
+  val yearFormatter = format.DateTimeFormatter.ofPattern("yyyy")
   val dateFormatter = format.DateTimeFormatter.ofPattern("yyyy-MM-dd")
   val timeFormatter = format.DateTimeFormatter.ofPattern("HH:mm")
 
-  def currentYearAsString: String = LocalDate.now().getYear.toString
+  def currentYearAsString: String = LocalDate.now.format(yearFormatter)
 
   def currentYearToInt(currentYear: String): Int = currentYear.toInt
 
