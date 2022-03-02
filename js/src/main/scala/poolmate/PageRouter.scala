@@ -12,9 +12,8 @@ import Serializers.given
 
 object PageRouter:
   given poolPageRW: ReadWriter[PoolPage] = macroRW
-  given pageRW: ReadWriter[Page] = ReadWriter.merge(
-    poolPageRW
-  )
+  given entityPageRW: ReadWriter[EntityPage] = macroRW
+  given pageRW: ReadWriter[Page] = macroRW
   
   val poolRoute = Route[PoolPage, Long](
     encode = poolPage => poolPage.id,
