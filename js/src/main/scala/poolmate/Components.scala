@@ -4,7 +4,7 @@ import com.raquo.laminar.api.L.*
 
 object Components:
   private val inputCss = "w3-input w3-hover-light-gray w3-text-indigo"
-  private val currentYear = DateTime.currentYearAsString
+  private val currentYear = "2022" // Calling from js, DateTime causes this error: unknown timezone id: america/new york
 
   def bar(elms: HtmlElement*): Div = div(cls("w3-bar"), elms)
 
