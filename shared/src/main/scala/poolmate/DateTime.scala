@@ -1,6 +1,6 @@
 package poolmate
 
-import java.time.{Instant, LocalDate, LocalTime, format}
+import java.time._
 
 object DateTime:
   val yearFormatter = format.DateTimeFormatter.ofPattern("yyyy")
