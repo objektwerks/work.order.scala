@@ -6,8 +6,6 @@ import com.raquo.waypoint.*
 
 import upickle.default.*
 
-import org.scalajs.dom
-
 import Serializers.given
 
 object PageRouter:
@@ -18,15 +16,15 @@ object PageRouter:
   val poolRoute = Route[PoolPage, Long](
     encode = poolPage => poolPage.id,
     decode = arg => PoolPage(id = arg),
-    pattern = root / "app" / "pool" / segment[Long] / endOfSegments
+    pattern = root / "pools" / segment[Long] / endOfSegments
   )
 
   val routes = List(
     Route.static(IndexPage, root / endOfSegments),
     Route.static(RegisterPage, root / "register" / endOfSegments),
     Route.static(LoginPage, root / "login" / endOfSegments),
-    Route.static(PoolsPage, root / "app" / "pools" / endOfSegments),
-    Route.static(AccountPage, root / "app" / "account" / endOfSegments),
+    Route.static(PoolsPage, root / "pools" / endOfSegments),
+    Route.static(AccountPage, root / "account" / endOfSegments),
     poolRoute
   )
 
