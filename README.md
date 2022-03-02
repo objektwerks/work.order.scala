@@ -43,8 +43,7 @@ Package Server
 
 Package Client
 --------------
-1. sbt js/clean fullLinkJS
-2. sbt js/universal:packageZipTarball
+1. sbt js/universal:packageZipTarball
 
 Execute Graalvm Image
 ---------------------
