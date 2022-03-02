@@ -33,7 +33,7 @@ Run Server
 
 Run Client
 ----------
-1. open target/scala-3.1.1/classes/public/index.html with live server
+1. via vscode command palette: **Live Server: Open with Live Server**
 2. open developer tools in browser
 
 Package Server
