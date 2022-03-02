@@ -2,9 +2,12 @@ package poolmate
 
 import com.raquo.laminar.api.L.*
 
+import scala.scalajs.js.Date
+
 object Components:
   private val inputCss = "w3-input w3-hover-light-gray w3-text-indigo"
-  private val currentYear = "2022" // Calling from js, DateTime causes this error: unknown timezone id: america/new york
+  private val currentYear = new Date().getFullYear().toInt.toString
+  // Calling DateTime causes this error: unknown timezone id: america/new york
 
   def bar(elms: HtmlElement*): Div = div(cls("w3-bar"), elms)
 
