@@ -13,7 +13,7 @@ Install
 Live Server
 -----------
 >Add the following Live Server settings to VSCode settings.json:
-1. "liveServer.settings.port": 8080,
+1. "liveServer.settings.port": 7171,
 2. "liveServer.settings.root": "./js/target/scala-3.1.1/classes/"
 3. "liveServer.settings.file": "index.html"
 >which produces this root url: http://127.0.0.1:8080/
