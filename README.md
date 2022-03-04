@@ -49,7 +49,7 @@ Package Server
 
 Package Client
 --------------
-1. sbt js/universal:packageZipTarball
+1. npx snowpack build ( see build directory )
 
 Execute Graalvm Image
 ---------------------
