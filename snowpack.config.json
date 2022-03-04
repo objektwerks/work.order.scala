@@ -4,6 +4,7 @@
   },
   "mount": {
     "public": "/",
-    "js/target/scala-3.1.1/js-fastopt": "/"
+    "js/target/scala-3.1.1/js-fastopt": "/",
+    "js/target/scala-3.1.1/js-opt": "/"
   }
 }
