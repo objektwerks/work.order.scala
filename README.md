@@ -32,7 +32,7 @@ Build
 
 Test
 ----
-1. sbt clean test fastLinkJS | sbt clean test fullLinkJS
+1. sbt clean test fastLinkJS | fullLinkJS
 
 Dev
 ---
