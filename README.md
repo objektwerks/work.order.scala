@@ -27,7 +27,8 @@ Snowpack
 
 Build
 -----
-1. sbt clean compile fastLinkJS | sbt clean compile fullLinkJS
+1. npm install ( only when package.json changes )
+2. sbt clean compile fastLinkJS | fullLinkJS
 
 Test
 ----
