@@ -37,6 +37,7 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
 
 lazy val sharedJs = shared.js
 lazy val sharedJvm = shared.jvm
+lazy val public = "public"
 
 lazy val js = (project in file("js"))
   .dependsOn(sharedJs)
@@ -48,7 +49,11 @@ lazy val js = (project in file("js"))
       "com.raquo" %%% "waypoint" % waypointVersion,
       "com.lihaoyi" %%% "upickle" % upickleVersion,
       "io.github.cquiroz" %%% "scala-java-time" % scalaJavaTimeVersion
-    )
+    ),
+    Compile / fastLinkJS / scalaJSLinkerOutputDirectory := target.value / public,
+    Compile / fullLinkJS / scalaJSLinkerOutputDirectory := target.value / public,
+    fastLinkJS / crossTarget := target.value / public,
+    fullLinkJS / crossTarget := target.value / public
   )
 
 lazy val jvm = (project in file("jvm"))
