@@ -40,6 +40,7 @@ Dev
 2. sbt ( unique terminal session )
 3. ~fastLinkJS
 4. npx snowpack dev ( unique terminal session )
+>Edits are reflected in the fastLinkJS and snowpack terminals.
 >See **snowpack.config.json** and [Snowpack Config](https://www.snowpack.dev/reference/configuration) for configurable options.
 
 Package Server
