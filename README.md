@@ -269,3 +269,4 @@ Documentation
 7. Scaffeine - https://github.com/blemale/scaffeine
 8. Packager - https://www.scala-sbt.org/sbt-native-packager/formats/graalvm-native-image.html
 9. Gaalvm - https://www.graalvm.org/docs/introduction/
+10. Snowpack - https://www.snowpack.dev/
