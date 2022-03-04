@@ -12,19 +12,6 @@ Install
 6. npm install ( in project root directory )
 >See **package.json** for installable dependencies.
 
-Live Server
------------
->Add the following Live Server settings to VSCode settings.json:
-1. "liveServer.settings.port": 7171,
-2. "liveServer.settings.root": "./js/target/scala-3.1.1/classes/"
-3. "liveServer.settings.file": "index.html"
->which produces this root url: http://127.0.0.1:8080/
->See: https://github.com/ritwickdey/vscode-live-server/blob/master/docs/settings.md
-
-Snowpack
---------
->Or use Snowpack in lieu of Live Server.
-
 Build
 -----
 1. npm install ( only when package.json changes )
