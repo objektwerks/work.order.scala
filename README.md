@@ -21,6 +21,10 @@ Live Server
 >which produces this root url: http://127.0.0.1:8080/
 >See: https://github.com/ritwickdey/vscode-live-server/blob/master/docs/settings.md
 
+Snowpack
+--------
+>Or use Snowpack in lieu of Live Server.
+
 Build
 -----
 1. sbt clean compile fastLinkJS | sbt clean compile fullLinkJS
