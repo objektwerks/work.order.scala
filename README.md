@@ -9,6 +9,8 @@ Install
 3. npm install jsdom ( **locally** )
 4. graalvm ( https://www.graalvm.org/docs/getting-started/ )
 5. vscode live server extension
+6. npm install ( in project root directory )
+>See **package.json** for installable dependencies.
 
 Live Server
 -----------
