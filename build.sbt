@@ -38,10 +38,6 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
 lazy val sharedJs = shared.js
 lazy val sharedJvm = shared.jvm
 
-lazy val root = "scala-3.1.1/classes"
-
-import NativePackagerHelper._
-
 lazy val js = (project in file("js"))
   .dependsOn(sharedJs)
   .enablePlugins(ScalaJSPlugin, UniversalPlugin)
@@ -52,12 +48,7 @@ lazy val js = (project in file("js"))
       "com.raquo" %%% "waypoint" % waypointVersion,
       "com.lihaoyi" %%% "upickle" % upickleVersion,
       "io.github.cquiroz" %%% "scala-java-time" % scalaJavaTimeVersion
-    ),
-    Compile / fastLinkJS / scalaJSLinkerOutputDirectory := target.value / root / "js",
-    Compile / fullLinkJS / scalaJSLinkerOutputDirectory := target.value / root / "js",
-    Universal / mappings := (Universal / mappings).value ++ contentOf(target.value / root),
-    fastLinkJS / crossTarget := target.value / root,
-    fullLinkJS / crossTarget := target.value / root
+    )
   )
 
 lazy val jvm = (project in file("jvm"))
