@@ -34,14 +34,13 @@ Test
 ----
 1. sbt clean test fastLinkJS | sbt clean test fullLinkJS
 
-Run Server
-----------
-1. sbt jvm/run ( curl -v http://localhost:7272/now )
-
-Run Client
-----------
-1. via vscode command palette: **Live Server: Open with Live Server**
-2. open developer tools in browser
+Dev
+---
+1. sbt jvm/run ( unique terminal session, curl -v http://localhost:7272/now )
+2. sbt ( unique terminal session )
+3. ~fastLinkJS
+4. npx snowpack dev ( unique terminal session )
+>See **snowpack.config.json** and [Snowpack Config](https://www.snowpack.dev/reference/configuration) for configurable options.
 
 Package Server
 --------------
