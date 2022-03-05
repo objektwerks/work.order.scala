@@ -6,17 +6,16 @@ Install
 -------
 1. brew install postgresql
 2. brew install node
-3. npm install jsdom ( **locally** )
+3. npm install jsdom ( must install **locally** )
 4. graalvm ( https://www.graalvm.org/docs/getting-started/ )
-5. vscode live server extension
-6. npm install ( in project root directory )
+5. npm install ( in project root directory )
 >See **package.json** for installable dependencies.
 
 Build
 -----
 1. npm install ( only when package.json changes )
 2. sbt clean compile fastLinkJS | fullLinkJS
->Note the placement of js files: js/target/public
+>See **js/target/public** directory.
 
 Test
 ----
@@ -24,25 +23,22 @@ Test
 
 Dev
 ---
-1. sbt jvm/run ( unique terminal session, curl -v http://localhost:7272/now )
-2. sbt ( unique terminal session )
+1. sbt jvm/run ( terminal session, curl -v http://localhost:7272/now )
+2. sbt ( terminal session )
 3. ~fastLinkJS
-4. npx snowpack dev ( unique terminal session )
->Edits are reflected in the fastLinkJS and snowpack terminals.
+4. npx snowpack dev ( terminal session )
+>Edits are reflected in the **fastLinkJS** and **snowpack** terminal sessions.
 >See **snowpack.config.json** and [Snowpack Config](https://www.snowpack.dev/reference/configuration) for configurable options.
 
 Package Server
 --------------
 >See sbt-native-packager ( www.scala-sbt.org/sbt-native-packager/formats/universal.html )
 1. sbt jvm/universal:packageZipTarball | sbt 'show graalvm-native-image:packageBin'
+>**Optionally** execute Graalvm image: ./jvm/target/graalvm-native-image/scala.graalvm
 
 Package Client
 --------------
-1. npx snowpack build ( see build directory )
-
-Execute Graalvm Image
----------------------
-1. ./target/graalvm-native-image/scala.graalvm
+1. npx snowpack build ( see **build** directory )
 
 Client
 ------
