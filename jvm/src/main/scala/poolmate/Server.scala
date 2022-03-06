@@ -5,6 +5,7 @@ import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
 import io.undertow.Undertow
+import io.undertow.server.handlers.BlockingHandler
 
 import java.util.concurrent.TimeUnit
 
@@ -35,9 +36,18 @@ object Server extends Main with LazyLogging:
 
   override def main(args: Array[String]): Unit =
     Main.silenceJboss()
+
+    val corsHanlder = CorsHandler(dispatchTrie,
+                                  mainDecorators,
+                                  debugMode = false,
+                                  handleNotFound,
+                                  handleMethodNotAllowed,
+                                  handleEndpointError)
+    val blockingHandler = new BlockingHandler(corsHanlder)
+    
     val server = Undertow.builder
       .addHttpListener(port, host)
-      .setHandler(defaultHandler)
+      .setHandler(blockingHandler)
       .build
 
     server.start()
