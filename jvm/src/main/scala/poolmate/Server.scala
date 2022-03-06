@@ -34,20 +34,20 @@ object Server extends Main with LazyLogging:
 
   override def port: Int = conf.getInt("port")
 
-  override def main(args: Array[String]): Unit =
-    Main.silenceJboss()
-
+  override def defaultHandler: BlockingHandler =
     val corsHanlder = CorsHandler(dispatchTrie,
                                   mainDecorators,
                                   debugMode = false,
                                   handleNotFound,
                                   handleMethodNotAllowed,
                                   handleEndpointError)
-    val blockingHandler = new BlockingHandler(corsHanlder)
-    
+    new BlockingHandler(corsHanlder)
+
+  override def main(args: Array[String]): Unit =
+    Main.silenceJboss()    
     val server = Undertow.builder
       .addHttpListener(port, host)
-      .setHandler(blockingHandler)
+      .setHandler(defaultHandler)
       .build
 
     server.start()
