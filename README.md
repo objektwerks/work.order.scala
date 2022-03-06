@@ -235,12 +235,17 @@ Resources
 1. index.html at /public/index.html
 2. web resources at /public/
 
+Cors Handler
+------------
+>See poolmate.CorsHandler and poolmate.Server
+>Also see https://github.com/Download/undertow-cors-filter
+
 Logs
 ----
 >See logs at /target/
 1. jvm.log
 2. test.jvm.log
-2. test.shared.log
+3. test.shared.log
 
 Documentation
 -------------
