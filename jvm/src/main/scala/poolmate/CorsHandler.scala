@@ -41,6 +41,6 @@ class CorsHandler(dispatchTrie: DispatchTrie[Map[String, (Routes, EndpointMetada
     exchange.getResponseHeaders
       .put(new HttpString("Access-Control-Allow-Origin"), "*")
       .put(new HttpString("Access-Control-Allow-Credentials"), "true")
-      .putAll(new HttpString("Access-Control-Allow-Headers"), Set("POST", "GET", "PUT", "DELETE", "PATCH", "OPTIONS").asJava)
-      .putAll(new HttpString("Access-Control-Allow-Methods"), Set("Authorization", "Content-Type", "X-Requested-With").asJava)
+      .putAll(new HttpString("Access-Control-Allow-Headers"), Set("Authorization", "Content-Type", "X-Requested-With").asJava)
+      .putAll(new HttpString("Access-Control-Allow-Methods"), Set("POST", "GET", "PUT", "DELETE", "PATCH", "OPTIONS").asJava)
     super.handleRequest(exchange)
