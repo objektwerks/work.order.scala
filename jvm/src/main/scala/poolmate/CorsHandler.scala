@@ -44,9 +44,10 @@ class CorsHandler(dispatchTrie: DispatchTrie[Map[String, (Routes, EndpointMetada
                               handleMethodNotAllowed,
                               handleError)(using log: Logger):
   override def handleRequest(exchange: HttpServerExchange): Unit =
+    import CorsHandler.*
     exchange.getResponseHeaders
-      .put(new HttpString("Access-Control-Allow-Origin"), "*")
-      .put(new HttpString("Access-Control-Allow-Credentials"), "true")
-      .putAll(new HttpString("Access-Control-Allow-Headers"), Set("Authorization", "Content-Type", "X-Requested-With").asJava)
-      .putAll(new HttpString("Access-Control-Allow-Methods"), Set("POST", "GET", "PUT", "DELETE", "PATCH", "OPTIONS").asJava)
+      .put(accessControlAllowOrigin, "*")
+      .put(accessControlAllowCredentials, "true")
+      .putAll(acccessControlAllowHeaders, Set("Authorization", "Content-Type", "X-Requested-With").asJava)
+      .putAll(accessControlAllowMethods, Set("POST", "GET", "PUT", "DELETE", "PATCH", "OPTIONS").asJava)
     super.handleRequest(exchange)
