@@ -32,7 +32,7 @@ object CorsHandler:
   val accessControlAllowMethods = new HttpString("Access-Control-Allow-Methods")
 
   val origin = "*"
-  val credentials = "true"
+  val accepted = "true"
   val headers = Set("Authorization", "Content-Type", "X-Requested-With").asJava
   val methods = Set("POST", "GET", "PUT", "DELETE", "PATCH", "OPTIONS").asJava
 
@@ -52,7 +52,7 @@ class CorsHandler(dispatchTrie: DispatchTrie[Map[String, (Routes, EndpointMetada
     import CorsHandler.*
     exchange.getResponseHeaders
       .put(accessControlAllowOrigin, origin)
-      .put(accessControlAllowCredentials, credentials)
+      .put(accessControlAllowCredentials, accepted)
       .putAll(acccessControlAllowHeaders, headers)
       .putAll(accessControlAllowMethods, methods)
     super.handleRequest(exchange)
