@@ -8,7 +8,6 @@ import cask.router.EndpointMetadata
 import cask.router.Decorator
 import cask.model.Response
 import cask.router.Result
-
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
@@ -20,7 +19,6 @@ import java.util.concurrent.TimeUnit
 
 import scala.concurrent.duration._
 import scala.io.StdIn
-import cask.model.Response.Data
 
 given log: Logger = new Logger.Console()
 
