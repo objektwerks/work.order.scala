@@ -31,6 +31,11 @@ object CorsHandler:
   val acccessControlAllowHeaders = new HttpString("Access-Control-Allow-Headers")
   val accessControlAllowMethods = new HttpString("Access-Control-Allow-Methods")
 
+  val origin = "*"
+  val credentials = "true"
+  val headers = Set("Authorization", "Content-Type", "X-Requested-With").asJava
+  val methods = Set("POST", "GET", "PUT", "DELETE", "PATCH", "OPTIONS").asJava
+
 class CorsHandler(dispatchTrie: DispatchTrie[Map[String, (Routes, EndpointMetadata[_])]],
                   mainDecorators: Seq[Decorator[_, _, _]],
                   debugMode: Boolean,
@@ -46,8 +51,8 @@ class CorsHandler(dispatchTrie: DispatchTrie[Map[String, (Routes, EndpointMetada
   override def handleRequest(exchange: HttpServerExchange): Unit =
     import CorsHandler.*
     exchange.getResponseHeaders
-      .put(accessControlAllowOrigin, "*")
-      .put(accessControlAllowCredentials, "true")
-      .putAll(acccessControlAllowHeaders, Set("Authorization", "Content-Type", "X-Requested-With").asJava)
-      .putAll(accessControlAllowMethods, Set("POST", "GET", "PUT", "DELETE", "PATCH", "OPTIONS").asJava)
+      .put(accessControlAllowOrigin, origin)
+      .put(accessControlAllowCredentials, credentials)
+      .putAll(acccessControlAllowHeaders, headers)
+      .putAll(accessControlAllowMethods, methods)
     super.handleRequest(exchange)
