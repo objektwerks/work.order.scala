@@ -34,7 +34,7 @@ object CorsHandler:
   val origin = "*"
   val accepted = "true"
   val headers = Set("Authorization", "Content-Type", "X-Requested-With").asJava
-  val methods = Set("POST", "GET", "PUT", "DELETE", "PATCH", "OPTIONS").asJava
+  val methods = Set("POST", "GET", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS").asJava
 
 class CorsHandler(dispatchTrie: DispatchTrie[Map[String, (Routes, EndpointMetadata[_])]],
                   mainDecorators: Seq[Decorator[_, _, _]],
