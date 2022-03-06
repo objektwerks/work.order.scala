@@ -14,11 +14,14 @@ import com.typesafe.scalalogging.LazyLogging
 import io.undertow.Undertow
 import io.undertow.server.HttpServerExchange
 import io.undertow.server.handlers.BlockingHandler
+import io.undertow.util.Headers
+import io.undertow.util.HttpString
 
 import java.util.concurrent.TimeUnit
 
 import scala.concurrent.duration._
 import scala.io.StdIn
+import scala.jdk.CollectionConverters.*
 
 given log: Logger = new Logger.Console()
 
@@ -35,4 +38,9 @@ class CorsHandler(dispatchTrie: DispatchTrie[Map[String, (Routes, EndpointMetada
                               handleMethodNotAllowed,
                               handleError)(using log: Logger):
   override def handleRequest(exchange: HttpServerExchange): Unit =
+    exchange.getResponseHeaders
+      .put(new HttpString("Access-Control-Allow-Origin"), "*")
+      .put(new HttpString("Access-Control-Allow-Credentials"), "true")
+      .putAll(new HttpString("Access-Control-Allow-Headers"), Set("POST", "GET", "PUT", "DELETE", "PATCH", "OPTIONS").asJava)
+      .putAll(new HttpString("Access-Control-Allow-Methods"), Set("Authorization", "Content-Type", "X-Requested-With").asJava)
     super.handleRequest(exchange)
