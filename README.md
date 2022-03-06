@@ -237,8 +237,8 @@ Resources
 
 Cors Handler
 ------------
->See poolmate.CorsHandler and poolmate.Server
->Also see https://github.com/Download/undertow-cors-filter
+* See poolmate.CorsHandler and poolmate.Server
+* Also see https://github.com/Download/undertow-cors-filter
 
 Logs
 ----
