@@ -25,6 +25,12 @@ import scala.jdk.CollectionConverters.*
 
 given log: Logger = new Logger.Console()
 
+object CorsHandler:
+  val accessControlAllowOrigin = new HttpString("Access-Control-Allow-Origin")
+  val accessControlAllowCredentials = new HttpString("Access-Control-Allow-Credentials")
+  val acccessControlAllowHeaders = new HttpString("Access-Control-Allow-Headers")
+  val accessControlAllowMethods = new HttpString("Access-Control-Allow-Methods")
+
 class CorsHandler(dispatchTrie: DispatchTrie[Map[String, (Routes, EndpointMetadata[_])]],
                   mainDecorators: Seq[Decorator[_, _, _]],
                   debugMode: Boolean,
