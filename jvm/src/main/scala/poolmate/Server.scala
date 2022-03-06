@@ -28,20 +28,20 @@ object Server extends Main with LazyLogging:
 
   val nowRouter = NowRouter()
   val commandEventRouter = CommandEventRouter(dispatcher, store)
-  val allRoutes = Seq(nowRouter, commandEventRouter)
+
+  override val allRoutes = Seq(nowRouter, commandEventRouter)
   
   override def host: String = conf.getString("host")
 
   override def port: Int = conf.getInt("port")
 
   override def defaultHandler: BlockingHandler =
-    val corsHanlder = CorsHandler(dispatchTrie,
-                                  mainDecorators,
-                                  debugMode = false,
-                                  handleNotFound,
-                                  handleMethodNotAllowed,
-                                  handleEndpointError)
-    new BlockingHandler(corsHanlder)
+    new BlockingHandler( CorsHandler(dispatchTrie,
+                                     mainDecorators,
+                                     debugMode = false,
+                                     handleNotFound,
+                                     handleMethodNotAllowed,
+                                     handleEndpointError) )
 
   override def main(args: Array[String]): Unit =
     Main.silenceJboss()    
