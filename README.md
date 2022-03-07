@@ -23,11 +23,11 @@ Test
 
 Dev
 ---
-1. sbt jvm/run ( terminal session, curl -v http://localhost:7272/now )
-2. sbt ( terminal session )
+1. sbt jvm/run ( new session, curl -v http://localhost:7272/now )
+2. sbt ( new session )
 3. ~fastLinkJS
-4. npx snowpack dev ( terminal session )
->Edits are reflected in the **fastLinkJS** and **snowpack** terminal sessions.
+4. npx snowpack dev ( new session )
+>Edits are reflected in the **fastLinkJS** and **snowpack** sessions.
 >See **snowpack.config.json** and [Snowpack Config](https://www.snowpack.dev/reference/configuration) for configurable options.
 
 Package Server
