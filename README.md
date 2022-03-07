@@ -14,14 +14,12 @@ Install
 Build
 -----
 1. npm install ( only when package.json changes )
-2. sbt clean compile
-3. sbt fastLinkJS | fullLinkJS
+2. sbt clean compile fastLinkJS
 >See **js/target/public** directory.
 
 Test
 ----
-1. sbt clean test
-2. sbt js/fastLinkJS | fullLinkJS
+1. sbt clean test fastLinkJS
 
 Dev
 ---
@@ -35,12 +33,14 @@ Dev
 Package Server
 --------------
 >See sbt-native-packager ( www.scala-sbt.org/sbt-native-packager/formats/universal.html )
-1. sbt jvm/universal:packageZipTarball | sbt 'show graalvm-native-image:packageBin'
+1. sbt clean test fullLinkJS
+2. sbt jvm/universal:packageZipTarball | sbt 'show graalvm-native-image:packageBin'
 >**Optionally** execute Graalvm image: ./jvm/target/graalvm-native-image/scala.graalvm
 
 Package Client
 --------------
-1. npx snowpack build ( see **build** directory )
+1. sbt clean test fullLinkJS
+2. npx snowpack build ( see **build** directory )
 
 Client
 ------
