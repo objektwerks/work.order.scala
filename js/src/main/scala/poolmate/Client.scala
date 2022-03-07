@@ -19,7 +19,7 @@ class Client(rootUrl: String) extends js.Object:
   log(s"now url: ${Url.now}")
   log(s"command url: ${Url.command}")
 
-  // Proxy.now.foreach( now => log(s"[now] $now") )
+  Proxy.now.foreach( now => log(s"[now] $now") )
 
   render(
     container = document.getElementById("container"),
