@@ -19,6 +19,7 @@ object RegisterView:
       event.fold(fault => errors.emit(s"Register failed: ${fault.cause}"), _ => PageRouter.router.pushState(IndexPage))
     div(
       hdr("Register"),
+      note("Check your email for your new account details."),
       err(errors),
       lbl("Email Address"),
       email.amend {
