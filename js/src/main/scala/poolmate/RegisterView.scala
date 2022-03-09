@@ -4,6 +4,9 @@ import com.raquo.laminar.api.L.*
 
 import org.scalajs.dom.console.log
 
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
+
 import Components.*
 import Error.*
 import Validators.*
@@ -11,8 +14,12 @@ import Validators.*
 object RegisterView:
   def apply(emailAddressVar: Var[String]): HtmlElement =
     val emailAddressErrors = new EventBus[String]
+    val errors = new EventBus[String]
+    def handler(event: Either[Fault, Event]): Unit =
+      event.fold(fault => errors.emit(s"Register failed: ${fault.cause}"), _ => PageRouter.router.pushState(IndexPage))
     div(
       hdr("Register"),
+      err(errors),
       lbl("Email Address"),
       email.amend {
         value <-- emailAddressVar
@@ -27,7 +34,8 @@ object RegisterView:
           disabled <-- emailAddressVar.signal.map(email => !email.isEmailAddress)
           onClick --> { _ =>
             log(s"Register onClick -> email address: ${emailAddressVar.now()}")
-            PageRouter.router.pushState(IndexPage)
+            val command = Register(emailAddressVar.now())
+            Proxy.call(command, handler)
           }
         },
       )
