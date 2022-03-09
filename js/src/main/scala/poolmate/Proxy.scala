@@ -41,7 +41,7 @@ object Proxy:
 
   def call(command: Command,
            handler: (event: Either[Fault, Event]) => Unit) =
-    val event = Proxy.post(command)
+    val event = post(command)
     handle(event, handler)
 
   private def post(command: Command): Future[Event] =
