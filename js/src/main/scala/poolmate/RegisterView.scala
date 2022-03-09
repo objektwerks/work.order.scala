@@ -13,24 +13,24 @@ import Validators.*
 
 object RegisterView:
   def apply(emailAddressVar: Var[String]): HtmlElement =
-    val emailAddressErrors = new EventBus[String]
-    val errors = new EventBus[String]
-    val note = new EventBus[String]
+    val emailAddressErrorBus = new EventBus[String]
+    val errorBus = new EventBus[String]
+    val noteBus = new EventBus[String]
     def handler(event: Either[Fault, Event]): Unit =
-      event.fold(fault => errors.emit(s"Register failed: ${fault.cause}"), _ => PageRouter.router.pushState(IndexPage))
+      event.fold(fault => errorBus.emit(s"Register failed: ${fault.cause}"), _ => PageRouter.router.pushState(IndexPage))
     div(
       hdr("Register"),
       note(noteBus),
-      err(errors),
+      err(errorBus),
       lbl("Email Address"),
       email.amend {
         value <-- emailAddressVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
         onKeyUp.mapToValue --> { emailAddress =>
-          if emailAddress.isEmailAddress then emailAddressErrors.emit("") else emailAddressErrors.emit(emailAddressError)
+          if emailAddress.isEmailAddress then emailAddressErrorBus.emit("") else emailAddressErrorBus.emit(emailAddressError)
         }
       },
-      err(emailAddressErrors),
+      err(emailAddressErrorBus),
       cbar(
         btn("Register").amend {
           disabled <-- emailAddressVar.signal.map(email => !email.isEmailAddress)
