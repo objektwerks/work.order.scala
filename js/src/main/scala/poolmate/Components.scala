@@ -23,8 +23,6 @@ object Components:
 
   def rotxt: Input = input(cls(inputCss), readOnly(true))
 
-  def note(text: String): Div = div(cls("w3-indigo"), p(cls("w3-margin"), text))
-
   def email: Input = input(cls(inputCss), typ("email"), minLength(3), placeholder("address@email.com"), required(true))
 
   def pin: Input = input(cls(inputCss), typ("text"), minLength(6), maxLength(6), required(true), placeholder("a$b2c#"))
@@ -42,6 +40,8 @@ object Components:
   def hdr(text: String): HtmlElement = h5(cls("w3-light-grey w3-text-indigo"), text)
 
   def err(errBus: EventBus[String]): Div = div(cls("w3-border-white w3-text-red"), child.text <-- errBus.events)
+
+  def note(noteBus: EventBus[String]): Div = div(cls("w3-border-white w3-text-indigo"), child.text <-- noteBus.events)
 
   def list(liSignal: Signal[Seq[Li]]): Div = div(cls("w3-container"), ul(cls("w3-ul w3-hoverable"), children <-- liSignal))
 
