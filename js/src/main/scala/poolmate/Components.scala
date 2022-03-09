@@ -23,6 +23,8 @@ object Components:
 
   def rotxt: Input = input(cls(inputCss), readOnly(true))
 
+  def note(text: String): Div = div(cls("w3-indigo"), p(cls("w3-margin"), text))
+
   def email: Input = input(cls(inputCss), typ("email"), minLength(3), placeholder("address@email.com"), required(true))
 
   def pin: Input = input(cls(inputCss), typ("text"), minLength(6), maxLength(6), required(true), placeholder("a$b2c#"))
