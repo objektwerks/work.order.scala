@@ -15,11 +15,12 @@ object RegisterView:
   def apply(emailAddressVar: Var[String]): HtmlElement =
     val emailAddressErrors = new EventBus[String]
     val errors = new EventBus[String]
+    val note = new EventBus[String]
     def handler(event: Either[Fault, Event]): Unit =
       event.fold(fault => errors.emit(s"Register failed: ${fault.cause}"), _ => PageRouter.router.pushState(IndexPage))
     div(
       hdr("Register"),
-      note("Check your email for your new account details."),
+      note(noteBus),
       err(errors),
       lbl("Email Address"),
       email.amend {
