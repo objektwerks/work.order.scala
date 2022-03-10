@@ -45,6 +45,7 @@ object AccountView:
           btn("Deactivate").amend {
             onClick --> { _ =>
               log("Account -> Deactivate onClick")
+              val command = Deactivate(account.now().license)
               PageRouter.router.pushState(PoolsPage)
             }
           },
