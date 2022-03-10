@@ -18,7 +18,9 @@ object RegisterView:
 
     def handler(event: Either[Fault, Event]): Unit =
       event match
-        case Right(event) => PageRouter.router.pushState(IndexPage)
+        case Right(event) =>
+          errorBus.emit("")
+          PageRouter.router.pushState(IndexPage)
         case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
       
     div(
