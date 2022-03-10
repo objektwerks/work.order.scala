@@ -24,14 +24,6 @@ object RegisterView:
         case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
       
     div(
-      bar(
-        btn("Home").amend {
-          onClick --> { _ =>
-            log("Register -> Home menu item onClick")
-            PageRouter.router.pushState(IndexPage)
-          }
-        }      
-      ),
       hdr("Register"),
       err(errorBus),
       lbl("Email Address"),
