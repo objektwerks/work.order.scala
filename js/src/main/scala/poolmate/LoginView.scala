@@ -13,8 +13,10 @@ object LoginView:
     val emailAddressErrorBus = new EventBus[String]
     val pinErrorBus = new EventBus[String]
     val errorBus = new EventBus[String]
+
     def handler(event: Either[Fault, Event]): Unit =
       event.fold(fault => errorBus.emit(s"Login failed: ${fault.cause}"), _ => PageRouter.router.pushState(PoolsPage))
+      
     div(
       hdr("Login"),
       lbl("Email Address"),
