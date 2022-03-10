@@ -20,7 +20,7 @@ object RegisterView:
       event match
         case Right(event) =>
           errorBus.emit("")
-          PageRouter.router.pushState(IndexPage)
+          PageRouter.router.pushState(LoginPage)
         case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
       
     div(
