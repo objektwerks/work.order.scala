@@ -10,7 +10,7 @@ import Validators.*
 
 object LoginView:
   def apply(emailAddressVar: Var[String], pinVar: Var[String]): HtmlElement =
-    val emailAddressErrors = new EventBus[String]
+    val emailAddressErrorBus = new EventBus[String]
     val pinErrors = new EventBus[String]
     val errorBus = new EventBus[String]
     def handler(event: Either[Fault, Event]): Unit =
@@ -22,10 +22,10 @@ object LoginView:
         value <-- emailAddressVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
         onKeyUp.mapToValue --> { emailAddress =>
-          if emailAddress.isEmailAddress then emailAddressErrors.emit("") else emailAddressErrors.emit(emailAddressError)
+          if emailAddress.isEmailAddress then emailAddressErrorBus.emit("") else emailAddressErrorBus.emit(emailAddressError)
         }
       },
-      err(emailAddressErrors),
+      err(emailAddressErrorBus),
       lbl("Pin"),
       pin.amend {
         value <-- pinVar
