@@ -19,6 +19,7 @@ object LoginView:
         case Right(event) =>
           event match
             case LoggedIn(account) =>
+              errorBus.emit("")
               accountVar.set(account)
               PageRouter.router.pushState(PoolsPage)
             case _ =>
