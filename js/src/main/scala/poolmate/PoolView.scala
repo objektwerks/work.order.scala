@@ -14,6 +14,7 @@ object PoolView:
     val builtErrorBus = new EventBus[String]
     val volumeErrorBus = new EventBus[String]
     val errorBus = new EventBus[String]
+    
     div(
       bar(
         btn("Pools").amend {
