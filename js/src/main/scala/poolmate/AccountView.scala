@@ -10,6 +10,9 @@ object AccountView:
   def apply(account: Var[Account]): HtmlElement =
     val errorBus = new EventBus[String]
 
+    def deactivateHandler(event: Either[Fault, Event]): Unit =
+      event.fold(fault => errorBus.emit(s"Deactivate failed: ${fault.cause}"), _ => PageRouter.router.pushState(PoolsPage))
+
     div(
       bar(
         btn("Pools").amend {
