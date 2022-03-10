@@ -52,7 +52,7 @@ object AccountView:
             onClick --> { _ =>
               log("Account -> Deactivate onClick")
               val command = Deactivate(account.now().license)
-              PageRouter.router.pushState(PoolsPage)
+              Proxy.call(command, deactivateHandler)
             }
           },
           btn("Reactivate").amend {
