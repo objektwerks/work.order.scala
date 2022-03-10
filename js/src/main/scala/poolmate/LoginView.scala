@@ -9,13 +9,20 @@ import Error.*
 import Validators.*
 
 object LoginView:
-  def apply(emailAddressVar: Var[String], pinVar: Var[String]): HtmlElement =
+  def apply(emailAddressVar: Var[String], pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
     val emailAddressErrorBus = new EventBus[String]
     val pinErrorBus = new EventBus[String]
     val errorBus = new EventBus[String]
 
     def handler(event: Either[Fault, Event]): Unit =
-      event.fold(fault => errorBus.emit(s"Login failed: ${fault.cause}"), _ => PageRouter.router.pushState(PoolsPage))
+      event match
+        case Right(event) =>
+          event match
+            case LoggedIn(account) =>
+              accountVar.set(account)
+              PageRouter.router.pushState(PoolsPage)
+            case _ =>
+        case Left(fault) => errorBus.emit(s"Login failed: ${fault.cause}")
       
     div(
       bar(

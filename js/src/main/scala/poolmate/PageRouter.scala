@@ -41,7 +41,7 @@ object PageRouter:
   val splitter = SplitRender[Page, HtmlElement](router.$currentPage)
     .collectStatic(IndexPage) { IndexView() }
     .collectStatic(RegisterPage) { RegisterView(Model.emailAddressVar) }
-    .collectStatic(LoginPage) { LoginView(Model.emailAddressVar, Model.pinVar) }
+    .collectStatic(LoginPage) { LoginView(Model.emailAddressVar, Model.pinVar, Model.accountVar) }
     .collectStatic(PoolsPage) { PoolsView(Model.pools) }
-    .collectStatic(AccountPage) { AccountView(Model.account) }
+    .collectStatic(AccountPage) { AccountView(Model.accountVar) }
     .collect[PoolPage] { page => PoolView(Model.pools.setSelectedEntityById(page.id)) }
