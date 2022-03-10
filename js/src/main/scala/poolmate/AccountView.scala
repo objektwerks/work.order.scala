@@ -49,6 +49,7 @@ object AccountView:
         },
         cbar(
           btn("Deactivate").amend {
+            disabled <-- account.signal.map { account => account.deactivated > 0 }
             onClick --> { _ =>
               log("Account -> Deactivate onClick")
               val command = Deactivate(account.now().license)
