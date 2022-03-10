@@ -52,6 +52,7 @@ object AccountView:
           btn("Reactivate").amend {
             onClick --> { _ =>
               log("Account -> Reactivate onClick")
+              val command = Reactivate(account.now().license)
               PageRouter.router.pushState(PoolsPage)
             }
           }      
