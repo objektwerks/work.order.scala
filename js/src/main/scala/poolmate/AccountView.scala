@@ -8,6 +8,8 @@ import Components.*
 
 object AccountView:
   def apply(account: Var[Account]): HtmlElement =
+    val errorBus = new EventBus[String]
+
     div(
       bar(
         btn("Pools").amend {
