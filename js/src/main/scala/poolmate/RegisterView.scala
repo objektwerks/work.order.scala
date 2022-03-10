@@ -17,7 +17,9 @@ object RegisterView:
     val errorBus = new EventBus[String]
 
     def handler(event: Either[Fault, Event]): Unit =
-      event.fold(fault => errorBus.emit(s"Register failed: ${fault.cause}"), _ => PageRouter.router.pushState(IndexPage))
+      event match
+        case Right(event) => PageRouter.router.pushState(IndexPage)
+        case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
       
     div(
       bar(
