@@ -7,7 +7,7 @@ import org.scalajs.dom.console.log
 import Components.*
 
 object AccountView:
-  def apply(account: Var[Account]): HtmlElement =
+  def apply(accountVar: Var[Account]): HtmlElement =
     val errorBus = new EventBus[String]
 
     def deactivateHandler(event: Either[Fault, Event]): Unit =
@@ -29,38 +29,38 @@ object AccountView:
         hdr("Account"),
         lbl("License"),
         rotxt.amend {
-          value <-- account.signal.map(_.license)
+          value <-- accountVar.signal.map(_.license)
         },
         lbl("Email Address"),
         rotxt.amend {
-          value <-- account.signal.map(_.emailAddress)
+          value <-- accountVar.signal.map(_.emailAddress)
         },
         lbl("Pin"),
         rotxt.amend {
-          value <-- account.signal.map(_.pin)
+          value <-- accountVar.signal.map(_.pin)
         },
         lbl("Activated"),
         rotxt.amend {
-          value <-- account.signal.map(_.activated.toString)
+          value <-- accountVar.signal.map(_.activated.toString)
         },
         lbl("Deactivated"),
         rotxt.amend {
-          value <-- account.signal.map(_.deactivated.toString)
+          value <-- accountVar.signal.map(_.deactivated.toString)
         },
         cbar(
           btn("Deactivate").amend {
-            disabled <-- account.signal.map { account => account.deactivated > 0 }
+            disabled <-- accountVar.signal.map { account => account.deactivated > 0 }
             onClick --> { _ =>
               log("Account -> Deactivate onClick")
-              val command = Deactivate(account.now().license)
+              val command = Deactivate(accountVar.now().license)
               Proxy.call(command, deactivateHandler)
             }
           },
           btn("Reactivate").amend {
-            disabled <-- account.signal.map { account => account.activated > 0 }
+            disabled <-- accountVar.signal.map { account => account.activated > 0 }
             onClick --> { _ =>
               log("Account -> Reactivate onClick")
-              val command = Reactivate(account.now().license)
+              val command = Reactivate(accountVar.now().license)
               Proxy.call(command, reactivateHandler)
             }
           }      
