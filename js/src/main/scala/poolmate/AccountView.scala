@@ -57,6 +57,7 @@ object AccountView:
             }
           },
           btn("Reactivate").amend {
+            disabled <-- account.signal.map { account => account.activated > 0 }
             onClick --> { _ =>
               log("Account -> Reactivate onClick")
               val command = Reactivate(account.now().license)
