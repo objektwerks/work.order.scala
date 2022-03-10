@@ -42,7 +42,8 @@ object LoginView:
           }
           onClick --> { _ =>
             log(s"Login onClick -> email address: ${emailAddressVar.now()} pin: ${pinVar.now()}")
-            PageRouter.router.pushState(PoolsPage)
+            val command = Login(emailAddressVar.now(), pinVar.now())
+            Proxy.call(command, handler)
           }
         }
       )
