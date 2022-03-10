@@ -10,9 +10,9 @@ import Validators.*
 
 object PoolView:
   def apply(model: Model[Pool]): HtmlElement =
-    val nameErrors = new EventBus[String]
-    val builtErrors = new EventBus[String]
-    val volumeErrors = new EventBus[String]
+    val nameErrorBus = new EventBus[String]
+    val builtErrorBus = new EventBus[String]
+    val volumeErrorBus = new EventBus[String]
     val errorBus = new EventBus[String]
     div(
       bar(
@@ -32,10 +32,10 @@ object PoolView:
             model.updateSelectedEntity( model.selectedEntityVar.now().copy(name = name) )
           }
           onKeyUp.mapToValue --> { name =>
-            if name.nonEmpty then nameErrors.emit("") else nameErrors.emit(nonEmptyError)
+            if name.nonEmpty then nameErrorBus.emit("") else nameErrorBus.emit(nonEmptyError)
           }
         },
-        err(nameErrors),
+        err(nameErrorBus),
         lbl("Year Built"),
         year.amend {
           value <-- model.selectedEntityVar.signal.map(_.built.toString)
@@ -43,10 +43,10 @@ object PoolView:
             model.updateSelectedEntity( model.selectedEntityVar.now().copy(built = built) )
           }
           onKeyUp.mapToValue.map(_.toInt) --> { built =>
-            if built.isGreaterThanZero then builtErrors.emit("") else builtErrors.emit(nonZeroError)
+            if built.isGreaterThanZero then builtErrorBus.emit("") else builtErrorBus.emit(nonZeroError)
           }
         },
-        err(builtErrors),
+        err(builtErrorBus),
         lbl("Volume"),
         txt.amend {
           value <-- model.selectedEntityVar.signal.map(_.volume.toString)
@@ -54,10 +54,10 @@ object PoolView:
             model.updateSelectedEntity( model.selectedEntityVar.now().copy(volume = volume) )
           }
           onKeyUp.mapToValue.map(_.toInt) --> { volume =>
-            if volume.isGreaterThanZero then volumeErrors.emit("") else volumeErrors.emit(nonZeroError)
+            if volume.isGreaterThanZero then volumeErrorBus.emit("") else volumeErrorBus.emit(nonZeroError)
           }
         },
-        err(volumeErrors)
+        err(volumeErrorBus)
       ),
       cbar(
         btn("Add").amend {
