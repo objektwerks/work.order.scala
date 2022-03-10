@@ -11,7 +11,7 @@ import Validators.*
 object LoginView:
   def apply(emailAddressVar: Var[String], pinVar: Var[String]): HtmlElement =
     val emailAddressErrorBus = new EventBus[String]
-    val pinErrors = new EventBus[String]
+    val pinErrorBus = new EventBus[String]
     val errorBus = new EventBus[String]
     def handler(event: Either[Fault, Event]): Unit =
       event.fold(fault => errorBus.emit(s"Login failed: ${fault.cause}"), _ => PageRouter.router.pushState(PoolsPage))
@@ -31,10 +31,10 @@ object LoginView:
         value <-- pinVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> pinVar
         onKeyUp.mapToValue --> { pin =>
-          if pin.isPin then pinErrors.emit("") else pinErrors.emit(pinError)
+          if pin.isPin then pinErrorBus.emit("") else pinErrorBus.emit(pinError)
         }      
       },
-      err(pinErrors),
+      err(pinErrorBus),
       cbar(
         btn("Login").amend {
           disabled <-- emailAddressVar.signal.combineWithFn(pinVar.signal) {
