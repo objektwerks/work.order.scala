@@ -18,6 +18,14 @@ object LoginView:
       event.fold(fault => errorBus.emit(s"Login failed: ${fault.cause}"), _ => PageRouter.router.pushState(PoolsPage))
       
     div(
+      bar(
+        btn("Home").amend {
+          onClick --> { _ =>
+            log("Login -> Home menu item onClick")
+            PageRouter.router.pushState(IndexPage)
+          }
+        }      
+      ),      
       hdr("Login"),
       lbl("Email Address"),
       email.amend {
