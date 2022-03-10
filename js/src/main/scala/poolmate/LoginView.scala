@@ -25,15 +25,7 @@ object LoginView:
             case _ =>
         case Left(fault) => errorBus.emit(s"Login failed: ${fault.cause}")
       
-    div(
-      bar(
-        btn("Home").amend {
-          onClick --> { _ =>
-            log("Login -> Home menu item onClick")
-            PageRouter.router.pushState(IndexPage)
-          }
-        }      
-      ),      
+    div(      
       hdr("Login"),
       lbl("Email Address"),
       email.amend {
