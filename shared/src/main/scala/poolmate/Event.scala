@@ -30,6 +30,9 @@ final case class TimerAdded(timer: Timer) extends Event
 final case class TimerSettingsListed(timerSettings: Seq[TimerSetting]) extends Event
 final case class TimerSettingAdded(timerSetting: TimerSetting) extends Event
 
+final case class HeatersListed(heaters: Seq[Heater]) extends Event
+final case class HeaterAdded(heater: Heater) extends Event
+
 final case class Fault(dateOf: Int = DateTime.currentDate,
                        timeOf: Int = DateTime.currentTime,
                        nanoOf: Int = DateTime.nano,
