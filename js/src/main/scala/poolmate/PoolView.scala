@@ -87,7 +87,8 @@ object PoolView:
           disabled <-- model.selectedEntityVar.signal.map { pool => pool.id.isGreaterThanZero }
           onClick --> { _ =>
             log(s"Pool -> Update onClick")
-            PageRouter.router.pushState(PoolsPage)
+            val command = UpdatePool("", model.selectedEntityVar.now())
+            Proxy.call(command, updateHandler)
           }
         }
       )
