@@ -14,7 +14,7 @@ object PoolsView extends View:
           event match
             case PoolsListed(pools: Seq[Pool]) =>
               clearErrors()
-
+              model.setEntities(pools)
             case _ =>
         case Left(fault) => errorBus.emit(s"List pools failed: ${fault.cause}")
 
