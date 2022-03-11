@@ -6,7 +6,7 @@ import org.scalajs.dom.console.log
 
 import Components.*
 
-object IndexView:
+object IndexView extends View:
     def apply(): HtmlElement =
       div(
         bar(
