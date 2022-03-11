@@ -84,9 +84,9 @@ final class Handler(emailSender: EmailSender, service: Service):
         service.updateChemical(update.chemical).fold(throwable => Fault(throwable), _ => Updated())
 
       case list: ListSupplies =>
-        service.listSupplies(list.poolId).fold(throwable => Fault(throwable), entities => Listed(entities))
+        service.listSupplies(list.poolId).fold(throwable => Fault(throwable), entities => SuppliesListed(entities))
       case add: AddSupply =>
-        service.addSupply(add.supply).fold(throwable => Fault(throwable), entity => Added(entity))
+        service.addSupply(add.supply).fold(throwable => Fault(throwable), entity => SupplyAdded(entity))
       case update: UpdateSupply =>
         service.updateSupply(update.supply).fold(throwable => Fault(throwable), _ => Updated())
 
