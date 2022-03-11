@@ -46,6 +46,9 @@ final case class ChemicalAdded(chemical: Chemical) extends Event
 final case class SuppliesListed(supplies: Seq[Supply]) extends Event
 final case class SupplyAdded(supply: Supply) extends Event
 
+final case class RepairsListed(repairs: Seq[Repair]) extends Event
+final case class RepairAdded(repair: Repair) extends Event
+
 final case class Fault(dateOf: Int = DateTime.currentDate,
                        timeOf: Int = DateTime.currentTime,
                        nanoOf: Int = DateTime.nano,
