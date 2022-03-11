@@ -70,9 +70,9 @@ final class Handler(emailSender: EmailSender, service: Service):
         service.updateMeasurement(update.measurement).fold(throwable => Fault(throwable), _ => Updated())
 
       case list: ListCleanings =>
-        service.listCleanings(list.poolId).fold(throwable => Fault(throwable), entities => Listed(entities))
+        service.listCleanings(list.poolId).fold(throwable => Fault(throwable), entities => CleaningsListed(entities))
       case add: AddCleaning =>
-        service.addCleaning(add.cleaning).fold(throwable => Fault(throwable), entity => Added(entity))
+        service.addCleaning(add.cleaning).fold(throwable => Fault(throwable), entity => CleaningAdded(entity))
       case update: UpdateCleaning =>
         service.updateCleaning(update.cleaning).fold(throwable => Fault(throwable), _ => Updated())
 
