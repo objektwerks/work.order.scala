@@ -6,7 +6,7 @@ import org.scalajs.dom.console.log
 
 import Components.*
 
-object PoolsView:
+object PoolsView extends View:
   def apply(model: Model[Pool]): HtmlElement =
     div(
       bar(
