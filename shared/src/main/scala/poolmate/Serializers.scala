@@ -120,6 +120,9 @@ object Serializers:
   given measurementsListedRW: ReadWriter[MeasurementsListed] = macroRW
   given measurementAddedRW: ReadWriter[MeasurementAdded] = macroRW
 
+  given cleaningsListedRW: ReadWriter[CleaningsListed] = macroRW
+  given cleaningAddedRW: ReadWriter[CleaningAdded] = macroRW
+
   given faultRW: ReadWriter[Fault] = macroRW
 
   given eventRW: ReadWriter[Event] = ReadWriter.merge(
@@ -127,5 +130,6 @@ object Serializers:
     poolsListedRW, poolAddedRW, surfacesListedRW, surfaceAddedRW, pumpsListedRW,
     pumpAddedRW, timersListedRW, timerAddedRW, timerSettingsListedRW,
     timerSettingAddedRW, heatersListedRW, heaterAddedRW, heaterSettingsListedRW,
-    heaterSettingAddedRW, measurementsListedRW, measurementAddedRW
+    heaterSettingAddedRW, measurementsListedRW, measurementAddedRW, cleaningsListedRW,
+    cleaningAddedRW
   )
