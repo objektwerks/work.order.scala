@@ -8,6 +8,16 @@ import Components.*
 
 object PoolsView extends View:
   def apply(model: Model[Pool]): HtmlElement =
+    def handler(event: Either[Fault, Event]): Unit =
+      event match
+        case Right(event) =>
+          event match
+            case PoolsListed(pools: Seq[Pool]) =>
+              clearErrors()
+              
+            case _ =>
+        case Left(fault) => errorBus.emit(s"List pools failed: ${fault.cause}")
+
     div(
       bar(
         btn("Account").amend {
@@ -18,6 +28,7 @@ object PoolsView extends View:
         }      
       ),
       div(
+        onLoad --> { _ => call(ListPools(""), handler) },
         hdr("Pools"),
         list(
           split(model.entitiesVar, (id: Long) => PoolPage(id))
