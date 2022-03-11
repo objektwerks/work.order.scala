@@ -18,7 +18,7 @@ object AccountView extends View:
             case Deactivated(account) =>
               errorBus.emit("")
               accountVar.set(account)
-              PageRouter.router.pushState(PoolsPage)
+              route(PoolsPage)
             case _ =>
         case Left(fault) => errorBus.emit(s"Deactivate failed: ${fault.cause}")
  
@@ -29,7 +29,7 @@ object AccountView extends View:
             case Reactivated(account) =>
               errorBus.emit("")
               accountVar.set(account)
-              PageRouter.router.pushState(PoolsPage)
+              route(PoolsPage)
             case _ =>
         case Left(fault) => errorBus.emit(s"Reactivate failed: ${fault.cause}")
 
@@ -38,7 +38,7 @@ object AccountView extends View:
         btn("Pools").amend {
           onClick --> { _ =>
             log("Account -> Pools onClick")
-            PageRouter.router.pushState(PoolsPage)
+            route(PoolsPage)
           }
         }      
       ),
@@ -70,7 +70,7 @@ object AccountView extends View:
             onClick --> { _ =>
               log("Account -> Deactivate onClick")
               val command = Deactivate(accountVar.now().license)
-              Proxy.call(command, deactivateHandler)
+              call(command, deactivateHandler)
             }
           },
           btn("Reactivate").amend {
@@ -78,7 +78,7 @@ object AccountView extends View:
             onClick --> { _ =>
               log("Account -> Reactivate onClick")
               val command = Reactivate(accountVar.now().license)
-              Proxy.call(command, reactivateHandler)
+              call(command, reactivateHandler)
             }
           }      
         )
