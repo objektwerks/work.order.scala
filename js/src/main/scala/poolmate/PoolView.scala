@@ -19,9 +19,9 @@ object PoolView:
       event match
         case Right(event) =>
           event match
-            case Added(pool) =>
+            case PoolAdded(pool) =>
               errorBus.emit("")
-              // model.addEntity(pool) TODO!
+              model.addEntity(pool)
               PageRouter.router.pushState(PoolsPage)
             case _ =>
         case Left(fault) => errorBus.emit(s"Add pool failed: ${fault.cause}")
