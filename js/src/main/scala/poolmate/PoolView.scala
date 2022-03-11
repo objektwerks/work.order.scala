@@ -9,7 +9,7 @@ import Error.*
 import Validators.*
 
 object PoolView:
-  def apply(model: Model[Pool]): HtmlElement =
+  def apply(model: Model[Pool], accountVar: Var[Account]): HtmlElement =
     val nameErrorBus = new EventBus[String]
     val builtErrorBus = new EventBus[String]
     val volumeErrorBus = new EventBus[String]
@@ -79,15 +79,16 @@ object PoolView:
           disabled <-- model.selectedEntityVar.signal.map { pool => pool.id.isZero }
           onClick --> { _ =>
             log(s"Pool -> Add onClick")
-            val command = AddPool("", model.selectedEntityVar.now())
+            val command = AddPool(accountVar.now().license, model.selectedEntityVar.now())
             Proxy.call(command, addHandler)
+
           }
         },
         btn("Update").amend {
           disabled <-- model.selectedEntityVar.signal.map { pool => pool.id.isGreaterThanZero }
           onClick --> { _ =>
             log(s"Pool -> Update onClick")
-            val command = UpdatePool("", model.selectedEntityVar.now())
+            val command = UpdatePool(accountVar.now().license, model.selectedEntityVar.now())
             Proxy.call(command, updateHandler)
           }
         }
