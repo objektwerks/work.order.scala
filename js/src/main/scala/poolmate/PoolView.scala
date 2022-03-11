@@ -79,7 +79,8 @@ object PoolView:
           disabled <-- model.selectedEntityVar.signal.map { pool => pool.id.isZero }
           onClick --> { _ =>
             log(s"Pool -> Add onClick")
-            PageRouter.router.pushState(PoolsPage)
+            val command = AddPool("", model.selectedEntityVar.now())
+            Proxy.call(command, addHandler)
           }
         },
         btn("Update").amend {
