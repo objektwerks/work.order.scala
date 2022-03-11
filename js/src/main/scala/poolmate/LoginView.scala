@@ -12,14 +12,13 @@ object LoginView extends View:
   def apply(emailAddressVar: Var[String], pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
     val emailAddressErrorBus = new EventBus[String]
     val pinErrorBus = new EventBus[String]
-    val errorBus = new EventBus[String]
 
     def handler(event: Either[Fault, Event]): Unit =
       event match
         case Right(event) =>
           event match
             case LoggedIn(account) =>
-              errorBus.emit("")
+              clearErrors()
               accountVar.set(account)
               route(PoolsPage)
             case _ =>
