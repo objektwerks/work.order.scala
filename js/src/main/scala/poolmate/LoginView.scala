@@ -8,7 +8,7 @@ import Components.*
 import Error.*
 import Validators.*
 
-object LoginView:
+object LoginView extends View:
   def apply(emailAddressVar: Var[String], pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
     val emailAddressErrorBus = new EventBus[String]
     val pinErrorBus = new EventBus[String]
