@@ -21,7 +21,7 @@ object LoginView extends View:
             case LoggedIn(account) =>
               errorBus.emit("")
               accountVar.set(account)
-              PageRouter.router.pushState(PoolsPage)
+              route(PoolsPage)
             case _ =>
         case Left(fault) => errorBus.emit(s"Login failed: ${fault.cause}")
       
@@ -53,7 +53,7 @@ object LoginView extends View:
           onClick --> { _ =>
             log(s"Login onClick -> email address: ${emailAddressVar.now()} pin: ${pinVar.now()}")
             val command = Login(emailAddressVar.now(), pinVar.now())
-            Proxy.call(command, handler)
+            call(command, handler)
           }
         }
       )
