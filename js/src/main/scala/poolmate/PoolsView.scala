@@ -46,6 +46,6 @@ object PoolsView extends View:
             log(s"Pools -> Refresh onClick")
             call(ListPools(accountVar.now().license), handler)
           }
-        }    
+        }
       )
     )
