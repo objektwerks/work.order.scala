@@ -14,8 +14,12 @@ object AccountView:
     def deactivateHandler(event: Either[Fault, Event]): Unit =
       event match
         case Right(event) =>
-          errorBus.emit("")
-          PageRouter.router.pushState(PoolsPage)
+          event match
+            case Deactivated(account) =>
+              errorBus.emit("")
+              accountVar.set(account)
+              PageRouter.router.pushState(PoolsPage)
+            case _ =>
         case Left(fault) => errorBus.emit(s"Deactivate failed: ${fault.cause}")
  
     def reactivateHandler(event: Either[Fault, Event]): Unit =
