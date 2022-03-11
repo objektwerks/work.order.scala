@@ -19,8 +19,6 @@ object RegisterView:
     def handler(event: Either[Fault, Event]): Unit =
       event match
         case Right(event) =>
-          errorBus.emit("")
-          PageRouter.router.pushState(LoginPage)
           event match
             case Registering() =>
               errorBus.emit("")
