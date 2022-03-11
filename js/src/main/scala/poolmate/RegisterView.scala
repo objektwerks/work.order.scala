@@ -44,7 +44,7 @@ object RegisterView extends View:
           onClick --> { _ =>
             log(s"Register onClick -> email address: ${emailAddressVar.now()}")
             val command = Register(emailAddressVar.now())
-            Proxy.call(command, handler)
+            call(command, handler)
           }
         },
       )
