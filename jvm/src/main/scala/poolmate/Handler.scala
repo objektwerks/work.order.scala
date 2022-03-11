@@ -21,9 +21,9 @@ final class Handler(emailSender: EmailSender, service: Service):
         service.updatePool(update.pool).fold(throwable => Fault(throwable), _ => Updated())
 
       case list: ListSurfaces =>
-        service.listSurfaces(list.poolId).fold(throwable => Fault(throwable), entities => Listed(entities))
+        service.listSurfaces(list.poolId).fold(throwable => Fault(throwable), entities => SurfacesListed(entities))
       case add: AddSurface =>
-        service.addSurface(add.surface).fold(throwable => Fault(throwable), entity => Added(entity))
+        service.addSurface(add.surface).fold(throwable => Fault(throwable), entity => SurfaceAdded(entity))
       case update: UpdateSurface =>
           service.updateSurface(update.surface).fold(throwable => Fault(throwable), _ => Updated())
 
