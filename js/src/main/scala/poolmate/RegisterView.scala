@@ -14,14 +14,13 @@ import Validators.*
 object RegisterView extends View:
   def apply(emailAddressVar: Var[String]): HtmlElement =
     val emailAddressErrorBus = new EventBus[String]
-    val errorBus = new EventBus[String]
 
     def handler(event: Either[Fault, Event]): Unit =
       event match
         case Right(event) =>
           event match
             case Registering() =>
-              errorBus.emit("")
+              clearErrors()
               route(PoolsPage)
             case _ =>
         case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
