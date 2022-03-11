@@ -21,6 +21,11 @@ object RegisterView:
         case Right(event) =>
           errorBus.emit("")
           PageRouter.router.pushState(LoginPage)
+          event match
+            case Registering() =>
+              errorBus.emit("")
+              PageRouter.router.pushState(PoolsPage)
+            case _ =>
         case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
       
     div(
