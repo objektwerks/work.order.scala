@@ -29,8 +29,11 @@ object PoolView:
     def updateHandler(event: Either[Fault, Event]): Unit =
       event match
         case Right(event) =>
-          errorBus.emit("")
-          PageRouter.router.pushState(PoolsPage)
+          event match
+            case Updated() =>
+              errorBus.emit("")
+              PageRouter.router.pushState(PoolsPage)
+            case _ =>
         case Left(fault) => errorBus.emit(s"Update pool failed: ${fault.cause}")
 
     div(
