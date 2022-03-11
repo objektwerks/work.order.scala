@@ -91,8 +91,8 @@ final class Handler(emailSender: EmailSender, service: Service):
         service.updateSupply(update.supply).fold(throwable => Fault(throwable), _ => Updated())
 
       case list: ListRepairs =>
-        service.listRepairs(list.poolId).fold(throwable => Fault(throwable), entities => Listed(entities))
+        service.listRepairs(list.poolId).fold(throwable => Fault(throwable), entities => RepairsListed(entities))
       case add: AddRepair =>
-        service.addRepair(add.repair).fold(throwable => Fault(throwable), entity => Added(entity))
+        service.addRepair(add.repair).fold(throwable => Fault(throwable), entity => RepairAdded(entity))
       case update: UpdateRepair =>
         service.updateRepair(update.repair).fold(throwable => Fault(throwable), _ => Updated())
