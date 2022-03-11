@@ -44,7 +44,8 @@ object PoolsView extends View:
         btn("Refresh").amend {
           onClick --> { _ =>
             log(s"Pools -> Refresh onClick")
-            call(ListPools(accountVar.now().license), handler)
+            val command = ListPools(accountVar.now().license)
+            call(command, handler)
           }
         }
       )
