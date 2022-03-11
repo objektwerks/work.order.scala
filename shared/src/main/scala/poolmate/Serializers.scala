@@ -102,5 +102,6 @@ object Serializers:
   given faultRW: ReadWriter[Fault] = macroRW
 
   given eventRW: ReadWriter[Event] = ReadWriter.merge(
-    registeredRW, loggedInRW, deactivatedRW, reactivatedRW, updatedRW, faultRW
+    registeredRW, loggedInRW, deactivatedRW, reactivatedRW, updatedRW, faultRW,
+    poolsListedRW, poolAddedRW
   )
