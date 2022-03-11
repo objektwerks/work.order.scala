@@ -8,7 +8,7 @@ import Components.*
 import Error.*
 import Validators.*
 
-object PoolView:
+object PoolView extends View:
   def apply(model: Model[Pool], accountVar: Var[Account]): HtmlElement =
     val nameErrorBus = new EventBus[String]
     val builtErrorBus = new EventBus[String]
