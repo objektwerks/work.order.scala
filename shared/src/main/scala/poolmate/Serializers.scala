@@ -94,12 +94,13 @@ object Serializers:
   given deactivatedRW: ReadWriter[Deactivated] = macroRW
   given reactivatedRW: ReadWriter[Reactivated] = macroRW
 
-  given listedRW: ReadWriter[Listed] = macroRW
-  given addedRW: ReadWriter[Added] = macroRW
   given updatedRW: ReadWriter[Updated] = macroRW
+
+  given poolsListedRW: ReadWriter[PoolsListed] = macroRW
+  given poolAddedRW: ReadWriter[PoolAdded] = macroRW
 
   given faultRW: ReadWriter[Fault] = macroRW
 
   given eventRW: ReadWriter[Event] = ReadWriter.merge(
-    registeredRW, loggedInRW, deactivatedRW, reactivatedRW, listedRW, addedRW, updatedRW, faultRW
+    registeredRW, loggedInRW, deactivatedRW, reactivatedRW, updatedRW, faultRW
   )

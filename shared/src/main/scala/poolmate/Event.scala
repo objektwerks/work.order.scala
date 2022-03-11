@@ -15,6 +15,9 @@ final case class Listed(entities: Seq[Entity]) extends Event
 final case class Added(entity: Entity) extends Event
 final case class Updated() extends Event
 
+final case class PoolsListed(pools: Seq[Pool]) extends Event
+final case class PoolAdded(pool: Pool) extends Event
+
 final case class Fault(dateOf: Int = DateTime.currentDate,
                        timeOf: Int = DateTime.currentTime,
                        nanoOf: Int = DateTime.nano,
