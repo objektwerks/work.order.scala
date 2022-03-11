@@ -27,6 +27,9 @@ final case class PumpAdded(pump: Pump) extends Event
 final case class TimersListed(timers: Seq[Timer]) extends Event
 final case class TimerAdded(timer: Timer) extends Event
 
+final case class TimerSettingsListed(timerSettings: Seq[TimerSetting]) extends Event
+final case class TimerSettingAdded(timerSetting: TimerSetting) extends Event
+
 final case class Fault(dateOf: Int = DateTime.currentDate,
                        timeOf: Int = DateTime.currentTime,
                        nanoOf: Int = DateTime.nano,
