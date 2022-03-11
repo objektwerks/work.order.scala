@@ -22,7 +22,7 @@ object PoolView extends View:
             case PoolAdded(pool) =>
               errorBus.emit("")
               model.addEntity(pool)
-              PageRouter.router.pushState(PoolsPage)
+              route(PoolsPage)
             case _ =>
         case Left(fault) => errorBus.emit(s"Add pool failed: ${fault.cause}")
 
@@ -32,7 +32,7 @@ object PoolView extends View:
           event match
             case Updated() =>
               errorBus.emit("")
-              PageRouter.router.pushState(PoolsPage)
+              route(PoolsPage)
             case _ =>
         case Left(fault) => errorBus.emit(s"Update pool failed: ${fault.cause}")
 
@@ -41,7 +41,7 @@ object PoolView extends View:
         btn("Pools").amend {
           onClick --> { _ =>
             log("Pool -> Pools onClick")
-            PageRouter.router.pushState(PoolsPage)
+            route(PoolsPage)
           }
         }      
       ),
@@ -87,7 +87,7 @@ object PoolView extends View:
           onClick --> { _ =>
             log(s"Pool -> Add onClick")
             val command = AddPool(accountVar.now().license, model.selectedEntityVar.now())
-            Proxy.call(command, addHandler)
+            call(command, addHandler)
 
           }
         },
@@ -96,7 +96,7 @@ object PoolView extends View:
           onClick --> { _ =>
             log(s"Pool -> Update onClick")
             val command = UpdatePool(accountVar.now().license, model.selectedEntityVar.now())
-            Proxy.call(command, updateHandler)
+            call(command, updateHandler)
           }
         }
       )
