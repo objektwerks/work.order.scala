@@ -7,7 +7,7 @@ import org.scalajs.dom.console.log
 import Components.*
 import Validators.*
 
-object AccountView:
+object AccountView extends View:
   def apply(accountVar: Var[Account]): HtmlElement =
     val errorBus = new EventBus[String]
 
