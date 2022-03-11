@@ -34,6 +34,9 @@ final case class HeaterAdded(heater: Heater) extends Event
 final case class HeaterSettingsListed(heaterSettings: Seq[HeaterSetting]) extends Event
 final case class HeaterSettingAdded(heaterSetting: HeaterSetting) extends Event
 
+final case class MeasurementsListed(measurements: Seq[Measurement]) extends Event
+final case class MeasurementAdded(measurement: Measurement) extends Event
+
 final case class Fault(dateOf: Int = DateTime.currentDate,
                        timeOf: Int = DateTime.currentTime,
                        nanoOf: Int = DateTime.nano,
