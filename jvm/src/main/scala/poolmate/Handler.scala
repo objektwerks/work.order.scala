@@ -63,9 +63,9 @@ final class Handler(emailSender: EmailSender, service: Service):
         service.updateHeaterSetting(update.heaterSetting).fold(throwable => Fault(throwable), _ => Updated())
 
       case list: ListMeasurements =>
-        service.listMeasurements(list.poolId).fold(throwable => Fault(throwable), entities => Listed(entities))
+        service.listMeasurements(list.poolId).fold(throwable => Fault(throwable), entities => MeasurementsListed(entities))
       case add: AddMeasurement =>
-        service.addMeasurement(add.measurement).fold(throwable => Fault(throwable), entity => Added(entity))
+        service.addMeasurement(add.measurement).fold(throwable => Fault(throwable), entity => MeasurementAdded(entity))
       case update: UpdateMeasurement =>
         service.updateMeasurement(update.measurement).fold(throwable => Fault(throwable), _ => Updated())
 
