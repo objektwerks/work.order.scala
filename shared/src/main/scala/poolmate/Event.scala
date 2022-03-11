@@ -21,6 +21,9 @@ final case class PoolAdded(pool: Pool) extends Event
 final case class SurfacesListed(surfaces: Seq[Surface]) extends Event
 final case class SurfaceAdded(surface: Surface) extends Event
 
+final case class PumpsListed(pumps: Seq[Pump]) extends Event
+final case class PumpAdded(pump: Pump) extends Event
+
 final case class Fault(dateOf: Int = DateTime.currentDate,
                        timeOf: Int = DateTime.currentTime,
                        nanoOf: Int = DateTime.nano,
