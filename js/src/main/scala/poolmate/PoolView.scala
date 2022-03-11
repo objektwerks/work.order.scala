@@ -18,8 +18,12 @@ object PoolView:
     def addHandler(event: Either[Fault, Event]): Unit =
       event match
         case Right(event) =>
-          errorBus.emit("")
-          PageRouter.router.pushState(PoolsPage)
+          event match
+            case Added(pool) =>
+              errorBus.emit("")
+              // model.addEntity(pool) TODO!
+              PageRouter.router.pushState(PoolsPage)
+            case _ =>
         case Left(fault) => errorBus.emit(s"Add pool failed: ${fault.cause}")
 
     def updateHandler(event: Either[Fault, Event]): Unit =
