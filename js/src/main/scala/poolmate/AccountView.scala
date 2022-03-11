@@ -9,14 +9,12 @@ import Validators.*
 
 object AccountView extends View:
   def apply(accountVar: Var[Account]): HtmlElement =
-    val errorBus = new EventBus[String]
-
     def deactivateHandler(event: Either[Fault, Event]): Unit =
       event match
         case Right(event) =>
           event match
             case Deactivated(account) =>
-              errorBus.emit("")
+              clearErrors()
               accountVar.set(account)
               route(PoolsPage)
             case _ =>
@@ -27,7 +25,7 @@ object AccountView extends View:
         case Right(event) =>
           event match
             case Reactivated(account) =>
-              errorBus.emit("")
+              clearErrors()
               accountVar.set(account)
               route(PoolsPage)
             case _ =>
