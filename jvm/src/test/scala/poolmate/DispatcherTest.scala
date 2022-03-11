@@ -186,7 +186,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   def testAddTimer(dispatcher: Dispatcher, pool: Pool, timer: Timer): Timer =
     val add = AddTimer(pool.license, timer)
     dispatcher.dispatch(add) match
-      case Added(timer: Timer) =>
+      case TimerAdded(timer: Timer) =>
         timer.id > 0 shouldBe true
         timer
       case event: Event => logger.error(event.toString); fail()
@@ -194,7 +194,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   def testListTimers(dispatcher: Dispatcher, pool: Pool): Unit =
     val list = ListTimers(pool.license, pool.id)
     dispatcher.dispatch(list) match
-      case Listed(timers) => timers.size shouldBe 1
+      case TimersListed(timers) => timers.size shouldBe 1
       case event: Event => logger.error(event.toString); fail()
 
   def testUpdateTimer(dispatcher: Dispatcher, pool: Pool, timer: Timer): Unit =
