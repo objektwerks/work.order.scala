@@ -40,6 +40,12 @@ object PoolsView extends View:
             log(s"Pools -> Add onClick")
             route(PoolPage())
           }
-        }
+        },
+        btn("Refresh").amend {
+          onClick --> { _ =>
+            log(s"Pools -> Refresh onClick")
+            call(ListPools(accountVar.now().license), handler)
+          }
+        }    
       )
     )
