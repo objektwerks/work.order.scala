@@ -5,6 +5,7 @@ import com.raquo.laminar.api.L.*
 import org.scalajs.dom.console.log
 
 import Components.*
+import Validators.*
 
 object AccountView:
   def apply(accountVar: Var[Account]): HtmlElement =
@@ -57,7 +58,7 @@ object AccountView:
         },
         cbar(
           btn("Deactivate").amend {
-            disabled <-- accountVar.signal.map { account => account.deactivated > 0 }
+            disabled <-- accountVar.signal.map { account => account.isDeactivated }
             onClick --> { _ =>
               log("Account -> Deactivate onClick")
               val command = Deactivate(accountVar.now().license)
@@ -65,7 +66,7 @@ object AccountView:
             }
           },
           btn("Reactivate").amend {
-            disabled <-- accountVar.signal.map { account => account.activated > 0 }
+            disabled <-- accountVar.signal.map { account => account.isActivated }
             onClick --> { _ =>
               log("Account -> Reactivate onClick")
               val command = Reactivate(accountVar.now().license)
