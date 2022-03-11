@@ -14,6 +14,13 @@ object PoolView:
     val builtErrorBus = new EventBus[String]
     val volumeErrorBus = new EventBus[String]
     val errorBus = new EventBus[String]
+
+    def addHandler(event: Either[Fault, Event]): Unit =
+      event match
+        case Right(event) =>
+          errorBus.emit("")
+          PageRouter.router.pushState(PoolsPage)
+        case Left(fault) => errorBus.emit(s"Add pool failed: ${fault.cause}")
     
     div(
       bar(
