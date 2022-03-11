@@ -114,11 +114,15 @@ object Serializers:
   given heatersListedRW: ReadWriter[HeatersListed] = macroRW
   given heaterAddedRW: ReadWriter[HeaterAdded] = macroRW
 
+  given heaterSettingsListedRW: ReadWriter[HeaterSettingsListed] = macroRW
+  given heaterSettingAddedRW: ReadWriter[HeaterSettingAdded] = macroRW
+
   given faultRW: ReadWriter[Fault] = macroRW
 
   given eventRW: ReadWriter[Event] = ReadWriter.merge(
     registeredRW, loggedInRW, deactivatedRW, reactivatedRW, updatedRW, faultRW,
     poolsListedRW, poolAddedRW, surfacesListedRW, surfaceAddedRW, pumpsListedRW,
     pumpAddedRW, timersListedRW, timerAddedRW, timerSettingsListedRW,
-    timerSettingAddedRW, heatersListedRW, heaterAddedRW
+    timerSettingAddedRW, heatersListedRW, heaterAddedRW, heaterSettingsListedRW,
+    heaterSettingAddedRW
   )
