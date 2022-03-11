@@ -19,6 +19,8 @@ final case class Model[E <: Entity](entitiesVar: Var[Seq[E]],
 
   def addEntity(entity: E): Unit = entitiesVar.update(_ :+ entity)
 
+  def setEntities(entities: Seq[E]): Unit = entitiesVar.set(entities)
+
   def setSelectedEntityById(id: Long): Model[E] =
     selectedEntityVar.set(entitiesVar.now().find(_.id == id).getOrElse(emptyEntity))
     this
