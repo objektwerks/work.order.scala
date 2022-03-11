@@ -77,9 +77,9 @@ final class Handler(emailSender: EmailSender, service: Service):
         service.updateCleaning(update.cleaning).fold(throwable => Fault(throwable), _ => Updated())
 
       case list: ListChemicals =>
-        service.listChemicals(list.poolId).fold(throwable => Fault(throwable), entities => Listed(entities))
+        service.listChemicals(list.poolId).fold(throwable => Fault(throwable), entities => ChemicalsListed(entities))
       case add: AddChemical =>
-        service.addChemical(add.chemical).fold(throwable => Fault(throwable), entity => Added(entity))
+        service.addChemical(add.chemical).fold(throwable => Fault(throwable), entity => ChemicalAdded(entity))
       case update: UpdateChemical =>
         service.updateChemical(update.chemical).fold(throwable => Fault(throwable), _ => Updated())
 
