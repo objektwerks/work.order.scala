@@ -42,9 +42,9 @@ final class Handler(emailSender: EmailSender, service: Service):
         service.updateTimer(update.timer).fold(throwable => Fault(throwable), _ => Updated())
 
       case list: ListTimerSettings =>
-        service.listTimerSettings(list.timerId).fold(throwable => Fault(throwable), entities => Listed(entities))
+        service.listTimerSettings(list.timerId).fold(throwable => Fault(throwable), entities => TimerSettingsListed(entities))
       case add: AddTimerSetting =>
-        service.addTimerSetting(add.timerSetting).fold(throwable => Fault(throwable), entity => Added(entity))
+        service.addTimerSetting(add.timerSetting).fold(throwable => Fault(throwable), entity => TimerSettingAdded(entity))
       case update: UpdateTimerSetting =>
         service.updateTimerSetting(update.timerSetting).fold(throwable => Fault(throwable), _ => Updated())
 
