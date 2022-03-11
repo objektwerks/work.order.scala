@@ -49,9 +49,9 @@ final class Handler(emailSender: EmailSender, service: Service):
         service.updateTimerSetting(update.timerSetting).fold(throwable => Fault(throwable), _ => Updated())
 
       case list: ListHeaters =>
-        service.listHeaters(list.poolId).fold(throwable => Fault(throwable), entities => Listed(entities))
+        service.listHeaters(list.poolId).fold(throwable => Fault(throwable), entities => HeatersListed(entities))
       case add: AddHeater =>
-        service.addHeater(add.heater).fold(throwable => Fault(throwable), entity => Added(entity))
+        service.addHeater(add.heater).fold(throwable => Fault(throwable), entity => HeaterAdded(entity))
       case update: UpdateHeater =>
         service.updateHeater(update.heater).fold(throwable => Fault(throwable), _ => Updated())
 
