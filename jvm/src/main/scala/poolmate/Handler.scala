@@ -35,9 +35,9 @@ final class Handler(emailSender: EmailSender, service: Service):
         service.updatePump(update.pump).fold(throwable => Fault(throwable), _ => Updated())
 
       case list: ListTimers =>
-        service.listTimers(list.poolId).fold(throwable => Fault(throwable), entities => Listed(entities))
+        service.listTimers(list.poolId).fold(throwable => Fault(throwable), entities => TimersListed(entities))
       case add: AddTimer =>
-        service.addTimer(add.timer).fold(throwable => Fault(throwable), entity => Added(entity))
+        service.addTimer(add.timer).fold(throwable => Fault(throwable), entity => TimerAdded(entity))
       case update: UpdateTimer =>
         service.updateTimer(update.timer).fold(throwable => Fault(throwable), _ => Updated())
 
