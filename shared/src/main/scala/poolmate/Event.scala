@@ -40,6 +40,9 @@ final case class MeasurementAdded(measurement: Measurement) extends Event
 final case class CleaningsListed(cleanings: Seq[Cleaning]) extends Event
 final case class CleaningAdded(cleaning: Cleaning) extends Event
 
+final case class ChemicalsListed(chemicals: Seq[Chemical]) extends Event
+final case class ChemicalAdded(chemical: Chemical) extends Event
+
 final case class Fault(dateOf: Int = DateTime.currentDate,
                        timeOf: Int = DateTime.currentTime,
                        nanoOf: Int = DateTime.nano,
