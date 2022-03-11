@@ -150,7 +150,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   def testAddSurface(dispatcher: Dispatcher, pool: Pool, surface: Surface): Surface =
     val add = AddSurface(pool.license, surface)
     dispatcher.dispatch(add) match
-      case Added(surface: Surface) =>
+      case SurfaceAdded(surface: Surface) =>
         surface.id > 0 shouldBe true
         surface
       case event: Event => logger.error(event.toString); fail()
@@ -158,7 +158,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   def testListSurfaces(dispatcher: Dispatcher, pool: Pool): Unit =
     val list = ListSurfaces(pool.license, pool.id)
     dispatcher.dispatch(list) match
-      case Listed(surfaces) => surfaces.size shouldBe 1
+      case SurfacesListed(surfaces) => surfaces.size shouldBe 1
       case event: Event => logger.error(event.toString); fail()
 
   def testUpdateSurface(dispatcher: Dispatcher, pool: Pool, surface: Surface): Unit =
