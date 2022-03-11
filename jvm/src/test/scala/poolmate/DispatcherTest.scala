@@ -222,7 +222,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   def testAddHeater(dispatcher: Dispatcher, pool: Pool, heater: Heater): Heater =
     val add = AddHeater(pool.license, heater)
     dispatcher.dispatch(add) match
-      case Added(heater: Heater) =>
+      case HeaterAdded(heater: Heater) =>
         heater.id > 0 shouldBe true
         heater
       case event: Event => logger.error(event.toString); fail()
@@ -230,7 +230,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   def testListHeaters(dispatcher: Dispatcher, pool: Pool): Unit =
     val list = ListHeaters(pool.license, pool.id)
     dispatcher.dispatch(list) match
-      case Listed(heaters) => heaters.size shouldBe 1
+      case HeatersListed(heaters) => heaters.size shouldBe 1
       case event: Event => logger.error(event.toString); fail()
 
   def testUpdateHeater(dispatcher: Dispatcher, pool: Pool, heater: Heater): Unit =
