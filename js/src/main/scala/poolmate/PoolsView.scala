@@ -28,7 +28,10 @@ object PoolsView extends View:
         }      
       ),
       div(
-        onLoad --> { _ => call(ListPools(accountVar.now().license), handler) },
+        onLoad --> { _ => 
+          val command = ListPools(accountVar.now().license)
+          call(command, handler)
+        },
         hdr("Pools"),
         list(
           split(model.entitiesVar, (id: Long) => PoolPage(id))
