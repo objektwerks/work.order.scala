@@ -330,7 +330,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   def testAddRepair(dispatcher: Dispatcher, pool: Pool, repair: Repair): Repair =
     val add = AddRepair(pool.license, repair)
     dispatcher.dispatch(add) match
-      case Added(repair: Repair) =>
+      case RepairAdded(repair: Repair) =>
         repair.id > 0 shouldBe true
         repair
       case event: Event => logger.error(event.toString); fail()
@@ -338,7 +338,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   def testListRepairs(dispatcher: Dispatcher, pool: Pool): Unit =
     val list = ListRepairs(pool.license, pool.id)
     dispatcher.dispatch(list) match
-      case Listed(repairs) => repairs.size shouldBe 1
+      case RepairsListed(repairs) => repairs.size shouldBe 1
       case event: Event => logger.error(event.toString); fail()
 
   def testUpdateRepair(dispatcher: Dispatcher, pool: Pool, repair: Repair): Unit =
