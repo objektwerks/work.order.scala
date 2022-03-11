@@ -13,7 +13,7 @@ object PoolsView extends View:
         btn("Account").amend {
           onClick --> { _ =>
             log("Pools -> Account menu item onClick")
-            PageRouter.router.pushState(AccountPage)
+            route(AccountPage)
           }
         }      
       ),
@@ -27,7 +27,7 @@ object PoolsView extends View:
         btn("Add").amend {
           onClick --> { _ =>
             log(s"Pools -> Add onClick")
-            PageRouter.router.pushState(PoolPage())
+            route(PoolPage())
           }
         }
       )
