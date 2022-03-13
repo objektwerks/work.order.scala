@@ -72,6 +72,7 @@ View(Menu) ! Action -> Page
    * Login ! Login -> Pools
 2. Pool
    * Pools(Account) ! Add -> Pool(Pools) ! Add, Update -> Pools
+   * Account(Pools) ! Deactivate, Reactivate -> Pools
    * Surfaces(Pool) ! Add -> Surface(Surfaces) ! Add, Update -> Surfaces
    * Pumps(Pool) ! Add -> Pump(Pumps) ! Add, Update -> Pumps
    * Timers(Pool) ! Add -> Timer(Timers) ! Add, Update -> Timers
