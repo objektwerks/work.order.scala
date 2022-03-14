@@ -16,7 +16,7 @@ object AccountView extends View:
             case Deactivated(account) =>
               clearErrors()
               accountVar.set(account)
-              route(PoolsPage)
+              route(HomePage)
             case _ =>
         case Left(fault) => errorBus.emit(s"Deactivate failed: ${fault.cause}")
  
