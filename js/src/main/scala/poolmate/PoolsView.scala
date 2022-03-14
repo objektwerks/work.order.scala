@@ -38,9 +38,9 @@ object PoolsView extends View:
         )
       ),
       cbar(
-        btn("Add").amend {
+        btn("New").amend {
           onClick --> { _ =>
-            log(s"Pools -> Add onClick")
+            log(s"Pools -> New onClick")
             route(PoolPage())
           }
         },
