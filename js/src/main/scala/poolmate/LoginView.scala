@@ -20,7 +20,7 @@ object LoginView extends View:
             case LoggedIn(account) =>
               clearErrors()
               accountVar.set(account)
-              route(PoolsPage)
+              route(HomePage)
             case _ =>
         case Left(fault) => errorBus.emit(s"Login failed: ${fault.cause}")
       
