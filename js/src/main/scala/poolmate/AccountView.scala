@@ -32,53 +32,43 @@ object AccountView extends View:
         case Left(fault) => errorBus.emit(s"Reactivate failed: ${fault.cause}")
 
     div(
-      bar(
-        btn("Pools").amend {
+      hdr("Account"),
+      lbl("License"),
+      rotxt.amend {
+        value <-- accountVar.signal.map(_.license)
+      },
+      lbl("Email Address"),
+      rotxt.amend {
+        value <-- accountVar.signal.map(_.emailAddress)
+      },
+      lbl("Pin"),
+      rotxt.amend {
+        value <-- accountVar.signal.map(_.pin)
+      },
+      lbl("Activated"),
+      rotxt.amend {
+        value <-- accountVar.signal.map(_.activated.toString)
+      },
+      lbl("Deactivated"),
+      rotxt.amend {
+        value <-- accountVar.signal.map(_.deactivated.toString)
+      },
+      cbar(
+        btn("Deactivate").amend {
+          disabled <-- accountVar.signal.map { account => account.isDeactivated }
           onClick --> { _ =>
-            log("Account -> Pools onClick")
-            route(PoolsPage)
+            log("Account -> Deactivate onClick")
+            val command = Deactivate(accountVar.now().license)
+            call(command, deactivateHandler)
+          }
+        },
+        btn("Reactivate").amend {
+          disabled <-- accountVar.signal.map { account => account.isActivated }
+          onClick --> { _ =>
+            log("Account -> Reactivate onClick")
+            val command = Reactivate(accountVar.now().license)
+            call(command, reactivateHandler)
           }
         }      
-      ),
-      div(
-        hdr("Account"),
-        lbl("License"),
-        rotxt.amend {
-          value <-- accountVar.signal.map(_.license)
-        },
-        lbl("Email Address"),
-        rotxt.amend {
-          value <-- accountVar.signal.map(_.emailAddress)
-        },
-        lbl("Pin"),
-        rotxt.amend {
-          value <-- accountVar.signal.map(_.pin)
-        },
-        lbl("Activated"),
-        rotxt.amend {
-          value <-- accountVar.signal.map(_.activated.toString)
-        },
-        lbl("Deactivated"),
-        rotxt.amend {
-          value <-- accountVar.signal.map(_.deactivated.toString)
-        },
-        cbar(
-          btn("Deactivate").amend {
-            disabled <-- accountVar.signal.map { account => account.isDeactivated }
-            onClick --> { _ =>
-              log("Account -> Deactivate onClick")
-              val command = Deactivate(accountVar.now().license)
-              call(command, deactivateHandler)
-            }
-          },
-          btn("Reactivate").amend {
-            disabled <-- accountVar.signal.map { account => account.isActivated }
-            onClick --> { _ =>
-              log("Account -> Reactivate onClick")
-              val command = Reactivate(accountVar.now().license)
-              call(command, reactivateHandler)
-            }
-          }      
-        )
       )
     )
