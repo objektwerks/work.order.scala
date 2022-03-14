@@ -62,7 +62,7 @@ Account
 
 Model
 -----
-1. Model
+1. Model -> Model[E <: Entity](entitiesVar: Var[Seq[E]], selectedEntityVar: Var[E], emptyEntity: E)
 
 View(Menu) ! Action -> Page
 ---------------------------
