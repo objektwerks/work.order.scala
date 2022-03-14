@@ -13,13 +13,13 @@ object IndexView extends View:
           btn("Login").amend {
             onClick --> { _ =>
               log("Index -> Login menu item onClick")
-              PageRouter.router.pushState(LoginPage)
+              route(LoginPage)
             }
           },
           rbtn("Register").amend {
             onClick --> { _ =>
               log("Index -> Register menu item onClick")
-              PageRouter.router.pushState(RegisterPage)
+              route(RegisterPage)
             }
           }          
         )
