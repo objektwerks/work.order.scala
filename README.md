@@ -60,10 +60,6 @@ Account
 * Deactivate( license ) => Deactivated( account )
 * Reactivate( license ) => Reactivated( account )
 
-Model
------
-1. Model -> Model[E <: Entity](entitiesVar: Var[Seq[E]], selectedEntityVar: Var[E], emptyEntity: E)
-
 View(Menu) ! Action -> Page
 ---------------------------
 1. Home
@@ -95,6 +91,10 @@ View(Menu) ! Action -> Page
 *** Charts:
 * measurements, cleanings, chemicals
 * supplies, repairs
+
+Model
+-----
+1. Model -> Model[E <: Entity](entitiesVar: Var[Seq[E]], selectedEntityVar: Var[E], emptyEntity: E)
 
 Entity Model
 ------------
