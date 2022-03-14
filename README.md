@@ -69,7 +69,8 @@ View(Menu) ! Action -> Page
 1. Home
    * Index(Login, Register)
    * Register ! Register -> Login
-   * Login ! Login -> Home(Account, Pools)
+   * Login ! Login -> Home
+   * Home(Account, Pools)
    * Account(Home) ! Deactivate, Reactivate -> Home
 2. Pool
    * Pools(Home) ! Add -> Pool(Pools) ! Add, Update -> Pools
