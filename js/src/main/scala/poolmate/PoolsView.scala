@@ -44,6 +44,12 @@ object PoolsView extends View:
             route(PoolPage())
           }
         },
+        btn("View").amend {
+          onClick --> { _ =>
+            log(s"Pools -> View onClick")
+            route(PoolPage())
+          }
+        },        
         btn("Refresh").amend {
           onClick --> { _ =>
             log(s"Pools -> Refresh onClick")
