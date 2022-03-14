@@ -80,15 +80,19 @@ View(Menu) ! Action -> Page
      * Timer !  New, View -> TimerSettings(Timer) ! Add -> TimerSetting ! Add, Update -> TimerSettings
    * Heaters(Pool) !  New, View -> Heater(Heaters) ! Add, Update -> Heaters
      * Heater !  New, View -> HeaterSettings(Heater) ! Add -> HeaterSetting ! Add, Update -> HeaterSettings
-3. Maintenance **
+3. Maintenance ***
    * Measurements(Pool) !  New, View -> Measurement(Measurements) ! Add, Update -> Measurements
    * Cleanings(Pool) !  New, View -> Cleaning(Cleanings) ! Add, Update -> Cleanings
    * Chemicals(Pool) !  New, View -> Chemical(Chemicals) ! Add, Update -> Chemicals
-4. Expenses **
+4. Expenses ***
    * Supplies(Pool) !  New, View -> Supply(Supplies) ! Add, Update -> Supplies
    * Repairs(Pool) !  New, View -> Repair(Repairs) ! Add, Update -> Repairs
 
-** Charts:
+** Actions:
+* New, View, Refresh = NVR
+* Add, Update = AU
+
+*** Charts:
 * measurements, cleanings, chemicals
 * supplies, repairs
 
