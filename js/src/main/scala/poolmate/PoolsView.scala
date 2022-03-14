@@ -20,10 +20,10 @@ object PoolsView extends View:
 
     div(
       bar(
-        btn("Account").amend {
+        btn("Home").amend {
           onClick --> { _ =>
-            log("Pools -> Account menu item onClick")
-            route(AccountPage)
+            log("Pools -> Home menu item onClick")
+            route(HomePage)
           }
         }      
       ),
