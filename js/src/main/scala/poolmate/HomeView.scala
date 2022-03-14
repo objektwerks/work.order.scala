@@ -14,14 +14,14 @@ object HomeView extends View:
           btn("Account").amend {
             onClick --> { _ =>
               log("Home -> Account menu item onClick")
-              PageRouter.router.pushState(AccountPage)
+              route(AccountPage)
             }
           },
           rbtn("Pools").amend {
             disabled <-- accountVar.signal.map { account => account.isDeactivated }
             onClick --> { _ =>
               log("Home -> Pools menu item onClick")
-              PageRouter.router.pushState(PoolsPage)
+              route(PoolsPage)
             }
           }          
         )
