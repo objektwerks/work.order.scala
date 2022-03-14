@@ -70,7 +70,7 @@ View(Menu) ! Action -> Page
    * Index(Login, Register)
    * Register ! Register -> Login
    * Login ! Login -> Home(Account, Pools)
-   * Account ! Deactivate, Reactivate -> Home
+   * Account(Home) ! Deactivate, Reactivate -> Home
 2. Pool
    * Pools(Home) ! Add -> Pool(Pools) ! Add, Update -> Pools
    * Surfaces(Pool) ! Add -> Surface(Surfaces) ! Add, Update -> Surfaces
