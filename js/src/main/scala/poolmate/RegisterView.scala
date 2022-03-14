@@ -21,7 +21,7 @@ object RegisterView extends View:
           event match
             case Registering() =>
               clearErrors()
-              route(PoolsPage)
+              route(LoginPage)
             case _ =>
         case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
       
