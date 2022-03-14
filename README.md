@@ -69,10 +69,10 @@ View(Menu) ! Action -> Page
 1. Home
    * Index(Login, Register)
    * Register ! Register -> Login
-   * Login ! Login -> Pools
+   * Login ! Login -> Home(Account, Pools)
+   * Account ! Deactivate, Reactivate -> Home
 2. Pool
-   * Pools(Account) ! Add -> Pool(Pools) ! Add, Update -> Pools
-   * Account(Pools) ! Deactivate, Reactivate -> Pools
+   * Pools(Home) ! Add -> Pool(Pools) ! Add, Update -> Pools
    * Surfaces(Pool) ! Add -> Surface(Surfaces) ! Add, Update -> Surfaces
    * Pumps(Pool) ! Add -> Pump(Pumps) ! Add, Update -> Pumps
    * Timers(Pool) ! Add -> Timer(Timers) ! Add, Update -> Timers
