@@ -73,20 +73,20 @@ View(Menu) ! Action -> Page
    * Home(Account, Pools)
    * Account(Home) ! Deactivate, Reactivate -> Home
 2. Pool
-   * Pools(Home) ! Add -> Pool(Pools) ! Add, Update -> Pools
-   * Surfaces(Pool) ! Add -> Surface(Surfaces) ! Add, Update -> Surfaces
-   * Pumps(Pool) ! Add -> Pump(Pumps) ! Add, Update -> Pumps
-   * Timers(Pool) ! Add -> Timer(Timers) ! Add, Update -> Timers
-     * Timer ! Add -> TimerSettings(Timer) ! Add -> TimerSetting ! Add, Update -> TimerSettings
-   * Heaters(Pool) ! Add -> Heater(Heaters) ! Add, Update -> Heaters
-     * Heater ! Add -> HeaterSettings(Heater) ! Add -> HeaterSetting ! Add, Update -> HeaterSettings
+   * Pools(Home) ! New, View -> Pool(Pools) ! Add, Update -> Pools
+   * Surfaces(Pool) !  New, View -> Surface(Surfaces) ! Add, Update -> Surfaces
+   * Pumps(Pool) !  New, View -> Pump(Pumps) ! Add, Update -> Pumps
+   * Timers(Pool) !  New, View -> Timer(Timers) ! Add, Update -> Timers
+     * Timer !  New, View -> TimerSettings(Timer) ! Add -> TimerSetting ! Add, Update -> TimerSettings
+   * Heaters(Pool) !  New, View -> Heater(Heaters) ! Add, Update -> Heaters
+     * Heater !  New, View -> HeaterSettings(Heater) ! Add -> HeaterSetting ! Add, Update -> HeaterSettings
 3. Maintenance **
-   * Measurements(Pool) ! Add -> Measurement(Measurements) ! Add, Update -> Measurements
-   * Cleanings(Pool) ! Add -> Cleaning(Cleanings) ! Add, Update -> Cleanings
-   * Chemicals(Pool) ! Add -> Chemical(Chemicals) ! Add, Update -> Chemicals
+   * Measurements(Pool) !  New, View -> Measurement(Measurements) ! Add, Update -> Measurements
+   * Cleanings(Pool) !  New, View -> Cleaning(Cleanings) ! Add, Update -> Cleanings
+   * Chemicals(Pool) !  New, View -> Chemical(Chemicals) ! Add, Update -> Chemicals
 4. Expenses **
-   * Supplies(Pool) ! Add -> Supply(Supplies) ! Add, Update -> Supplies
-   * Repairs(Pool) ! Add -> Repair(Repairs) ! Add, Update -> Repairs
+   * Supplies(Pool) !  New, View -> Supply(Supplies) ! Add, Update -> Supplies
+   * Repairs(Pool) !  New, View -> Repair(Repairs) ! Add, Update -> Repairs
 
 ** Charts:
 * measurements, cleanings, chemicals
