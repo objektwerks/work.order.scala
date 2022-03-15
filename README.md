@@ -69,20 +69,20 @@ View(Menu) ! Action -> Page
    * Home(Account, Pools)
    * Account(Home) ! Deactivate, Reactivate -> Home
 2. Pool **
-   * Pools(Home) ! NVR -> Pool(Pools) ! AU -> Pools
-   * Surfaces(Pool) !  NVR -> Surface(Surfaces) ! AU -> Surfaces
-   * Pumps(Pool) !  NVR -> Pump(Pumps) ! AU -> Pumps
-   * Timers(Pool) !  NVR -> Timer(Timers) ! AU -> Timers
-     * Timer !  NVR -> TimerSettings(Timer) ! NVR -> TimerSetting ! AU -> TimerSettings
-   * Heaters(Pool) ! NVR -> Heater(Heaters) ! AU -> Heaters
-     * Heater !  NVR -> HeaterSettings(Heater) ! NVR -> HeaterSetting ! AU -> HeaterSettings
+   * Pools(Home) ! NR -> Pool(Pools) ! AU -> Pools
+   * Surfaces(Pool) !  NR -> Surface(Surfaces) ! AU -> Surfaces
+   * Pumps(Pool) !  NR -> Pump(Pumps) ! AU -> Pumps
+   * Timers(Pool) !  NR -> Timer(Timers) ! AU -> Timers
+     * Timer !  NR -> TimerSettings(Timer) ! NR -> TimerSetting ! AU -> TimerSettings
+   * Heaters(Pool) ! NR -> Heater(Heaters) ! AU -> Heaters
+     * Heater !  NR -> HeaterSettings(Heater) ! NR -> HeaterSetting ! AU -> HeaterSettings
 3. Maintenance **, ***
-   * Measurements(Pool) !  NVR -> Measurement(Measurements) ! AU -> Measurements
-   * Cleanings(Pool) !  NVR -> Cleaning(Cleanings) ! AU -> Cleanings
-   * Chemicals(Pool) !  NVR -> Chemical(Chemicals) ! AU -> Chemicals
+   * Measurements(Pool) !  NR -> Measurement(Measurements) ! AU -> Measurements
+   * Cleanings(Pool) !  NR -> Cleaning(Cleanings) ! AU -> Cleanings
+   * Chemicals(Pool) !  NR -> Chemical(Chemicals) ! AU -> Chemicals
 4. Expenses **, ***
-   * Supplies(Pool) !  NVR -> Supply(Supplies) ! AU -> Supplies
-   * Repairs(Pool) !  NVR -> Repair(Repairs) ! AU -> Repairs
+   * Supplies(Pool) !  NR -> Supply(Supplies) ! AU -> Supplies
+   * Repairs(Pool) !  NR -> Repair(Repairs) ! AU -> Repairs
 
 ** Actions:
 * New Refresh = NR
