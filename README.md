@@ -85,7 +85,7 @@ View(Menu) ! Action -> Page
    * Repairs(Pool) !  NVR -> Repair(Repairs) ! AU -> Repairs
 
 ** Actions:
-* New, View, Refresh = NVR
+* New Refresh = NR
 * Add, Update = AU
 
 *** Charts:
