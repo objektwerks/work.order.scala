@@ -32,7 +32,7 @@ object PoolView extends View:
             case Updated() =>
               clearErrors()
               route(PoolsPage)
-            case _ => log(s"Account view update handler failed: $event")
+            case _ => log(s"Pool view update handler failed: $event")
         case Left(fault) => errorBus.emit(s"Update pool failed: ${fault.cause}")
 
     div(
