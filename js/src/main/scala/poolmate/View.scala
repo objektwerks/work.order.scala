@@ -2,6 +2,8 @@ package poolmate
 
 import com.raquo.laminar.api.L.*
 
+import org.scalajs.dom.console
+
 trait View:
   protected[this] val errorBus = new EventBus[String]
 
@@ -14,3 +16,5 @@ trait View:
   def emit(bus: EventBus[String], message: String): Unit = bus.emit(message)
 
   def clearErrors(): Unit = errorBus.emit("")
+
+  def log(message: String): Unit = console.log(message)
