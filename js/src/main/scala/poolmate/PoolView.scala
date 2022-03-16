@@ -64,7 +64,7 @@ object PoolView extends View:
             model.updateSelectedEntity( model.selectedEntityVar.now().copy(built = built) )
           }
           onKeyUp.mapToValue.map(_.toInt) --> { built =>
-            if built.isGreaterThanZero then builtErrorBus.emit("") else builtErrorBus.emit(nonZeroError)
+            if built.isGreaterThan1900 then builtErrorBus.emit("") else builtErrorBus.emit(nonZeroError)
           }
         },
         err(builtErrorBus),
