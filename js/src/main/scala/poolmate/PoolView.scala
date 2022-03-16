@@ -53,7 +53,7 @@ object PoolView extends View:
             model.updateSelectedEntity( model.selectedEntityVar.now().copy(name = name) )
           }
           onKeyUp.mapToValue --> { name =>
-            if name.nonEmpty then nameErrorBus.emit("") else nameErrorBus.emit(nonEmptyError)
+            if name.isName then nameErrorBus.emit("") else nameErrorBus.emit(nonEmptyError)
           }
         },
         err(nameErrorBus),
