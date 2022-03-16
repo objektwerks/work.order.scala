@@ -7,13 +7,13 @@ object Validators:
     def isPin: Boolean = value.length == 6
     def isName: Boolean = value.length == 2
 
-  extension (id: Long)
-    def isZero: Boolean = id == 0
-    def isGreaterThanZero: Boolean = id > 0
-
   extension (value: Int)
     def isGreaterThan1900 = value > 1900
     def isGreaterThan999 = value > 999
+
+  extension (id: Long)
+    def isZero: Boolean = id == 0
+    def isGreaterThanZero: Boolean = id > 0
 
   extension (register: Register)
     def isValid: Boolean = register.emailAddress.isEmailAddress
