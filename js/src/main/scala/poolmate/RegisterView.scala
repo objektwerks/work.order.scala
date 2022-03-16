@@ -22,7 +22,7 @@ object RegisterView extends View:
             case Registering() =>
               clearErrors()
               route(LoginPage)
-            case _ => log(s"Register handler failed: $event")
+            case _ => log(s"Register view handler failed: $event")
         case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
       
     div(
