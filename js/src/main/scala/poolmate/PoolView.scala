@@ -57,7 +57,7 @@ object PoolView extends View:
           }
         },
         err(nameErrorBus),
-        lbl("Year Built"),
+        lbl("Built"),
         year.amend {
           value <-- model.selectedEntityVar.signal.map(_.built.toString)
           onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { built =>
