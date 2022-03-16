@@ -64,7 +64,7 @@ object PoolView extends View:
             model.updateSelectedEntity( model.selectedEntityVar.now().copy(built = built) )
           }
           onKeyUp.mapToValue.map(_.toInt) --> { built =>
-            if built.isGreaterThan1900 then builtErrorBus.emit("") else builtErrorBus.emit(nonZeroError)
+            if built.isGreaterThan1900 then builtErrorBus.emit("") else builtErrorBus.emit(builtError)
           }
         },
         err(builtErrorBus),
@@ -75,7 +75,7 @@ object PoolView extends View:
             model.updateSelectedEntity( model.selectedEntityVar.now().copy(volume = volume) )
           }
           onKeyUp.mapToValue.map(_.toInt) --> { volume =>
-            if volume.isGreaterThan999 then volumeErrorBus.emit("") else volumeErrorBus.emit(nonZeroError)
+            if volume.isGreaterThan999 then volumeErrorBus.emit("") else volumeErrorBus.emit(volumeError)
           }
         },
         err(volumeErrorBus)
