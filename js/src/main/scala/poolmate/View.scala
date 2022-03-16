@@ -9,8 +9,8 @@ trait View:
   
   def route(page: Page): Unit = PageRouter.router.pushState(page)
 
-  def clear(errorBuss: EventBus[String]): Unit = errorBus.emit("")
+  def clear(bus: EventBus[String]): Unit = bus.emit("")
 
-  def emit(errorBuss: EventBus[String], message: String): Unit = errorBus.emit(message)
+  def emit(bus: EventBus[String], message: String): Unit = bus.emit(message)
 
   def clearErrors(): Unit = errorBus.emit("")
