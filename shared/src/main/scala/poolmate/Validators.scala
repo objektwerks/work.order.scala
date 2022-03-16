@@ -11,6 +11,7 @@ object Validators:
     def isGreaterThanZero: Boolean = id > 0
 
   extension (value: Int)
+    def isGreaterThan1900 = value >= 1900
     def isEqualToGreaterThan1000 = value >= 1000
 
   extension (register: Register)
