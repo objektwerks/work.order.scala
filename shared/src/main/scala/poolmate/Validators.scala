@@ -11,8 +11,8 @@ object Validators:
     def isGreaterThanZero: Boolean = id > 0
 
   extension (value: Int)
-    def isGreaterThan1900 = value >= 1900
-    def isEqualToGreaterThan1000 = value >= 1000
+    def isGreaterThan1900 = value > 1900
+    def isGreaterThan999 = value > 999
 
   extension (register: Register)
     def isValid: Boolean = register.emailAddress.isEmailAddress
