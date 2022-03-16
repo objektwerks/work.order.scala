@@ -13,40 +13,40 @@ final case class Reactivated(account: Account) extends Event
 
 final case class Updated() extends Event
 
-final case class PoolsListed(pools: Seq[Pool]) extends Event
+final case class PoolsListed(pools: List[Pool]) extends Event
 final case class PoolAdded(pool: Pool) extends Event
 
-final case class SurfacesListed(surfaces: Seq[Surface]) extends Event
+final case class SurfacesListed(surfaces: List[Surface]) extends Event
 final case class SurfaceAdded(surface: Surface) extends Event
 
-final case class PumpsListed(pumps: Seq[Pump]) extends Event
+final case class PumpsListed(pumps: List[Pump]) extends Event
 final case class PumpAdded(pump: Pump) extends Event
 
-final case class TimersListed(timers: Seq[Timer]) extends Event
+final case class TimersListed(timers: List[Timer]) extends Event
 final case class TimerAdded(timer: Timer) extends Event
 
-final case class TimerSettingsListed(timerSettings: Seq[TimerSetting]) extends Event
+final case class TimerSettingsListed(timerSettings: List[TimerSetting]) extends Event
 final case class TimerSettingAdded(timerSetting: TimerSetting) extends Event
 
-final case class HeatersListed(heaters: Seq[Heater]) extends Event
+final case class HeatersListed(heaters: List[Heater]) extends Event
 final case class HeaterAdded(heater: Heater) extends Event
 
-final case class HeaterSettingsListed(heaterSettings: Seq[HeaterSetting]) extends Event
+final case class HeaterSettingsListed(heaterSettings: List[HeaterSetting]) extends Event
 final case class HeaterSettingAdded(heaterSetting: HeaterSetting) extends Event
 
-final case class MeasurementsListed(measurements: Seq[Measurement]) extends Event
+final case class MeasurementsListed(measurements: List[Measurement]) extends Event
 final case class MeasurementAdded(measurement: Measurement) extends Event
 
-final case class CleaningsListed(cleanings: Seq[Cleaning]) extends Event
+final case class CleaningsListed(cleanings: List[Cleaning]) extends Event
 final case class CleaningAdded(cleaning: Cleaning) extends Event
 
-final case class ChemicalsListed(chemicals: Seq[Chemical]) extends Event
+final case class ChemicalsListed(chemicals: List[Chemical]) extends Event
 final case class ChemicalAdded(chemical: Chemical) extends Event
 
-final case class SuppliesListed(supplies: Seq[Supply]) extends Event
+final case class SuppliesListed(supplies: List[Supply]) extends Event
 final case class SupplyAdded(supply: Supply) extends Event
 
-final case class RepairsListed(repairs: Seq[Repair]) extends Event
+final case class RepairsListed(repairs: List[Repair]) extends Event
 final case class RepairAdded(repair: Repair) extends Event
 
 final case class Fault(dateOf: Int = DateTime.currentDate,

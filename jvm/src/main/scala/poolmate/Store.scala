@@ -30,7 +30,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
 
   ConnectionPool.singleton(url, user, password, settings)
 
-  def listAccounts(): Seq[Account] =
+  def listAccounts(): List[Account] =
     DB readOnly { implicit session =>
       sql"select * from account"
         .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
@@ -51,7 +51,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }
     ()
 
-  def listUnprocessedEmails: Seq[Email] =
+  def listUnprocessedEmails: List[Email] =
     DB readOnly { implicit session =>
       sql"select * from email where processed = false"
         .map(rs => 
@@ -125,7 +125,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
       else None
     }
 
-  def listPools(): Seq[Pool] =
+  def listPools(): List[Pool] =
     DB readOnly { implicit session =>
       sql"select * from pool order by built desc"
         .map(rs => Pool(rs.long("id"), rs.string("license"), rs.string("name"), rs.int("built"), rs.int("volume")))
@@ -146,7 +146,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }
     ()
 
-  def listSurfaces(): Seq[Surface] =
+  def listSurfaces(): List[Surface] =
     DB readOnly { implicit session =>
       sql"select * from surface order by installed desc"
         .map(rs => Surface(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind")))
@@ -167,7 +167,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }
     ()
 
-  def listPumps(): Seq[Pump] =
+  def listPumps(): List[Pump] =
     DB readOnly { implicit session =>
       sql"select * from pump order by installed desc"
         .map(rs => Pump(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model")))
@@ -188,7 +188,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }
     ()
 
-  def listTimers(): Seq[Timer] =
+  def listTimers(): List[Timer] =
     DB readOnly { implicit session =>
       sql"select * from timer order by installed desc"
         .map(rs => Timer(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model")))
@@ -209,7 +209,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }
     ()
 
-  def listTimerSettings(): Seq[TimerSetting] =
+  def listTimerSettings(): List[TimerSetting] =
     DB readOnly { implicit session =>
       sql"select * from timer_setting order by created desc"
         .map(rs => TimerSetting(rs.long("id"), rs.long("timer_id"), rs.int("created"), rs.int("time_on"), rs.int("time_off")))
@@ -230,7 +230,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }
     ()
 
-  def listHeaters(): Seq[Heater] =
+  def listHeaters(): List[Heater] =
     DB readOnly { implicit session =>
       sql"select * from heater order by installed desc"
         .map(rs => Heater(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model")))
@@ -251,7 +251,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }
     ()
 
-  def listHeaterSettings(): Seq[HeaterSetting] =
+  def listHeaterSettings(): List[HeaterSetting] =
     DB readOnly { implicit session =>
       sql"select * from heater_setting order by date_on desc"
         .map(rs => HeaterSetting(rs.long("id"), rs.long("heater_id"), rs.int("temp"), rs.int("date_on"), rs.int("date_off")))
@@ -272,7 +272,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }
     ()
 
-  def listMeasurements(): Seq[Measurement] =
+  def listMeasurements(): List[Measurement] =
     DB readOnly { implicit session =>
       sql"select * from measurement order by measured desc"
         .map(rs =>
@@ -310,7 +310,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }
     ()
   
-  def listCleanings(): Seq[Cleaning] =
+  def listCleanings(): List[Cleaning] =
     DB readOnly { implicit session =>
       sql"select * from cleaning order by cleaned desc"
         .map(rs =>
@@ -347,7 +347,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }
     ()
 
-  def listChemicals(): Seq[Chemical] =
+  def listChemicals(): List[Chemical] =
     DB readOnly { implicit session =>
       sql"select * from chemical order by added desc"
         .map(rs => Chemical(rs.long("id"), rs.long("pool_id"), rs.int("added"), rs.string("chemical"), rs.double("amount"), rs.string("unit")))
@@ -368,7 +368,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }
     ()
 
-  def listSupplies(): Seq[Supply] =
+  def listSupplies(): List[Supply] =
     DB readOnly { implicit session =>
       sql"select * from supply order by purchased desc"
         .map(rs => Supply(rs.long("id"), rs.long("pool_id"), rs.int("purchased"), rs.string("item"), rs.double("amount"), rs.string("unit"), rs.double("cost")))
@@ -389,7 +389,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }
     ()
 
-  def listRepairs(): Seq[Repair] =
+  def listRepairs(): List[Repair] =
     DB readOnly { implicit session =>
       sql"select * from repair order by repaired desc"
         .map(rs => Repair(rs.long("id"), rs.long("pool_id"), rs.int("repaired"), rs.string("repair"), rs.double("cost")))
@@ -410,7 +410,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }
     ()
 
-  def listFaults: Seq[Fault] =
+  def listFaults: List[Fault] =
     DB readOnly { implicit session =>
       sql"select * from fault order by date_of, time_of desc"
         .map(rs => Fault(rs.int("date_of"), rs.int("time_of"), rs.int("nano_of"), rs.string("cause")))
