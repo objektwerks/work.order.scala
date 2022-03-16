@@ -31,7 +31,7 @@ object LoginView extends View:
         value <-- emailAddressVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
         onKeyUp.mapToValue --> { emailAddress =>
-          if emailAddress.isEmailAddress then emailAddressErrorBus.emit("") else emailAddressErrorBus.emit(emailAddressError)
+          if emailAddress.isEmailAddress then clear(emailAddressErrorBus) else emit(emailAddressErrorBus, emailAddressError)
         }
       },
       err(emailAddressErrorBus),
@@ -40,7 +40,7 @@ object LoginView extends View:
         value <-- pinVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> pinVar
         onKeyUp.mapToValue --> { pin =>
-          if pin.isPin then pinErrorBus.emit("") else pinErrorBus.emit(pinError)
+          if pin.isPin then clear(pinErrorBus) else emit(pinErrorBus, pinError)
         }      
       },
       err(pinErrorBus),
