@@ -75,7 +75,7 @@ object PoolView extends View:
             model.updateSelectedEntity( model.selectedEntityVar.now().copy(volume = volume) )
           }
           onKeyUp.mapToValue.map(_.toInt) --> { volume =>
-            if volume.isEqualToGreaterThan1000 then volumeErrorBus.emit("") else volumeErrorBus.emit(nonZeroError)
+            if volume.isGreaterThan999 then volumeErrorBus.emit("") else volumeErrorBus.emit(nonZeroError)
           }
         },
         err(volumeErrorBus)
