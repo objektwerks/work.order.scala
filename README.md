@@ -70,12 +70,12 @@ View(Menu) ! Action -> Page
    * Account(Home) ! Deactivate, Reactivate -> Home
 2. Pool **
    * Pools(Home) ! NR -> Pool(Pools) ! AU -> Pools
+3. Hardware
    * Surfaces(Pool) !  NR -> Surface(Surfaces) ! AU -> Surfaces
    * Decks(Pool) !  NR -> Deck(Surfaces) ! AU -> Decks
-3. Hardware
    * Pumps(Pool) !  NR -> Pump(Pumps) ! AU -> Pumps
    * Timers(Pool) !  NR -> Timer(Timers) ! AU -> Timers
-     * Timer !  NR -> TimerSettings(Timer) ! NR -> TimerSetting ! AU -> TimerSettings
+   * Timer !  NR -> TimerSettings(Timer) ! NR -> TimerSetting ! AU -> TimerSettings
    * Heaters(Pool) ! NR -> Heater(Heaters) ! AU -> Heaters
      * Heater !  NR -> HeaterSettings(Heater) ! NR -> HeaterSetting ! AU -> HeaterSettings
 4. Maintenance **, ***
