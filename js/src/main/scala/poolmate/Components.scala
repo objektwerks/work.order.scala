@@ -29,7 +29,7 @@ object Components:
   def btn(text: String): Button =
     button(cls("w3-button w3-round-xxlarge w3-mobile w3-light-grey w3-text-indigo"), text)
 
-  def rbtn(text: String): HtmlElement =
+  def rbtn(text: String): Button =
     button(cls("w3-button w3-round-xxlarge w3-mobile w3-light-grey w3-text-indigo w3-right"), text)
   
   def dropdown(header: Button, buttons: Button*): Div =
