@@ -65,6 +65,12 @@ final case class Surface(id: Long = 0,
                          kind: String = "") extends Entity:
   def display = kind
 
+final case class Deck(id: Long = 0,
+                      poolId: Long = 0,
+                      installed: Int = 0,
+                      kind: String = "") extends Entity:
+  def display = kind
+
 final case class Pump(id: Long = 0,
                       poolId: Long = 0,
                       installed: Int = 0,
