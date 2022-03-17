@@ -43,19 +43,19 @@ object PoolView extends View:
             route(PoolsPage)
           }
         },
-        rbtn("Hardware").amend {
+        btn("Hardware").amend {
           onClick --> { _ =>
             log("Pool -> Hardware menu item onClick")
             // Surfaces, Decks, Pumps, Timers, Heaters
           }
         },
-        rbtn("Maintenance").amend {
+        btn("Maintenance").amend {
           onClick --> { _ =>
             log("Pool -> Maintenance menu item onClick")
             // Measurements, Cleanings, Chemicals
           }
         },
-        rbtn("Expenses").amend {
+        btn("Expenses").amend {
           onClick --> { _ =>
             log("Pool -> Expenses menu item onClick")
             // Supplies, Repairs
