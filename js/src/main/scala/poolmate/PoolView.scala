@@ -42,7 +42,12 @@ object PoolView extends View:
             log("Pool -> Pools onClick")
             route(PoolsPage)
           }
-        }      
+        },
+        btn("Surfaces").amend {
+          onClick --> { _ =>
+            log("Pool -> Surfaces onClick")
+          }
+        }               
       ),
       div(
         hdr("Pool"),
