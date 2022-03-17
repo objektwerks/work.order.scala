@@ -57,6 +57,11 @@ object PoolView extends View:
           onClick --> { _ =>
             log("Pool -> Timers onClick")
           }
+        },
+        btn("Heaters").amend {
+          onClick --> { _ =>
+            log("Pool -> Heaters onClick")
+          }
         }                
       ),
       div(
