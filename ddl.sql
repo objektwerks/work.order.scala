@@ -25,6 +25,13 @@ CREATE TABLE surface (
   kind VARCHAR NOT NULL
 );
 
+CREATE TABLE deck (
+  id BIGSERIAL PRIMARY KEY,
+  pool_id BIGINT REFERENCES pool(id),
+  installed INT NOT NULL,
+  kind VARCHAR NOT NULL
+);
+
 CREATE TABLE pump (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
