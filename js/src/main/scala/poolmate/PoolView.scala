@@ -52,6 +52,7 @@ object PoolView extends View:
         rbtn("Maintenance").amend {
           onClick --> { _ =>
             log("Pool -> Maintenance menu item onClick")
+            // Measurements, Cleanings, Chemicals
           }
         },
         rbtn("Expenses").amend {
