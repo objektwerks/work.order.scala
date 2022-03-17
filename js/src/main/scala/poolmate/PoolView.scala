@@ -39,23 +39,23 @@ object PoolView extends View:
       bar(
         btn("Pools").amend {
           onClick --> { _ =>
-            log("Pool -> Pools onClick")
+            log("Pool -> Pools menu item onClick")
             route(PoolsPage)
           }
         },
         rbtn("Hardware").amend {
           onClick --> { _ =>
-            log("Pool -> Surfaces onClick")
+            log("Pool -> Hardware menu item onClick")
           }
         },
         rbtn("Maintenance").amend {
           onClick --> { _ =>
-            log("Pool -> Pumps onClick")
+            log("Pool -> Maintenance menu item onClick")
           }
         },
         rbtn("Expenses").amend {
           onClick --> { _ =>
-            log("Pool -> Timers onClick")
+            log("Pool -> Expenses menu item onClick")
           }
         }          
       ),
