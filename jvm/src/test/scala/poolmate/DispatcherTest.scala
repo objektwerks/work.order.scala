@@ -50,6 +50,11 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     testListSurfaces(dispatcher, pool)
     testUpdateSurface(dispatcher, pool, surface.copy(kind = "pebble"))
 
+    var deck = Deck(poolId = pool.id, installed = 20010103, kind = "tile")
+    deck = testAddDeck(dispatcher, pool, deck)
+    testListDecks(dispatcher, pool)
+    testUpdateDeck(dispatcher, pool, deck.copy(kind = "pavers"))
+
     var pump = Pump(poolId = pool.id, installed = 20010101, model = "hayward")
     pump = testAddPump(dispatcher, pool, pump)
     testListPumps(dispatcher, pool)
@@ -163,6 +168,24 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   def testUpdateSurface(dispatcher: Dispatcher, pool: Pool, surface: Surface): Unit =
     val update = UpdateSurface(pool.license, surface)
+    dispatcher.dispatch(update) shouldBe Updated()
+
+  def testAddDeck(dispatcher: Dispatcher, pool: Pool, deck: Deck): Deck =
+    val add = AddDeck(pool.license, deck)
+    dispatcher.dispatch(add) match
+      case DeckAdded(deck: Deck) =>
+        deck.id > 0 shouldBe true
+        deck
+      case event: Event => logger.error(event.toString); fail()
+
+  def testListDecks(dispatcher: Dispatcher, pool: Pool): Unit =
+    val list = ListDecks(pool.license, pool.id)
+    dispatcher.dispatch(list) match
+      case DecksListed(decks) => decks.size shouldBe 1
+      case event: Event => logger.error(event.toString); fail()
+
+  def testUpdateDeck(dispatcher: Dispatcher, pool: Pool, deck: Deck): Unit =
+    val update = UpdateDeck(pool.license, deck)
     dispatcher.dispatch(update) shouldBe Updated()
 
   def testAddPump(dispatcher: Dispatcher, pool: Pool, pump: Pump): Pump =
