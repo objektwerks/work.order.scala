@@ -4,17 +4,6 @@ import com.raquo.laminar.api.L.*
 
 import scala.scalajs.js.Date
 
-/*
-  <div class="w3-dropdown-hover">
-    <button class="w3-button">Dropdown</button>
-    <div class="w3-dropdown-content w3-bar-block w3-card-4">
-      <a href="#" class="w3-bar-item w3-button">Link 1</a>
-      <a href="#" class="w3-bar-item w3-button">Link 2</a>
-      <a href="#" class="w3-bar-item w3-button">Link 3</a>
-    </div>
-  </div>
-*/
-
 object Components:
   private val inputCss = "w3-input w3-hover-light-gray w3-text-indigo"
   private val currentYear = new Date().getFullYear().toInt.toString
