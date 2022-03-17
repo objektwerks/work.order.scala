@@ -19,6 +19,9 @@ final case class PoolAdded(pool: Pool) extends Event
 final case class SurfacesListed(surfaces: List[Surface]) extends Event
 final case class SurfaceAdded(surface: Surface) extends Event
 
+final case class DecksListed(decks: List[Deck]) extends Event
+final case class DeckAdded(deck: Deck) extends Event
+
 final case class PumpsListed(pumps: List[Pump]) extends Event
 final case class PumpAdded(pump: Pump) extends Event
 
