@@ -28,7 +28,8 @@ object Components:
 
   def rbtn(text: String): HtmlElement = button(cls("w3-button w3-round-xxlarge w3-mobile w3-light-grey w3-text-indigo w3-right"), text)
   
-  def dd(header: Button, items: Button*): Div = div(header, div(items))
+  def dropdown(header: Button, buttons: Button*): Div =
+    div(cls("w3-dropdown-hover"), header, div(cls("w3-dropdown-content w3-bar-block w3-card-4"), buttons))
 
   def lbl(text: String): Label = label(cls("w3-left-align w3-text-indigo"), text)
 
