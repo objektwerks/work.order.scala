@@ -6,6 +6,7 @@ object Serializers:
   given accountRW: ReadWriter[Account] = macroRW
   given poolRW: ReadWriter[Pool] = macroRW
   given surfaceRW: ReadWriter[Surface] = macroRW
+  given deckRW: ReadWriter[Deck] = macroRW
   given pumpRW: ReadWriter[Pump] = macroRW
   given timerRW: ReadWriter[Timer] = macroRW
   given timerSettingRW: ReadWriter[TimerSetting] = macroRW
@@ -18,7 +19,7 @@ object Serializers:
   given repairRW: ReadWriter[Repair] = macroRW
 
   given entityRW: ReadWriter[Entity] = ReadWriter.merge(
-    accountRW, poolRW, surfaceRW, pumpRW, timerRW, timerSettingRW, heaterRW,
+    accountRW, poolRW, surfaceRW, deckRW, pumpRW, timerRW, timerSettingRW, heaterRW,
     heaterSettingRW, measurementRW, cleaningRW, chemicalRW, supplyRW, repairRW
   )
 
