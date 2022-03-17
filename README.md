@@ -101,7 +101,7 @@ Model
 Entity Model
 ------------
 * Pool 1..n ---> 1 Account **
-* Pool 1 ---> 1..n Surface, Pump, Timer, TimerSetting, Heater, HeaterSetting, Measurement, Cleaning, Chemical, Supply, Repair
+* Pool 1 ---> 1..n Surface, Deck, Pump, Timer, TimerSetting, Heater, HeaterSetting, Measurement, Cleaning, Chemical, Supply, Repair
 * Email 1..n ---> 1 Account **
 * Fault
 * UoM ( unit of measure )
