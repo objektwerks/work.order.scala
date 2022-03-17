@@ -67,11 +67,11 @@ final class EmailSender(conf: Config, store: Store) extends LazyLogging:
     Using( smtpServer.createSession ) { session =>
       session.open()
 
-      val account = Account(emailAddress = register.emailAddress)
+      var account = Account(emailAddress = register.emailAddress)
       val messageId = session.sendMail(buildEmail(account))
       logger.info("*** EmailSender sent message id: {}", messageId)
 
-      store.addAccount(account)
+      account = store.addAccount(account)
       logger.info("*** EmailSender added account: {}", account)
 
       val email = poolmate.Email(messageId, account.license, account.emailAddress)
