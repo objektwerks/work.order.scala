@@ -43,26 +43,21 @@ object PoolView extends View:
             route(PoolsPage)
           }
         },
-        btn("Surfaces").amend {
+        rbtn("Hardware").amend {
           onClick --> { _ =>
             log("Pool -> Surfaces onClick")
           }
         },
-        btn("Pumps").amend {
+        rbtn("Maintenance").amend {
           onClick --> { _ =>
             log("Pool -> Pumps onClick")
           }
         },
-        btn("Timers").amend {
+        rbtn("Expenses").amend {
           onClick --> { _ =>
             log("Pool -> Timers onClick")
           }
-        },
-        btn("Heaters").amend {
-          onClick --> { _ =>
-            log("Pool -> Heaters onClick")
-          }
-        }                
+        }          
       ),
       div(
         hdr("Pool"),
