@@ -69,7 +69,7 @@ View(Menu) ! Action -> Page
    * Home(Account, Pools)
    * Account(Home) ! Deactivate, Reactivate -> Home
 2. Pool **
-   * Pools(Home) ! NR -> Pool(Pools) ! AU -> Pools
+   * Pools(Home) ! NR -> Pool(Pools, Hardware, Maintenance, Expenses) ! AU -> Pools
 3. Hardware
    * Surfaces(Pool) !  NR -> Surface(Surfaces) ! AU -> Surfaces
    * Decks(Pool) !  NR -> Deck(Surfaces) ! AU -> Decks
