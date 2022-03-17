@@ -35,7 +35,11 @@ object Account:
 
   private def newSpecialChar: Char = specialChars(random.nextInt(specialChars.length))
 
-  private def newPin: String = // 6 alphanumeric chars = 36^6 ( 2,176,782,336 )
+  /**
+   * 26 letters + 10 numbers + 18 special characters = 54 combinations
+   * 6 alphanumeric char pin = 54^6 ( 24,794,911,296 )
+   */
+  private def newPin: String =
     Random.shuffle(
       Random
         .alphanumeric
