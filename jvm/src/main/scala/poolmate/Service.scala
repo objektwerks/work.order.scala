@@ -31,6 +31,10 @@ final class Service(store: Store):
   def addSurface(surface: Surface): Either[Throwable, Surface] = Try( store.addSurface(surface) ).toEither
   def updateSurface(surface: Surface): Either[Throwable, Unit] = Try( store.updateSurface(surface) ).toEither
 
+  def listDecks(poolId: Long): Either[Throwable, List[Deck]] = Try( store.listDecks() ).toEither
+  def addDeck(deck: Deck): Either[Throwable, Deck] = Try( store.addDeck(deck) ).toEither
+  def updateDeck(deck: Deck): Either[Throwable, Unit] = Try( store.updateDeck(deck) ).toEither
+
   def listPumps(poolId: Long): Either[Throwable, List[Pump]] = Try( store.listPumps() ).toEither
   def addPump(pump: Pump): Either[Throwable, Pump] = Try( store.addPump(pump) ).toEither
   def updatePump(pump: Pump): Either[Throwable, Unit] = Try( store.updatePump(pump) ).toEither
