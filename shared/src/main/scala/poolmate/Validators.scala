@@ -56,6 +56,13 @@ object Validators:
       surface.installed > 0 &&
       surface.kind.nonEmpty
 
+  extension (deck: Deck)
+    def isValid: Boolean =
+      deck.id >= 0 &&
+      deck.poolId > 0 &&
+      deck.installed > 0 &&
+      deck.kind.nonEmpty
+
   extension (pump: Pump)
     def isValid: Boolean =
       pump.id >= 0 &&
