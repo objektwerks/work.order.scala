@@ -13,9 +13,9 @@ object Components:
 
   def cbar(elms: HtmlElement*): Div = div(cls("w3-bar w3-margin-top w3-center"), elms)
 
-  def btn(text: String): Button = button(cls("w3-button w3-round-xxlarge w3-light-grey w3-text-indigo"), text)
+  def btn(text: String): Button = button(cls("w3-button w3-round-xxlarge w3-mobile w3-light-grey w3-text-indigo"), text)
 
-  def rbtn(text: String): HtmlElement = button(cls("w3-button w3-round-xxlarge w3-light-grey w3-text-indigo w3-right"), text)
+  def rbtn(text: String): HtmlElement = button(cls("w3-button w3-round-xxlarge w3-mobile w3-light-grey w3-text-indigo w3-right"), text)
   
   def lbl(text: String): Label = label(cls("w3-left-align w3-text-indigo"), text)
 
