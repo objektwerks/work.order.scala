@@ -19,6 +19,10 @@ final class Validator():
       case add: AddSurface => add.surface.isValid
       case update: UpdateSurface => update.surface.isValid
 
+      case list: ListDecks => true
+      case add: AddDeck => add.deck.isValid
+      case update: UpdateDeck => update.deck.isValid
+
       case list: ListPumps => true
       case add: AddPump => add.pump.isValid
       case update: UpdatePump => update.pump.isValid
