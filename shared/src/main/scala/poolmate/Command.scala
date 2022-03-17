@@ -19,6 +19,10 @@ final case class ListSurfaces(license: String, poolId: Long) extends Command wit
 final case class AddSurface(license: String, surface: Surface) extends Command with License
 final case class UpdateSurface(license: String, surface: Surface) extends Command with License
 
+final case class ListDecks(license: String, poolId: Long) extends Command with License
+final case class AddDeck(license: String, deck: Deck) extends Command with License
+final case class UpdateDeck(license: String, deck: Deck) extends Command with License
+
 final case class ListPumps(license: String, poolId: Long) extends Command with License
 final case class AddPump(license: String, pump: Pump) extends Command with License
 final case class UpdatePump(license: String, pump: Pump) extends Command with License
