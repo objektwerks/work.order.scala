@@ -167,6 +167,27 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }
     ()
 
+  def listDecks(): List[Deck] =
+    DB readOnly { implicit session =>
+      sql"select * from deck order by installed desc"
+        .map(rs => Deck(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind")))
+        .list()
+    }
+
+  def addDeck(deck: Deck): Deck =
+    val id = DB localTx { implicit session =>
+      sql"insert into deck(pool_id, installed, kind) values(${deck.poolId}, ${deck.installed}, ${deck.kind})"
+      .updateAndReturnGeneratedKey()
+    }
+    deck.copy(id = id)
+
+  def updateDeck(deck: Deck): Unit =
+    DB localTx { implicit session =>
+      sql"update deck set installed = ${deck.installed}, kind = ${deck.kind} where id = ${deck.id}"
+      .update()
+    }
+    ()
+
   def listPumps(): List[Pump] =
     DB readOnly { implicit session =>
       sql"select * from pump order by installed desc"
