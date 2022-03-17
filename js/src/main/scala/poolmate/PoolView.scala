@@ -51,18 +51,22 @@ object PoolView extends View:
             }
           }
         ),
-        btn("Maintenance").amend {
-          onClick --> { _ =>
-            log("Pool -> Maintenance menu item onClick")
-            // Measurements, Cleanings, Chemicals
+        dropdown(
+          btn("Maintenance"), // Measurements, Cleanings, Chemicals
+          btn("Measurements").amend {
+            onClick --> { _ =>
+              log("Maintenance -> Measurements menu item onClick")
+            }
           }
-        },
-        btn("Expenses").amend {
-          onClick --> { _ =>
-            log("Pool -> Expenses menu item onClick")
-            // Supplies, Repairs
+        ),
+        dropdown(
+          btn("Expenses"), // Supplies, Repairs
+          btn("Supplies").amend {
+            onClick --> { _ =>
+              log("Expenses -> Supplies menu item onClick")
+            }
           }
-        }          
+        )         
       ),
       div(
         hdr("Pool"),
