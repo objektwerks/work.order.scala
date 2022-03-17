@@ -46,6 +46,7 @@ object PoolView extends View:
         rbtn("Hardware").amend {
           onClick --> { _ =>
             log("Pool -> Hardware menu item onClick")
+            // Surfaces, Decks, Pumps, Timers, Heaters
           }
         },
         rbtn("Maintenance").amend {
