@@ -75,7 +75,7 @@ View(Menu) ! Action -> Page
    * Decks(Pool) !  NR -> Deck(Surfaces) ! AU -> Decks
    * Pumps(Pool) !  NR -> Pump(Pumps) ! AU -> Pumps
    * Timers(Pool) !  NR -> Timer(Timers) ! AU -> Timers
-   * Timer !  NR -> TimerSettings(Timer) ! NR -> TimerSetting ! AU -> TimerSettings
+     * Timer !  NR -> TimerSettings(Timer) ! NR -> TimerSetting ! AU -> TimerSettings
    * Heaters(Pool) ! NR -> Heater(Heaters) ! AU -> Heaters
      * Heater !  NR -> HeaterSettings(Heater) ! NR -> HeaterSetting ! AU -> HeaterSettings
 4. Maintenance **, ***
