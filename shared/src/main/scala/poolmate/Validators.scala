@@ -8,7 +8,7 @@ object Validators:
     def isName: Boolean = value.length >= 2
 
   extension (value: Int)
-    def isGreaterThan1900 = value > 1900
+    def isGreaterThan1899 = value > 1899
     def isGreaterThan999 = value > 999
 
   extension (id: Long)
