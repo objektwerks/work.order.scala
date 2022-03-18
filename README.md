@@ -55,7 +55,7 @@ Server
 
 Account
 -------
-* Register( email ) => Registered( account )
+* Explore( email ) => Explored( account )
 * Login( email, pin ) => LoggedIn( account )
 * Deactivate( license ) => Deactivated( account )
 * Reactivate( license ) => Reactivated( account )
@@ -63,8 +63,8 @@ Account
 View(Menu) ! Action -> Page
 ---------------------------
 1. Home
-   * Index(Login, Register)
-   * Register ! Register -> Login
+   * Index(Login, Explore)
+   * Explore ! Explore -> Login
    * Login ! Login -> Home
    * Home(Account, Pools)
    * Account(Home) ! Deactivate, Reactivate -> Home
