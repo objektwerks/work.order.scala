@@ -56,16 +56,16 @@ Server
 Account
 -------
 * Explore( email ) => Explored( account )
-* Login( email, pin ) => LoggedIn( account )
+* Enter( email, pin ) => LoggedIn( account )
 * Deactivate( license ) => Deactivated( account )
 * Reactivate( license ) => Reactivated( account )
 
 View(Menu) ! Action -> Page
 ---------------------------
 1. Home
-   * Index(Login, Explore)
-   * Explore ! Explore -> Login
-   * Login ! Login -> Home
+   * Index(Enter, Explore)
+   * Explore ! Explore -> Enter
+   * Enter ! Enter -> Home
    * Home(Account, Pools)
    * Account(Home) ! Deactivate, Reactivate -> Home
 2. Pool **
