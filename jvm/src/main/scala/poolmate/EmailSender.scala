@@ -19,9 +19,9 @@ final class EmailSender(conf: Config, store: Store) extends LazyLogging:
   private val password = conf.getString("email.password")
   private val from = conf.getString("email.from")
   private val subject = conf.getString("email.subject")
-  private val greeting = conf.getString("email.greeting")
-  private val message = conf.getString("email.message")
   private val salutation = conf.getString("email.salutation")
+  private val message = conf.getString("email.message")
+  private val closing = conf.getString("email.closing")
 
   private val smtpServer: SmtpServer = MailServer.create()
     .ssl(true)
@@ -38,9 +38,9 @@ final class EmailSender(conf: Config, store: Store) extends LazyLogging:
                   |<title>$subject</title>
                   |</head>
                   |<body>
-                  |<p>$greeting</p>
-                  |<p>$message</p>
                   |<p>$salutation</p>
+                  |<p>$message</p>
+                  |<p>$closing</p>
                   |</body>
                   |</html>
                   |""".stripMargin
