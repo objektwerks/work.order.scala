@@ -34,7 +34,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     var account = testExplore(dispatcher)
     store.listAccounts().head shouldBe account
 
-    testLogin(dispatcher, account)
+    testEnter(dispatcher, account)
     account = testDeactivate(dispatcher, account)
     account = testReactivate(dispatcher, account)
 
@@ -112,8 +112,8 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
         account
       case event: Event => logger.error(event.toString); fail()
 
-  def testLogin(dispatcher: Dispatcher, account: Account): Unit =
-    val command = Login(account.pin)
+  def testEnter(dispatcher: Dispatcher, account: Account): Unit =
+    val command = Enter(account.pin)
     dispatcher.dispatch(command) match
       case loggedIn: LoggedIn => account shouldBe loggedIn.account
       case event: Event => logger.error(event.toString); fail()
