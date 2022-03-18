@@ -67,7 +67,7 @@ object Components:
   def err(errBus: EventBus[String]): Div =
     div(cls("w3-border-white w3-text-red"), child.text <-- errBus.events)
 
-  def note(noteBus: EventBus[String]): Div =
+  def msg(noteBus: EventBus[String]): Div =
     div(cls("w3-border-white w3-text-indigo"), child.text <-- noteBus.events)
 
   def list(liSignal: Signal[Seq[Li]]): Div =
