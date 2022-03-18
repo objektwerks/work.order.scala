@@ -44,7 +44,7 @@ object PoolView extends View:
           }
         },
         dropdown(
-          btn("Hardware"), // Surfaces, Decks, Pumps, Timers, Heaters
+          btn("Hardware"),
           btn("Surfaces").amend {
             onClick --> { _ =>
               log("Hardware -> Surfaces menu item onClick")
@@ -72,7 +72,7 @@ object PoolView extends View:
           }
         ),
         dropdown(
-          btn("Maintenance"), // Measurements, Cleanings, Chemicals
+          btn("Maintenance"),
           btn("Measurements").amend {
             onClick --> { _ =>
               log("Maintenance -> Measurements menu item onClick")
@@ -90,7 +90,7 @@ object PoolView extends View:
           }
         ),
         dropdown(
-          btn("Expenses"), // Supplies, Repairs
+          btn("Expenses"),
           btn("Supplies").amend {
             onClick --> { _ =>
               log("Expenses -> Supplies menu item onClick")
