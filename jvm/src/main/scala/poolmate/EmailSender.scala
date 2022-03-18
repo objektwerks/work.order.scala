@@ -37,8 +37,7 @@ final class EmailSender(conf: Config, store: Store) extends LazyLogging:
                   |<title>$subject</title>
                   |</head>
                   |<body>
-                  |<p>$message ${account.pin}</p>
-                  |<p>$instructions</p>
+                  |<p>$message ${account.pin} $instructions</p>
                   |</body>
                   |</html>
                   |""".stripMargin
