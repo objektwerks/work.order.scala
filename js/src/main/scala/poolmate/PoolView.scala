@@ -44,37 +44,6 @@ object PoolView extends View:
           }
         },
         dropdown(
-          btn("Aesthetics"),
-          btn("Surfaces").amend {
-            onClick --> { _ =>
-              log("Hardware -> Surfaces menu item onClick")
-            }
-          },
-          btn("Decks").amend {
-            onClick --> { _ =>
-              log("Hardware -> Decks menu item onClick")
-            }
-          },
-        ),
-        dropdown(
-          btn("Hardware"),
-          btn("Pumps").amend {
-            onClick --> { _ =>
-              log("Hardware -> Pumps menu item onClick")
-            }
-          },
-          btn("Timers").amend {
-            onClick --> { _ =>
-              log("Hardware -> Timers menu item onClick")
-            }
-          },
-          btn("Heaters").amend {
-            onClick --> { _ =>
-              log("Hardware -> Heaters menu item onClick")
-            }
-          }
-        ),
-        dropdown(
           btn("Maintenance"),
           btn("Measurements").amend {
             onClick --> { _ =>
@@ -104,7 +73,38 @@ object PoolView extends View:
               log("Hardware -> Repairs menu item onClick")
             }
           }
-        )         
+        ),
+        dropdown(
+          btn("Hardware"),
+          btn("Pumps").amend {
+            onClick --> { _ =>
+              log("Hardware -> Pumps menu item onClick")
+            }
+          },
+          btn("Timers").amend {
+            onClick --> { _ =>
+              log("Hardware -> Timers menu item onClick")
+            }
+          },
+          btn("Heaters").amend {
+            onClick --> { _ =>
+              log("Hardware -> Heaters menu item onClick")
+            }
+          }
+        ),
+        dropdown(
+          btn("Aesthetics"),
+          btn("Surfaces").amend {
+            onClick --> { _ =>
+              log("Aesthetics -> Surfaces menu item onClick")
+            }
+          },
+          btn("Decks").amend {
+            onClick --> { _ =>
+              log("Aesthetics -> Decks menu item onClick")
+            }
+          },
+        )
       ),
       div(
         hdr("Pool"),
