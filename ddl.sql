@@ -4,7 +4,6 @@ CREATE SCHEMA PUBLIC;
 CREATE TABLE account (
   id BIGSERIAL PRIMARY KEY,
   license VARCHAR(36) UNIQUE NOT NULL,
-  email_address VARCHAR NOT NULL,
   pin VARCHAR(6) NOT NULL,
   activated INT NOT NULL,
   deactivated INT NOT NULL
