@@ -31,13 +31,11 @@ object Validators:
     def isActivated: Boolean =
       account.id >= 0 &&
       account.license.isLicense &&
-      account.emailAddress.isEmailAddress &&
       account.pin.isPin &&
       account.activated > 0 &&
       account.deactivated == 0
     def isDeactivated: Boolean =
       account.license.isLicense &&
-      account.emailAddress.isEmailAddress &&
       account.pin.isPin &&
       account.activated == 0 &&
       account.deactivated > 0
