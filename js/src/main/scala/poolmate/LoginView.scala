@@ -6,6 +6,7 @@ import org.scalajs.dom.console.log
 
 import Components.*
 import Error.*
+import Message.*
 import Validators.*
 
 object LoginView extends View:
@@ -43,7 +44,7 @@ object LoginView extends View:
           if pin.isPin then clear(pinErrorBus) else emit(pinErrorBus, pinError)
         }      
       },
-      info("Keep your pin in a secure place!"),
+      info(pinMessage),
       err(pinErrorBus),
       cbar(
         btn("Login").amend {
