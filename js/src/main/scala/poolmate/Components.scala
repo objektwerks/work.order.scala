@@ -27,6 +27,9 @@ object Components:
   def lbl(text: String): Label =
     label(cls("w3-left-align w3-text-indigo"), text)
 
+  def info(text: String): Label =
+    label(cls("w3-left-align w3-indigo w3-text-white"), text)
+
   def txt: Input =
     input(cls(inputCss), required(true))
 
