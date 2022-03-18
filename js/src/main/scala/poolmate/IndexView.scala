@@ -16,10 +16,10 @@ object IndexView extends View:
               route(LoginPage)
             }
           },
-          rbtn("Register").amend {
+          rbtn("Explire").amend {
             onClick --> { _ =>
-              log("Index -> Register menu item onClick")
-              route(RegisterPage)
+              log("Index -> Explore menu item onClick")
+              route(ExplorePage)
             }
           }          
         )

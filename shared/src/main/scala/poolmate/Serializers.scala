@@ -23,7 +23,7 @@ object Serializers:
     heaterSettingRW, measurementRW, cleaningRW, chemicalRW, supplyRW, repairRW
   )
 
-  given registerRW: ReadWriter[Register] = macroRW
+  given registerRW: ReadWriter[Explore] = macroRW
   given loginRW: ReadWriter[Login] = macroRW
 
   given deactivateRW: ReadWriter[Deactivate] = macroRW
@@ -89,7 +89,7 @@ object Serializers:
     addRepairRW, updateRepairRW
   )
 
-  given registeredRW: ReadWriter[Registered] = macroRW
+  given registeredRW: ReadWriter[Explored] = macroRW
   given loggedInRW: ReadWriter[LoggedIn] = macroRW
 
   given deactivatedRW: ReadWriter[Deactivated] = macroRW

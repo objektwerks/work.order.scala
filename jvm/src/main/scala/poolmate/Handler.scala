@@ -3,8 +3,8 @@ package poolmate
 final class Handler(service: Service):
   def handle(command: Command): Event =
     command match
-      case register: Register =>
-        Registered( service.register() )
+      case explore: Explore =>
+        Explored( service.register() )
       case login: Login =>
         service.login(login.pin).fold(throwable => Fault(throwable), account => LoggedIn(account))
       

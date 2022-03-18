@@ -6,7 +6,7 @@ sealed trait Page:
   val title = "Poolmate"
 
 case object IndexPage extends Page
-case object RegisterPage extends Page
+case object ExplorePage extends Page
 case object LoginPage extends Page
 
 case object HomePage extends Page

@@ -12,13 +12,13 @@ import Error.*
 import Message.*
 import Validators.*
 
-object RegisterView extends View:
+object ExploreView extends View:
   def apply(pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
     def handler(event: Either[Fault, Event]): Unit =
       event match
         case Right(event) =>
           event match
-            case Registered(account) =>
+            case Explored(account) =>
               clearErrors()
               accountVar.set(account)
               pinVar.set(account.pin)
@@ -26,13 +26,13 @@ object RegisterView extends View:
             case _ => log(s"Register view handler failed: $event")
         case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
     div(
-      hdr("Register"),
-      info(registerMessage),
+      hdr("Explore"),
+      info(exploreMessage),
       cbar(
         btn("Register").amend {
           onClick --> { _ =>
             log(s"Register onClick")
-            val command = Register()
+            val command = Explore()
             call(command, handler)
           }
         },
