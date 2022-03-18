@@ -25,7 +25,6 @@ object RegisterView extends View:
               route(LoginPage)
             case _ => log(s"Register view handler failed: $event")
         case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
-      
     div(
       hdr("Register"),
       info(registerMessage),
