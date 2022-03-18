@@ -20,9 +20,6 @@ final class EmailSender(conf: Config, store: Store) extends LazyLogging:
   private val from = conf.getString("email.from")
   private val subject = conf.getString("email.subject")
   private val message = conf.getString("email.message")
-  private val email = conf.getString("email.email")
-  private val lic = conf.getString("email.lic")
-  private val pin = conf.getString("email.pin")
   private val instructions = conf.getString("email.instructions")
 
   private val smtpServer: SmtpServer = MailServer.create()
@@ -40,10 +37,7 @@ final class EmailSender(conf: Config, store: Store) extends LazyLogging:
                   |<title>$subject</title>
                   |</head>
                   |<body>
-                  |<p>$message</p>
-                  |<p>$lic ${account.license}</p>
-                  |<p>$email ${account.emailAddress}</p>
-                  |<p>$pin ${account.pin}</p>
+                  |<p>$message ${account.pin}</p>
                   |<p>$instructions</p>
                   |</body>
                   |</html>
