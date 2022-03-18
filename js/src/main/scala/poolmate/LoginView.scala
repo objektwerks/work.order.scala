@@ -26,6 +26,7 @@ object LoginView extends View:
       
     div(      
       hdr("Login"),
+      info(loginMessage),
       lbl("Pin"),
       pin.amend {
         value <-- pinVar
