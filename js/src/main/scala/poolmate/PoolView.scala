@@ -82,6 +82,11 @@ object PoolView extends View:
             onClick --> { _ =>
               log("Hardware -> Cleanings menu item onClick")
             }
+          },
+          btn("Chemicals").amend {
+            onClick --> { _ =>
+              log("Hardware -> Chemicals menu item onClick")
+            }
           }
         ),
         dropdown(
