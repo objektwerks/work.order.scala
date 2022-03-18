@@ -23,15 +23,15 @@ object ExploreView extends View:
               accountVar.set(account)
               pinVar.set(account.pin)
               route(LoginPage)
-            case _ => log(s"Register view handler failed: $event")
-        case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
+            case _ => log(s"Explore view handler failed: $event")
+        case Left(fault) => errorBus.emit(s"Explore failed: ${fault.cause}")
     div(
       hdr("Explore"),
       info(exploreMessage),
       cbar(
-        btn("Register").amend {
+        btn("Explore").amend {
           onClick --> { _ =>
-            log(s"Register onClick")
+            log(s"Explore onClick")
             val command = Explore()
             call(command, handler)
           }
