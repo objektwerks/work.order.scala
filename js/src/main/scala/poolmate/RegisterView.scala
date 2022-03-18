@@ -9,6 +9,7 @@ import scala.concurrent.Future
 
 import Components.*
 import Error.*
+import Message.*
 import Validators.*
 
 object RegisterView extends View:
@@ -29,6 +30,7 @@ object RegisterView extends View:
       
     div(
       hdr("Register"),
+      info(pinMessage),
       err(errorBus),
       lbl("Email Address"),
       email.amend {
