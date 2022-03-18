@@ -55,7 +55,7 @@ Server
 
 Account
 -------
-* Register( email ) => Registering()
+* Register( email ) => Registered( account )
 * Login( email, pin ) => LoggedIn( account )
 * Deactivate( license ) => Deactivated( account )
 * Reactivate( license ) => Reactivated( account )
