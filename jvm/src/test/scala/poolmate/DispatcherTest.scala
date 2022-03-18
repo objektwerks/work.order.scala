@@ -20,15 +20,13 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     Process("psql -d poolmate -f ddl.sql").run().exitValue()
     
     val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
-    val emailSender = EmailSender(conf, store)
     val service = Service(store)
     val authorizer = Authorizer(service)
-    val handler = Handler(emailSender, service)
+    val handler = Handler(service)
     val validator = Validator()
     val dispatcher = Dispatcher(authorizer, validator, handler)
 
     testDispatcher(dispatcher, store)
-    testEmail(store)
     testFault(store)
   }
 
@@ -107,7 +105,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   }
 
   def testRegister(dispatcher: Dispatcher): Account =
-    val command = Register(emailAddress = conf.getString("email.to"))
+    val command = Register()
     dispatcher.dispatch(command) match
       case Registered(account) =>
         account.isActivated shouldBe true
@@ -115,7 +113,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
       case event: Event => logger.error(event.toString); fail()
 
   def testLogin(dispatcher: Dispatcher, account: Account): Unit =
-    val command = Login(account.emailAddress, account.pin)
+    val command = Login(account.pin)
     dispatcher.dispatch(command) match
       case loggedIn: LoggedIn => account shouldBe loggedIn.account
       case event: Event => logger.error(event.toString); fail()
@@ -369,12 +367,6 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   def testUpdateRepair(dispatcher: Dispatcher, pool: Pool, repair: Repair): Unit =
     val update = UpdateRepair(pool.license, repair)
     dispatcher.dispatch(update) shouldBe Updated()
-
-  def testEmail(store: Store): Unit =
-    store.listUnprocessedEmails.size shouldBe 1
-    val email = store.listUnprocessedEmails.head
-    store.processEmail(email.copy(processed = true, valid = true))
-    store.listUnprocessedEmails.size shouldBe 0
 
   def testFault(store: Store): Unit =
     val fault = Fault("fault")
