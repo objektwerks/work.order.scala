@@ -10,8 +10,7 @@ import Message.*
 import Validators.*
 
 object LoginView extends View:
-  def apply(emailAddressVar: Var[String], pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
-    val emailAddressErrorBus = new EventBus[String]
+  def apply(pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
     val pinErrorBus = new EventBus[String]
 
     def handler(event: Either[Fault, Event]): Unit =
@@ -27,15 +26,6 @@ object LoginView extends View:
       
     div(      
       hdr("Login"),
-      lbl("Email Address"),
-      email.amend {
-        value <-- emailAddressVar
-        onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
-        onKeyUp.mapToValue --> { emailAddress =>
-          if emailAddress.isEmailAddress then clear(emailAddressErrorBus) else emit(emailAddressErrorBus, emailAddressError)
-        }
-      },
-      err(emailAddressErrorBus),
       lbl("Pin"),
       pin.amend {
         value <-- pinVar
@@ -48,12 +38,10 @@ object LoginView extends View:
       err(pinErrorBus),
       cbar(
         btn("Login").amend {
-          disabled <-- emailAddressVar.signal.combineWithFn(pinVar.signal) {
-            (email, pin) => !(email.isEmailAddress && pin.isPin)
-          }
+          disabled <-- pinVar.signal.map( pin => !pin.isPin )
           onClick --> { _ =>
-            log(s"Login onClick -> email address: ${emailAddressVar.now()} pin: ${pinVar.now()}")
-            val command = Login(emailAddressVar.now(), pinVar.now())
+            log(s"Login onClick -> pin: ${pinVar.now()}")
+            val command = Login(pinVar.now())
             call(command, handler)
           }
         }

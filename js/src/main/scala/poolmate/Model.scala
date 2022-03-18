@@ -5,7 +5,6 @@ import com.raquo.laminar.api.L.*
 import org.scalajs.dom.console.log
 
 object Model:
-  val emailAddressVar = Var("")
   val pinVar = Var("")
   val accountVar = Var(Account.empty)
   val pools = Model[Pool](Var(Seq.empty[Pool]), Var(Pool()), Pool())

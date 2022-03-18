@@ -46,10 +46,6 @@ object AccountView extends View:
         rotxt.amend {
           value <-- accountVar.signal.map(_.license)
         },
-        lbl("Email Address"),
-        rotxt.amend {
-          value <-- accountVar.signal.map(_.emailAddress)
-        },
         lbl("Pin"),
         rotxt.amend {
           value <-- accountVar.signal.map(_.pin)

@@ -3,10 +3,13 @@ package poolmate
 import scala.util.Try
 
 final class Service(store: Store):
-  def login(email: String, pin: String): Either[Throwable, Account] =
-    store.login(email, pin) match
+  def register(): Account =
+    store.addAccount( Account() )
+
+  def login(pin: String): Either[Throwable, Account] =
+    store.login(pin) match
       case Some(account) => Right(account)
-      case None => Left(IllegalArgumentException(s"Login failed for email: $email and pin: $pin"))
+      case None => Left(IllegalArgumentException(s"Login failed for pin: $pin"))
 
   def deactivate(license: String): Either[Throwable, Account] =
     store.deactivate(license) match

@@ -33,13 +33,13 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
   def listAccounts(): List[Account] =
     DB readOnly { implicit session =>
       sql"select * from account"
-        .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+        .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
         .list()
     }
 
   def addAccount(account: Account): Account =
     val id = DB localTx { implicit session =>
-      sql"insert into account(license, email_address, pin, activated, deactivated) values(${account.license}, ${account.emailAddress}, ${account.pin}, ${account.activated}, ${account.deactivated})"
+      sql"insert into account(license, pin, activated, deactivated) values(${account.license}, ${account.pin}, ${account.activated}, ${account.deactivated})"
       .update()
     }
     account.copy(id = id)
@@ -50,39 +50,11 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
       .update()
     }
     ()
-
-  def listUnprocessedEmails: List[Email] =
-    DB readOnly { implicit session =>
-      sql"select * from email where processed = false"
-        .map(rs => 
-          Email(rs.string("id"), rs.string("license"), rs.string("address"), rs.int("date_sent"),
-                rs.int("time_sent"), rs.boolean("processed"), rs.boolean("valid")
-              )
-        )
-        .list()
-    }
-
-  def addEmail(email: Email): Unit =
-    DB localTx { implicit session =>
-      sql"""insert into email(id, license, address, date_sent, time_sent, processed, valid)
-            values(${email.id}, ${email.license}, ${email.address}, ${email.dateSent},
-             ${email.timeSent}, ${email.processed}, ${email.valid})
-         """
-        .stripMargin
-        .update()
-    }
-
-  def processEmail(email: Email): Unit =
-    DB localTx { implicit session =>
-      sql"update email set processed = ${email.processed}, valid = ${email.valid} where id = ${email.id}"
-        .update()
-    }
-    ()
     
-  def login(email: String, pin: String): Option[Account] =
+  def login(pin: String): Option[Account] =
     DB readOnly { implicit session =>
-      sql"select * from account where email_address = $email and pin = $pin"
-        .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+      sql"select * from account where pin = $pin"
+        .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
         .single()
     }
 
@@ -109,7 +81,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
       .update()
       if deactivated > 0 then
         sql"select * from account where license = $license"
-          .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+          .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
           .single()
       else None
     }
@@ -120,7 +92,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
       .update()
       if activated > 0 then
         sql"select * from account where license = $license"
-          .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+          .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
           .single()
       else None
     }

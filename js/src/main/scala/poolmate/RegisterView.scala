@@ -13,9 +13,7 @@ import Message.*
 import Validators.*
 
 object RegisterView extends View:
-  def apply(emailAddressVar: Var[String], pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
-    val emailAddressErrorBus = new EventBus[String]
-
+  def apply(pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
     def handler(event: Either[Fault, Event]): Unit =
       event match
         case Right(event) =>
@@ -31,22 +29,11 @@ object RegisterView extends View:
     div(
       hdr("Register"),
       info(registerMessage),
-      err(errorBus),
-      lbl("Email Address"),
-      email.amend {
-        value <-- emailAddressVar
-        onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
-        onKeyUp.mapToValue --> { emailAddress =>
-          if emailAddress.isEmailAddress then clear(emailAddressErrorBus) else emit(emailAddressErrorBus, emailAddressError)
-        }
-      },
-      err(emailAddressErrorBus),
       cbar(
         btn("Register").amend {
-          disabled <-- emailAddressVar.signal.map(email => !email.isEmailAddress)
           onClick --> { _ =>
-            log(s"Register onClick -> email address: ${emailAddressVar.now()}")
-            val command = Register(emailAddressVar.now())
+            log(s"Register onClick")
+            val command = Register()
             call(command, handler)
           }
         },

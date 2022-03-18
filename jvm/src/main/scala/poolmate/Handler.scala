@@ -1,12 +1,12 @@
 package poolmate
 
-final class Handler(emailSender: EmailSender, service: Service):
+final class Handler(service: Service):
   def handle(command: Command): Event =
     command match
       case register: Register =>
-        emailSender.send(register).fold(_ => Fault(s"Invalid email address: ${register.emailAddress}"), registering => registering)
+        Registered( service.register() )
       case login: Login =>
-        service.login(login.emailAddress, login.pin).fold(throwable => Fault(throwable), account => LoggedIn(account))
+        service.login(login.pin).fold(throwable => Fault(throwable), account => LoggedIn(account))
       
       case deactivate: Deactivate =>
         service.deactivate(deactivate.license).fold(throwable => Fault(throwable), account => Deactivated(account))
