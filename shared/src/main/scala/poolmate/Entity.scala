@@ -18,7 +18,7 @@ final case class Account(id: Long = 0,
                          pin: String = newPin,
                          activated: Int = DateTime.currentDate,
                          deactivated: Int = 0) extends Entity:
-  def display = emailAddress
+  def display = ""
 
 object Account:
   private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
