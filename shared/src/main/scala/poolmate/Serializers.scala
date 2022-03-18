@@ -23,7 +23,7 @@ object Serializers:
     heaterSettingRW, measurementRW, cleaningRW, chemicalRW, supplyRW, repairRW
   )
 
-  given registerRW: ReadWriter[Explore] = macroRW
+  given exploreRW: ReadWriter[Explore] = macroRW
   given loginRW: ReadWriter[Login] = macroRW
 
   given deactivateRW: ReadWriter[Deactivate] = macroRW
@@ -78,7 +78,7 @@ object Serializers:
   given updateRepairRW: ReadWriter[UpdateRepair] = macroRW
 
   given commandRW: ReadWriter[Command] = ReadWriter.merge(
-    registerRW, loginRW, deactivateRW, reactivateRW, listPoolsRW, addPoolRW,
+    exploreRW, loginRW, deactivateRW, reactivateRW, listPoolsRW, addPoolRW,
     updatePoolRW, listSurfacesRW, addSurfaceRW, updateSurfaceRW, listPumpsRW,
     addPumpRW, updatePumpRW, listTimersRW, addTimerRW, updateTimerRW,
     listTimerSettingsRW, addTimerSettingRW, updateTimerSettingRW, listHeatersRW,
