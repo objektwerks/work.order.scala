@@ -7,7 +7,18 @@ import org.scalajs.dom.console.log
 import Components.*
 
 object IndexView extends View:
-    def apply(): HtmlElement =
+    def apply(pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
+      def handler(event: Either[Fault, Event]): Unit =
+        event match
+          case Right(event) =>
+            event match
+              case Explored(account) =>
+                clearErrors()
+                accountVar.set(account)
+                pinVar.set(account.pin)
+                route(LoginPage)
+              case _ => log(s"Index -> Explore view handler failed: $event")
+          case Left(fault) => errorBus.emit(s"Explore failed: ${fault.cause}")
       div(
         bar(
           btn("Login").amend {
@@ -18,8 +29,9 @@ object IndexView extends View:
           },
           rbtn("Explore").amend {
             onClick --> { _ =>
-              log("Index -> Explore menu item onClick")
-              route(ExplorePage)
+              log(s"Index -> Explore menu item onClick")
+              val command = Explore()
+              call(command, handler)
             }
           }          
         )

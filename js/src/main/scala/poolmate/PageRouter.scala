@@ -40,7 +40,7 @@ object PageRouter:
   )
 
   val splitter = SplitRender[Page, HtmlElement](router.$currentPage)
-    .collectStatic(IndexPage) { IndexView() }
+    .collectStatic(IndexPage) { IndexView(Model.pinVar, Model.accountVar) }
     .collectStatic(ExplorePage) { ExploreView(Model.pinVar, Model.accountVar) }
     .collectStatic(LoginPage) { LoginView(Model.pinVar, Model.accountVar) }
     .collectStatic(HomePage) { HomeView(Model.accountVar) }
