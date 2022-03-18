@@ -16,7 +16,7 @@ object IndexView extends View:
               route(LoginPage)
             }
           },
-          rbtn("Explire").amend {
+          rbtn("Explore").amend {
             onClick --> { _ =>
               log("Index -> Explore menu item onClick")
               route(ExplorePage)
