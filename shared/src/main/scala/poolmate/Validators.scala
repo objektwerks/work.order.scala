@@ -14,11 +14,8 @@ object Validators:
     def isZero: Boolean = id == 0
     def isGreaterThanZero: Boolean = id > 0
 
-  extension (register: Register)
-    def isValid: Boolean = register.emailAddress.isEmailAddress
-
   extension (login: Login)
-    def isValid: Boolean = login.emailAddress.isEmailAddress && login.pin.isPin
+    def isValid: Boolean = login.pin.isPin
 
   extension (deactivate: Deactivate)
     def isValid: Boolean = deactivate.license.isLicense
