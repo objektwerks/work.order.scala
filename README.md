@@ -70,22 +70,22 @@ View(Menu) ! Action -> Page
    * Account(Home) ! Deactivate, Reactivate -> Home
 2. Pool **
    * Pools(Home) ! NR -> Pool(Pools, Hardware, Maintenance, Expenses) ! AU -> Pools
-3. Aesthetics **
-   * Surfaces(Pool) !  NR -> Surface(Surfaces) ! AU -> Surfaces
-   * Decks(Pool) !  NR -> Deck(Surfaces) ! AU -> Decks
-4. Hardware **
+3. Maintenance **, ***
+   * Measurements(Pool) !  NR -> Measurement(Measurements) ! AU -> Measurements
+   * Cleanings(Pool) !  NR -> Cleaning(Cleanings) ! AU -> Cleanings
+   * Chemicals(Pool) !  NR -> Chemical(Chemicals) ! AU -> Chemicals
+4. Expenses **, ***
+   * Supplies(Pool) !  NR -> Supply(Supplies) ! AU -> Supplies
+   * Repairs(Pool) !  NR -> Repair(Repairs) ! AU -> Repairs
+5. Hardware **
    * Pumps(Pool) !  NR -> Pump(Pumps) ! AU -> Pumps
    * Timers(Pool) !  NR -> Timer(Timers) ! AU -> Timers
      * Timer !  NR -> TimerSettings(Timer) ! NR -> TimerSetting ! AU -> TimerSettings
    * Heaters(Pool) ! NR -> Heater(Heaters) ! AU -> Heaters
      * Heater !  NR -> HeaterSettings(Heater) ! NR -> HeaterSetting ! AU -> HeaterSettings
-5. Maintenance **, ***
-   * Measurements(Pool) !  NR -> Measurement(Measurements) ! AU -> Measurements
-   * Cleanings(Pool) !  NR -> Cleaning(Cleanings) ! AU -> Cleanings
-   * Chemicals(Pool) !  NR -> Chemical(Chemicals) ! AU -> Chemicals
-6. Expenses **, ***
-   * Supplies(Pool) !  NR -> Supply(Supplies) ! AU -> Supplies
-   * Repairs(Pool) !  NR -> Repair(Repairs) ! AU -> Repairs
+6. Aesthetics **
+   * Surfaces(Pool) !  NR -> Surface(Surfaces) ! AU -> Surfaces
+   * Decks(Pool) !  NR -> Deck(Surfaces) ! AU -> Decks
 
 ** Actions:
 * New Refresh = NR
