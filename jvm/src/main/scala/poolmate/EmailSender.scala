@@ -56,7 +56,7 @@ final class EmailSender(conf: Config, store: Store) extends LazyLogging:
       case Failure(error) => throw error
     }
 
-  private def sendEmail(register: Register): Either[Throwable, Registering] =
+  private def sendEmail(register: Register): Either[Throwable, Registered] =
     Using( smtpServer.createSession ) { session =>
       session.open()
 
@@ -71,8 +71,8 @@ final class EmailSender(conf: Config, store: Store) extends LazyLogging:
       store.addEmail(email)
       logger.info("*** EmailSender added email: {}", email)
       
-      Registering(account)
+      Registered(account)
     }.toEither
 
-  def send(register: Register): Either[Throwable, Registering] =
-    retry[Either[Throwable, Registering]](1)(sendEmail(register))
+  def send(register: Register): Either[Throwable, Registered] =
+    retry[Either[Throwable, Registered]](1)(sendEmail(register))

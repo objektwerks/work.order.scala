@@ -19,7 +19,7 @@ object RegisterView extends View:
       event match
         case Right(event) =>
           event match
-            case Registering(account) =>
+            case Registered(account) =>
               clearErrors()
               accountVar.set(account)
               route(LoginPage)
