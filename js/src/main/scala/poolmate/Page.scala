@@ -7,7 +7,7 @@ sealed trait Page:
 
 case object IndexPage extends Page
 case object ExplorePage extends Page
-case object LoginPage extends Page
+case object EnterPage extends Page
 
 case object HomePage extends Page
 case object AccountPage extends Page

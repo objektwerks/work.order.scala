@@ -16,15 +16,15 @@ object IndexView extends View:
                 clearErrors()
                 accountVar.set(account)
                 pinVar.set(account.pin)
-                route(LoginPage)
+                route(EnterPage)
               case _ => log(s"Index -> Explore view handler failed: $event")
           case Left(fault) => errorBus.emit(s"Explore failed: ${fault.cause}")
       div(
         bar(
-          btn("Login").amend {
+          btn("Enter").amend {
             onClick --> { _ =>
-              log("Index -> Login menu item onClick")
-              route(LoginPage)
+              log("Index -> Enter menu item onClick")
+              route(EnterPage)
             }
           },
           rbtn("Explore").amend {

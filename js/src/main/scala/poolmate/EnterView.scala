@@ -9,7 +9,7 @@ import Error.*
 import Message.*
 import Validators.*
 
-object LoginView extends View:
+object EnterView extends View:
   def apply(pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
     val pinErrorBus = new EventBus[String]
 
