@@ -12,15 +12,16 @@ import Error.*
 import Validators.*
 
 object RegisterView extends View:
-  def apply(emailAddressVar: Var[String]): HtmlElement =
+  def apply(emailAddressVar: Var[String], accountVar: Var[Account]): HtmlElement =
     val emailAddressErrorBus = new EventBus[String]
 
     def handler(event: Either[Fault, Event]): Unit =
       event match
         case Right(event) =>
           event match
-            case Registering() =>
+            case Registering(account) =>
               clearErrors()
+              accountVar.set(account)
               route(LoginPage)
             case _ => log(s"Register view handler failed: $event")
         case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")

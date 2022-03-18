@@ -72,7 +72,7 @@ final class EmailSender(conf: Config, store: Store) extends LazyLogging:
       store.addEmail(email)
       logger.info("*** EmailSender added email: {}", email)
       
-      Registering()
+      Registering(account)
     }.toEither
 
   def send(register: Register): Either[Throwable, Registering] =
