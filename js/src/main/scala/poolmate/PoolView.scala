@@ -44,7 +44,7 @@ object PoolView extends View:
           }
         },
         dropdown(
-          btn("Hardware"),
+          btn("Aesthetics"),
           btn("Surfaces").amend {
             onClick --> { _ =>
               log("Hardware -> Surfaces menu item onClick")
@@ -55,6 +55,9 @@ object PoolView extends View:
               log("Hardware -> Decks menu item onClick")
             }
           },
+        ),
+        dropdown(
+          btn("Hardware"),
           btn("Pumps").amend {
             onClick --> { _ =>
               log("Hardware -> Pumps menu item onClick")
