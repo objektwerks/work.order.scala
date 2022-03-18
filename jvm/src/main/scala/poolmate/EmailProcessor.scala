@@ -48,7 +48,7 @@ class EmailProcessor(conf: Config, store: Store) extends LazyLogging:
                 store.removeAccount(email.license)
                 logger.warn("*** EmailProcesor removed [invalid] account: {}", email.license)
 
-              else logger.error("*** EmailProcesor [invalid] message: {}", message.messageId())
+              else logger.error("*** EmailProcesor [unknown] message: {}", message)
             }
           }
         }.get
