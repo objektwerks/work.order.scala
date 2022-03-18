@@ -43,6 +43,7 @@ object LoginView extends View:
           if pin.isPin then clear(pinErrorBus) else emit(pinErrorBus, pinError)
         }      
       },
+      info("Keep your pin in a secure place!"),
       err(pinErrorBus),
       cbar(
         btn("Login").amend {
