@@ -6,7 +6,7 @@ sealed trait License:
 sealed trait Command
 
 final case class Explore() extends Command
-final case class Login(pin: String) extends Command
+final case class Enter(pin: String) extends Command
 
 final case class Deactivate(license: String) extends Command with License
 final case class Reactivate(license: String) extends Command with License

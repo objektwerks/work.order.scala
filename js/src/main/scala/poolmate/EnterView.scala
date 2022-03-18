@@ -42,7 +42,7 @@ object EnterView extends View:
           disabled <-- pinVar.signal.map( pin => !pin.isPin )
           onClick --> { _ =>
             log(s"Login onClick -> pin: ${pinVar.now()}")
-            val command = Login(pinVar.now())
+            val command = Enter(pinVar.now())
             call(command, handler)
           }
         }

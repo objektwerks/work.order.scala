@@ -14,7 +14,7 @@ object Validators:
     def isZero: Boolean = id == 0
     def isGreaterThanZero: Boolean = id > 0
 
-  extension (login: Login)
+  extension (login: Enter)
     def isValid: Boolean = login.pin.isPin
 
   extension (deactivate: Deactivate)

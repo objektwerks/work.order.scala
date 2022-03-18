@@ -6,7 +6,7 @@ final class Validator():
   def isValid(command: Command): Boolean =
     command match
       case explore: Explore => true
-      case login: Login => login.isValid
+      case enter: Enter => enter.isValid
 
       case deactivate: Deactivate => deactivate.isValid
       case reactivate: Reactivate => reactivate.isValid

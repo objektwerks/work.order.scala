@@ -24,7 +24,7 @@ object Serializers:
   )
 
   given exploreRW: ReadWriter[Explore] = macroRW
-  given loginRW: ReadWriter[Login] = macroRW
+  given loginRW: ReadWriter[Enter] = macroRW
 
   given deactivateRW: ReadWriter[Deactivate] = macroRW
   given reactivateRW: ReadWriter[Reactivate] = macroRW

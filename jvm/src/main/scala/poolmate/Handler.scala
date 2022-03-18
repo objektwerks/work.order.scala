@@ -5,8 +5,8 @@ final class Handler(service: Service):
     command match
       case explore: Explore =>
         Explored( service.register() )
-      case login: Login =>
-        service.login(login.pin).fold(throwable => Fault(throwable), account => LoggedIn(account))
+      case enter: Enter =>
+        service.login(enter.pin).fold(throwable => Fault(throwable), account => LoggedIn(account))
       
       case deactivate: Deactivate =>
         service.deactivate(deactivate.license).fold(throwable => Fault(throwable), account => Deactivated(account))
