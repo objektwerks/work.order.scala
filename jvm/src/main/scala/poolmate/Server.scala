@@ -22,7 +22,7 @@ object Server extends Main with LazyLogging:
   val validator = Validator()
   val dispatcher = Dispatcher(authorizer, validator, handler)
 
-  val router = CommandEventRouter(dispatcher, store)
+  val router = Router(dispatcher, store)
 
   override val allRoutes = Seq(router)
   
