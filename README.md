@@ -125,13 +125,12 @@ Sequence
 2. Server --- Command ---> Router
 3. Router --- Command ---> Dispatcher
 4. Dispatcher --- Command ---> Authorizer, Validator, Handler
-5. Handler --- Command ---> EmailSender, Service
+5. Handler --- Command ---> Service
 6. EmailSender, Service --- Either[Throwable, T] ---> Handler
 7. Handler --- Event ---> Dispatcher
 8. Dispatcher --- Event ---> Router
 9. Router --- Event ---> Server
 10. Server --- Event ---> Client
-11. Scheduler ---> EmailProcessor
 
 Measurements
 ------------
