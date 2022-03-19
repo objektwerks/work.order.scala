@@ -17,7 +17,7 @@ object EnterView extends View:
       event match
         case Right(event) =>
           event match
-            case LoggedIn(account) =>
+            case Entered(account) =>
               clearErrors()
               accountVar.set(account)
               route(HomePage)

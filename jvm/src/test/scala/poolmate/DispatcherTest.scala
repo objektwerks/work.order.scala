@@ -115,7 +115,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   def testEnter(dispatcher: Dispatcher, account: Account): Unit =
     val command = Enter(account.pin)
     dispatcher.dispatch(command) match
-      case loggedIn: LoggedIn => account shouldBe loggedIn.account
+      case loggedIn: Entered => account shouldBe loggedIn.account
       case event: Event => logger.error(event.toString); fail()
 
   def testDeactivate(dispatcher: Dispatcher, account: Account): Account =

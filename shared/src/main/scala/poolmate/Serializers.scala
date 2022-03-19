@@ -90,7 +90,7 @@ object Serializers:
   )
 
   given exploredRW: ReadWriter[Explored] = macroRW
-  given loggedInRW: ReadWriter[LoggedIn] = macroRW
+  given loggedInRW: ReadWriter[Entered] = macroRW
 
   given deactivatedRW: ReadWriter[Deactivated] = macroRW
   given reactivatedRW: ReadWriter[Reactivated] = macroRW
