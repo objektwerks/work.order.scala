@@ -103,7 +103,6 @@ Entity Model
 ------------
 * Pool 1..n ---> 1 Account **
 * Pool 1 ---> 1..n Surface, Deck, Pump, Timer, TimerSetting, Heater, HeaterSetting, Measurement, Cleaning, Chemical, Supply, Repair
-* Email 1..n ---> 1 Account **
 * Fault
 * UoM ( unit of measure )
 >** Account contains a globally unique license.
@@ -113,9 +112,8 @@ Object Model
 * Router 1 ---> 1 Dispatcher, Store
 * Service 1 ---> 1 Store
 * Authorizer 1 ---> 1 Service
-* Handler 1 ---> 1 EmailSender, Service
+* Handler 1 ---> 1 Service
 * Dispatcher 1 ---> 1 Authorizer, Validator, Handler
-* Scheduler 1 ---> 1 EmailProcesor 1 ---> 1 Store
 * Server 1 ---> 1 Router
 * Client
 
@@ -126,11 +124,10 @@ Sequence
 3. Router --- Command ---> Dispatcher
 4. Dispatcher --- Command ---> Authorizer, Validator, Handler
 5. Handler --- Command ---> Service
-6. EmailSender, Service --- Either[Throwable, T] ---> Handler
-7. Handler --- Event ---> Dispatcher
-8. Dispatcher --- Event ---> Router
-9. Router --- Event ---> Server
-10. Server --- Event ---> Client
+6. Handler --- Event ---> Dispatcher
+7. Dispatcher --- Event ---> Router
+8. Router --- Event ---> Server
+9.  Server --- Event ---> Client
 
 Measurements
 ------------
