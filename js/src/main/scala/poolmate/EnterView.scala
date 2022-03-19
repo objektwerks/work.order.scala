@@ -25,7 +25,7 @@ object EnterView extends View:
         case Left(fault) => errorBus.emit(s"Enter view handler failed: ${fault.cause}")
       
     div(      
-      hdr("Login"),
+      hdr("Enter"),
       info(enterMessage),
       lbl("Pin"),
       pin.amend {
