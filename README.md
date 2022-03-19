@@ -55,8 +55,8 @@ Server
 
 Account
 -------
-* Explore( email ) => Explored( account )
-* Enter( email, pin ) => LoggedIn( account )
+* Explore() => Explored( account )
+* Enter( pin ) => LoggedIn( account )
 * Deactivate( license ) => Deactivated( account )
 * Reactivate( license ) => Reactivated( account )
 
