@@ -101,7 +101,7 @@ Model
 Entity Model
 ------------
 * Pool 1..n ---> 1 Account **
-* Pool 1 ---> 1..n Surface, Deck, Pump, Timer, TimerSetting, Heater, HeaterSetting, Measurement, Cleaning, Chemical, Supply, Repair
+* Pool 1 ---> 1..n Measurement, Cleaning, Chemical, Supply, Repair, Pump, Timer, TimerSetting, Heater, HeaterSetting, Surface, Deck
 * Fault
 * UoM ( unit of measure )
 >** Account contains a globally unique license.
