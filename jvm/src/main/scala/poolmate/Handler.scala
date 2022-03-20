@@ -20,19 +20,40 @@ final class Handler(service: Service):
       case update: UpdatePool =>
         service.updatePool(update.pool).fold(throwable => Fault(throwable), _ => Updated())
 
-      case list: ListSurfaces =>
-        service.listSurfaces(list.poolId).fold(throwable => Fault(throwable), entities => SurfacesListed(entities))
-      case add: AddSurface =>
-        service.addSurface(add.surface).fold(throwable => Fault(throwable), entity => SurfaceAdded(entity))
-      case update: UpdateSurface =>
-        service.updateSurface(update.surface).fold(throwable => Fault(throwable), _ => Updated())
+      case list: ListMeasurements =>
+        service.listMeasurements(list.poolId).fold(throwable => Fault(throwable), entities => MeasurementsListed(entities))
+      case add: AddMeasurement =>
+        service.addMeasurement(add.measurement).fold(throwable => Fault(throwable), entity => MeasurementAdded(entity))
+      case update: UpdateMeasurement =>
+        service.updateMeasurement(update.measurement).fold(throwable => Fault(throwable), _ => Updated())
 
-      case list: ListDecks =>
-        service.listDecks(list.poolId).fold(throwable => Fault(throwable), entities => DecksListed(entities))
-      case add: AddDeck =>
-        service.addDeck(add.deck).fold(throwable => Fault(throwable), entity => DeckAdded(entity))
-      case update: UpdateDeck =>
-        service.updateDeck(update.deck).fold(throwable => Fault(throwable), _ => Updated())
+      case list: ListCleanings =>
+        service.listCleanings(list.poolId).fold(throwable => Fault(throwable), entities => CleaningsListed(entities))
+      case add: AddCleaning =>
+        service.addCleaning(add.cleaning).fold(throwable => Fault(throwable), entity => CleaningAdded(entity))
+      case update: UpdateCleaning =>
+        service.updateCleaning(update.cleaning).fold(throwable => Fault(throwable), _ => Updated())
+
+      case list: ListChemicals =>
+        service.listChemicals(list.poolId).fold(throwable => Fault(throwable), entities => ChemicalsListed(entities))
+      case add: AddChemical =>
+        service.addChemical(add.chemical).fold(throwable => Fault(throwable), entity => ChemicalAdded(entity))
+      case update: UpdateChemical =>
+        service.updateChemical(update.chemical).fold(throwable => Fault(throwable), _ => Updated())
+
+      case list: ListSupplies =>
+        service.listSupplies(list.poolId).fold(throwable => Fault(throwable), entities => SuppliesListed(entities))
+      case add: AddSupply =>
+        service.addSupply(add.supply).fold(throwable => Fault(throwable), entity => SupplyAdded(entity))
+      case update: UpdateSupply =>
+        service.updateSupply(update.supply).fold(throwable => Fault(throwable), _ => Updated())
+
+      case list: ListRepairs =>
+        service.listRepairs(list.poolId).fold(throwable => Fault(throwable), entities => RepairsListed(entities))
+      case add: AddRepair =>
+        service.addRepair(add.repair).fold(throwable => Fault(throwable), entity => RepairAdded(entity))
+      case update: UpdateRepair =>
+        service.updateRepair(update.repair).fold(throwable => Fault(throwable), _ => Updated())
 
       case list: ListPumps =>
         service.listPumps(list.poolId).fold(throwable => Fault(throwable), entities => PumpsListed(entities))
@@ -69,37 +90,16 @@ final class Handler(service: Service):
       case update: UpdateHeaterSetting =>
         service.updateHeaterSetting(update.heaterSetting).fold(throwable => Fault(throwable), _ => Updated())
 
-      case list: ListMeasurements =>
-        service.listMeasurements(list.poolId).fold(throwable => Fault(throwable), entities => MeasurementsListed(entities))
-      case add: AddMeasurement =>
-        service.addMeasurement(add.measurement).fold(throwable => Fault(throwable), entity => MeasurementAdded(entity))
-      case update: UpdateMeasurement =>
-        service.updateMeasurement(update.measurement).fold(throwable => Fault(throwable), _ => Updated())
+      case list: ListSurfaces =>
+        service.listSurfaces(list.poolId).fold(throwable => Fault(throwable), entities => SurfacesListed(entities))
+      case add: AddSurface =>
+        service.addSurface(add.surface).fold(throwable => Fault(throwable), entity => SurfaceAdded(entity))
+      case update: UpdateSurface =>
+        service.updateSurface(update.surface).fold(throwable => Fault(throwable), _ => Updated())
 
-      case list: ListCleanings =>
-        service.listCleanings(list.poolId).fold(throwable => Fault(throwable), entities => CleaningsListed(entities))
-      case add: AddCleaning =>
-        service.addCleaning(add.cleaning).fold(throwable => Fault(throwable), entity => CleaningAdded(entity))
-      case update: UpdateCleaning =>
-        service.updateCleaning(update.cleaning).fold(throwable => Fault(throwable), _ => Updated())
-
-      case list: ListChemicals =>
-        service.listChemicals(list.poolId).fold(throwable => Fault(throwable), entities => ChemicalsListed(entities))
-      case add: AddChemical =>
-        service.addChemical(add.chemical).fold(throwable => Fault(throwable), entity => ChemicalAdded(entity))
-      case update: UpdateChemical =>
-        service.updateChemical(update.chemical).fold(throwable => Fault(throwable), _ => Updated())
-
-      case list: ListSupplies =>
-        service.listSupplies(list.poolId).fold(throwable => Fault(throwable), entities => SuppliesListed(entities))
-      case add: AddSupply =>
-        service.addSupply(add.supply).fold(throwable => Fault(throwable), entity => SupplyAdded(entity))
-      case update: UpdateSupply =>
-        service.updateSupply(update.supply).fold(throwable => Fault(throwable), _ => Updated())
-
-      case list: ListRepairs =>
-        service.listRepairs(list.poolId).fold(throwable => Fault(throwable), entities => RepairsListed(entities))
-      case add: AddRepair =>
-        service.addRepair(add.repair).fold(throwable => Fault(throwable), entity => RepairAdded(entity))
-      case update: UpdateRepair =>
-        service.updateRepair(update.repair).fold(throwable => Fault(throwable), _ => Updated())
+      case list: ListDecks =>
+        service.listDecks(list.poolId).fold(throwable => Fault(throwable), entities => DecksListed(entities))
+      case add: AddDeck =>
+        service.addDeck(add.deck).fold(throwable => Fault(throwable), entity => DeckAdded(entity))
+      case update: UpdateDeck =>
+        service.updateDeck(update.deck).fold(throwable => Fault(throwable), _ => Updated())
