@@ -33,13 +33,25 @@ object Serializers:
   given addPoolRW: ReadWriter[AddPool] = macroRW
   given updatePoolRW: ReadWriter[UpdatePool] = macroRW
 
-  given listSurfacesRW: ReadWriter[ListSurfaces] = macroRW
-  given addSurfaceRW: ReadWriter[AddSurface] = macroRW
-  given updateSurfaceRW: ReadWriter[UpdateSurface] = macroRW
+  given listMeasurementsRW: ReadWriter[ListMeasurements] = macroRW
+  given addMeasurementRW: ReadWriter[AddMeasurement] = macroRW
+  given updateMeasurementRW: ReadWriter[UpdateMeasurement] = macroRW
 
-  given listDecksRW: ReadWriter[ListDecks] = macroRW
-  given addDeckRW: ReadWriter[AddDeck] = macroRW
-  given updateDeckRW: ReadWriter[UpdateDeck] = macroRW
+  given listCleaningsRW: ReadWriter[ListCleanings] = macroRW
+  given addCleaningRW: ReadWriter[AddCleaning] = macroRW
+  given updateCleaningRW: ReadWriter[UpdateCleaning] = macroRW
+
+  given listChemicalsRW: ReadWriter[ListChemicals] = macroRW
+  given addChemicalRW: ReadWriter[AddChemical] = macroRW
+  given updateChemicalRW: ReadWriter[UpdateChemical] = macroRW
+
+  given listSuppliesRW: ReadWriter[ListSupplies] = macroRW
+  given addSupplyRW: ReadWriter[AddSupply] = macroRW
+  given updateSupplyRW: ReadWriter[UpdateSupply] = macroRW
+
+  given listRepairsRW: ReadWriter[ListRepairs] = macroRW
+  given addRepairRW: ReadWriter[AddRepair] = macroRW
+  given updateRepairRW: ReadWriter[UpdateRepair] = macroRW
 
   given listPumpsRW: ReadWriter[ListPumps] = macroRW
   given addPumpRW: ReadWriter[AddPump] = macroRW
@@ -61,36 +73,23 @@ object Serializers:
   given addHeaterSettingRW: ReadWriter[AddHeaterSetting] = macroRW
   given updateHeaterSettingRW: ReadWriter[UpdateHeaterSetting] = macroRW
 
-  given listMeasurementsRW: ReadWriter[ListMeasurements] = macroRW
-  given addMeasurementRW: ReadWriter[AddMeasurement] = macroRW
-  given updateMeasurementRW: ReadWriter[UpdateMeasurement] = macroRW
+  given listSurfacesRW: ReadWriter[ListSurfaces] = macroRW
+  given addSurfaceRW: ReadWriter[AddSurface] = macroRW
+  given updateSurfaceRW: ReadWriter[UpdateSurface] = macroRW
 
-  given listCleaningsRW: ReadWriter[ListCleanings] = macroRW
-  given addCleaningRW: ReadWriter[AddCleaning] = macroRW
-  given updateCleaningRW: ReadWriter[UpdateCleaning] = macroRW
-
-  given listChemicalsRW: ReadWriter[ListChemicals] = macroRW
-  given addChemicalRW: ReadWriter[AddChemical] = macroRW
-  given updateChemicalRW: ReadWriter[UpdateChemical] = macroRW
-
-  given listSuppliesRW: ReadWriter[ListSupplies] = macroRW
-  given addSupplyRW: ReadWriter[AddSupply] = macroRW
-  given updateSupplyRW: ReadWriter[UpdateSupply] = macroRW
-
-  given listRepairsRW: ReadWriter[ListRepairs] = macroRW
-  given addRepairRW: ReadWriter[AddRepair] = macroRW
-  given updateRepairRW: ReadWriter[UpdateRepair] = macroRW
+  given listDecksRW: ReadWriter[ListDecks] = macroRW
+  given addDeckRW: ReadWriter[AddDeck] = macroRW
+  given updateDeckRW: ReadWriter[UpdateDeck] = macroRW
 
   given commandRW: ReadWriter[Command] = ReadWriter.merge(
-    exploreRW, loginRW, deactivateRW, reactivateRW, listPoolsRW, addPoolRW,
-    updatePoolRW, listSurfacesRW, addSurfaceRW, updateSurfaceRW, listPumpsRW,
-    addPumpRW, updatePumpRW, listTimersRW, addTimerRW, updateTimerRW,
-    listTimerSettingsRW, addTimerSettingRW, updateTimerSettingRW, listHeatersRW,
-    addHeaterRW, updateHeaterRW, listHeaterSettingsRW, addHeaterSettingRW,
-    updateHeaterSettingRW, listMeasurementsRW, addMeasurementRW, updateMeasurementRW,
-    listCleaningsRW, addCleaningRW, updateCleaningRW, listChemicalsRW, addChemicalRW,
-    updateChemicalRW, listSuppliesRW, addSupplyRW, updateSupplyRW, listRepairsRW,
-    addRepairRW, updateRepairRW
+    exploreRW, loginRW, deactivateRW, reactivateRW, listPoolsRW, addPoolRW, updatePoolRW,
+    listMeasurementsRW, addMeasurementRW, updateMeasurementRW, listCleaningsRW, addCleaningRW,
+    updateCleaningRW, listChemicalsRW, addChemicalRW, updateChemicalRW, listSuppliesRW,
+    addSupplyRW, updateSupplyRW, listRepairsRW, addRepairRW, updateRepairRW, listPumpsRW,
+    addPumpRW, updatePumpRW, listTimersRW, addTimerRW, updateTimerRW, listTimerSettingsRW,
+    addTimerSettingRW, updateTimerSettingRW, listHeatersRW, addHeaterRW, updateHeaterRW,
+    listHeaterSettingsRW, addHeaterSettingRW, updateHeaterSettingRW, listSurfacesRW, addSurfaceRW,
+    updateSurfaceRW, listDecksRW, addDeckRW, updateDeckRW
   )
 
   given exploredRW: ReadWriter[Explored] = macroRW
