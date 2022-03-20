@@ -37,6 +37,10 @@ object Serializers:
   given addSurfaceRW: ReadWriter[AddSurface] = macroRW
   given updateSurfaceRW: ReadWriter[UpdateSurface] = macroRW
 
+  given listDecksRW: ReadWriter[ListDecks] = macroRW
+  given addDeckRW: ReadWriter[AddDeck] = macroRW
+  given updateDeckRW: ReadWriter[UpdateDeck] = macroRW
+
   given listPumpsRW: ReadWriter[ListPumps] = macroRW
   given addPumpRW: ReadWriter[AddPump] = macroRW
   given updatePumpRW: ReadWriter[UpdatePump] = macroRW
