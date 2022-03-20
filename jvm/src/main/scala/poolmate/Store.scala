@@ -118,153 +118,6 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }
     ()
 
-  def listSurfaces(): List[Surface] =
-    DB readOnly { implicit session =>
-      sql"select * from surface order by installed desc"
-        .map(rs => Surface(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind"), rs.double("cost")))
-        .list()
-    }
-
-  def addSurface(surface: Surface): Surface =
-    val id = DB localTx { implicit session =>
-      sql"insert into surface(pool_id, installed, kind, cost) values(${surface.poolId}, ${surface.installed}, ${surface.kind}, ${surface.cost})"
-      .updateAndReturnGeneratedKey()
-    }
-    surface.copy(id = id)
-
-  def updateSurface(surface: Surface): Unit =
-    DB localTx { implicit session =>
-      sql"update surface set installed = ${surface.installed}, kind = ${surface.kind}, cost = ${surface.cost} where id = ${surface.id}"
-      .update()
-    }
-    ()
-
-  def listDecks(): List[Deck] =
-    DB readOnly { implicit session =>
-      sql"select * from deck order by installed desc"
-        .map(rs => Deck(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind"), rs.double("cost")))
-        .list()
-    }
-
-  def addDeck(deck: Deck): Deck =
-    val id = DB localTx { implicit session =>
-      sql"insert into deck(pool_id, installed, kind, cost) values(${deck.poolId}, ${deck.installed}, ${deck.kind}, ${deck.cost})"
-      .updateAndReturnGeneratedKey()
-    }
-    deck.copy(id = id)
-
-  def updateDeck(deck: Deck): Unit =
-    DB localTx { implicit session =>
-      sql"update deck set installed = ${deck.installed}, kind = ${deck.kind}, cost = ${deck.cost} where id = ${deck.id}"
-      .update()
-    }
-    ()
-
-  def listPumps(): List[Pump] =
-    DB readOnly { implicit session =>
-      sql"select * from pump order by installed desc"
-        .map(rs => Pump(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model")))
-        .list()
-    }
-
-  def addPump(pump: Pump): Pump =
-    val id = DB localTx { implicit session =>
-      sql"insert into pump(pool_id, installed, model) values(${pump.poolId}, ${pump.installed}, ${pump.model})"
-      .updateAndReturnGeneratedKey()
-    }
-    pump.copy(id = id)  
-  
-  def updatePump(pump: Pump): Unit =
-    DB localTx { implicit session =>
-      sql"update pump set installed = ${pump.installed}, model = ${pump.model} where id = ${pump.id}"
-      .update()
-    }
-    ()
-
-  def listTimers(): List[Timer] =
-    DB readOnly { implicit session =>
-      sql"select * from timer order by installed desc"
-        .map(rs => Timer(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model")))
-        .list()
-    }
-
-  def addTimer(timer: Timer): Timer =
-    val id = DB localTx { implicit session =>
-      sql"insert into timer(pool_id, installed, model) values(${timer.poolId}, ${timer.installed}, ${timer.model})"
-      .updateAndReturnGeneratedKey()
-    }
-    timer.copy(id = id)
-  
-  def updateTimer(timer: Timer): Unit =
-    DB localTx { implicit session =>
-      sql"update timer set installed = ${timer.installed}, model = ${timer.model} where id = ${timer.id}"
-      .update()
-    }
-    ()
-
-  def listTimerSettings(): List[TimerSetting] =
-    DB readOnly { implicit session =>
-      sql"select * from timer_setting order by created desc"
-        .map(rs => TimerSetting(rs.long("id"), rs.long("timer_id"), rs.int("created"), rs.int("time_on"), rs.int("time_off")))
-        .list()
-    }
-
-  def addTimerSetting(timerSetting: TimerSetting): TimerSetting =
-    val id = DB localTx { implicit session =>
-      sql"insert into timer_setting(timer_id, created, time_on, time_off) values(${timerSetting.timerId}, ${timerSetting.created}, ${timerSetting.timeOn}, ${timerSetting.timeOff})"
-      .updateAndReturnGeneratedKey()
-    }
-    timerSetting.copy(id = id)
-
-  def updateTimerSetting(timerSetting: TimerSetting): Unit =
-    DB localTx { implicit session =>
-      sql"update timer_setting set created = ${timerSetting.created}, time_on = ${timerSetting.timeOn}, time_off = ${timerSetting.timeOff} where id = ${timerSetting.id}"
-      .update()
-    }
-    ()
-
-  def listHeaters(): List[Heater] =
-    DB readOnly { implicit session =>
-      sql"select * from heater order by installed desc"
-        .map(rs => Heater(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model")))
-        .list()
-    }
-
-  def addHeater(heater: Heater): Heater =
-    val id = DB localTx { implicit session =>
-      sql"insert into heater(pool_id, installed, model) values(${heater.poolId}, ${heater.installed}, ${heater.model})"
-      .updateAndReturnGeneratedKey()
-    }
-    heater.copy(id = id)
-
-  def updateHeater(heater: Heater): Unit =
-    DB localTx { implicit session =>
-      sql"update heater set installed = ${heater.installed}, model = ${heater.model} where id = ${heater.id}"
-      .update()
-    }
-    ()
-
-  def listHeaterSettings(): List[HeaterSetting] =
-    DB readOnly { implicit session =>
-      sql"select * from heater_setting order by date_on desc"
-        .map(rs => HeaterSetting(rs.long("id"), rs.long("heater_id"), rs.int("temp"), rs.int("date_on"), rs.int("date_off")))
-        .list()
-    }
-
-  def addHeaterSetting(heaterSetting: HeaterSetting): HeaterSetting =
-    val id = DB localTx { implicit session =>
-      sql"insert into heater_setting(heater_id, temp, date_on, date_off) values(${heaterSetting.heaterId}, ${heaterSetting.temp}, ${heaterSetting.dateOn}, ${heaterSetting.dateOff})"
-      .updateAndReturnGeneratedKey()
-    }
-    heaterSetting.copy(id = id)
-
-  def updateHeaterSetting(heaterSetting: HeaterSetting): Unit =
-    DB localTx { implicit session =>
-      sql"update heater_setting set temp = ${heaterSetting.temp}, date_on = ${heaterSetting.dateOn}, date_off = ${heaterSetting.dateOff} where id = ${heaterSetting.id}"
-      .update()
-    }
-    ()
-
   def listMeasurements(): List[Measurement] =
     DB readOnly { implicit session =>
       sql"select * from measurement order by measured desc"
@@ -399,6 +252,153 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
   def updateRepair(repair: Repair): Unit =
     DB localTx { implicit session =>
       sql"update repair set repaired = ${repair.repaired}, repair = ${repair.repair}, cost = ${repair.cost} where id = ${repair.id}"
+      .update()
+    }
+    ()
+
+  def listPumps(): List[Pump] =
+    DB readOnly { implicit session =>
+      sql"select * from pump order by installed desc"
+        .map(rs => Pump(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model")))
+        .list()
+    }
+
+  def addPump(pump: Pump): Pump =
+    val id = DB localTx { implicit session =>
+      sql"insert into pump(pool_id, installed, model) values(${pump.poolId}, ${pump.installed}, ${pump.model})"
+      .updateAndReturnGeneratedKey()
+    }
+    pump.copy(id = id)  
+  
+  def updatePump(pump: Pump): Unit =
+    DB localTx { implicit session =>
+      sql"update pump set installed = ${pump.installed}, model = ${pump.model} where id = ${pump.id}"
+      .update()
+    }
+    ()
+
+  def listTimers(): List[Timer] =
+    DB readOnly { implicit session =>
+      sql"select * from timer order by installed desc"
+        .map(rs => Timer(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model")))
+        .list()
+    }
+
+  def addTimer(timer: Timer): Timer =
+    val id = DB localTx { implicit session =>
+      sql"insert into timer(pool_id, installed, model) values(${timer.poolId}, ${timer.installed}, ${timer.model})"
+      .updateAndReturnGeneratedKey()
+    }
+    timer.copy(id = id)
+  
+  def updateTimer(timer: Timer): Unit =
+    DB localTx { implicit session =>
+      sql"update timer set installed = ${timer.installed}, model = ${timer.model} where id = ${timer.id}"
+      .update()
+    }
+    ()
+
+  def listTimerSettings(): List[TimerSetting] =
+    DB readOnly { implicit session =>
+      sql"select * from timer_setting order by created desc"
+        .map(rs => TimerSetting(rs.long("id"), rs.long("timer_id"), rs.int("created"), rs.int("time_on"), rs.int("time_off")))
+        .list()
+    }
+
+  def addTimerSetting(timerSetting: TimerSetting): TimerSetting =
+    val id = DB localTx { implicit session =>
+      sql"insert into timer_setting(timer_id, created, time_on, time_off) values(${timerSetting.timerId}, ${timerSetting.created}, ${timerSetting.timeOn}, ${timerSetting.timeOff})"
+      .updateAndReturnGeneratedKey()
+    }
+    timerSetting.copy(id = id)
+
+  def updateTimerSetting(timerSetting: TimerSetting): Unit =
+    DB localTx { implicit session =>
+      sql"update timer_setting set created = ${timerSetting.created}, time_on = ${timerSetting.timeOn}, time_off = ${timerSetting.timeOff} where id = ${timerSetting.id}"
+      .update()
+    }
+    ()
+
+  def listHeaters(): List[Heater] =
+    DB readOnly { implicit session =>
+      sql"select * from heater order by installed desc"
+        .map(rs => Heater(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model")))
+        .list()
+    }
+
+  def addHeater(heater: Heater): Heater =
+    val id = DB localTx { implicit session =>
+      sql"insert into heater(pool_id, installed, model) values(${heater.poolId}, ${heater.installed}, ${heater.model})"
+      .updateAndReturnGeneratedKey()
+    }
+    heater.copy(id = id)
+
+  def updateHeater(heater: Heater): Unit =
+    DB localTx { implicit session =>
+      sql"update heater set installed = ${heater.installed}, model = ${heater.model} where id = ${heater.id}"
+      .update()
+    }
+    ()
+
+  def listHeaterSettings(): List[HeaterSetting] =
+    DB readOnly { implicit session =>
+      sql"select * from heater_setting order by date_on desc"
+        .map(rs => HeaterSetting(rs.long("id"), rs.long("heater_id"), rs.int("temp"), rs.int("date_on"), rs.int("date_off")))
+        .list()
+    }
+
+  def addHeaterSetting(heaterSetting: HeaterSetting): HeaterSetting =
+    val id = DB localTx { implicit session =>
+      sql"insert into heater_setting(heater_id, temp, date_on, date_off) values(${heaterSetting.heaterId}, ${heaterSetting.temp}, ${heaterSetting.dateOn}, ${heaterSetting.dateOff})"
+      .updateAndReturnGeneratedKey()
+    }
+    heaterSetting.copy(id = id)
+
+  def updateHeaterSetting(heaterSetting: HeaterSetting): Unit =
+    DB localTx { implicit session =>
+      sql"update heater_setting set temp = ${heaterSetting.temp}, date_on = ${heaterSetting.dateOn}, date_off = ${heaterSetting.dateOff} where id = ${heaterSetting.id}"
+      .update()
+    }
+    ()
+
+  def listSurfaces(): List[Surface] =
+    DB readOnly { implicit session =>
+      sql"select * from surface order by installed desc"
+        .map(rs => Surface(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind"), rs.double("cost")))
+        .list()
+    }
+
+  def addSurface(surface: Surface): Surface =
+    val id = DB localTx { implicit session =>
+      sql"insert into surface(pool_id, installed, kind, cost) values(${surface.poolId}, ${surface.installed}, ${surface.kind}, ${surface.cost})"
+      .updateAndReturnGeneratedKey()
+    }
+    surface.copy(id = id)
+
+  def updateSurface(surface: Surface): Unit =
+    DB localTx { implicit session =>
+      sql"update surface set installed = ${surface.installed}, kind = ${surface.kind}, cost = ${surface.cost} where id = ${surface.id}"
+      .update()
+    }
+    ()
+
+  def listDecks(): List[Deck] =
+    DB readOnly { implicit session =>
+      sql"select * from deck order by installed desc"
+        .map(rs => Deck(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind"), rs.double("cost")))
+        .list()
+    }
+
+  def addDeck(deck: Deck): Deck =
+    val id = DB localTx { implicit session =>
+      sql"insert into deck(pool_id, installed, kind, cost) values(${deck.poolId}, ${deck.installed}, ${deck.kind}, ${deck.cost})"
+      .updateAndReturnGeneratedKey()
+    }
+    deck.copy(id = id)
+
+  def updateDeck(deck: Deck): Unit =
+    DB localTx { implicit session =>
+      sql"update deck set installed = ${deck.installed}, kind = ${deck.kind}, cost = ${deck.cost} where id = ${deck.id}"
       .update()
     }
     ()
