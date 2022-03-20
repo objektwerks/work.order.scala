@@ -9,7 +9,7 @@ final class Service(store: Store):
   def enter(pin: String): Either[Throwable, Account] =
     store.enter(pin) match
       case Some(account) => Right(account)
-      case None => Left(IllegalArgumentException(s"Login failed for pin: $pin"))
+      case None => Left(IllegalArgumentException(s"Invalid pin: $pin"))
 
   def deactivate(license: String): Either[Throwable, Account] =
     store.deactivate(license) match
