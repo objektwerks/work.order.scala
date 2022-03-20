@@ -56,20 +56,6 @@ final case class Pool(id: Long = 0,
                       volume: Int = 1000) extends Entity:
   def display = name
 
-final case class Surface(id: Long = 0,
-                         poolId: Long = 0,
-                         installed: Int = 0,
-                         kind: String = "",
-                         cost: Double = 0.0) extends Entity:
-  def display = kind
-
-final case class Deck(id: Long = 0,
-                      poolId: Long = 0,
-                      installed: Int = 0,
-                      kind: String = "",
-                      cost: Double = 0.0) extends Entity:
-  def display = kind
-
 final case class Pump(id: Long = 0,
                       poolId: Long = 0,
                       installed: Int = 0,
@@ -159,3 +145,17 @@ final case class Repair(id: Long = 0,
                         repair: String = "",
                         cost: Double = 0.0) extends Entity:
   def display = s"$repaired: $repair"
+
+final case class Surface(id: Long = 0,
+                         poolId: Long = 0,
+                         installed: Int = 0,
+                         kind: String = "",
+                         cost: Double = 0.0) extends Entity:
+  def display = kind
+
+final case class Deck(id: Long = 0,
+                      poolId: Long = 0,
+                      installed: Int = 0,
+                      kind: String = "",
+                      cost: Double = 0.0) extends Entity:
+  def display = kind
