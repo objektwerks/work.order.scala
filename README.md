@@ -111,8 +111,7 @@ Object Model
 * Router 1 ---> 1 Dispatcher, Store
 * Service 1 ---> 1 Store
 * Authorizer 1 ---> 1 Service
-* Handler 1 ---> 1 Service
-* Dispatcher 1 ---> 1 Authorizer, Validator, Handler
+* Dispatcher 1 ---> 1 Authorizer, Validator, Service
 * Server 1 ---> 1 Router
 * Client
 
@@ -121,12 +120,11 @@ Sequence
 1. Client --- Command ---> Server
 2. Server --- Command ---> Router
 3. Router --- Command ---> Dispatcher
-4. Dispatcher --- Command ---> Authorizer, Validator, Handler
-5. Handler --- Command ---> Service
-6. Handler --- Event ---> Dispatcher
-7. Dispatcher --- Event ---> Router
-8. Router --- Event ---> Server
-9.  Server --- Event ---> Client
+4. Dispatcher --- Command ---> Authorizer, Validator, Service
+5. Dispatcher --- Command ---> Service
+6. Dispatcher --- Event ---> Router
+7. Router --- Event ---> Server
+8. Server --- Event ---> Client
 
 Measurements
 ------------
