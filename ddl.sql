@@ -29,7 +29,8 @@ CREATE TABLE deck (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
   installed INT NOT NULL,
-  kind VARCHAR NOT NULL
+  kind VARCHAR NOT NULL,
+  cost NUMERIC(5, 2) NOT NULL
 );
 
 CREATE TABLE pump (
