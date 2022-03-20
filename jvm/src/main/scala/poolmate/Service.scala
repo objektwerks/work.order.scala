@@ -6,7 +6,7 @@ final class Service(store: Store):
   def register(): Account =
     store.addAccount( Account() )
 
-  def login(pin: String): Either[Throwable, Account] =
+  def enter(pin: String): Either[Throwable, Account] =
     store.login(pin) match
       case Some(account) => Right(account)
       case None => Left(IllegalArgumentException(s"Login failed for pin: $pin"))
