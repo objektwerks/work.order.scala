@@ -30,13 +30,25 @@ final class Service(store: Store):
   def addPool(pool: Pool): Either[Throwable, Pool] = Try( store.addPool(pool) ).toEither
   def updatePool(pool: Pool): Either[Throwable, Unit] = Try( store.updatePool(pool) ).toEither
 
-  def listSurfaces(poolId: Long): Either[Throwable, List[Surface]] = Try( store.listSurfaces() ).toEither
-  def addSurface(surface: Surface): Either[Throwable, Surface] = Try( store.addSurface(surface) ).toEither
-  def updateSurface(surface: Surface): Either[Throwable, Unit] = Try( store.updateSurface(surface) ).toEither
+  def listMeasurements(poolId: Long): Either[Throwable, List[Measurement]] = Try( store.listMeasurements() ).toEither
+  def addMeasurement(measurement: Measurement): Either[Throwable, Measurement] = Try( store.addMeasurement(measurement) ).toEither
+  def updateMeasurement(measurement: Measurement): Either[Throwable, Unit] = Try( store.updateMeasurement(measurement) ).toEither
 
-  def listDecks(poolId: Long): Either[Throwable, List[Deck]] = Try( store.listDecks() ).toEither
-  def addDeck(deck: Deck): Either[Throwable, Deck] = Try( store.addDeck(deck) ).toEither
-  def updateDeck(deck: Deck): Either[Throwable, Unit] = Try( store.updateDeck(deck) ).toEither
+  def listCleanings(poolId: Long): Either[Throwable, List[Cleaning]] = Try( store.listCleanings() ).toEither
+  def addCleaning(cleaning: Cleaning): Either[Throwable, Cleaning] = Try( store.addCleaning(cleaning) ).toEither
+  def updateCleaning(cleaning: Cleaning): Either[Throwable, Unit] = Try( store.updateCleaning(cleaning) ).toEither
+
+  def listChemicals(poolId: Long): Either[Throwable, List[Chemical]] = Try( store.listChemicals() ).toEither
+  def addChemical(chemical: Chemical): Either[Throwable, Chemical] = Try( store.addChemical(chemical) ).toEither
+  def updateChemical(chemical: Chemical): Either[Throwable, Unit] = Try( store.updateChemical(chemical) ).toEither
+
+  def listSupplies(poolId: Long): Either[Throwable, List[Supply]] = Try( store.listSupplies() ).toEither
+  def addSupply(supply: Supply): Either[Throwable, Supply] = Try( store.addSupply(supply) ).toEither
+  def updateSupply(supply: Supply): Either[Throwable, Unit] = Try( store.updateSupply(supply) ).toEither
+
+  def listRepairs(poolId: Long): Either[Throwable, List[Repair]] = Try( store.listRepairs() ).toEither
+  def addRepair(repair: Repair): Either[Throwable, Repair] = Try( store.addRepair(repair) ).toEither
+  def updateRepair(repair: Repair): Either[Throwable, Unit] = Try( store.updateRepair(repair) ).toEither
 
   def listPumps(poolId: Long): Either[Throwable, List[Pump]] = Try( store.listPumps() ).toEither
   def addPump(pump: Pump): Either[Throwable, Pump] = Try( store.addPump(pump) ).toEither
@@ -58,22 +70,10 @@ final class Service(store: Store):
   def addHeaterSetting(heaterSetting: HeaterSetting): Either[Throwable, HeaterSetting] = Try( store.addHeaterSetting(heaterSetting) ).toEither
   def updateHeaterSetting(heaterSetting: HeaterSetting): Either[Throwable, Unit] = Try( store.updateHeaterSetting(heaterSetting) ).toEither
 
-  def listMeasurements(poolId: Long): Either[Throwable, List[Measurement]] = Try( store.listMeasurements() ).toEither
-  def addMeasurement(measurement: Measurement): Either[Throwable, Measurement] = Try( store.addMeasurement(measurement) ).toEither
-  def updateMeasurement(measurement: Measurement): Either[Throwable, Unit] = Try( store.updateMeasurement(measurement) ).toEither
+  def listSurfaces(poolId: Long): Either[Throwable, List[Surface]] = Try( store.listSurfaces() ).toEither
+  def addSurface(surface: Surface): Either[Throwable, Surface] = Try( store.addSurface(surface) ).toEither
+  def updateSurface(surface: Surface): Either[Throwable, Unit] = Try( store.updateSurface(surface) ).toEither
 
-  def listCleanings(poolId: Long): Either[Throwable, List[Cleaning]] = Try( store.listCleanings() ).toEither
-  def addCleaning(cleaning: Cleaning): Either[Throwable, Cleaning] = Try( store.addCleaning(cleaning) ).toEither
-  def updateCleaning(cleaning: Cleaning): Either[Throwable, Unit] = Try( store.updateCleaning(cleaning) ).toEither
-
-  def listChemicals(poolId: Long): Either[Throwable, List[Chemical]] = Try( store.listChemicals() ).toEither
-  def addChemical(chemical: Chemical): Either[Throwable, Chemical] = Try( store.addChemical(chemical) ).toEither
-  def updateChemical(chemical: Chemical): Either[Throwable, Unit] = Try( store.updateChemical(chemical) ).toEither
-
-  def listSupplies(poolId: Long): Either[Throwable, List[Supply]] = Try( store.listSupplies() ).toEither
-  def addSupply(supply: Supply): Either[Throwable, Supply] = Try( store.addSupply(supply) ).toEither
-  def updateSupply(supply: Supply): Either[Throwable, Unit] = Try( store.updateSupply(supply) ).toEither
-
-  def listRepairs(poolId: Long): Either[Throwable, List[Repair]] = Try( store.listRepairs() ).toEither
-  def addRepair(repair: Repair): Either[Throwable, Repair] = Try( store.addRepair(repair) ).toEither
-  def updateRepair(repair: Repair): Either[Throwable, Unit] = Try( store.updateRepair(repair) ).toEither
+  def listDecks(poolId: Long): Either[Throwable, List[Deck]] = Try( store.listDecks() ).toEither
+  def addDeck(deck: Deck): Either[Throwable, Deck] = Try( store.addDeck(deck) ).toEither
+  def updateDeck(deck: Deck): Either[Throwable, Unit] = Try( store.updateDeck(deck) ).toEither
