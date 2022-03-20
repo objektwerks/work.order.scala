@@ -56,38 +56,6 @@ final case class Pool(id: Long = 0,
                       volume: Int = 1000) extends Entity:
   def display = name
 
-final case class Pump(id: Long = 0,
-                      poolId: Long = 0,
-                      installed: Int = 0,
-                      model: String = "") extends Entity:
-  def display = model
-
-final case class Timer(id: Long = 0,
-                       poolId: Long = 0,
-                       installed: Int = 0,
-                       model: String = "") extends Entity:
-  def display = model
-
-final case class TimerSetting(id: Long = 0,
-                              timerId: Long = 0,
-                              created: Int = 0,
-                              timeOn: Int = 0,
-                              timeOff: Int = 0) extends Entity:
-  def display = s"$created: $timeOn - $timeOff"
-
-final case class Heater(id: Long = 0,
-                        poolId: Long = 0,
-                        installed: Int = 0,
-                        model: String = "") extends Entity:
-  def display = installed.toString
-
-final case class HeaterSetting(id: Long = 0,
-                               heaterId: Long = 0,
-                               temp: Int = 0,
-                               dateOn: Int = 0,
-                               dateOff: Int = 0) extends Entity:
-  def display = s"$dateOn: $temp"
-
 final case class Measurement(id: Long = 0,
                              poolId: Long = 0,
                              measured: Int = 0,
@@ -145,6 +113,38 @@ final case class Repair(id: Long = 0,
                         repair: String = "",
                         cost: Double = 0.0) extends Entity:
   def display = s"$repaired: $repair"
+
+final case class Pump(id: Long = 0,
+                      poolId: Long = 0,
+                      installed: Int = 0,
+                      model: String = "") extends Entity:
+  def display = model
+
+final case class Timer(id: Long = 0,
+                       poolId: Long = 0,
+                       installed: Int = 0,
+                       model: String = "") extends Entity:
+  def display = model
+
+final case class TimerSetting(id: Long = 0,
+                              timerId: Long = 0,
+                              created: Int = 0,
+                              timeOn: Int = 0,
+                              timeOff: Int = 0) extends Entity:
+  def display = s"$created: $timeOn - $timeOff"
+
+final case class Heater(id: Long = 0,
+                        poolId: Long = 0,
+                        installed: Int = 0,
+                        model: String = "") extends Entity:
+  def display = installed.toString
+
+final case class HeaterSetting(id: Long = 0,
+                               heaterId: Long = 0,
+                               temp: Int = 0,
+                               dateOn: Int = 0,
+                               dateOff: Int = 0) extends Entity:
+  def display = s"$dateOn: $temp"
 
 final case class Surface(id: Long = 0,
                          poolId: Long = 0,
