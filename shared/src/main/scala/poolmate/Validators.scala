@@ -43,58 +43,6 @@ object Validators:
     pool.built > 0 &&
     pool.volume >= 1000
 
-  extension (surface: Surface)
-    def isValid: Boolean =
-      surface.id >= 0 &&
-      surface.poolId > 0 &&
-      surface.installed > 0 &&
-      surface.kind.nonEmpty
-
-  extension (deck: Deck)
-    def isValid: Boolean =
-      deck.id >= 0 &&
-      deck.poolId > 0 &&
-      deck.installed > 0 &&
-      deck.kind.nonEmpty
-
-  extension (pump: Pump)
-    def isValid: Boolean =
-      pump.id >= 0 &&
-      pump.poolId > 0 &&
-      pump.installed > 0 &&
-      pump.model.nonEmpty
-
-  extension (timer: Timer)
-    def isValid: Boolean =
-      timer.id >= 0 &&
-      timer.poolId > 0 &&
-      timer.installed > 0 &&
-      timer.model.nonEmpty
-
-  extension (timerSetting: TimerSetting)
-    def isValid: Boolean =
-      timerSetting.id >= 0 &&
-      timerSetting.timerId > 0 &&
-      timerSetting.created > 0 &&
-      timerSetting.timeOn > 0 &&
-      timerSetting.timeOff > 0 &&
-      timerSetting.timeOff > timerSetting.timeOn
-
-  extension (heater: Heater)
-    def isValid: Boolean =
-      heater.id >= 0 &&
-      heater.poolId > 0 &&
-      heater.installed > 0 &&
-      heater.model.nonEmpty
-
-  extension (heaterSetting: HeaterSetting)
-    def isValid: Boolean =
-      heaterSetting.id >= 0 &&
-      heaterSetting.heaterId > 0 &&
-      heaterSetting.temp > 0 &&
-      heaterSetting.dateOn > 0 &&
-      heaterSetting.dateOff >= 0
-
   extension (measurement: Measurement)
     def isValid: Boolean =
       import Measurement.*
@@ -142,3 +90,55 @@ object Validators:
       repair.repaired > 0 &&
       repair.repair.nonEmpty &&
       repair.cost > 0.00
+
+  extension (pump: Pump)
+    def isValid: Boolean =
+      pump.id >= 0 &&
+      pump.poolId > 0 &&
+      pump.installed > 0 &&
+      pump.model.nonEmpty
+
+  extension (timer: Timer)
+    def isValid: Boolean =
+      timer.id >= 0 &&
+      timer.poolId > 0 &&
+      timer.installed > 0 &&
+      timer.model.nonEmpty
+
+  extension (timerSetting: TimerSetting)
+    def isValid: Boolean =
+      timerSetting.id >= 0 &&
+      timerSetting.timerId > 0 &&
+      timerSetting.created > 0 &&
+      timerSetting.timeOn > 0 &&
+      timerSetting.timeOff > 0 &&
+      timerSetting.timeOff > timerSetting.timeOn
+
+  extension (heater: Heater)
+    def isValid: Boolean =
+      heater.id >= 0 &&
+      heater.poolId > 0 &&
+      heater.installed > 0 &&
+      heater.model.nonEmpty
+
+  extension (heaterSetting: HeaterSetting)
+    def isValid: Boolean =
+      heaterSetting.id >= 0 &&
+      heaterSetting.heaterId > 0 &&
+      heaterSetting.temp > 0 &&
+      heaterSetting.dateOn > 0 &&
+      heaterSetting.dateOff >= 0
+
+  extension (surface: Surface)
+    def isValid: Boolean =
+      surface.id >= 0 &&
+      surface.poolId > 0 &&
+      surface.installed > 0 &&
+      surface.kind.nonEmpty
+
+  extension (deck: Deck)
+    def isValid: Boolean =
+      deck.id >= 0 &&
+      deck.poolId > 0 &&
+      deck.installed > 0 &&
+      deck.kind.nonEmpty
