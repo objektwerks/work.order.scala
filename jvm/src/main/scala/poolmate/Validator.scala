@@ -15,13 +15,25 @@ final class Validator():
       case add: AddPool => add.pool.isValid
       case update: UpdatePool => update.pool.isValid
 
-      case list: ListSurfaces => true
-      case add: AddSurface => add.surface.isValid
-      case update: UpdateSurface => update.surface.isValid
+      case list: ListMeasurements => true
+      case add: AddMeasurement => add.measurement.isValid
+      case update: UpdateMeasurement => update.measurement.isValid
 
-      case list: ListDecks => true
-      case add: AddDeck => add.deck.isValid
-      case update: UpdateDeck => update.deck.isValid
+      case list: ListCleanings => true
+      case add: AddCleaning => add.cleaning.isValid
+      case update: UpdateCleaning => update.cleaning.isValid
+
+      case list: ListChemicals => true
+      case add: AddChemical => add.chemical.isValid
+      case update: UpdateChemical => update.chemical.isValid
+
+      case list: ListSupplies => true
+      case add: AddSupply => add.supply.isValid
+      case update: UpdateSupply => update.supply.isValid
+
+      case list: ListRepairs => true
+      case add: AddRepair => add.repair.isValid
+      case update: UpdateRepair => update.repair.isValid
 
       case list: ListPumps => true
       case add: AddPump => add.pump.isValid
@@ -43,22 +55,10 @@ final class Validator():
       case add: AddHeaterSetting => add.heaterSetting.isValid
       case update: UpdateHeaterSetting => update.heaterSetting.isValid
 
-      case list: ListMeasurements => true
-      case add: AddMeasurement => add.measurement.isValid
-      case update: UpdateMeasurement => update.measurement.isValid
+      case list: ListSurfaces => true
+      case add: AddSurface => add.surface.isValid
+      case update: UpdateSurface => update.surface.isValid
 
-      case list: ListCleanings => true
-      case add: AddCleaning => add.cleaning.isValid
-      case update: UpdateCleaning => update.cleaning.isValid
-
-      case list: ListChemicals => true
-      case add: AddChemical => add.chemical.isValid
-      case update: UpdateChemical => update.chemical.isValid
-
-      case list: ListSupplies => true
-      case add: AddSupply => add.supply.isValid
-      case update: UpdateSupply => update.supply.isValid
-
-      case list: ListRepairs => true
-      case add: AddRepair => add.repair.isValid
-      case update: UpdateRepair => update.repair.isValid
+      case list: ListDecks => true
+      case add: AddDeck => add.deck.isValid
+      case update: UpdateDeck => update.deck.isValid
