@@ -51,7 +51,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }
     ()
     
-  def login(pin: String): Option[Account] =
+  def enter(pin: String): Option[Account] =
     DB readOnly { implicit session =>
       sql"select * from account where pin = $pin"
         .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
