@@ -4,7 +4,7 @@ final class Handler(service: Service):
   def handle(command: Command): Event =
     command match
       case explore: Explore =>
-        Explored( service.register() )
+        Explored( service.explore() )
       case enter: Enter =>
         service.enter(enter.pin).fold(throwable => Fault(throwable), account => Entered(account))
       
