@@ -103,8 +103,20 @@ object Serializers:
   given poolsListedRW: ReadWriter[PoolsListed] = macroRW
   given poolAddedRW: ReadWriter[PoolAdded] = macroRW
 
-  given surfacesListedRW: ReadWriter[SurfacesListed] = macroRW
-  given surfaceAddedRW: ReadWriter[SurfaceAdded] = macroRW
+  given measurementsListedRW: ReadWriter[MeasurementsListed] = macroRW
+  given measurementAddedRW: ReadWriter[MeasurementAdded] = macroRW
+
+  given cleaningsListedRW: ReadWriter[CleaningsListed] = macroRW
+  given cleaningAddedRW: ReadWriter[CleaningAdded] = macroRW
+
+  given chemicalsListedRW: ReadWriter[ChemicalsListed] = macroRW
+  given chemicalAddedRW: ReadWriter[ChemicalAdded] = macroRW
+
+  given suppliesListedRW: ReadWriter[SuppliesListed] = macroRW
+  given supplyAddedRW: ReadWriter[SupplyAdded] = macroRW
+
+  given repairsListedRW: ReadWriter[RepairsListed] = macroRW
+  given repairAddedRW: ReadWriter[RepairAdded] = macroRW
 
   given pumpsListedRW: ReadWriter[PumpsListed] = macroRW
   given pumpAddedRW: ReadWriter[PumpAdded] = macroRW
@@ -121,29 +133,19 @@ object Serializers:
   given heaterSettingsListedRW: ReadWriter[HeaterSettingsListed] = macroRW
   given heaterSettingAddedRW: ReadWriter[HeaterSettingAdded] = macroRW
 
-  given measurementsListedRW: ReadWriter[MeasurementsListed] = macroRW
-  given measurementAddedRW: ReadWriter[MeasurementAdded] = macroRW
+  given surfacesListedRW: ReadWriter[SurfacesListed] = macroRW
+  given surfaceAddedRW: ReadWriter[SurfaceAdded] = macroRW
 
-  given cleaningsListedRW: ReadWriter[CleaningsListed] = macroRW
-  given cleaningAddedRW: ReadWriter[CleaningAdded] = macroRW
-
-  given chemicalsListedRW: ReadWriter[ChemicalsListed] = macroRW
-  given chemicalAddedRW: ReadWriter[ChemicalAdded] = macroRW
-
-  given suppliesListedRW: ReadWriter[SuppliesListed] = macroRW
-  given supplyAddedRW: ReadWriter[SupplyAdded] = macroRW
-
-  given repairsListedRW: ReadWriter[RepairsListed] = macroRW
-  given repairAddedRW: ReadWriter[RepairAdded] = macroRW
+  given decksListedRW: ReadWriter[DecksListed] = macroRW
+  given deckAddedRW: ReadWriter[DeckAdded] = macroRW
 
   given faultRW: ReadWriter[Fault] = macroRW
 
   given eventRW: ReadWriter[Event] = ReadWriter.merge(
-    exploredRW, loggedInRW, deactivatedRW, reactivatedRW, updatedRW, faultRW,
-    poolsListedRW, poolAddedRW, surfacesListedRW, surfaceAddedRW, pumpsListedRW,
-    pumpAddedRW, timersListedRW, timerAddedRW, timerSettingsListedRW,
-    timerSettingAddedRW, heatersListedRW, heaterAddedRW, heaterSettingsListedRW,
-    heaterSettingAddedRW, measurementsListedRW, measurementAddedRW, cleaningsListedRW,
-    cleaningAddedRW, chemicalsListedRW, chemicalAddedRW, suppliesListedRW,
-    supplyAddedRW, repairsListedRW, repairAddedRW
+    exploredRW, loggedInRW, deactivatedRW, reactivatedRW, updatedRW, faultRW, poolsListedRW,
+    poolAddedRW, measurementsListedRW, measurementAddedRW, cleaningsListedRW, cleaningAddedRW,
+    chemicalsListedRW, chemicalAddedRW, suppliesListedRW, supplyAddedRW, repairsListedRW,
+    repairAddedRW, pumpsListedRW, pumpAddedRW, timersListedRW, timerAddedRW, timerSettingsListedRW,
+    timerSettingAddedRW, heatersListedRW, heaterAddedRW, heaterSettingsListedRW, heaterSettingAddedRW,
+    surfacesListedRW, surfaceAddedRW, decksListedRW, deckAddedRW
   )
