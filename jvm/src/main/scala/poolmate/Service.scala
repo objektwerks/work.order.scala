@@ -14,17 +14,16 @@ final class Service(store: Store):
   def deactivate(license: String): Either[Throwable, Account] =
     store.deactivate(license) match
       case Some(account) => Right(account)
-      case None => Left(IllegalArgumentException(s"License is invalid: $license"))
+      case None => Left(IllegalArgumentException(s"Invalid license: $license"))
 
   def reactivate(license: String): Either[Throwable, Account] =
     store.reactivate(license) match
       case Some(account) => Right(account)
-      case None => Left(IllegalArgumentException(s"License is invalid: $license"))
+      case None => Left(IllegalArgumentException(s"Invalid license: $license"))
 
   def authorize(license: String): Event =
-    Try(
-      store.isAuthorized(license)
-    ).fold(_ => Unauthorized(s"Authorization failed for: $license"), _ => Authorized(license))
+      if store.isAuthorized(license) then Authorized(license)
+      else Unauthorized(s"Invalid license: $license")
   
   def listPools(): Either[Throwable, List[Pool]] = Try( store.listPools() ).toEither
   def addPool(pool: Pool): Either[Throwable, Pool] = Try( store.addPool(pool) ).toEither
