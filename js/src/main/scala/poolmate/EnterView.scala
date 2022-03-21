@@ -26,7 +26,7 @@ object EnterView extends View:
       
     div(      
       hdr("Enter"),
-      info(enterMessage),
+      info(joinMessage),
       lbl("Pin"),
       pin.amend {
         value <-- pinVar
