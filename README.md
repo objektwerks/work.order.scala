@@ -121,7 +121,7 @@ Sequence
 2. Server --- Command ---> Router
 3. Router --- Command ---> Dispatcher
 4. Dispatcher --- Command ---> Authorizer, Validator, Service
-5. Dispatcher --- Command ---> Service
+5. Authorizer, Validator, Service --- Event ---> Dispatcher
 6. Dispatcher --- Event ---> Router
 7. Router --- Event ---> Server
 8. Server --- Event ---> Client
