@@ -3,7 +3,7 @@ package poolmate
 import scala.util.Try
 
 final class Service(store: Store):
-  def explore(): Account =
+  def join(): Account =
     store.addAccount( Account() )
 
   def enter(pin: String): Either[Throwable, Account] =

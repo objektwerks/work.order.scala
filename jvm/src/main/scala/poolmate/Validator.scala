@@ -5,7 +5,7 @@ import Validators.*
 final class Validator():
   def isValid(command: Command): Boolean =
     command match
-      case explore: Explore => true
+      case join: Join => true
       case enter: Enter => enter.isValid
 
       case deactivate: Deactivate => deactivate.isValid

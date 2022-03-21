@@ -23,8 +23,8 @@ object Serializers:
     pumpRW, timerRW, timerSettingRW, heaterRW, heaterSettingRW, surfaceRW, deckRW
   )
 
-  given exploreRW: ReadWriter[Explore] = macroRW
-  given loginRW: ReadWriter[Enter] = macroRW
+  given joinRW: ReadWriter[Join] = macroRW
+  given enterRW: ReadWriter[Enter] = macroRW
 
   given deactivateRW: ReadWriter[Deactivate] = macroRW
   given reactivateRW: ReadWriter[Reactivate] = macroRW
@@ -82,7 +82,7 @@ object Serializers:
   given updateDeckRW: ReadWriter[UpdateDeck] = macroRW
 
   given commandRW: ReadWriter[Command] = ReadWriter.merge(
-    exploreRW, loginRW, deactivateRW, reactivateRW, listPoolsRW, addPoolRW, updatePoolRW,
+    joinRW, enterRW, deactivateRW, reactivateRW, listPoolsRW, addPoolRW, updatePoolRW,
     listMeasurementsRW, addMeasurementRW, updateMeasurementRW, listCleaningsRW, addCleaningRW,
     updateCleaningRW, listChemicalsRW, addChemicalRW, updateChemicalRW, listSuppliesRW,
     addSupplyRW, updateSupplyRW, listRepairsRW, addRepairRW, updateRepairRW, listPumpsRW,
@@ -92,8 +92,8 @@ object Serializers:
     updateSurfaceRW, listDecksRW, addDeckRW, updateDeckRW
   )
 
-  given exploredRW: ReadWriter[Explored] = macroRW
-  given loggedInRW: ReadWriter[Entered] = macroRW
+  given joinedRW: ReadWriter[Joined] = macroRW
+  given enteredRW: ReadWriter[Entered] = macroRW
 
   given deactivatedRW: ReadWriter[Deactivated] = macroRW
   given reactivatedRW: ReadWriter[Reactivated] = macroRW
@@ -142,7 +142,7 @@ object Serializers:
   given faultRW: ReadWriter[Fault] = macroRW
 
   given eventRW: ReadWriter[Event] = ReadWriter.merge(
-    exploredRW, loggedInRW, deactivatedRW, reactivatedRW, updatedRW, faultRW, poolsListedRW,
+    joinedRW, enteredRW, deactivatedRW, reactivatedRW, updatedRW, faultRW, poolsListedRW,
     poolAddedRW, measurementsListedRW, measurementAddedRW, cleaningsListedRW, cleaningAddedRW,
     chemicalsListedRW, chemicalAddedRW, suppliesListedRW, supplyAddedRW, repairsListedRW,
     repairAddedRW, pumpsListedRW, pumpAddedRW, timersListedRW, timerAddedRW, timerSettingsListedRW,

@@ -30,7 +30,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   }
 
   def testDispatcher(dispatcher: Dispatcher, store: Store): Unit = {
-    var account = testExplore(dispatcher)
+    var account = testJoin(dispatcher)
     store.listAccounts().head shouldBe account
 
     testEnter(dispatcher, account)
@@ -103,10 +103,10 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     testUpdateRepair(dispatcher, pool, repair.copy(cost = 105.0))
   }
 
-  def testExplore(dispatcher: Dispatcher): Account =
-    val command = Explore()
+  def testJoin(dispatcher: Dispatcher): Account =
+    val command = Join()
     dispatcher.dispatch(command) match
-      case Explored(account) =>
+      case Joined(account) =>
         account.isActivated shouldBe true
         account
       case event: Event => logger.error(event.toString); fail()

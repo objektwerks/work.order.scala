@@ -12,25 +12,25 @@ object IndexView extends View:
         event match
           case Right(event) =>
             event match
-              case Explored(account) =>
+              case Joined(account) =>
                 clearErrors()
                 accountVar.set(account)
                 pinVar.set(account.pin)
                 route(EnterPage)
-              case _ => log(s"Index -> Explore view handler failed: $event")
-          case Left(fault) => errorBus.emit(s"Explore failed: ${fault.cause}")
+              case _ => log(s"Index -> Join view handler failed: $event")
+          case Left(fault) => errorBus.emit(s"Join failed: ${fault.cause}")
       div(
         bar(
-          btn("Enter Pin").amend {
+          btn("Enter").amend {
             onClick --> { _ =>
               log("Index -> Enter menu item onClick")
               route(EnterPage)
             }
           },
-          rbtn("Get Pin").amend {
+          rbtn("Join").amend {
             onClick --> { _ =>
-              log(s"Index -> Explore menu item onClick")
-              val command = Explore()
+              log(s"Index -> Join menu item onClick")
+              val command = Join()
               call(command, handler)
             }
           }          

@@ -12,8 +12,8 @@ final class Dispatcher(authorizer: Authorizer,
 
   private def handle(service: Service, command: Command): Event =
     command match
-      case explore: Explore =>
-        Explored( service.explore() )
+      case join: Join =>
+        Joined( service.join() )
       case enter: Enter =>
         service.enter(enter.pin).fold(throwable => Fault(throwable), account => Entered(account))
       
