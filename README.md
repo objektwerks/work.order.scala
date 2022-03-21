@@ -86,7 +86,7 @@ View(Menu) ! Action -> Page
    * Decks(Pool) !  NR -> Deck(Surfaces) ! AU -> Decks
 
 ** Actions:
-* New Refresh = NR
+* New, Refresh = NR
 * Add, Update = AU
 
 *** Charts:
