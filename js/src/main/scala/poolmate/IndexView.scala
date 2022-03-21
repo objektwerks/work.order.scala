@@ -21,7 +21,7 @@ object IndexView extends View:
           case Left(fault) => errorBus.emit(s"Explore failed: ${fault.cause}")
       div(
         bar(
-          btn("Enter").amend {
+          btn("Enter Pin").amend {
             onClick --> { _ =>
               log("Index -> Enter menu item onClick")
               route(EnterPage)
