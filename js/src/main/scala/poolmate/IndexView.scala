@@ -27,7 +27,7 @@ object IndexView extends View:
               route(EnterPage)
             }
           },
-          rbtn("Explore").amend {
+          rbtn("Get Pin").amend {
             onClick --> { _ =>
               log(s"Index -> Explore menu item onClick")
               val command = Explore()
