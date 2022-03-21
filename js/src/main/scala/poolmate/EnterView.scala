@@ -38,10 +38,10 @@ object EnterView extends View:
       info(pinMessage),
       err(pinErrorBus),
       cbar(
-        btn("Login").amend {
+        btn("Enter").amend {
           disabled <-- pinVar.signal.map( pin => !pin.isPin )
           onClick --> { _ =>
-            log(s"Login onClick -> pin: ${pinVar.now()}")
+            log(s"Enter onClick -> pin: ${pinVar.now()}")
             val command = Enter(pinVar.now())
             call(command, handler)
           }
