@@ -54,7 +54,7 @@ Server
 
 Account
 -------
-* Explore() => Explored( account )
+* Join() => Joined( account )
 * Enter( pin ) => Entered( account )
 * Deactivate( license ) => Deactivated( account )
 * Reactivate( license ) => Reactivated( account )
@@ -62,7 +62,7 @@ Account
 View(Menu) ! Action -> Page
 ---------------------------
 1. Home
-   * Index(Enter, Explore) ! Enter | Explore -> Enter
+   * Index(Enter, Join) ! Enter | Join -> Enter
    * Enter ! Enter -> Home
    * Home(Account, Pools)
    * Account(Home) ! Deactivate | Reactivate -> Home
