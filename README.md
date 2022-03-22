@@ -49,7 +49,7 @@ Use Cases
 * add pool chemicals
 * record pool supplies
 * record pool expenses
-* record pool pool hardware
+* record pool hardware
 
 Client
 ------
