@@ -48,7 +48,8 @@ Use Cases
 * clean pool artifacts
 * add chemicals to pool
 * record pool supplies
-* recored pool expenses
+* record pool expenses
+* record pool pool hardware
 
 Client
 ------
