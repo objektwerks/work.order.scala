@@ -20,7 +20,7 @@ object EnterView extends View:
             case Entered(account) =>
               clearErrors()
               accountVar.set(account)
-              route(HomePage)
+              route(AppPage)
             case _ => log(s"Enter view handler failed: $event")
         case Left(fault) => errorBus.emit(s"Enter view handler failed: ${fault.cause}")
       
