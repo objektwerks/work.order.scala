@@ -16,7 +16,7 @@ object PageRouter:
   val poolRoute = Route[PoolPage, Long](
     encode = poolPage => poolPage.id,
     decode = arg => PoolPage(id = arg),
-    pattern = root / "pools" / segment[Long] / endOfSegments
+    pattern = root / "home" / "pools" / segment[Long] / endOfSegments
   )
 
   val routes = List(
@@ -24,8 +24,8 @@ object PageRouter:
     Route.static(ExplorePage, root / "explore" / endOfSegments),
     Route.static(EnterPage, root / "enter" / endOfSegments),
     Route.static(HomePage, root / "home" / endOfSegments),
-    Route.static(AccountPage, root / "account" / endOfSegments),
-    Route.static(PoolsPage, root / "pools" / endOfSegments),
+    Route.static(AccountPage, root / "home" / "account" / endOfSegments),
+    Route.static(PoolsPage, root / "home" / "pools" / endOfSegments),
     poolRoute
   )
 
