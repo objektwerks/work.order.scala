@@ -42,6 +42,12 @@ Package Client
 1. sbt clean test fullLinkJS
 2. npx snowpack build ( see **build** directory )
 
+Use Cases
+---------
+* measure pool chemical state
+* clean pool artifacts
+* add chemicals to pool
+
 Client
 ------
 * Now
