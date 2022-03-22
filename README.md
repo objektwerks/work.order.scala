@@ -51,6 +51,10 @@ Use Cases
 4. expense supplies, repairs, hardware, enhancements
 5. set timer and heater
 
+Alternate Model
+---------------
+Pool 1 ---> * Health, Expense, Setting
+
 Client
 ------
 * Now
