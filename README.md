@@ -44,16 +44,14 @@ Package Client
 
 Use Cases
 ---------
->Pool:
-1. measure water
-2. clean artifacts
-3. add chemicals
-4. expense supplies, repairs, pumps, timers, heaters, surfaces, decks
-5. adjust settings
+1. service pool
+2. add chemicals
+3. expense supplies, repairs, pumps, timers, heaters, surfaces, decks
+4. adjust timer/heating settings
 
 Use Case Model
 --------------
-Pool 1 ---> * Maintenance, Chemical, Supply, Repair, Pump, Timer, Heater, Surface, Deck, Setting
+Pool 1 ---> * Maintenance, Chemical, Supply, Repair, Pump, Timer, Heater, Surface, Deck, Setting(Timer, Heater)
 
 Maintenance
 -----------
