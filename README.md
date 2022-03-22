@@ -45,7 +45,7 @@ Package Client
 Use Cases
 ---------
 >Pool:
-1. measure health
+1. measure water
 2. clean artifacts
 3. add chemicals
 4. expense supplies, repairs, hardware, aesthetic
@@ -53,7 +53,7 @@ Use Cases
 
 Use Case Model
 --------------
-Pool 1 ---> * Measurement, Cleaning, Chemical, Supply, Repair, Hardware, Aesthetic, Setting
+Pool 1 ---> * Maintenance, Chemical, Supply, Repair, Pump, Timer, Heater, Surface, Deck, Setting
 
 Maintenance
 -----------
