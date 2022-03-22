@@ -126,8 +126,7 @@ object Validators:
       heaterSetting.id >= 0 &&
       heaterSetting.heaterId > 0 &&
       heaterSetting.temp > 0 &&
-      heaterSetting.dateOn > 0 &&
-      heaterSetting.dateOff >= 0
+      heaterSetting.dateSet > 0
 
   extension (surface: Surface)
     def isValid: Boolean =

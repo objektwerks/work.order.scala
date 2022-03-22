@@ -345,21 +345,21 @@ final class Store(conf: Config,
 
   def listHeaterSettings(): List[HeaterSetting] =
     DB readOnly { implicit session =>
-      sql"select * from heater_setting order by date_on desc"
-        .map(rs => HeaterSetting(rs.long("id"), rs.long("heater_id"), rs.int("temp"), rs.int("date_on"), rs.int("date_off")))
+      sql"select * from heater_setting order by date_set desc"
+        .map(rs => HeaterSetting(rs.long("id"), rs.long("heater_id"), rs.int("temp"), rs.int("date_set")))
         .list()
     }
 
   def addHeaterSetting(heaterSetting: HeaterSetting): HeaterSetting =
     val id = DB localTx { implicit session =>
-      sql"insert into heater_setting(heater_id, temp, date_on, date_off) values(${heaterSetting.heaterId}, ${heaterSetting.temp}, ${heaterSetting.dateOn}, ${heaterSetting.dateOff})"
+      sql"insert into heater_setting(heater_id, temp, date_set) values(${heaterSetting.heaterId}, ${heaterSetting.temp}, ${heaterSetting.dateSet})"
       .updateAndReturnGeneratedKey()
     }
     heaterSetting.copy(id = id)
 
   def updateHeaterSetting(heaterSetting: HeaterSetting): Unit =
     DB localTx { implicit session =>
-      sql"update heater_setting set temp = ${heaterSetting.temp}, date_on = ${heaterSetting.dateOn}, date_off = ${heaterSetting.dateOff} where id = ${heaterSetting.id}"
+      sql"update heater_setting set temp = ${heaterSetting.temp}, date_set = ${heaterSetting.dateSet} where id = ${heaterSetting.id}"
       .update()
     }
     ()

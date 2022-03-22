@@ -17,59 +17,6 @@ CREATE TABLE pool (
   volume INT NOT NULL
 );
 
-CREATE TABLE surface (
-  id BIGSERIAL PRIMARY KEY,
-  pool_id BIGINT REFERENCES pool(id),
-  installed INT NOT NULL,
-  kind VARCHAR NOT NULL,
-  cost NUMERIC(5, 2) NOT NULL
-);
-
-CREATE TABLE deck (
-  id BIGSERIAL PRIMARY KEY,
-  pool_id BIGINT REFERENCES pool(id),
-  installed INT NOT NULL,
-  kind VARCHAR NOT NULL,
-  cost NUMERIC(5, 2) NOT NULL
-);
-
-CREATE TABLE pump (
-  id BIGSERIAL PRIMARY KEY,
-  pool_id BIGINT REFERENCES pool(id),
-  installed INT NOT NULL,
-  model VARCHAR NOT NULL
-);
-
-CREATE TABLE timer (
-  id BIGSERIAL PRIMARY KEY,
-  pool_id BIGINT REFERENCES pool(id),
-  installed INT NOT NULL,
-  model VARCHAR NOT NULL
-);
-
-CREATE TABLE timer_setting (
-  id BIGSERIAL PRIMARY KEY,
-  timer_id BIGINT REFERENCES timer(id),
-  created INT NOT NULL,
-  time_on SMALLINT NOT NULL,
-  time_off SMALLINT NOT NULL
-);
-
-CREATE TABLE heater (
-  id BIGSERIAL PRIMARY KEY,
-  pool_id BIGINT REFERENCES pool(id),
-  installed INT NOT NULL,
-  model VARCHAR NOT NULL
-);
-
-CREATE TABLE heater_setting (
-  id BIGSERIAL PRIMARY KEY,
-  heater_id BIGINT REFERENCES heater(id),
-  temp INT NOT NULL,
-  date_on INT NOT NULL,
-  date_off INT NOT NULL
-);
-
 CREATE TABLE measurement (
   id BIGSERIAL PRIMARY KEY,
   pool_id BIGINT REFERENCES pool(id),
@@ -122,6 +69,58 @@ CREATE TABLE repair (
   repaired INT NOT NULL,
   repair VARCHAR NOT NULL,
   cost NUMERIC(7, 2) NOT NULL
+);
+
+CREATE TABLE pump (
+  id BIGSERIAL PRIMARY KEY,
+  pool_id BIGINT REFERENCES pool(id),
+  installed INT NOT NULL,
+  model VARCHAR NOT NULL
+);
+
+CREATE TABLE timer (
+  id BIGSERIAL PRIMARY KEY,
+  pool_id BIGINT REFERENCES pool(id),
+  installed INT NOT NULL,
+  model VARCHAR NOT NULL
+);
+
+CREATE TABLE timer_setting (
+  id BIGSERIAL PRIMARY KEY,
+  timer_id BIGINT REFERENCES timer(id),
+  created INT NOT NULL,
+  time_on SMALLINT NOT NULL,
+  time_off SMALLINT NOT NULL
+);
+
+CREATE TABLE heater (
+  id BIGSERIAL PRIMARY KEY,
+  pool_id BIGINT REFERENCES pool(id),
+  installed INT NOT NULL,
+  model VARCHAR NOT NULL
+);
+
+CREATE TABLE heater_setting (
+  id BIGSERIAL PRIMARY KEY,
+  heater_id BIGINT REFERENCES heater(id),
+  temp INT NOT NULL,
+  date_set INT NOT NULL
+);
+
+CREATE TABLE surface (
+  id BIGSERIAL PRIMARY KEY,
+  pool_id BIGINT REFERENCES pool(id),
+  installed INT NOT NULL,
+  kind VARCHAR NOT NULL,
+  cost NUMERIC(5, 2) NOT NULL
+);
+
+CREATE TABLE deck (
+  id BIGSERIAL PRIMARY KEY,
+  pool_id BIGINT REFERENCES pool(id),
+  installed INT NOT NULL,
+  kind VARCHAR NOT NULL,
+  cost NUMERIC(5, 2) NOT NULL
 );
 
 CREATE TABLE fault (
