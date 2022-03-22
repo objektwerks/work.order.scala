@@ -48,7 +48,7 @@ Use Cases
 1. measure water
 2. clean artifacts
 3. add chemicals
-4. expense supplies, repairs, hardware, aesthetic
+4. expense supplies, repairs, pumps, timers, heaters, surfaces, decks
 5. adjust settings
 
 Use Case Model
