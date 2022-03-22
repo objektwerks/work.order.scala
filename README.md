@@ -50,7 +50,7 @@ Use Cases
 4. expense pool supplies
 5. expense pool repairs
 6. expense pool hardware
-7. record timer and heater settings
+7. set timer and heater
 
 Client
 ------
