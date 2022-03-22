@@ -44,10 +44,11 @@ Package Client
 
 Use Cases
 ---------
-1. measure pool health
-2. clean pool artifacts
-3. add pool chemicals
-4. expense pool supplies, repairs, hardware, enhancements
+>Pool:
+1. measure health
+2. clean artifacts
+3. add chemicals
+4. expense supplies, repairs, hardware, enhancements
 5. set timer and heater
 
 Client
