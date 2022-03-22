@@ -259,22 +259,22 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     val update = UpdateHeater(pool.license, heater)
     dispatcher.dispatch(update) shouldBe Updated()
 
-  def testAddHeaterSetting(dispatcher: Dispatcher, pool: Pool, heaterSetting: HeaterSetting): HeaterSetting =
-    val add = AddHeaterSetting(pool.license, heaterSetting)
+  def testAddHeaterSetting(dispatcher: Dispatcher, pool: Pool, setting: HeaterSetting): HeaterSetting =
+    val add = AddHeaterSetting(pool.license, setting)
     dispatcher.dispatch(add) match
-      case HeaterSettingAdded(heaterSetting: HeaterSetting) =>
-        heaterSetting.id > 0 shouldBe true
-        heaterSetting
+      case HeaterSettingAdded(setting: HeaterSetting) =>
+        setting.id > 0 shouldBe true
+        setting
       case event: Event => logger.error(event.toString); fail()
 
   def testListHeaterSettings(dispatcher: Dispatcher, pool: Pool, heater: Heater): Unit =
     val list = ListHeaterSettings(pool.license, heater.id)
     dispatcher.dispatch(list) match
-      case HeaterSettingsListed(heaterSettings) => heaterSettings.size shouldBe 1
+      case HeaterSettingsListed(settings) => settings.size shouldBe 1
       case event: Event => logger.error(event.toString); fail()
 
-  def testUpdateHeaterSetting(dispatcher: Dispatcher, pool: Pool, heaterSetting: HeaterSetting): Unit =
-    val update = UpdateHeaterSetting(pool.license, heaterSetting)
+  def testUpdateHeaterSetting(dispatcher: Dispatcher, pool: Pool, setting: HeaterSetting): Unit =
+    val update = UpdateHeaterSetting(pool.license, setting)
     dispatcher.dispatch(update) shouldBe Updated()
 
   def testAddMeasurement(dispatcher: Dispatcher, pool: Pool, measurement: Measurement): Measurement =
