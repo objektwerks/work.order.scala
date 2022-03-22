@@ -48,7 +48,7 @@ Use Cases
 * clean pool artifacts
 * add pool chemicals
 * record pool supplies
-* record pool expenses
+* record pool repairs
 * record pool hardware
 * recored timer and heater settings
 
