@@ -50,6 +50,7 @@ Use Cases
 * record pool supplies
 * record pool expenses
 * record pool hardware
+* recored timer and heater settings
 
 Client
 ------
