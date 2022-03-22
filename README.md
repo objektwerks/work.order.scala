@@ -55,6 +55,28 @@ Use Case Model
 --------------
 Pool 1 ---> * Measurement, Cleaning, Chemical, Supply, Repair, Hardware, Aesthetic, Setting
 
+Maintenance
+-----------
+>Combined Measurement and Cleaning:
+1. id: Long = 0,
+2. poolId: Long = 0,
+3. maintained: Int = 0,
+4. temp: Int = 85,
+5. totalHardness: Int = 375,
+6. totalChlorine: Int = 3,
+7. totalBromine: Int = 5,
+8. freeChlorine: Int = 3,
+9. ph: Double = 7.4,
+10. totalAlkalinity: Int = 100,
+11. cyanuricAcid: Long = 50
+12. brush: Boolean = true,
+13. net: Boolean = true,
+14. vacuum: Boolean = false,
+15. skimmerBasket: Boolean = true,
+16. pumpBasket: Boolean = false,
+17. pumpFilter: Boolean = false,
+18. deck: Boolean = false
+
 Client
 ------
 * Now
