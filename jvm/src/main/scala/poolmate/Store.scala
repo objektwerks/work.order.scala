@@ -350,16 +350,16 @@ final class Store(conf: Config,
         .list()
     }
 
-  def addHeaterSetting(heaterSetting: HeaterSetting): HeaterSetting =
+  def addHeaterSetting(setting: HeaterSetting): HeaterSetting =
     val id = DB localTx { implicit session =>
-      sql"insert into heater_setting(heater_id, date_set, temp) values(${heaterSetting.heaterId}, ${heaterSetting.dateSet}, ${heaterSetting.temp})"
+      sql"insert into heater_setting(heater_id, date_set, temp) values(${setting.heaterId}, ${setting.dateSet}, ${setting.temp})"
       .updateAndReturnGeneratedKey()
     }
-    heaterSetting.copy(id = id)
+    setting.copy(id = id)
 
-  def updateHeaterSetting(heaterSetting: HeaterSetting): Unit =
+  def updateHeaterSetting(setting: HeaterSetting): Unit =
     DB localTx { implicit session =>
-      sql"update heater_setting set date_set = ${heaterSetting.dateSet}, temp = ${heaterSetting.temp} where id = ${heaterSetting.id}"
+      sql"update heater_setting set date_set = ${setting.dateSet}, temp = ${setting.temp} where id = ${setting.id}"
       .update()
     }
     ()
