@@ -103,8 +103,8 @@ CREATE TABLE heater (
 CREATE TABLE heater_setting (
   id BIGSERIAL PRIMARY KEY,
   heater_id BIGINT REFERENCES heater(id),
-  temp INT NOT NULL,
-  date_set INT NOT NULL
+  date_set INT NOT NULL,
+  temp INT NOT NULL
 );
 
 CREATE TABLE surface (

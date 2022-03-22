@@ -141,8 +141,8 @@ final case class Heater(id: Long = 0,
 
 final case class HeaterSetting(id: Long = 0,
                                heaterId: Long = 0,
-                               temp: Int = 0,
-                               dateSet: Int = 0) extends Entity:
+                               dateSet: Int = 0,
+                               temp: Int = 0) extends Entity:
   def display = s"$dateSet: $temp"
 
 final case class Surface(id: Long = 0,

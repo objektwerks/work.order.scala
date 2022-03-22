@@ -72,7 +72,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     testListHeaters(dispatcher, pool)
     testUpdateHeater(dispatcher, pool, heater.copy(model = "pentair"))
 
-    var heaterSetting = HeaterSetting(heaterId = heater.id, temp = 85, dateSet = 20011201)
+    var heaterSetting = HeaterSetting(heaterId = heater.id, dateSet = 20011201, temp = 85)
     heaterSetting = testAddHeaterSetting(dispatcher, pool, heaterSetting)
     testListHeaterSettings(dispatcher, pool, heater)
     testUpdateHeaterSetting(dispatcher, pool, heaterSetting.copy(dateSet = 20020501))
