@@ -231,13 +231,7 @@ Config
 
 Cache
 -----
->See jvm/Resources.cache and jvm/Store.cache
-
-Resources
----------
-> See jvm/Resources and jvm/ResourceRouter on resource loading:
-1. index.html at /public/index.html
-2. web resources at /public/
+>See jvm/Store.cache
 
 Cors Handler
 ------------
