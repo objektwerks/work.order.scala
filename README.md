@@ -48,12 +48,12 @@ Use Cases
 1. measure health
 2. clean artifacts
 3. add chemicals
-4. expense supplies, repairs, hardware, enhancements
+4. expense supplies, repairs, hardware
 5. set timer and heater
 
-Alternate Model
----------------
-Pool 1 ---> * Health, Expense, Hardware, Setting
+Use Case Model
+--------------
+Pool 1 ---> * Measurement, Cleaning, Chemical, Supply, Repair, Hardware, Setting
 
 Client
 ------
