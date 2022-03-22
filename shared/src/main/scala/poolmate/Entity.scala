@@ -128,10 +128,10 @@ final case class Timer(id: Long = 0,
 
 final case class TimerSetting(id: Long = 0,
                               timerId: Long = 0,
-                              created: Int = 0,
+                              dateSet: Int = 0,
                               timeOn: Int = 0,
                               timeOff: Int = 0) extends Entity:
-  def display = s"$created: $timeOn - $timeOff"
+  def display = s"$dateSet: $timeOn - $timeOff"
 
 final case class Heater(id: Long = 0,
                         poolId: Long = 0,

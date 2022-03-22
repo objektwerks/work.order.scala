@@ -88,7 +88,7 @@ CREATE TABLE timer (
 CREATE TABLE timer_setting (
   id BIGSERIAL PRIMARY KEY,
   timer_id BIGINT REFERENCES timer(id),
-  created INT NOT NULL,
+  date_set INT NOT NULL,
   time_on SMALLINT NOT NULL,
   time_off SMALLINT NOT NULL
 );

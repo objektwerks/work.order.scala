@@ -62,7 +62,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     testListTimers(dispatcher, pool)
     testUpdateTimer(dispatcher, pool, timer.copy(model = "smartpool"))
 
-    var timerSetting = TimerSetting(timerId = timer.id, created = 20010101, timeOn = 800, timeOff = 1700)
+    var timerSetting = TimerSetting(timerId = timer.id, dateSet = 20010101, timeOn = 800, timeOff = 1700)
     timerSetting = testAddTimerSetting(dispatcher, pool, timerSetting)
     testListTimerSettings(dispatcher, pool, timer)
     testUpdateTimerSetting(dispatcher, pool, timerSetting.copy(timeOff = 1730))

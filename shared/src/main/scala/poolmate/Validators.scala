@@ -109,7 +109,7 @@ object Validators:
     def isValid: Boolean =
       timerSetting.id >= 0 &&
       timerSetting.timerId > 0 &&
-      timerSetting.created > 0 &&
+      timerSetting.dateSet > 0 &&
       timerSetting.timeOn > 0 &&
       timerSetting.timeOff > 0 &&
       timerSetting.timeOff > timerSetting.timeOn
