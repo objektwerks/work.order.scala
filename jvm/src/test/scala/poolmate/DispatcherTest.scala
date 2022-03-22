@@ -223,22 +223,22 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     val update = UpdateTimer(pool.license, timer)
     dispatcher.dispatch(update) shouldBe Updated()
 
-  def testAddTimerSetting(dispatcher: Dispatcher, pool: Pool, timerSetting: TimerSetting): TimerSetting =
-    val add = AddTimerSetting(pool.license, timerSetting)
+  def testAddTimerSetting(dispatcher: Dispatcher, pool: Pool, setting: TimerSetting): TimerSetting =
+    val add = AddTimerSetting(pool.license, setting)
     dispatcher.dispatch(add) match
-      case TimerSettingAdded(timerSetting: TimerSetting) =>
-        timerSetting.id > 0 shouldBe true
-        timerSetting
+      case TimerSettingAdded(setting: TimerSetting) =>
+        setting.id > 0 shouldBe true
+        setting
       case event: Event => logger.error(event.toString); fail()
 
   def testListTimerSettings(dispatcher: Dispatcher, pool: Pool, timer: Timer): Unit =
     val list = ListTimerSettings(pool.license, timer.id)
     dispatcher.dispatch(list) match
-      case TimerSettingsListed(timerSettings) => timerSettings.size shouldBe 1
+      case TimerSettingsListed(settings) => settings.size shouldBe 1
       case event: Event => logger.error(event.toString); fail()
 
-  def testUpdateTimerSetting(dispatcher: Dispatcher, pool: Pool, timerSetting: TimerSetting): Unit =
-    val update = UpdateTimerSetting(pool.license, timerSetting)
+  def testUpdateTimerSetting(dispatcher: Dispatcher, pool: Pool, setting: TimerSetting): Unit =
+    val update = UpdateTimerSetting(pool.license, setting)
     dispatcher.dispatch(update) shouldBe Updated()
 
   def testAddHeater(dispatcher: Dispatcher, pool: Pool, heater: Heater): Heater =
