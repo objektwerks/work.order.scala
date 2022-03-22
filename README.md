@@ -47,10 +47,8 @@ Use Cases
 1. measure pool health
 2. clean pool artifacts
 3. add pool chemicals
-4. expense pool supplies
-5. expense pool repairs
-6. expense pool hardware
-7. set timer and heater
+4. expense pool supplies, repairs, hardware, enhancements
+5. set timer and heater
 
 Client
 ------
