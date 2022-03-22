@@ -61,8 +61,8 @@ Account
 
 View(Menu) ! Action -> Page
 ---------------------------
-1. Index
-   * Index(Enter, Join) ! Enter | Join -> Enter
+1. Root
+   * Root(Enter, Join) ! Enter | Join -> Enter
    * Enter ! Enter -> Home
 2. Home
    * Home(Account, Pools)
