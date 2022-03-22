@@ -53,7 +53,7 @@ Use Cases
 
 Alternate Model
 ---------------
-Pool 1 ---> * Health, Expense, Setting
+Pool 1 ---> * Health, Expense, Hardware, Setting
 
 Client
 ------
