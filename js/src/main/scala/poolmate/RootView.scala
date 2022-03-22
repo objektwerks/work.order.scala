@@ -6,7 +6,7 @@ import org.scalajs.dom.console.log
 
 import Components.*
 
-object IndexView extends View:
+object RootView extends View:
     def apply(pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
       def handler(event: Either[Fault, Event]): Unit =
         event match
