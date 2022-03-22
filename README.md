@@ -44,9 +44,9 @@ Package Client
 
 Use Cases
 ---------
-* measure pool chemical state
+* measure pool health
 * clean pool artifacts
-* add chemicals to pool
+* add pool chemicals
 * record pool supplies
 * record pool expenses
 * record pool pool hardware
