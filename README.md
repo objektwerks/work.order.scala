@@ -47,6 +47,8 @@ Use Cases
 * measure pool chemical state
 * clean pool artifacts
 * add chemicals to pool
+* record pool supplies
+* recored pool expenses
 
 Client
 ------
