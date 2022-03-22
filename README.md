@@ -47,10 +47,10 @@ Use Cases
 * measure pool health
 * clean pool artifacts
 * add pool chemicals
-* record pool supplies
-* record pool repairs
-* record pool hardware
-* recored timer and heater settings
+* expense pool supplies
+* expense pool repairs
+* expense pool hardware
+* record timer and heater settings
 
 Client
 ------
