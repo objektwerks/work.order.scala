@@ -117,7 +117,8 @@ final case class Repair(id: Long = 0,
 final case class Pump(id: Long = 0,
                       poolId: Long = 0,
                       installed: Int = 0,
-                      model: String = "") extends Entity:
+                      model: String = "",
+                      cost: Double = 0.0) extends Entity:
   def display = model
 
 final case class Timer(id: Long = 0,
