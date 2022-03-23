@@ -4,7 +4,7 @@ object Validators:
   extension (value: String)
     def isLicense: Boolean = if value.nonEmpty then value.length == 36 else false
     def isPin: Boolean = value.length == 6
-    def isName: Boolean = value.length >= 2
+    def isName: Boolean = value.length >= 2 && value.length <= 24
 
   extension (value: Int)
     def isGreaterThan1899 = value > 1899
@@ -39,7 +39,7 @@ object Validators:
   extension (pool: Pool) def isValid =
     pool.id >= 0 &&
     pool.license.isLicense &&
-    pool.name.nonEmpty &&
+    pool.name.isName &&
     pool.built > 0 &&
     pool.volume >= 1000
 
