@@ -49,7 +49,7 @@ CREATE TABLE chemical (
   pool_id BIGINT REFERENCES pool(id),
   added INT NOT NULL,
   chemical VARCHAR NOT NULL,
-  amount NUMERIC(5, 2),
+  amount NUMERIC(7, 2),
   unit VARCHAR NOT NULL
 );
 
@@ -58,9 +58,9 @@ CREATE TABLE supply (
   pool_id BIGINT REFERENCES pool(id),
   purchased INT NOT NULL,
   item VARCHAR NOT NULL,
-  amount NUMERIC(4, 2) NOT NULL,
+  amount NUMERIC(7, 2) NOT NULL,
   unit VARCHAR NOT NULL,
-  cost NUMERIC(5, 2) NOT NULL
+  cost NUMERIC(7, 2) NOT NULL
 );
 
 CREATE TABLE repair (
@@ -76,7 +76,7 @@ CREATE TABLE pump (
   pool_id BIGINT REFERENCES pool(id),
   installed INT NOT NULL,
   model VARCHAR NOT NULL,
-  cost NUMERIC(5, 2) NOT NULL
+  cost NUMERIC(7, 2) NOT NULL
 );
 
 CREATE TABLE timer (
@@ -84,7 +84,7 @@ CREATE TABLE timer (
   pool_id BIGINT REFERENCES pool(id),
   installed INT NOT NULL,
   model VARCHAR NOT NULL,
-  cost NUMERIC(5, 2) NOT NULL
+  cost NUMERIC(7, 2) NOT NULL
 );
 
 CREATE TABLE timer_setting (
@@ -100,7 +100,7 @@ CREATE TABLE heater (
   pool_id BIGINT REFERENCES pool(id),
   installed INT NOT NULL,
   model VARCHAR NOT NULL,
-  cost NUMERIC(5, 2) NOT NULL
+  cost NUMERIC(7, 2) NOT NULL
 );
 
 CREATE TABLE heater_setting (
@@ -115,7 +115,7 @@ CREATE TABLE surface (
   pool_id BIGINT REFERENCES pool(id),
   installed INT NOT NULL,
   kind VARCHAR NOT NULL,
-  cost NUMERIC(5, 2) NOT NULL
+  cost NUMERIC(7, 2) NOT NULL
 );
 
 CREATE TABLE deck (
@@ -123,7 +123,7 @@ CREATE TABLE deck (
   pool_id BIGINT REFERENCES pool(id),
   installed INT NOT NULL,
   kind VARCHAR NOT NULL,
-  cost NUMERIC(5, 2) NOT NULL
+  cost NUMERIC(7, 2) NOT NULL
 );
 
 CREATE TABLE fault (
