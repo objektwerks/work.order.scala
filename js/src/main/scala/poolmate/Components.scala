@@ -46,7 +46,7 @@ object Components:
     input(
       cls(inputCss), typ("number"), pattern("\\d*"),
       stepAttr("1"), minAttr("1900"), maxAttr(currentYear),
-      placeholder(currentYear), required(true)
+      required(true)
     )
 
   def date: Input =
