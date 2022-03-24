@@ -40,7 +40,7 @@ object Components:
     input(cls(inputCss), typ("email"), minLength(3), required(true))
 
   def pin: Input =
-    input(cls(inputCss), typ("text"), minLength(6), maxLength(6), required(true), placeholder("a$b2c#"))
+    input(cls(inputCss), typ("text"), minLength(6), maxLength(6), required(true))
 
   def year: Input =
     input(
