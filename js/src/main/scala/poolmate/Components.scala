@@ -37,7 +37,7 @@ object Components:
     input(cls(inputCss), readOnly(true))
 
   def email: Input =
-    input(cls(inputCss), typ("email"), minLength(3), placeholder("address@email.com"), required(true))
+    input(cls(inputCss), typ("email"), minLength(3), required(true))
 
   def pin: Input =
     input(cls(inputCss), typ("text"), minLength(6), maxLength(6), required(true), placeholder("a$b2c#"))
