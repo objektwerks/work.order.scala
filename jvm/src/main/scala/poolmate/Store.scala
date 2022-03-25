@@ -262,7 +262,7 @@ final class Store(conf: Config,
   def listPumps(): List[Pump] =
     DB readOnly { implicit session =>
       sql"select * from pump order by installed desc"
-        .map(rs => Pump(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model"), rs.double("cost")))
+        .map(rs => Pump(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model"), rs.int("cost")))
         .list()
     }
 
