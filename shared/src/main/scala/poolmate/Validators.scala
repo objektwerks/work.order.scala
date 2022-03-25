@@ -137,7 +137,8 @@ object Validators:
       surface.id >= 0 &&
       surface.poolId > 0 &&
       surface.installed > 0 &&
-      surface.kind.nonEmpty
+      surface.kind.nonEmpty &&
+      surface.cost > 0
 
   extension (deck: Deck)
     def isValid: Boolean =
