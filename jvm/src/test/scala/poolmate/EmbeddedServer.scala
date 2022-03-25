@@ -12,6 +12,9 @@ import io.undertow.Undertow
 import io.undertow.server.handlers.BlockingHandler
 
 final class EmbeddedServer(conf: Config) extends Main with LazyLogging:
+  val _host = conf.getString("host")
+  val _port = conf.getInt("port")
+  
   val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
   val service = Service(store)
   val authorizer = Authorizer(service)
@@ -26,9 +29,9 @@ final class EmbeddedServer(conf: Config) extends Main with LazyLogging:
     .setHandler(defaultHandler)
     .build
   
-  override def host: String = conf.getString("host")
+  override def host: String = _host
 
-  override def port: Int = conf.getInt("port")
+  override def port: Int = _port
 
   override def defaultHandler: BlockingHandler =
     new BlockingHandler( CorsHandler(dispatchTrie,
@@ -40,7 +43,7 @@ final class EmbeddedServer(conf: Config) extends Main with LazyLogging:
 
   def start(): Unit =
     server.start()
-    logger.info(s"*** EmbeddedServer started at http://$host:$port/")
+    logger.info(s"*** EmbeddedServer started at http://$_host:$_port/")
 
   def stop(): Unit =
     server.stop()
