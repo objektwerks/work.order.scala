@@ -367,7 +367,7 @@ final class Store(conf: Config,
   def listSurfaces(): List[Surface] =
     DB readOnly { implicit session =>
       sql"select * from surface order by installed desc"
-        .map(rs => Surface(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind"), rs.double("cost")))
+        .map(rs => Surface(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind"), rs.int("cost")))
         .list()
     }
 
