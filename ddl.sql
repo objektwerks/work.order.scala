@@ -61,7 +61,7 @@ CREATE TABLE supply (
   item VARCHAR NOT NULL,
   amount NUMERIC(7, 2) NOT NULL,
   unit VARCHAR NOT NULL,
-  cost NUMERIC(7, 2) NOT NULL
+  cost INT NOT NULL
 );
 
 CREATE TABLE repair (
