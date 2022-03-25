@@ -7,7 +7,7 @@ import Serializers.given
 
 import upickle.default.*
 
-object Client extends LazyLogging:
+object Requester extends LazyLogging:
   def main(args: Array[String]): Unit =
     val conf = ConfigFactory.load("server.conf")
     val host = conf.getString("host")
