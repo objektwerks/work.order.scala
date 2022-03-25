@@ -44,7 +44,6 @@ Package Client
 
 Use Cases
 ---------
->Pool:
 1. measure water
 2. clean artifacts
 3. add chemicals
@@ -154,8 +153,8 @@ Measurements
 
 Chemicals
 ---------
-1. Chlorine for pool.
-2. Chlorine tablets for pool filtration system.
+1. Chlorine
+2. Chlorine Tablets
 3. Pool Shock
 
 Solutions
@@ -176,7 +175,7 @@ Descriptions
 
 Images
 ------
-* add, edit, chart
+* add, edit, refresh, chart
 
 Charts
 ------
