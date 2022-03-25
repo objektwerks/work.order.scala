@@ -97,7 +97,8 @@ object Validators:
       pump.id >= 0 &&
       pump.poolId > 0 &&
       pump.installed > 0 &&
-      pump.model.nonEmpty
+      pump.model.nonEmpty &&
+      pump.cost > 0
 
   extension (timer: Timer)
     def isValid: Boolean =
