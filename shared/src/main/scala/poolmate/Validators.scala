@@ -145,4 +145,5 @@ object Validators:
       deck.id >= 0 &&
       deck.poolId > 0 &&
       deck.installed > 0 &&
-      deck.kind.nonEmpty
+      deck.kind.nonEmpty &&
+      deck.cost > 0
