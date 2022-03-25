@@ -59,7 +59,7 @@ CREATE TABLE supply (
   pool_id BIGINT REFERENCES pool(id),
   purchased INT NOT NULL,
   item VARCHAR NOT NULL,
-  amount NUMERIC(7, 2) NOT NULL,
+  amount INT NOT NULL,
   unit VARCHAR NOT NULL,
   cost INT NOT NULL
 );
