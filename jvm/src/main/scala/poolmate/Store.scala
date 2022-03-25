@@ -199,7 +199,7 @@ final class Store(conf: Config,
   def listChemicals(): List[Chemical] =
     DB readOnly { implicit session =>
       sql"select * from chemical order by added desc"
-        .map(rs => Chemical(rs.long("id"), rs.long("pool_id"), rs.int("added"), rs.string("chemical"), rs.double("amount"), rs.string("unit")))
+        .map(rs => Chemical(rs.long("id"), rs.long("pool_id"), rs.int("added"), rs.string("chemical"), rs.int("amount"), rs.string("unit")))
         .list()
     }
 

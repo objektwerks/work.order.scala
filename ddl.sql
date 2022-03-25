@@ -50,7 +50,7 @@ CREATE TABLE chemical (
   pool_id BIGINT REFERENCES pool(id),
   added INT NOT NULL,
   chemical VARCHAR NOT NULL,
-  amount NUMERIC(7, 2),
+  amount INT,
   unit VARCHAR NOT NULL
 );
 

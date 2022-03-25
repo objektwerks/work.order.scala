@@ -95,7 +95,7 @@ final case class Chemical(id: Long = 0,
                           poolId: Long = 0,
                           added: Int = 0,
                           chemical: String = "",
-                          amount: Double = 0.0,
+                          amount: Int = 0,
                           unit: String = "") extends Entity:
   def display = s"$added: $chemical"
 

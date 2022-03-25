@@ -87,10 +87,10 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     testListCleanings(dispatcher, pool)
     testUpdateCleaning(dispatcher, pool, cleaning.copy(deck = true))
 
-    var chemical = Chemical(poolId = pool.id, added = 20010101, chemical = "chlorine", amount = 1.0, unit = UoM.gallon.abrv)
+    var chemical = Chemical(poolId = pool.id, added = 20010101, chemical = "chlorine", amount = 1, unit = UoM.gallon.abrv)
     chemical = testAddChemical(dispatcher, pool, chemical)
     testListChemicals(dispatcher, pool)
-    testUpdateChemical(dispatcher, pool, chemical.copy(amount = 2.0))
+    testUpdateChemical(dispatcher, pool, chemical.copy(amount = 2))
 
     var supply = Supply(poolId = pool.id, purchased = 20010101, item = "chlorine", amount = 1.0, unit = UoM.gallon.abrv, cost = 5)
     supply = testAddSupply(dispatcher, pool, supply)
