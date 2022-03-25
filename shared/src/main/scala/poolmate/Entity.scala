@@ -67,7 +67,7 @@ final case class Measurement(id: Long = 0,
                              freeChlorine: Int = 3,
                              ph: Double = 7.4,
                              totalAlkalinity: Int = 100,
-                             cyanuricAcid: Long = 50) extends Entity:
+                             cyanuricAcid: Int = 50) extends Entity:
   def display = s"$measured: $ph ph"
 
 object Measurement:
