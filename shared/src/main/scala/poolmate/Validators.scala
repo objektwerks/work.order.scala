@@ -122,7 +122,8 @@ object Validators:
       heater.id >= 0 &&
       heater.poolId > 0 &&
       heater.installed > 0 &&
-      heater.model.nonEmpty
+      heater.model.nonEmpty &&
+      heater.cost > 0
 
   extension (heaterSetting: HeaterSetting)
     def isValid: Boolean =
