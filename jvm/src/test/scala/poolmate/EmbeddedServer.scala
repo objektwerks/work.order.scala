@@ -18,8 +18,13 @@ final class EmbeddedServer(conf: Config) extends Main with LazyLogging:
   val validator = Validator()
   val dispatcher = Dispatcher(authorizer, validator, service)
   val router = Router(dispatcher, store)
-
   override val allRoutes = Seq(router)
+
+  Main.silenceJboss()    
+  val server = Undertow.builder
+    .addHttpListener(port, host)
+    .setHandler(defaultHandler)
+    .build
   
   override def host: String = conf.getString("host")
 
@@ -32,12 +37,6 @@ final class EmbeddedServer(conf: Config) extends Main with LazyLogging:
                                      handleNotFound,
                                      handleMethodNotAllowed,
                                      handleEndpointError) )
-
-  Main.silenceJboss()    
-  val server = Undertow.builder
-    .addHttpListener(port, host)
-    .setHandler(defaultHandler)
-    .build
 
   def start(): Unit =
     server.start()
