@@ -55,7 +55,7 @@ final class EmbeddedServer(conf: Config) extends Main with LazyLogging:
     server.stop()
     logger.info("*** EmbeddedServer stopped.")
 
-object RequesterTest extends AnyFunSuite with Matchers with LazyLogging:
+class RequesterTest extends AnyFunSuite with Matchers with LazyLogging:
   Process("psql -d poolmate -f ddl.sql").run().exitValue()
 
   val conf = ConfigFactory.load("test.server.conf")
