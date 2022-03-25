@@ -105,7 +105,8 @@ object Validators:
       timer.id >= 0 &&
       timer.poolId > 0 &&
       timer.installed > 0 &&
-      timer.model.nonEmpty
+      timer.model.nonEmpty &&
+      timer.cost > 0
 
   extension (timerSetting: TimerSetting)
     def isValid: Boolean =
