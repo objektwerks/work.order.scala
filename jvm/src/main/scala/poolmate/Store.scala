@@ -283,7 +283,7 @@ final class Store(conf: Config,
   def listTimers(): List[Timer] =
     DB readOnly { implicit session =>
       sql"select * from timer order by installed desc"
-        .map(rs => Timer(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model"), rs.double("cost")))
+        .map(rs => Timer(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("model"), rs.int("cost")))
         .list()
     }
 
