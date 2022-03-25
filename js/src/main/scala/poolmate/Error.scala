@@ -1,7 +1,7 @@
 package poolmate
 
 object Error:
-  val pinError = "Enter a valid pin of 6 alphanumeric characters."
+  val pinError = "Enter a valid pin of 7 alphanumeric characters."
 
   val nameError = "Enter a 2 characters or more."
   val builtError = "Enter a year greater than 1900."
