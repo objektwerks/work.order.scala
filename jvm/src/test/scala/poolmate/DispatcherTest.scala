@@ -25,6 +25,9 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   test("dispatcher") {
     testDispatcher(dispatcher, store)
+  }
+
+  test("fault") {
     testFault(store)
   }
 
