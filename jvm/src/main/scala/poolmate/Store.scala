@@ -388,7 +388,7 @@ final class Store(conf: Config,
   def listDecks(): List[Deck] =
     DB readOnly { implicit session =>
       sql"select * from deck order by installed desc"
-        .map(rs => Deck(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind"), rs.double("cost")))
+        .map(rs => Deck(rs.long("id"), rs.long("pool_id"), rs.int("installed"), rs.string("kind"), rs.int("cost")))
         .list()
     }
 

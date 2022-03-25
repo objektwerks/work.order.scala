@@ -42,12 +42,12 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     testListPools(dispatcher, account)
     testUpdatePool(dispatcher, pool.copy(volume = 10000))
 
-    var surface = Surface(poolId = pool.id, installed = 20010101, kind = "concrete", cost = 1200)
+    var surface = Surface(poolId = pool.id, installed = 20010101, kind = "concrete", cost = 3200)
     surface = testAddSurface(dispatcher, pool, surface)
     testListSurfaces(dispatcher, pool)
     testUpdateSurface(dispatcher, pool, surface.copy(kind = "pebble"))
 
-    var deck = Deck(poolId = pool.id, installed = 20010103, kind = "tile")
+    var deck = Deck(poolId = pool.id, installed = 20010103, kind = "tile", cost = 2400)
     deck = testAddDeck(dispatcher, pool, deck)
     testListDecks(dispatcher, pool)
     testUpdateDeck(dispatcher, pool, deck.copy(kind = "pavers"))

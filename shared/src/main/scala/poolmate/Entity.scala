@@ -160,5 +160,5 @@ final case class Deck(id: Long = 0,
                       poolId: Long = 0,
                       installed: Int = 0,
                       kind: String = "",
-                      cost: Double = 0.0) extends Entity:
+                      cost: Int = 0) extends Entity:
   def display = kind

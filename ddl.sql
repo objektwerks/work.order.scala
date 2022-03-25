@@ -124,7 +124,7 @@ CREATE TABLE deck (
   pool_id BIGINT REFERENCES pool(id),
   installed INT NOT NULL,
   kind VARCHAR NOT NULL,
-  cost NUMERIC(7, 2) NOT NULL
+  cost INT NOT NULL
 );
 
 CREATE TABLE fault (
