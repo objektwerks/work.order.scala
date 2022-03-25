@@ -60,7 +60,7 @@ class RequesterTest extends AnyFunSuite with Matchers with LazyLogging:
 
   val conf = ConfigFactory.load("test.server.conf")
   val host = conf.getString("host")
-  val port = conf.getString("host")
+  val port = conf.getString("port")
   val url = s"http://$host:$port/command"
   val server = EmbeddedServer(conf)
 
