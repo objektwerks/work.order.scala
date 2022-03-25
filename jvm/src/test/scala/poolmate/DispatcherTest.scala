@@ -14,17 +14,16 @@ import scala.sys.process.Process
 import Validators.*
 
 class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
+  Process("psql -d poolmate -f ddl.sql").run().exitValue()
+
   val conf = ConfigFactory.load("test.server.conf")
+  val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
+  val service = Service(store)
+  val authorizer = Authorizer(service)
+  val validator = Validator()
+  val dispatcher = Dispatcher(authorizer, validator, service)
 
   test("dispatcher") {
-    Process("psql -d poolmate -f ddl.sql").run().exitValue()
-    
-    val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
-    val service = Service(store)
-    val authorizer = Authorizer(service)
-    val validator = Validator()
-    val dispatcher = Dispatcher(authorizer, validator, service)
-
     testDispatcher(dispatcher, store)
     testFault(store)
   }
