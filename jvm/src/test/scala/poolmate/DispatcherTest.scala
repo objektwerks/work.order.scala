@@ -153,40 +153,94 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     val update = UpdatePool(pool.license, pool)
     dispatcher.dispatch(update) shouldBe Updated()
 
-  def testAddSurface(dispatcher: Dispatcher, pool: Pool, surface: Surface): Surface =
-    val add = AddSurface(pool.license, surface)
+  def testAddMeasurement(dispatcher: Dispatcher, pool: Pool, measurement: Measurement): Measurement =
+    val add = AddMeasurement(pool.license, measurement)
     dispatcher.dispatch(add) match
-      case SurfaceAdded(surface: Surface) =>
-        surface.id > 0 shouldBe true
-        surface
+      case MeasurementAdded(measurement: Measurement) =>
+        measurement.id > 0 shouldBe true
+        measurement
       case event: Event => logger.error(event.toString); fail()
 
-  def testListSurfaces(dispatcher: Dispatcher, pool: Pool): Unit =
-    val list = ListSurfaces(pool.license, pool.id)
+  def testListMeasurements(dispatcher: Dispatcher, pool: Pool): Unit =
+    val list = ListMeasurements(pool.license, pool.id)
     dispatcher.dispatch(list) match
-      case SurfacesListed(surfaces) => surfaces.size shouldBe 1
+      case MeasurementsListed(measurements) => measurements.size shouldBe 1
       case event: Event => logger.error(event.toString); fail()
 
-  def testUpdateSurface(dispatcher: Dispatcher, pool: Pool, surface: Surface): Unit =
-    val update = UpdateSurface(pool.license, surface)
+  def testUpdateMeasurement(dispatcher: Dispatcher, pool: Pool, measurement: Measurement): Unit =
+    val update = UpdateMeasurement(pool.license, measurement)
     dispatcher.dispatch(update) shouldBe Updated()
 
-  def testAddDeck(dispatcher: Dispatcher, pool: Pool, deck: Deck): Deck =
-    val add = AddDeck(pool.license, deck)
+  def testAddCleaning(dispatcher: Dispatcher, pool: Pool, cleaning: Cleaning): Cleaning =
+    val add = AddCleaning(pool.license, cleaning)
     dispatcher.dispatch(add) match
-      case DeckAdded(deck: Deck) =>
-        deck.id > 0 shouldBe true
-        deck
+      case CleaningAdded(cleaning: Cleaning) =>
+        cleaning.id > 0 shouldBe true
+        cleaning
       case event: Event => logger.error(event.toString); fail()
 
-  def testListDecks(dispatcher: Dispatcher, pool: Pool): Unit =
-    val list = ListDecks(pool.license, pool.id)
+  def testListCleanings(dispatcher: Dispatcher, pool: Pool): Unit =
+    val list = ListCleanings(pool.license, pool.id)
     dispatcher.dispatch(list) match
-      case DecksListed(decks) => decks.size shouldBe 1
+      case CleaningsListed(cleanings) => cleanings.size shouldBe 1
       case event: Event => logger.error(event.toString); fail()
 
-  def testUpdateDeck(dispatcher: Dispatcher, pool: Pool, deck: Deck): Unit =
-    val update = UpdateDeck(pool.license, deck)
+  def testUpdateCleaning(dispatcher: Dispatcher, pool: Pool, cleaning: Cleaning): Unit =
+    val update = UpdateCleaning(pool.license, cleaning)
+    dispatcher.dispatch(update) shouldBe Updated()
+
+  def testAddChemical(dispatcher: Dispatcher, pool: Pool, chemical: Chemical): Chemical =
+    val add = AddChemical(pool.license, chemical)
+    dispatcher.dispatch(add) match
+      case ChemicalAdded(chemical: Chemical) =>
+        chemical.id > 0 shouldBe true
+        chemical
+      case event: Event => logger.error(event.toString); fail()
+
+  def testListChemicals(dispatcher: Dispatcher, pool: Pool): Unit =
+    val list = ListChemicals(pool.license, pool.id)
+    dispatcher.dispatch(list) match
+      case ChemicalsListed(chemicals) => chemicals.size shouldBe 1
+      case event: Event => logger.error(event.toString); fail()
+
+  def testUpdateChemical(dispatcher: Dispatcher, pool: Pool, chemical: Chemical): Unit =
+    val update = UpdateChemical(pool.license, chemical)
+    dispatcher.dispatch(update) shouldBe Updated()
+
+  def testAddSupply(dispatcher: Dispatcher, pool: Pool, supply: Supply): Supply =
+    val add = AddSupply(pool.license, supply)
+    dispatcher.dispatch(add) match
+      case SupplyAdded(supply: Supply) =>
+        supply.id > 0 shouldBe true
+        supply
+      case event: Event => logger.error(event.toString); fail()
+
+  def testListSupplies(dispatcher: Dispatcher, pool: Pool): Unit =
+    val list = ListSupplies(pool.license, pool.id)
+    dispatcher.dispatch(list) match
+      case SuppliesListed(supplies) => supplies.size shouldBe 1
+      case event: Event => logger.error(event.toString); fail()
+
+  def testUpdateSupply(dispatcher: Dispatcher, pool: Pool, supply: Supply): Unit =
+    val update = UpdateSupply(pool.license, supply)
+    dispatcher.dispatch(update) shouldBe Updated()
+
+  def testAddRepair(dispatcher: Dispatcher, pool: Pool, repair: Repair): Repair =
+    val add = AddRepair(pool.license, repair)
+    dispatcher.dispatch(add) match
+      case RepairAdded(repair: Repair) =>
+        repair.id > 0 shouldBe true
+        repair
+      case event: Event => logger.error(event.toString); fail()
+
+  def testListRepairs(dispatcher: Dispatcher, pool: Pool): Unit =
+    val list = ListRepairs(pool.license, pool.id)
+    dispatcher.dispatch(list) match
+      case RepairsListed(repairs) => repairs.size shouldBe 1
+      case event: Event => logger.error(event.toString); fail()
+
+  def testUpdateRepair(dispatcher: Dispatcher, pool: Pool, repair: Repair): Unit =
+    val update = UpdateRepair(pool.license, repair)
     dispatcher.dispatch(update) shouldBe Updated()
 
   def testAddPump(dispatcher: Dispatcher, pool: Pool, pump: Pump): Pump =
@@ -279,94 +333,40 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     val update = UpdateHeaterSetting(pool.license, setting)
     dispatcher.dispatch(update) shouldBe Updated()
 
-  def testAddMeasurement(dispatcher: Dispatcher, pool: Pool, measurement: Measurement): Measurement =
-    val add = AddMeasurement(pool.license, measurement)
+  def testAddSurface(dispatcher: Dispatcher, pool: Pool, surface: Surface): Surface =
+    val add = AddSurface(pool.license, surface)
     dispatcher.dispatch(add) match
-      case MeasurementAdded(measurement: Measurement) =>
-        measurement.id > 0 shouldBe true
-        measurement
+      case SurfaceAdded(surface: Surface) =>
+        surface.id > 0 shouldBe true
+        surface
       case event: Event => logger.error(event.toString); fail()
 
-  def testListMeasurements(dispatcher: Dispatcher, pool: Pool): Unit =
-    val list = ListMeasurements(pool.license, pool.id)
+  def testListSurfaces(dispatcher: Dispatcher, pool: Pool): Unit =
+    val list = ListSurfaces(pool.license, pool.id)
     dispatcher.dispatch(list) match
-      case MeasurementsListed(measurements) => measurements.size shouldBe 1
+      case SurfacesListed(surfaces) => surfaces.size shouldBe 1
       case event: Event => logger.error(event.toString); fail()
 
-  def testUpdateMeasurement(dispatcher: Dispatcher, pool: Pool, measurement: Measurement): Unit =
-    val update = UpdateMeasurement(pool.license, measurement)
+  def testUpdateSurface(dispatcher: Dispatcher, pool: Pool, surface: Surface): Unit =
+    val update = UpdateSurface(pool.license, surface)
     dispatcher.dispatch(update) shouldBe Updated()
 
-  def testAddCleaning(dispatcher: Dispatcher, pool: Pool, cleaning: Cleaning): Cleaning =
-    val add = AddCleaning(pool.license, cleaning)
+  def testAddDeck(dispatcher: Dispatcher, pool: Pool, deck: Deck): Deck =
+    val add = AddDeck(pool.license, deck)
     dispatcher.dispatch(add) match
-      case CleaningAdded(cleaning: Cleaning) =>
-        cleaning.id > 0 shouldBe true
-        cleaning
+      case DeckAdded(deck: Deck) =>
+        deck.id > 0 shouldBe true
+        deck
       case event: Event => logger.error(event.toString); fail()
 
-  def testListCleanings(dispatcher: Dispatcher, pool: Pool): Unit =
-    val list = ListCleanings(pool.license, pool.id)
+  def testListDecks(dispatcher: Dispatcher, pool: Pool): Unit =
+    val list = ListDecks(pool.license, pool.id)
     dispatcher.dispatch(list) match
-      case CleaningsListed(cleanings) => cleanings.size shouldBe 1
+      case DecksListed(decks) => decks.size shouldBe 1
       case event: Event => logger.error(event.toString); fail()
 
-  def testUpdateCleaning(dispatcher: Dispatcher, pool: Pool, cleaning: Cleaning): Unit =
-    val update = UpdateCleaning(pool.license, cleaning)
-    dispatcher.dispatch(update) shouldBe Updated()
-
-  def testAddChemical(dispatcher: Dispatcher, pool: Pool, chemical: Chemical): Chemical =
-    val add = AddChemical(pool.license, chemical)
-    dispatcher.dispatch(add) match
-      case ChemicalAdded(chemical: Chemical) =>
-        chemical.id > 0 shouldBe true
-        chemical
-      case event: Event => logger.error(event.toString); fail()
-
-  def testListChemicals(dispatcher: Dispatcher, pool: Pool): Unit =
-    val list = ListChemicals(pool.license, pool.id)
-    dispatcher.dispatch(list) match
-      case ChemicalsListed(chemicals) => chemicals.size shouldBe 1
-      case event: Event => logger.error(event.toString); fail()
-
-  def testUpdateChemical(dispatcher: Dispatcher, pool: Pool, chemical: Chemical): Unit =
-    val update = UpdateChemical(pool.license, chemical)
-    dispatcher.dispatch(update) shouldBe Updated()
-
-  def testAddSupply(dispatcher: Dispatcher, pool: Pool, supply: Supply): Supply =
-    val add = AddSupply(pool.license, supply)
-    dispatcher.dispatch(add) match
-      case SupplyAdded(supply: Supply) =>
-        supply.id > 0 shouldBe true
-        supply
-      case event: Event => logger.error(event.toString); fail()
-
-  def testListSupplies(dispatcher: Dispatcher, pool: Pool): Unit =
-    val list = ListSupplies(pool.license, pool.id)
-    dispatcher.dispatch(list) match
-      case SuppliesListed(supplies) => supplies.size shouldBe 1
-      case event: Event => logger.error(event.toString); fail()
-
-  def testUpdateSupply(dispatcher: Dispatcher, pool: Pool, supply: Supply): Unit =
-    val update = UpdateSupply(pool.license, supply)
-    dispatcher.dispatch(update) shouldBe Updated()
-
-  def testAddRepair(dispatcher: Dispatcher, pool: Pool, repair: Repair): Repair =
-    val add = AddRepair(pool.license, repair)
-    dispatcher.dispatch(add) match
-      case RepairAdded(repair: Repair) =>
-        repair.id > 0 shouldBe true
-        repair
-      case event: Event => logger.error(event.toString); fail()
-
-  def testListRepairs(dispatcher: Dispatcher, pool: Pool): Unit =
-    val list = ListRepairs(pool.license, pool.id)
-    dispatcher.dispatch(list) match
-      case RepairsListed(repairs) => repairs.size shouldBe 1
-      case event: Event => logger.error(event.toString); fail()
-
-  def testUpdateRepair(dispatcher: Dispatcher, pool: Pool, repair: Repair): Unit =
-    val update = UpdateRepair(pool.license, repair)
+  def testUpdateDeck(dispatcher: Dispatcher, pool: Pool, deck: Deck): Unit =
+    val update = UpdateDeck(pool.license, deck)
     dispatcher.dispatch(update) shouldBe Updated()
 
   def testFault(store: Store): Unit =
