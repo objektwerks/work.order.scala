@@ -44,15 +44,30 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     testListPools(dispatcher, account)
     testUpdatePool(dispatcher, pool.copy(volume = 10000))
 
-    var surface = Surface(poolId = pool.id, installed = 20010101, kind = "concrete", cost = 3200)
-    surface = testAddSurface(dispatcher, pool, surface)
-    testListSurfaces(dispatcher, pool)
-    testUpdateSurface(dispatcher, pool, surface.copy(kind = "pebble"))
+    var measurement = Measurement(poolId = pool.id, measured = 20010201)
+    measurement = testAddMeasurement(dispatcher, pool, measurement)
+    testListMeasurements(dispatcher, pool)
+    testUpdateMeasurement(dispatcher, pool, measurement.copy(freeChlorine = 5))
 
-    var deck = Deck(poolId = pool.id, installed = 20010103, kind = "tile", cost = 2400)
-    deck = testAddDeck(dispatcher, pool, deck)
-    testListDecks(dispatcher, pool)
-    testUpdateDeck(dispatcher, pool, deck.copy(kind = "pavers"))
+    var cleaning = Cleaning(poolId = pool.id, cleaned = 20010201)
+    cleaning = testAddCleaning(dispatcher, pool, cleaning)
+    testListCleanings(dispatcher, pool)
+    testUpdateCleaning(dispatcher, pool, cleaning.copy(deck = true))
+
+    var chemical = Chemical(poolId = pool.id, added = 20010101, chemical = "chlorine", amount = 1, unit = UoM.gallon.abrv)
+    chemical = testAddChemical(dispatcher, pool, chemical)
+    testListChemicals(dispatcher, pool)
+    testUpdateChemical(dispatcher, pool, chemical.copy(amount = 2))
+
+    var supply = Supply(poolId = pool.id, purchased = 20010101, item = "chlorine", amount = 1, unit = UoM.gallon.abrv, cost = 5)
+    supply = testAddSupply(dispatcher, pool, supply)
+    testListSupplies(dispatcher, pool)
+    testUpdateSupply(dispatcher, pool, supply.copy(cost = 6))
+
+    var repair = Repair(poolId = pool.id, repaired = 20100101, repair = "pump", cost = 100)
+    repair = testAddRepair(dispatcher, pool, repair)
+    testListRepairs(dispatcher, pool)
+    testUpdateRepair(dispatcher, pool, repair.copy(cost = 105))
 
     var pump = Pump(poolId = pool.id, installed = 20010101, model = "hayward", cost = 455)
     pump = testAddPump(dispatcher, pool, pump)
@@ -79,30 +94,15 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
     testListHeaterSettings(dispatcher, pool, heater)
     testUpdateHeaterSetting(dispatcher, pool, heaterSetting.copy(dateSet = 20020501))
 
-    var measurement = Measurement(poolId = pool.id, measured = 20010201)
-    measurement = testAddMeasurement(dispatcher, pool, measurement)
-    testListMeasurements(dispatcher, pool)
-    testUpdateMeasurement(dispatcher, pool, measurement.copy(freeChlorine = 5))
+    var surface = Surface(poolId = pool.id, installed = 20010101, kind = "concrete", cost = 3200)
+    surface = testAddSurface(dispatcher, pool, surface)
+    testListSurfaces(dispatcher, pool)
+    testUpdateSurface(dispatcher, pool, surface.copy(kind = "pebble"))
 
-    var cleaning = Cleaning(poolId = pool.id, cleaned = 20010201)
-    cleaning = testAddCleaning(dispatcher, pool, cleaning)
-    testListCleanings(dispatcher, pool)
-    testUpdateCleaning(dispatcher, pool, cleaning.copy(deck = true))
-
-    var chemical = Chemical(poolId = pool.id, added = 20010101, chemical = "chlorine", amount = 1, unit = UoM.gallon.abrv)
-    chemical = testAddChemical(dispatcher, pool, chemical)
-    testListChemicals(dispatcher, pool)
-    testUpdateChemical(dispatcher, pool, chemical.copy(amount = 2))
-
-    var supply = Supply(poolId = pool.id, purchased = 20010101, item = "chlorine", amount = 1, unit = UoM.gallon.abrv, cost = 5)
-    supply = testAddSupply(dispatcher, pool, supply)
-    testListSupplies(dispatcher, pool)
-    testUpdateSupply(dispatcher, pool, supply.copy(cost = 6))
-
-    var repair = Repair(poolId = pool.id, repaired = 20100101, repair = "pump", cost = 100)
-    repair = testAddRepair(dispatcher, pool, repair)
-    testListRepairs(dispatcher, pool)
-    testUpdateRepair(dispatcher, pool, repair.copy(cost = 105))
+    var deck = Deck(poolId = pool.id, installed = 20010103, kind = "tile", cost = 2400)
+    deck = testAddDeck(dispatcher, pool, deck)
+    testListDecks(dispatcher, pool)
+    testUpdateDeck(dispatcher, pool, deck.copy(kind = "pavers"))
   }
 
   def testJoin(dispatcher: Dispatcher): Account =
