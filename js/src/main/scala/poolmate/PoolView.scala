@@ -13,6 +13,7 @@ object PoolView extends View:
     val nameErrorBus = new EventBus[String]
     val builtErrorBus = new EventBus[String]
     val volumeErrorBus = new EventBus[String]
+    val costErrorBus = new EventBus[String]
 
     def addHandler(event: Either[Fault, Event]): Unit =
       event match
@@ -145,7 +146,18 @@ object PoolView extends View:
             if volume.isGreaterThan999 then clear(volumeErrorBus) else emit(volumeErrorBus, volumeError)
           }
         },
-        err(volumeErrorBus)
+        err(volumeErrorBus),
+        lbl("Cost"),
+        int.amend {
+          value <-- model.selectedEntityVar.signal.map(_.cost.toString)
+          onInput.mapToValue.filter(_.toIntOption.nonEmpty).map(_.toInt) --> { cost =>
+            model.updateSelectedEntity( model.selectedEntityVar.now().copy(cost = cost) )
+          }
+          onKeyUp.mapToValue.map(_.toInt) --> { cost =>
+            if cost.isGreaterThanZero then clear(costErrorBus) else emit(costErrorBus, costError)
+          }
+        },
+        err(costErrorBus)
       ),
       cbar(
         btn("Add").amend {
