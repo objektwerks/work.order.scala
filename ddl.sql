@@ -101,7 +101,7 @@ CREATE TABLE heater (
   pool_id BIGINT REFERENCES pool(id),
   installed INT NOT NULL,
   model VARCHAR NOT NULL,
-  cost NUMERIC(7, 2) NOT NULL
+  cost INT NOT NULL
 );
 
 CREATE TABLE heater_setting (
