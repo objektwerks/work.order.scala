@@ -112,7 +112,7 @@ final case class Repair(id: Long = 0,
                         poolId: Long = 0,
                         repaired: Int = 0,
                         repair: String = "",
-                        cost: Double = 0.0) extends Entity:
+                        cost: Int = 0) extends Entity:
   def display = s"$repaired: $repair"
 
 final case class Pump(id: Long = 0,

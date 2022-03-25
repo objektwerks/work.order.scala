@@ -69,7 +69,7 @@ CREATE TABLE repair (
   pool_id BIGINT REFERENCES pool(id),
   repaired INT NOT NULL,
   repair VARCHAR NOT NULL,
-  cost NUMERIC(7, 2) NOT NULL
+  cost INT NOT NULL
 );
 
 CREATE TABLE pump (
