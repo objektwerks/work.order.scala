@@ -43,4 +43,4 @@ object Requester extends LazyLogging:
     val entered = read[Entered](enterResponse.text())
     logger.info(s"*** Entered: $entered")
 
-    require(account == entered.account, "Account not equal to LoggedIn account.")
+    require(account == entered.account, "Account not equal to Entered account.")
