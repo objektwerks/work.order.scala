@@ -41,7 +41,8 @@ object Validators:
     pool.license.isLicense &&
     pool.name.isName &&
     pool.built > 0 &&
-    pool.volume >= 1000
+    pool.volume >= 1000 &&
+    pool.cost > 0
 
   extension (measurement: Measurement)
     def isValid: Boolean =
@@ -70,7 +71,7 @@ object Validators:
       chemical.poolId > 0 &&
       chemical.added > 0 &&
       chemical.chemical.nonEmpty &&
-      chemical.amount > 0.00 &&
+      chemical.amount > 0 &&
       chemical.unit.nonEmpty
 
   extension (supply: Supply)
@@ -79,9 +80,9 @@ object Validators:
       supply.poolId > 0 &&
       supply.purchased > 0 &&
       supply.item.nonEmpty &&
-      supply.amount > 0.00 &&
+      supply.amount > 0 &&
       supply.unit.nonEmpty &&
-      supply.cost > 0.00
+      supply.cost > 0
 
   extension (repair: Repair)
     def isValid: Boolean =
@@ -89,7 +90,7 @@ object Validators:
       repair.poolId > 0 &&
       repair.repaired > 0 &&
       repair.repair.nonEmpty &&
-      repair.cost > 0.00
+      repair.cost > 0
 
   extension (pump: Pump)
     def isValid: Boolean =
