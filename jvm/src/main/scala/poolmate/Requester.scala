@@ -28,10 +28,7 @@ object Requester extends LazyLogging:
     val joined = read[Joined](joinResponse.text())
     logger.info(s"*** Joined: $joined")
 
-    val account = joined.account
-    logger.info(s"*** Account: $account")
-
-    val enter = Enter(account.pin)
+    val enter = Enter(joined.account.pin)
     logger.info(s"*** Enter: $enter")
 
     val enterJson = write[Enter](enter)
@@ -43,4 +40,4 @@ object Requester extends LazyLogging:
     val entered = read[Entered](enterResponse.text())
     logger.info(s"*** Entered: $entered")
 
-    require(account == entered.account, "Account not equal to Entered account.")
+    require(joined.account == entered.account, "Joined account not equal to Entered account.")
