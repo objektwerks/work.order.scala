@@ -103,7 +103,7 @@ final class Store(conf: Config,
   def listPools(): List[Pool] =
     DB readOnly { implicit session =>
       sql"select * from pool order by built desc"
-        .map(rs => Pool(rs.long("id"), rs.string("license"), rs.string("name"), rs.int("built"), rs.int("volume"), rs.double("cost")))
+        .map(rs => Pool(rs.long("id"), rs.string("license"), rs.string("name"), rs.int("built"), rs.int("volume"), rs.int("cost")))
         .list()
     }
 

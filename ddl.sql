@@ -15,7 +15,7 @@ CREATE TABLE pool (
   name VARCHAR(24) NOT NULL,
   built INT NOT NULL,
   volume INT NOT NULL,
-  cost NUMERIC(7, 2) NOT NULL
+  cost INT NOT NULL
 );
 
 CREATE TABLE measurement (

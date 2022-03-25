@@ -54,7 +54,7 @@ final case class Pool(id: Long = 0,
                       name: String = "",
                       built: Int = 0,
                       volume: Int = 1000,
-                      cost: Double = 0.0) extends Entity:
+                      cost: Int = 0) extends Entity:
   def display = name
 
 final case class Measurement(id: Long = 0,
