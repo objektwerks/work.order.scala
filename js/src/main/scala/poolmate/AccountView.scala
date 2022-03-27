@@ -28,7 +28,7 @@ object AccountView extends View:
               clearErrors()
               accountVar.set(account)
               route(AppPage)
-            case _ =>
+            case _ => log(s"Account reactivate view handler failed: $event")
         case Left(fault) => errorBus.emit(s"Reactivate failed: ${fault.cause}")
 
     div(
