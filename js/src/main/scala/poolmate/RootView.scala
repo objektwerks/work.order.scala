@@ -17,19 +17,19 @@ object RootView extends View:
               accountVar.set(account)
               pinVar.set(account.pin)
               route(EnterPage)
-            case _ => log(s"Index -> Join view handler failed: $event")
+            case _ => log(s"Root -> Root view handler failed: $event")
         case Left(fault) => errorBus.emit(s"Join failed: ${fault.cause}")
     div(
       bar(
         btn("Enter").amend {
           onClick --> { _ =>
-            log("Index -> Enter menu item onClick")
+            log("Root -> Enter menu item onClick")
             route(EnterPage)
           }
         },
         rbtn("Join").amend {
           onClick --> { _ =>
-            log(s"Index -> Join menu item onClick")
+            log(s"Root -> Join menu item onClick")
             val command = Join()
             call(command, handler)
           }
