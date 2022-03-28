@@ -15,7 +15,7 @@ import scala.scalajs.js.Thenable.Implicits.*
 
 import Serializers.given
 
-import upickle.default.{read, write}
+import upickle.default._
 
 object Proxy:
   private val hdrs = new Headers {
