@@ -47,6 +47,7 @@ object Proxy:
   private def post(command: Command): Future[Event] =
     log(s"Proxy:post command: $command")
     params.body = write[Command](command)
+    log(s"Proxy:params command: ${params.body}")
     (
       for
         response <- dom.fetch(Url.command, params)
@@ -57,7 +58,7 @@ object Proxy:
         event
     ).recover {
       case failure: Exception =>
-        log(s"Proxy:post failure: ${failure.getCause}")
+        log(s"Proxy:post failure: $failure")
         Fault(failure)
     }
 
