@@ -28,7 +28,7 @@ object Components:
     label(cls("w3-left-align w3-text-indigo"), text)
 
   def info(text: String): Div =
-    div(cls("w3-border-white w3-text-indigo"), b(text))
+    div(cls("w3-border-white w3-text-indigo"), text)
 
   def txt: Input =
     input(cls(inputCss), required(true))
