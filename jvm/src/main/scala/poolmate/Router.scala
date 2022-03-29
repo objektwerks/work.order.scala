@@ -22,11 +22,11 @@ final class Router(dispatcher: Dispatcher, store: Store) extends Routes with Laz
     val event = dispatcher.dispatch(command)
     logger.debug(s"*** Event: $event")
     event match {
-      case unauthorized: Unauthorized => 
-        logger.error(s"Unauthorized: $unauthorized")
-        store.addFault( Fault(unauthorized.license) )
+      case unauthorized: Unauthorized =>
+        logger.error(s"Router unauthorized: $unauthorized")
+        store.addFault( Fault( s"Router unauthorized: ${unauthorized.license}" ) )
       case fault: Fault =>
-        logger.error(s"Fault: $fault")
+        logger.error(s"Router fault: $fault")
         store.addFault(fault)
       case _ =>
     }
