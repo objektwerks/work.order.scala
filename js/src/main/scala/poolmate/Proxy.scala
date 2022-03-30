@@ -47,7 +47,7 @@ object Proxy:
   private def post(command: Command): Future[Event] =
     log(s"Proxy:post command: $command")
     params.body = write[Command](command)
-    log(s"Proxy:params command: ${params.body}")
+    log(s"Proxy:params body: ${params.body}")
     (
       for
         response <- dom.fetch(Url.command, params)
