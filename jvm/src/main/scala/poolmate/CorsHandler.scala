@@ -19,7 +19,7 @@ import io.undertow.util.HttpString
 
 import java.util.concurrent.TimeUnit
 
-import scala.concurrent.duration._
+import scala.concurrent.duration.*
 import scala.io.StdIn
 import scala.jdk.CollectionConverters.*
 

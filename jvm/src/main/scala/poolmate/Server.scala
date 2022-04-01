@@ -9,7 +9,7 @@ import io.undertow.server.handlers.BlockingHandler
 
 import java.util.concurrent.TimeUnit
 
-import scala.concurrent.duration._
+import scala.concurrent.duration.*
 import scala.io.StdIn
 
 object Server extends Main with LazyLogging:
