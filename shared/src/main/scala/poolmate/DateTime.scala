@@ -1,6 +1,9 @@
 package poolmate
 
-import java.time._
+import java.time.format
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.Instant
 
 object DateTime:
   val dateFormatter = format.DateTimeFormatter.ofPattern("yyyy-MM-dd")
