@@ -6,7 +6,6 @@ lazy val waypointVersion = "0.5.0"
 lazy val upickleVersion = "1.5.0"
 lazy val postgresqlVersion = "42.3.3"
 lazy val scalaJavaTimeVersion = "2.3.0"
-lazy val twelveMonkeysVersion = "3.8.1"
 lazy val scalaTestVersion = "3.2.10"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
