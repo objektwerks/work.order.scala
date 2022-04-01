@@ -47,13 +47,13 @@ object Proxy:
   private def post(command: Command): Future[Event] =
     log(s"Proxy:post command: $command")
     params.body = write[Command](command)
-    log(s"Proxy:params body: ${params.body}")
+    log(s"Proxy:post request: ${params.body}")
     (
       for
         response <- dom.fetch(Url.command, params)
         text     <- response.text()
       yield
-        log(s"Proxy:post text: $text")
+        log(s"Proxy:post response: $text")
         val event = read[Event](text)
         log(s"Proxy:post event: $event")
         event
