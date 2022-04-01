@@ -54,7 +54,7 @@ object Proxy:
         text     <- response.text()
       yield
         log(s"Proxy:post response: $text")
-        val event = read[Event](text)
+        val event = read[Event](text) // failing: java.time.zone.ZoneRulesException: Unknown time-zone ID: America/New_York
         log(s"Proxy:post event: $event")
         event
     ).recover {
