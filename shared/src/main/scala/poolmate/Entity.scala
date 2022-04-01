@@ -13,11 +13,11 @@ sealed trait Entity:
   val id: Long
   def display: String
 
-final case class Account(id: Long = 0,
-                         license: String = newLicense,
-                         pin: String = newPin,
-                         activated: Int = DateTime.currentDate,
-                         deactivated: Int = 0) extends Entity:
+final case class Account(id: Long,
+                         license: String,
+                         pin: String,
+                         activated: Int,
+                         deactivated: Int) extends Entity:
   def display = ""
 
 object Account:
@@ -43,9 +43,18 @@ object Account:
   private def newLicense: String = UUID.randomUUID.toString
 
   val empty = Account(
+    id = 0,
     license = "",
     pin = "",
     activated = 0,
+    deactivated = 0
+  )
+
+  def newInstance(): Account = Account(
+    id = 0,
+    license = newLicense,
+    pin = newPin,
+    activated = DateTime.currentDate,
     deactivated = 0
   )
 
