@@ -4,12 +4,14 @@ import java.time.format
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.Instant
+import java.time.ZoneId
 
 object DateTime:
+  val zoneId = ZoneId.of("EST", ZoneId.SHORT_IDS)
   val dateFormatter = format.DateTimeFormatter.ofPattern("yyyy-MM-dd")
   val timeFormatter = format.DateTimeFormatter.ofPattern("HH:mm")
 
-  def currentDate: Int = localDateToInt(LocalDate.now)
+  def currentDate: Int = localDateToInt(LocalDate.now(zoneId))
 
   def localDateToInt(localDate: LocalDate): Int =
     localDateToString(localDate).replace("-", "").toInt
@@ -30,7 +32,7 @@ object DateTime:
     val dd = localDateAsString.substring(6, 8)
     LocalDate.of(yyyy.toInt, mm.toInt, dd.toInt).format(dateFormatter)
 
-  def currentTime: Int = localTimeToInt(LocalTime.now)
+  def currentTime: Int = localTimeToInt(LocalTime.now(zoneId))
 
   def localTimeToInt(localTime: LocalTime): Int =
     localTimeToString(localTime).replace(":", "").toInt
