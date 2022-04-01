@@ -4,7 +4,7 @@ import scala.util.Try
 
 final class Service(store: Store):
   def join(): Account =
-    store.addAccount( Account.newInstance() )
+    store.addAccount( Account() )
 
   def enter(pin: String): Either[Throwable, Account] =
     store.enter(pin) match
