@@ -26,7 +26,7 @@ object EnterView extends View:
       
     div(      
       hdr("Enter"),
-      info(joinMessage),
+      info(pinMessage),
       lbl("Pin"),
       pin.amend {
         value <-- pinVar
@@ -35,7 +35,6 @@ object EnterView extends View:
           if pin.isPin then clear(pinErrorBus) else emit(pinErrorBus, pinError)
         }      
       },
-      info(pinMessage),
       err(pinErrorBus),
       cbar(
         btn("Enter").amend {
