@@ -15,11 +15,10 @@ sealed trait Entity:
 
 final case class Account(id: Long = 0,
                          license: String = newLicense,
-                         emailAddress: String,
                          pin: String = newPin,
                          activated: Int = DateTime.currentDate,
                          deactivated: Int = 0) extends Entity:
-  def display = emailAddress
+  def display = activated.toString
 
 object Account:
   private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
@@ -45,7 +44,6 @@ object Account:
 
   val empty = Account(
     license = "",
-    emailAddress = "",
     pin = "",
     activated = 0,
     deactivated = 0
