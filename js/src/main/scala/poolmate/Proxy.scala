@@ -1,6 +1,6 @@
 package poolmate
 
-import com.raquo.laminar.api.L._
+import com.raquo.laminar.api.L.*
 
 import org.scalajs.dom
 import org.scalajs.dom.Headers
@@ -15,7 +15,7 @@ import scala.scalajs.js.Thenable.Implicits.*
 
 import Serializers.given
 
-import upickle.default._
+import upickle.default.*
 
 object Proxy:
   private val hdrs = new Headers {
