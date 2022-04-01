@@ -7,7 +7,9 @@ import java.time.Instant
 import java.time.ZoneId
 
 object DateTime:
-  val zoneId = ZoneId.of("EST", ZoneId.SHORT_IDS)
+  var zoneId = ZoneId.of("EST", ZoneId.SHORT_IDS)
+  zoneId = if zoneId == null then ZoneId.of("EST") else zoneId
+
   val yearFormatter = format.DateTimeFormatter.ofPattern("yyyy")
   val dateFormatter = format.DateTimeFormatter.ofPattern("yyyy-MM-dd")
   val timeFormatter = format.DateTimeFormatter.ofPattern("HH:mm")
