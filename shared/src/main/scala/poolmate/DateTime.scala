@@ -8,8 +8,11 @@ import java.time.ZoneId
 
 object DateTime:
   val zoneId = ZoneId.of("EST", ZoneId.SHORT_IDS)
+  val yearFormatter = format.DateTimeFormatter.ofPattern("yyyy")
   val dateFormatter = format.DateTimeFormatter.ofPattern("yyyy-MM-dd")
   val timeFormatter = format.DateTimeFormatter.ofPattern("HH:mm")
+
+  def currentYear: Int = LocalDate.now(zoneId).format(yearFormatter).toInt
 
   def currentDate: Int = localDateToInt(LocalDate.now(zoneId))
 
