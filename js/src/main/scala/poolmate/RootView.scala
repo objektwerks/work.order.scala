@@ -16,8 +16,9 @@ object RootView extends View:
               clearErrors()
               accountVar.set(account)
               pinVar.set(account.pin)
+              log(s"Root view handler joined account: $account")
               route(EnterPage)
-            case _ => log(s"Root -> Root view handler failed: $event")
+            case _ => log(s"Root view handler failed: $event")
         case Left(fault) => errorBus.emit(s"Join failed: ${fault.cause}")
     div(
       bar(
