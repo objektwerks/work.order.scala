@@ -21,7 +21,7 @@ object PageRouter:
 
   val routes = List(
     Route.static(RootPage, root / endOfSegments),
-    Route.static(JoinPage, root / "explore" / endOfSegments),
+    Route.static(JoinPage, root / "join" / endOfSegments),
     Route.static(EnterPage, root / "enter" / endOfSegments),
     Route.static(AppPage, root / "app" / endOfSegments),
     Route.static(AccountPage, root / "app" / "account" / endOfSegments),
