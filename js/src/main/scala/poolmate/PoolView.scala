@@ -79,17 +79,17 @@ object PoolView extends View:
           btn("Hardware"),
           btn("Pumps").amend {
             onClick --> { _ =>
-              log("Hardware -> Pumps menu item onClick")
+              log("Pumps menu item onClick")
             }
           },
           btn("Timers").amend {
             onClick --> { _ =>
-              log("Hardware -> Timers menu item onClick")
+              log("Timers menu item onClick")
             }
           },
           btn("Heaters").amend {
             onClick --> { _ =>
-              log("Hardware -> Heaters menu item onClick")
+              log("Heaters menu item onClick")
             }
           }
         ),
