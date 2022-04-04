@@ -60,7 +60,7 @@ object AccountView extends View:
         },
         cbar(
           btn("Deactivate").amend {
-            disabled <-- accountVar.signal.map { account => account.isDeactivated }
+            disabled <-- accountVar.signal.map { account => if account.isDeactivated then true else false }
             onClick --> { _ =>
               log("Account -> Deactivate onClick")
               val command = Deactivate(accountVar.now().license)
@@ -68,7 +68,7 @@ object AccountView extends View:
             }
           },
           btn("Reactivate").amend {
-            disabled <-- accountVar.signal.map { account => account.isActivated }
+            disabled <-- accountVar.signal.map { account => if account.isActivated then true else false }
             onClick --> { _ =>
               log("Account -> Reactivate onClick")
               val command = Reactivate(accountVar.now().license)
