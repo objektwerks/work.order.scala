@@ -97,12 +97,12 @@ object PoolView extends View:
           btn("Aesthetics"),
           btn("Surfaces").amend {
             onClick --> { _ =>
-              log("Aesthetics -> Surfaces menu item onClick")
+              log("Surfaces menu item onClick")
             }
           },
           btn("Decks").amend {
             onClick --> { _ =>
-              log("Aesthetics -> Decks menu item onClick")
+              log("Decks menu item onClick")
             }
           },
         )
