@@ -31,6 +31,7 @@ object Validators:
       account.activated > 0 &&
       account.deactivated == 0
     def isDeactivated: Boolean =
+      account.id >= 0 &&
       account.license.isLicense &&
       account.pin.isPin &&
       account.activated == 0 &&
