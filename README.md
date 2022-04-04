@@ -50,10 +50,6 @@ Use Cases
 4. expense supplies, repairs, pumps, timers, heaters, surfaces, decks
 5. adjust timer/heating settings
 
-Use Case Model
---------------
-Pool 1 ---> * Measurement, Cleaning, Chemical, Supply, Repair, Pump, Timer, Heater, Surface, Deck, Setting(Timer, Heater)
-
 Client
 ------
 * Now
