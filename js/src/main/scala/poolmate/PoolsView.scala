@@ -40,13 +40,13 @@ object PoolsView extends View:
       cbar(
         btn("New").amend {
           onClick --> { _ =>
-            log(s"Pools -> New onClick")
+            log(s"Pools -> New button onClick")
             route(PoolPage())
           }
         },        
         btn("Refresh").amend {
           onClick --> { _ =>
-            log(s"Pools -> Refresh onClick")
+            log(s"Pools -> Refresh button onClick")
             val command = ListPools(accountVar.now().license)
             call(command, handler)
           }

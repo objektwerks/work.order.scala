@@ -35,7 +35,7 @@ object AccountView extends View:
       bar(
         btn("App").amend {
           onClick --> { _ =>
-            log("Account -> Home onClick")
+            log("Account -> App menu item onClick")
             route(AppPage)
           }
         }      
@@ -62,7 +62,7 @@ object AccountView extends View:
           btn("Deactivate").amend {
             disabled <-- accountVar.signal.map { account => if account.isDeactivated then true else false }
             onClick --> { _ =>
-              log("Account -> Deactivate onClick")
+              log("Account -> Deactivate button onClick")
               val command = Deactivate(accountVar.now().license)
               call(command, deactivateHandler)
             }
@@ -70,7 +70,7 @@ object AccountView extends View:
           btn("Reactivate").amend {
             disabled <-- accountVar.signal.map { account => if account.isActivated then true else false }
             onClick --> { _ =>
-              log("Account -> Reactivate onClick")
+              log("Account -> Reactivate button onClick")
               val command = Reactivate(accountVar.now().license)
               call(command, reactivateHandler)
             }
