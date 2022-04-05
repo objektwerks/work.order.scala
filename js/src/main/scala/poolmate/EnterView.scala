@@ -40,7 +40,7 @@ object EnterView extends View:
         btn("Enter").amend {
           disabled <-- pinVar.signal.map( pin => !pin.isPin )
           onClick --> { _ =>
-            log(s"Enter button onClick pin: ${pinVar.now()}")
+            log(s"Enter button onClick -> pin: ${pinVar.now()}")
             val command = Enter(pinVar.now())
             call(command, handler)
           }
