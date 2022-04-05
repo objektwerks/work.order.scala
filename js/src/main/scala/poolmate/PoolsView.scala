@@ -20,9 +20,9 @@ object PoolsView extends View:
 
     div(
       bar(
-        btn("Home").amend {
+        btn("App").amend {
           onClick --> { _ =>
-            log("Pools -> Home menu item onClick")
+            log("Pools -> App menu item onClick")
             route(AppPage)
           }
         }      
