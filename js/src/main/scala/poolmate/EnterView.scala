@@ -21,7 +21,7 @@ object EnterView extends View:
               clearErrors()
               accountVar.set(account)
               route(AppPage)
-            case _ => log(s"Enter view handler failed: $event")
+            case _ => log(s"Enter -> handler failed: $event")
         case Left(fault) => errorBus.emit(s"Enter failed: ${fault.cause}")
       
     div(      
