@@ -33,7 +33,7 @@ object AccountView extends View:
 
     div(
       bar(
-        btn("Home").amend {
+        btn("App").amend {
           onClick --> { _ =>
             log("Account -> Home onClick")
             route(AppPage)
