@@ -13,8 +13,9 @@ object EnterView extends View:
   def apply(pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
     val pinErrorBus = new EventBus[String]
 
-    def handler(event: Either[Fault, Event]): Unit =
-      event match
+    def handler(either: Either[Fault, Event]): Unit =
+      either match
+        case Left(fault) => errorBus.emit(s"Enter failed: ${fault.cause}")
         case Right(event) =>
           event match
             case Entered(account) =>
@@ -22,7 +23,6 @@ object EnterView extends View:
               accountVar.set(account)
               route(AppPage)
             case _ => log(s"Enter -> handler failed: $event")
-        case Left(fault) => errorBus.emit(s"Enter failed: ${fault.cause}")
       
     div(      
       hdr("Enter"),
