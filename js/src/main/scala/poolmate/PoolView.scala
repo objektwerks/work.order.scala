@@ -158,7 +158,7 @@ object PoolView extends View:
         btn("Add").amend {
           disabled <-- model.selectedEntityVar.signal.map { pool => pool.id.isGreaterThanZero }
           onClick --> { _ =>
-            log(s"Pool -> Add onClick")
+            log(s"Pool -> Add button onClick")
             val command = AddPool(accountVar.now().license, model.selectedEntityVar.now())
             call(command, addHandler)
 
@@ -167,7 +167,7 @@ object PoolView extends View:
         btn("Update").amend {
           disabled <-- model.selectedEntityVar.signal.map { pool => pool.id.isZero }
           onClick --> { _ =>
-            log(s"Pool -> Update onClick")
+            log(s"Pool -> Update button onClick")
             val command = UpdatePool(accountVar.now().license, model.selectedEntityVar.now())
             call(command, updateHandler)
           }
