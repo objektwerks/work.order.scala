@@ -1,6 +1,6 @@
 Poolmate Web
 ------------
->Mobile web pool management app using Cask, uPickle, Scalikejdbc, ScalaJs, Laminar, Waypoint, W3.CSS, Scaffeine, Postgresql and Scala 3.
+>Mobile web pool management app using Cask, uPickle, Scalikejdbc, ScalaJs, Laminar, Waypoint, W3.CSS, Scaffeine, Postgresql, Snowpack and Scala 3.
 
 Install
 -------
