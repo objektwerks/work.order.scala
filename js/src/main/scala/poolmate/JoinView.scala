@@ -30,7 +30,7 @@ object JoinView extends View:
       
     div(
       hdr("Register"),
-      info(registerMessage),
+      info(joinMessage),
       err(errorBus),
       lbl("Email Address"),
       email.amend {

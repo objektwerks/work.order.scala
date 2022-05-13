@@ -11,6 +11,7 @@ import Validators.*
 
 object EnterView extends View:
   def apply(emailAddressVar: Var[String], pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
+    val emailAddressErrorBus = new EventBus[String]
     val pinErrorBus = new EventBus[String]
 
     def handler(either: Either[Fault, Event]): Unit =
@@ -26,6 +27,15 @@ object EnterView extends View:
       
     div(      
       hdr("Enter"),
+      lbl("Email Address"),
+      email.amend {
+        value <-- emailAddressVar
+        onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
+        onKeyUp.mapToValue --> { emailAddress =>
+          if emailAddress.isEmailAddress then clear(emailAddressErrorBus) else emit(emailAddressErrorBus, emailAddressError)
+        }
+      },
+      err(emailAddressErrorBus),
       info(pinMessage),
       lbl("Pin"),
       pin.amend {
