@@ -44,7 +44,9 @@ object EnterView extends View:
         value <-- pinVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> pinVar
         onKeyUp.mapToValue --> { pin =>
-          if pin.isPin then clear(pinErrorBus) else emit(pinErrorBus, pinError)
+          if pin.isPin
+          then clear(pinErrorBus)
+          else emit(pinErrorBus, pinError)
         }      
       },
       err(pinErrorBus),
