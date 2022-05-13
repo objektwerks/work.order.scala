@@ -53,6 +53,7 @@ object Account:
 
   val empty = Account(
     license = "",
+    emailAddress = "",
     pin = "",
     activated = 0,
     deactivated = 0
