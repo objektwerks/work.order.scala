@@ -59,11 +59,11 @@ final class EmailSender(conf: Config,
       case Failure(error) => throw error
     }
 
-  private def sendEmail(register: Register): Either[Throwable, Registered] =
+  private def sendEmail(join: Join): Either[Throwable, Joined] =
     Using( smtpServer.createSession ) { session =>
       session.open()
 
-      var account = Account(emailAddress = register.emailAddress)
+      var account = Account(emailAddress = join.emailAddress)
       val messageId = session.sendMail(buildEmail(account))
       logger.info("*** EmailSender sent message id: {}", messageId)
 
@@ -74,8 +74,8 @@ final class EmailSender(conf: Config,
       store.addEmail(email)
       logger.info("*** EmailSender added email: {}", email)
       
-      Registered(account)
+      Joined(account)
     }.toEither
 
-  def send(register: Register): Either[Throwable, Registered] =
-    retry[Either[Throwable, Registered]](1)(sendEmail(register))
+  def send(join: Join): Either[Throwable, Joined] =
+    retry[Either[Throwable, Joined]](1)(sendEmail(join))
