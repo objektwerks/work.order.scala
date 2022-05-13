@@ -38,7 +38,9 @@ object JoinView extends View:
         value <-- emailAddressVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
         onKeyUp.mapToValue --> { emailAddress =>
-          if emailAddress.isEmailAddress then clear(emailAddressErrorBus) else emit(emailAddressErrorBus, emailAddressError)
+          if emailAddress.isEmailAddress
+          then clear(emailAddressErrorBus)
+          else emit(emailAddressErrorBus, emailAddressError)
         }
       },
       err(emailAddressErrorBus),
