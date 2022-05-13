@@ -7,7 +7,7 @@ import org.scalajs.dom.console.log
 import Components.*
 
 object RootView extends View:
-  def apply(pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
+  def apply(emailAddressVar: Var[String], pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
     def handler(either: Either[Fault, Event]): Unit =
       either match
         case Left(fault) => errorBus.emit(s"Join failed: ${fault.cause}")
@@ -31,7 +31,7 @@ object RootView extends View:
         rbtn("Join").amend {
           onClick --> { _ =>
             log(s"Root -> Join menu item onClick")
-            val command = Join()
+            val command = Join(emailAddressVar.now())
             call(command, handler)
           }
         }          

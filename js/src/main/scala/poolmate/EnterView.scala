@@ -10,7 +10,7 @@ import Message.*
 import Validators.*
 
 object EnterView extends View:
-  def apply(pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
+  def apply(emailAddressVar: Var[String], pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
     val pinErrorBus = new EventBus[String]
 
     def handler(either: Either[Fault, Event]): Unit =
@@ -41,7 +41,7 @@ object EnterView extends View:
           disabled <-- pinVar.signal.map( pin => !pin.isPin )
           onClick --> { _ =>
             log(s"Enter button onClick -> pin: ${pinVar.now()}")
-            val command = Enter(pinVar.now())
+            val command = Enter(emailAddressVar.now(), pinVar.now())
             call(command, handler)
           }
         }
