@@ -53,6 +53,34 @@ final class Store(conf: Config,
       .update()
     }
     ()
+
+  def listUnprocessedEmails: List[Email] =
+    DB readOnly { implicit session =>
+      sql"select * from email where processed = false"
+        .map(rs => 
+          Email(rs.string("id"), rs.string("license"), rs.string("address"), rs.int("date_sent"),
+                rs.int("time_sent"), rs.boolean("processed"), rs.boolean("valid")
+              )
+        )
+        .list()
+    }
+
+  def addEmail(email: Email): Unit =
+    DB localTx { implicit session =>
+      sql"""insert into email(id, license, address, date_sent, time_sent, processed, valid)
+            values(${email.id}, ${email.license}, ${email.address}, ${email.dateSent},
+             ${email.timeSent}, ${email.processed}, ${email.valid})
+         """
+        .stripMargin
+        .update()
+    }
+
+  def processEmail(email: Email): Unit =
+    DB localTx { implicit session =>
+      sql"update email set processed = ${email.processed}, valid = ${email.valid} where id = ${email.id}"
+        .update()
+    }
+    ()
     
   def enter(pin: String): Option[Account] =
     DB readOnly { implicit session =>
