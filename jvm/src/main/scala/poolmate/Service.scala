@@ -3,9 +3,6 @@ package poolmate
 import scala.util.Try
 
 final class Service(store: Store):
-  def join(emailAddress: String): Account =
-    store.addAccount( Account(emailAddress = emailAddress) )
-
   def enter(emailAddress: String, pin: String): Either[Throwable, Account] =
     store.enter(emailAddress, pin) match
       case Some(account) => Right(account)

@@ -18,6 +18,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   val conf = ConfigFactory.load("test.server.conf")
   val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
+  val emailSender = EmailSender(conf, store)
   val service = Service(store)
   val authorizer = Authorizer(service)
   val validator = Validator()
@@ -25,9 +26,7 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   test("dispatcher") {
     testDispatcher(dispatcher, store)
-  }
-
-  test("fault") {
+    testEmail(store)
     testFault(store)
   }
 
@@ -368,6 +367,12 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   def testUpdateDeck(dispatcher: Dispatcher, pool: Pool, deck: Deck): Unit =
     val update = UpdateDeck(pool.license, deck)
     dispatcher.dispatch(update) shouldBe Updated()
+
+  def testEmail(store: Store): Unit =
+    store.listUnprocessedEmails.size shouldBe 1
+    val email = store.listUnprocessedEmails.head
+    store.processEmail(email.copy(processed = true, valid = true))
+    store.listUnprocessedEmails.size shouldBe 0
 
   def testFault(store: Store): Unit =
     val fault = Fault("fault")

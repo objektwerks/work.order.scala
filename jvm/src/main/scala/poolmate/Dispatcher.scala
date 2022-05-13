@@ -2,7 +2,8 @@ package poolmate
 
 final class Dispatcher(authorizer: Authorizer,
                        validator: Validator,
-                       service: Service):
+                       service: Service,
+                       emailSender: EmailSender):
   def dispatch(command: Command): Event =
     authorizer.authorize(command) match
       case unauthorized: Unauthorized => unauthorized
@@ -13,7 +14,7 @@ final class Dispatcher(authorizer: Authorizer,
   private def handle(service: Service, command: Command): Event =
     command match
       case join: Join =>
-        Joined( service.join(join.emailAddress) )
+        emailSender.send(join).fold(_ => Fault(s"Invalid email address: ${join.emailAddress}"), joined => joined)
       case enter: Enter =>
         service.enter(enter.emailAddress, enter.pin).fold(throwable => Fault(throwable), account => Entered(account))
       
