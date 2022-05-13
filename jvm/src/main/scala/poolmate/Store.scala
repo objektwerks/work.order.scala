@@ -36,7 +36,7 @@ final class Store(conf: Config,
   def listAccounts(): List[Account] =
     DB readOnly { implicit session =>
       sql"select * from account"
-        .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+        .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
         .list()
     }
 
@@ -85,7 +85,7 @@ final class Store(conf: Config,
   def enter(pin: String): Option[Account] =
     DB readOnly { implicit session =>
       sql"select * from account where pin = $pin"
-        .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+        .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
         .single()
     }
 
@@ -112,7 +112,7 @@ final class Store(conf: Config,
       .update()
       if deactivated > 0 then
         sql"select * from account where license = $license"
-          .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+          .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
           .single()
       else None
     }
@@ -123,7 +123,7 @@ final class Store(conf: Config,
       .update()
       if activated > 0 then
         sql"select * from account where license = $license"
-          .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+          .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
           .single()
       else None
     }
