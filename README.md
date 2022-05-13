@@ -54,7 +54,7 @@ Server
 
 Account
 -------
-* Join() => Joined( account )
+* Join( emailAddress ) => Joined( account )
 * Enter( pin ) => Entered( account )
 * Deactivate( license ) => Deactivated( account )
 * Reactivate( license ) => Reactivated( account )
