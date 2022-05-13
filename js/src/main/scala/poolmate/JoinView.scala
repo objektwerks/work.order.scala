@@ -25,8 +25,9 @@ object JoinView extends View:
               clearErrors()
               accountVar.set(account)
               pinVar.set(account.pin)
+              log(s"Join -> handler joined account: $account")
               route(EnterPage)
-            case _ => log(s"Register -> handler failed: $event")
+            case _ => log(s"Join -> handler failed: $event")
       
     div(
       hdr("Register"),
