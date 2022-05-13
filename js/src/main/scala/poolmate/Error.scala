@@ -1,6 +1,7 @@
 package poolmate
 
 object Error:
+  val emailAddressError = "Enter a valid email address."
   val pinError = "Enter a valid pin of 7 alphanumeric characters."
 
   val nameError = "Enter a 2 characters or more."
