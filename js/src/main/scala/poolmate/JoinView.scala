@@ -42,11 +42,11 @@ object JoinView extends View:
       },
       err(emailAddressErrorBus),
       cbar(
-        btn("Register").amend {
+        btn("Join").amend {
           disabled <-- emailAddressVar.signal.map(email => !email.isEmailAddress)
           onClick --> { _ =>
-            log(s"Register button onClick -> email address: ${emailAddressVar.now()}")
-            val command = Register(emailAddressVar.now())
+            log(s"Join button onClick -> email address: ${emailAddressVar.now()}")
+            val command = Join(emailAddressVar.now())
             call(command, handler)
           }
         },
