@@ -31,8 +31,7 @@ object RootView extends View:
         rbtn("Join").amend {
           onClick --> { _ =>
             log(s"Root -> Join menu item onClick")
-            val command = Join(emailAddressVar.now())
-            call(command, handler)
+            route(JoinPage)
           }
         }          
       )
