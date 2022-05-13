@@ -8,18 +8,6 @@ import Components.*
 
 object RootView extends View:
   def apply(emailAddressVar: Var[String], pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
-    def handler(either: Either[Fault, Event]): Unit =
-      either match
-        case Left(fault) => errorBus.emit(s"Join failed: ${fault.cause}")
-        case Right(event) =>
-          event match
-            case Joined(account) =>
-              clearErrors()
-              accountVar.set(account)
-              pinVar.set(account.pin)
-              log(s"Root -> handler joined account: $account")
-              route(EnterPage)
-            case _ => log(s"Root -> handler failed: $event")
     div(
       bar(
         btn("Enter").amend {
