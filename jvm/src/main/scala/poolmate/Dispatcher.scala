@@ -15,7 +15,7 @@ final class Dispatcher(authorizer: Authorizer,
       case join: Join =>
         Joined( service.join(join.emailAddress) )
       case enter: Enter =>
-        service.enter(enter.pin).fold(throwable => Fault(throwable), account => Entered(account))
+        service.enter(enter.emailAddress, enter.pin).fold(throwable => Fault(throwable), account => Entered(account))
       
       case deactivate: Deactivate =>
         service.deactivate(deactivate.license).fold(throwable => Fault(throwable), account => Deactivated(account))

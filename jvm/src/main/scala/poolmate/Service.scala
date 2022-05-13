@@ -6,10 +6,10 @@ final class Service(store: Store):
   def join(emailAddress: String): Account =
     store.addAccount( Account(emailAddress = emailAddress) )
 
-  def enter(pin: String): Either[Throwable, Account] =
-    store.enter(pin) match
+  def enter(emailAddress: String, pin: String): Either[Throwable, Account] =
+    store.enter(emailAddress, pin) match
       case Some(account) => Right(account)
-      case None => Left(IllegalArgumentException(s"Invalid pin: $pin"))
+      case None => Left(IllegalArgumentException(s"Invalid email address: $emailAddress and/or pin: $pin"))
 
   def deactivate(license: String): Either[Throwable, Account] =
     store.deactivate(license) match
