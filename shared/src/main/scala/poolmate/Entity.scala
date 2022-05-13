@@ -9,6 +9,14 @@ enum UoM(val abrv: String):
   case gallon extends UoM("gl")
   case pounds extends UoM("lb")
 
+final case class Email(id: String,
+                       license: String,
+                       address: String,
+                       dateSent: Int = DateTime.currentDate,
+                       timeSent: Int = DateTime.currentTime,
+                       processed: Boolean = false,
+                       valid: Boolean = false)
+
 sealed trait Entity:
   val id: Long
   def display: String
