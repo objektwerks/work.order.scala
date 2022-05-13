@@ -127,6 +127,16 @@ CREATE TABLE deck (
   cost INT NOT NULL
 );
 
+CREATE TABLE email (
+  id VARCHAR PRIMARY KEY,
+  license VARCHAR(36) REFERENCES account(license),
+  address VARCHAR NOT NULL,
+  date_sent INT NOT NULL,
+  time_sent INT NOT NULL,
+  processed BOOL NOT NULL,
+  valid BOOL NOT NULL
+);
+
 CREATE TABLE fault (
   date_of INT NOT NULL,
   time_of INT NOT NULL,
