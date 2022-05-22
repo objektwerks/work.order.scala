@@ -62,8 +62,8 @@ Use Cases
 
 Account
 -------
-* Join( email address ) => Joined( account )
-* Enter( email address, pin ) => Entered( account )
+* Join( emailAddress ) => Joined( account )
+* Enter( emailAddress, pin ) => Entered( account )
 * Deactivate( license ) => Deactivated( account )
 * Reactivate( license ) => Reactivated( account )
 
