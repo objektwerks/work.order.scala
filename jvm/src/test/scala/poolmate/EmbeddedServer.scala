@@ -16,10 +16,11 @@ final class EmbeddedServer(conf: Config) extends Main with LazyLogging:
   val _port = conf.getInt("port")
   
   val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
+  val emailSender = EmailSender(conf, store)
   val service = Service(store)
   val authorizer = Authorizer(service)
   val validator = Validator()
-  val dispatcher = Dispatcher(authorizer, validator, service)
+  val dispatcher = Dispatcher(authorizer, validator, service, emailSender)
   val router = Router(dispatcher, store)
   override val allRoutes = Seq(router)
 
