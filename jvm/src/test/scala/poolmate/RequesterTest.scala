@@ -25,7 +25,7 @@ class RequesterTest extends AnyFunSuite with Matchers with LazyLogging:
     server.start()
 
     val join = Join(emailAddress = conf.getString("email.to"))
-    logger.info(s"*** join: $join")
+    logger.info(s"*** Join: $join")
 
     val joinJson = write[Join](join)
     logger.info(s"*** Join json: $joinJson")
