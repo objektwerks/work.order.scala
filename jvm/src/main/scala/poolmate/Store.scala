@@ -84,7 +84,7 @@ final class Store(conf: Config,
     
   def enter(emailAddress: String, pin: String): Option[Account] =
     DB readOnly { implicit session =>
-      sql"select * from account where emailAddress = $emailAddress and pin = $pin"
+      sql"select * from account where email_address = $emailAddress and pin = $pin"
         .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
         .single()
     }
