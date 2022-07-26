@@ -52,8 +52,8 @@ lazy val js = (project in file("js"))
     ),
     Compile / fastLinkJS / scalaJSLinkerOutputDirectory := target.value / public,
     Compile / fullLinkJS / scalaJSLinkerOutputDirectory := target.value / public,
-    Compile / scalacOptions += "-scalajs",
-    Test / scalacOptions += "-scalajs"
+    Compile / scalacOptions ++= Seq("-scalajs"),
+    Test / scalacOptions ++= Seq("-scalajs")
   )
 
 lazy val jvm = (project in file("jvm"))
