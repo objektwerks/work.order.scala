@@ -51,9 +51,7 @@ lazy val js = (project in file("js"))
       "io.github.cquiroz" %%% "scala-java-time" % scalaJavaTimeVersion
     ),
     Compile / fastLinkJS / scalaJSLinkerOutputDirectory := target.value / public,
-    Compile / fullLinkJS / scalaJSLinkerOutputDirectory := target.value / public,
-    Compile / scalacOptions ++= Seq("-scalajs"),
-    Test / scalacOptions ++= Seq("-scalajs")
+    Compile / fullLinkJS / scalaJSLinkerOutputDirectory := target.value / public
   )
 
 lazy val jvm = (project in file("jvm"))
