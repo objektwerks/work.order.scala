@@ -64,7 +64,6 @@ lazy val jvm = (project in file("jvm"))
       Seq(
         "com.lihaoyi" %% "cask" % caskVersion,
         "com.lihaoyi" %% "upickle" % upickleVersion,
-        "com.lihaoyi" %% "requests" % "0.7.0",
         "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
         "org.postgresql" % "postgresql" % postgresqlVersion,
         "io.github.cquiroz" %% "scala-java-time" % "2.3.0",
@@ -73,6 +72,7 @@ lazy val jvm = (project in file("jvm"))
         "com.typesafe" % "config" % "1.4.2",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "ch.qos.logback" % "logback-classic" % "1.2.11",
+        "com.lihaoyi" %% "requests" % "0.7.0" % Test,
         "org.scalatest" %% "scalatest" % scalaTestVersion % Test
       )
     }
