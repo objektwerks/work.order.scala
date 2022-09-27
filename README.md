@@ -1,6 +1,6 @@
 Work Order
 ----------
->Todo
+>**WIP** This is reworking of the work.order project using Scalajs and Scala 3.
 
 Install
 -------
