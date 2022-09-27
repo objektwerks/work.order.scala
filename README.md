@@ -1,6 +1,6 @@
-Poolmate Web
-------------
->Mobile web pool management app using Cask, uPickle, Scalikejdbc, ScalaJs, Laminar, Waypoint, W3.CSS, Scaffeine, Postgresql, Snowpack and Scala 3.
+Work Order
+----------
+>Todo
 
 Install
 -------
@@ -42,156 +42,21 @@ Package Client
 1. sbt clean test fullLinkJS
 2. npx snowpack build ( see **build** directory )
 
-Client
+Routes
 ------
-* Now
-* Command => Event
-
-Server
-------
-1. Now: /now
-2. Api: /command
+* Todo
 
 Use Cases
 ---------
-1. **clean** artifacts
-2. **measure** water
-3. **add** chemicals
-4. **set** timer | heater
-5. **expense** supplies, repairs, pumps, timers, heaters, surfaces, decks
-
-Account
--------
-* Join( emailAddress ) => Joined( account )
-* Enter( emailAddress, pin ) => Entered( account )
-* Deactivate( license ) => Deactivated( account )
-* Reactivate( license ) => Reactivated( account )
-
-View(Menu) ! Action -> Page
----------------------------
-1. Root
-   * Root(Enter, Join) ! Enter | Join -> Enter
-   * Enter ! Enter -> App
-2. App
-   * App(Account, Pools)
-   * Account(App) ! Deactivate | Reactivate
-   * Pools(App) ! N -> Pool(Pools, Hardware, Maintenance, Expenses) ! AU
-3. Maintenance **, ***
-   * Measurements(Pool) ! N -> Measurement(Measurements) ! AU
-   * Cleanings(Pool) ! N -> Cleaning(Cleanings) ! AU
-   * Chemicals(Pool) ! N -> Chemical(Chemicals) ! AU
-4. Expenses **, ***
-   * Supplies(Pool) ! N -> Supply(Supplies) ! AU
-   * Repairs(Pool) ! N -> Repair(Repairs) ! AU
-5. Hardware **
-   * Pumps(Pool) ! N -> Pump(Pumps) ! AU
-   * Timers(Pool) ! N -> Timer(Timers) ! AU
-     * Timer ! N -> TimerSettings(Timer) ! N -> TimerSetting ! AU
-   * Heaters(Pool) ! N -> Heater(Heaters) ! AU
-     * Heater ! N -> HeaterSettings(Heater) ! N -> HeaterSetting ! AU
-6. Aesthetics **
-   * Surfaces(Pool) ! N -> Surface(Surfaces) ! AU
-   * Decks(Pool) ! N -> Deck(Surfaces) ! AU
-
-** Actions:
-* New = N
-* Add, Update = AU
-* Refresh = R ( all list views have a refresh button )
-
-*** Charts:
-* measurements, cleanings, chemicals
-* supplies, repairs
+* Tod
 
 Model
 -----
-1. Model -> Model[E <: Entity](entitiesVar: Var[Seq[E]], selectedEntityVar: Var[E], emptyEntity: E)
-
-Entity Model
-------------
-* Pool 1..n ---> 1 Account **
-* Pool 1 ---> 1..n Measurement, Cleaning, Chemical, Supply, Repair, Pump, Timer, TimerSetting, Heater, HeaterSetting, Surface, Deck
-* Fault
-* UoM ( unit of measure )
->** Account contains a globally unique license.
-
-Object Model
-------------
-* Router 1 ---> 1 Dispatcher, Store
-* Service 1 ---> 1 Store
-* Authorizer 1 ---> 1 Service
-* Dispatcher 1 ---> 1 Authorizer, Validator, Service
-* Server 1 ---> 1 Router
-* Client
+1. Todo
 
 Sequence
 --------
-1. Client --- Command ---> Server
-2. Server --- Command ---> Router
-3. Router --- Command ---> Dispatcher
-4. Dispatcher --- Command ---> Authorizer, Validator, Service
-5. Authorizer, Validator, Service --- Event ---> Dispatcher
-6. Dispatcher --- Event ---> Router
-7. Router --- Event ---> Server
-8. Server --- Event ---> Client
-
-Measurements
-------------
-1. total hardness 0 - 1000      ok = 250 - 500      ideal = 375
-2. total chlorine 0 - 10        ok = 1 - 5          ideal = 3
-3. total bromine 0 - 20         ok = 2 - 10         ideal = 5
-4. free chlorine 0 - 10         ok = 1 - 5          ideal = 3
-5. ph 6.2 - 8.4                 ok = 7.2 - 7.6      ideal = 7.4
-6. total alkalinity 0 - 240     ok = 80 - 120       ideal = 100
-7. cyanuric acid 0 - 300        ok = 30 - 100       ideal = 50
-8. temp 0 - 100
-
-** Units of Measure - oz, gl, lb
-
-Chemicals
----------
-1. Chlorine
-2. Chlorine Tablets
-3. Pool Shock
-
-Solutions
----------
->Suggested solutions to chemical imbalances.
-1. high ph - Sodium Bisulfate
-2. low ph - Sodium Carbonate, Soda Ash
-3. high alkalinity - Muriatic Acid, Sodium Bisulfate
-4. low alkalinity - Sodium Bicarbonate, Baking Soda
-5. calcium hardness - Calcium Chloride
-6. low chlorine - Chlorine Tablets, Granules, Liquid
-7. algae - Algaecide, Shock
-8. stains - Stain Identification Kit, Stain Remover
-
-Descriptions
-------------
-* cleanings, measurements
-
-Images
-------
-* add, edit, refresh, chart
-
-Charts
-------
-1. measurements - line chart ( x = date, y = chemical )
-2. cleanings - line chart ( x = date, y = month )
-3. chemicals - bar chart ( x = date, y = amount, c = chemical )
-4. supplies - bar chart ( x = date, y = cost, c = item )
-5. repairs - line chart ( x = date, y = cost )
-
-Date
-----
-1. Format: yyyy-MM-dd
-2. String: 1999-01-01, 1999-12-16
-3. Int: 19990101, 19991216
-
-Time
-----
-1. Format: HH:mm
-2. String: 01:01, 19:14
-3. Int: 101, 1914
+* Todo
 
 Postgresql
 ----------
