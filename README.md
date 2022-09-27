@@ -1,6 +1,6 @@
 Work Order
 ----------
->**WIP** This is reworking of the work.order project using Scalajs and Scala 3.
+>**WIP** This is refactoring of the [work.order](https://github.com/objektwerks/work.order) project using Scalajs and Scala 3.
 
 Install
 -------
