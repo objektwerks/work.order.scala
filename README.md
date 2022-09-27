@@ -38,7 +38,8 @@ Package Server
 Package Client
 --------------
 1. sbt clean test fullLinkJS
-2. npx snowpack build ( see **build** directory )
+2. npx snowpack build
+> See **build** directory.
 
 Routes
 ------
