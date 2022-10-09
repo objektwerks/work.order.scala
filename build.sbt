@@ -6,7 +6,7 @@ lazy val waypointVersion = "0.5.0"
 lazy val upickleVersion = "2.0.0"
 lazy val postgresqlVersion = "42.4.0"
 lazy val scalaJavaTimeVersion = "2.4.0"
-lazy val scalaTestVersion = "3.2.13"
+lazy val scalaTestVersion = "3.2.14"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
@@ -71,7 +71,7 @@ lazy val jvm = (project in file("jvm"))
         "org.jodd" % "jodd-mail" % "6.0.5",
         "com.typesafe" % "config" % "1.4.2",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-        "ch.qos.logback" % "logback-classic" % "1.4.1",
+        "ch.qos.logback" % "logback-classic" % "1.4.3",
         "com.lihaoyi" %% "requests" % "0.7.0" % Test,
         "org.scalatest" %% "scalatest" % scalaTestVersion % Test
       )
