@@ -43,9 +43,6 @@ final case class User(id: Int,
                       pin: String,
                       license: String) extends Entity
 
-object WorkOrder:
-  def empty: WorkOrder = WorkOrder(0, 0, 0, "", "", "", "", "", "", "")
-
 final case class WorkOrder(number: Int,
                            homeownerId: Int,
                            serviceProviderId: Int,
