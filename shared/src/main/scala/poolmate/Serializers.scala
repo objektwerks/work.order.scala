@@ -15,4 +15,5 @@ object Serializers:
   given commandRW: ReadWriter[Command] = ReadWriter.merge( registerRW, loginRW, saveUserRW, saveWorkOrderRW, listWorkOrdersRW )
 
   given registeredRW: ReadWriter[Registered] = macroRW
-  given eventRW: ReadWriter[Event] = ReadWriter.merge( registeredRW )
+  given loggedInRW: ReadWriter[LoggedIn] = macroRW
+  given eventRW: ReadWriter[Event] = ReadWriter.merge( registeredRW, loggedInRW )
