@@ -4,32 +4,7 @@ import java.util.UUID
 
 import scala.util.Random
 
-enum UoM(val abrv: String):
-  case ounce extends UoM("oz")
-  case gallon extends UoM("gl")
-  case pounds extends UoM("lb")
-
-final case class Email(id: String,
-                       license: String,
-                       address: String,
-                       dateSent: Int = DateTime.currentDate,
-                       timeSent: Int = DateTime.currentTime,
-                       processed: Boolean = false,
-                       valid: Boolean = false)
-
-sealed trait Entity:
-  val id: Long
-  def display: String
-
-final case class Account(id: Long = 0,
-                         license: String = newLicense,
-                         emailAddress: String,
-                         pin: String = newPin,
-                         activated: Int = DateTime.currentDate,
-                         deactivated: Int = 0) extends Entity:
-  def display = activated.toString
-
-object Account:
+object User:
   private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
   private val random = new Random
 
@@ -39,7 +14,7 @@ object Account:
    * 26 letters + 10 numbers + 18 special characters = 54 combinations
    * 7 alphanumeric char pin = 54^7 ( 1,338,925,209,984 )
    */
-  private def newPin: String =
+  def newPin: String =
     Random.shuffle(
       Random
         .alphanumeric
@@ -49,126 +24,24 @@ object Account:
         .appended(newSpecialChar)
     ).mkString
 
-  private def newLicense: String = UUID.randomUUID.toString
+  def newLicense: String = UUID.randomUUID.toString
 
-  val empty = Account(
-    license = "",
-    emailAddress = "",
-    pin = "",
-    activated = 0,
-    deactivated = 0
-  )
+final case class User(id: Int,
+                      role: String,
+                      name: String,
+                      emailAddress: String,
+                      streetAddress: String,
+                      registered: String,
+                      pin: String,
+                      license: String)
 
-final case class Pool(id: Long = 0,
-                      license: String = "",
-                      name: String = "",
-                      built: Int = 0,
-                      volume: Int = 1000,
-                      cost: Int = 0) extends Entity:
-  def display = name
-
-final case class Measurement(id: Long = 0,
-                             poolId: Long = 0,
-                             measured: Int = 0,
-                             temp: Int = 85,
-                             totalHardness: Int = 375,
-                             totalChlorine: Int = 3,
-                             totalBromine: Int = 5,
-                             freeChlorine: Int = 3,
-                             ph: Double = 7.4,
-                             totalAlkalinity: Int = 100,
-                             cyanuricAcid: Int = 50) extends Entity:
-  def display = s"$measured: $ph ph"
-
-object Measurement:
-  val tempRange = 0 to 100
-  val totalHardnessRange = 1 to 1000
-  val totalChlorineRange = 0 to 10
-  val totalBromineRange = 0 to 20
-  val freeChlorineRange = 0 to 10
-  val totalAlkalinityRange = 0 to 240
-  val cyanuricAcidRange = 0 to 300
-
-final case class Cleaning(id: Long = 0,
-                          poolId: Long = 0,
-                          cleaned: Int = 0,
-                          brush: Boolean = true,
-                          net: Boolean = true,
-                          vacuum: Boolean = false,
-                          skimmerBasket: Boolean = true,
-                          pumpBasket: Boolean = false,
-                          pumpFilter: Boolean = false,
-                          deck: Boolean = false) extends Entity:
-  def display = cleaned.toString
-
-final case class Chemical(id: Long = 0,
-                          poolId: Long = 0,
-                          added: Int = 0,
-                          chemical: String = "",
-                          amount: Int = 0,
-                          unit: String = "") extends Entity:
-  def display = s"$added: $chemical"
-
-final case class Supply(id: Long = 0,
-                        poolId: Long = 0,
-                        purchased: Int = 0,
-                        item: String = "",
-                        amount: Int = 0,
-                        unit: String = "",
-                        cost: Int = 0) extends Entity:
-  def display = s"$purchased: $item"
-
-final case class Repair(id: Long = 0,
-                        poolId: Long = 0,
-                        repaired: Int = 0,
-                        repair: String = "",
-                        cost: Int = 0) extends Entity:
-  def display = s"$repaired: $repair"
-
-final case class Pump(id: Long = 0,
-                      poolId: Long = 0,
-                      installed: Int = 0,
-                      model: String = "",
-                      cost: Int = 0) extends Entity:
-  def display = model
-
-final case class Timer(id: Long = 0,
-                       poolId: Long = 0,
-                       installed: Int = 0,
-                       model: String = "",
-                       cost: Int = 0) extends Entity:
-  def display = model
-
-final case class TimerSetting(id: Long = 0,
-                              timerId: Long = 0,
-                              dateSet: Int = 0,
-                              timeOn: Int = 0,
-                              timeOff: Int = 0) extends Entity:
-  def display = s"$dateSet: $timeOn - $timeOff"
-
-final case class Heater(id: Long = 0,
-                        poolId: Long = 0,
-                        installed: Int = 0,
-                        model: String = "",
-                        cost: Int = 0) extends Entity:
-  def display = installed.toString
-
-final case class HeaterSetting(id: Long = 0,
-                               heaterId: Long = 0,
-                               dateSet: Int = 0,
-                               temp: Int = 0) extends Entity:
-  def display = s"$dateSet: $temp"
-
-final case class Surface(id: Long = 0,
-                         poolId: Long = 0,
-                         installed: Int = 0,
-                         kind: String = "",
-                         cost: Int = 0) extends Entity:
-  def display = kind
-
-final case class Deck(id: Long = 0,
-                      poolId: Long = 0,
-                      installed: Int = 0,
-                      kind: String = "",
-                      cost: Int = 0) extends Entity:
-  def display = kind
+final case class WorkOrder(number: Int,
+                           homeownerId: Int,
+                           serviceProviderId: Int,
+                           title: String,
+                           issue: String,
+                           streetAddress: String,
+                           imageUrl: String,
+                           resolution: String,
+                           opened: String,
+                           closed: String)
