@@ -26,7 +26,11 @@ object Validators:
     def isGreaterThanOrEqualZero = value >= 0
 
   extension (user: User)
-    def isValid: List[String] = List()
+    def isValid: List[String] =
+      val errors = List[String]()
+      errors
 
   extension (workOrder: WorkOrder)
-    def isValid: List[String] = List()
+    def isValid: List[String] =
+      val errors = List[String]()
+      errors
