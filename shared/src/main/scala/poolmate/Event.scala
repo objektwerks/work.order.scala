@@ -3,17 +3,10 @@ package poolmate
 sealed trait Event
 
 final case class Registered(pin: String,
-                            success: boolean = true,
-                            error: string = "") extends Event
-
-  static success(pin: string): Registered {
-    return new Registered(pin)
-  }
-  
-  static fail(error: string): Registered {
-    return new Registered('', false, error)
-  }
-}
+                            success: Boolean = true,
+                            error: String = "") extends Event:
+  def success(pin: String): Registered = Registered(pin)
+  def fail(error: String): Registered = Registered("", false, error)
 
 /*
 export class Registered {
