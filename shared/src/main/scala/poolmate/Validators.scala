@@ -3,14 +3,14 @@ package poolmate
 import scala.collection.mutable
 
 object Validators:
-  val licenseInvalid = "A license must be 36 characters."
+  val idInvalid = "An id must be greater than 0."
   val roleInvalid = "A role must be selected."
   val nameInvalid = "A name must be at least 2 characters."
   val emailAddressInvalid = "An email address must be at least 3 characters and inlcude an @ symbol."
   val streetAddressInvalid = "A street address must at least 6 characters."
-  val pinInvalid = "A pin must be exactly 7 numbers, characters and/or symbols."
   val registeredInvalid = "An registered date-time value must be 24 characters."
-  val idInvalid = "An id must be greater than 0."
+  val pinInvalid = "A pin must be exactly 7 numbers, characters and/or symbols."
+  val licenseInvalid = "A license must be 36 characters."
   val numberInvalid = "A number must be greater than 0."
   val titleInvalid = "A title must be at least 3 characters."
   val issueInvalid = "An issue must be at least 3 characters."
