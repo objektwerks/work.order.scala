@@ -17,6 +17,13 @@ final case class LoggedIn(user: User,
   def success(user: User, serviceProviders: Array[User], workOrders: Array[WorkOrder]): LoggedIn = LoggedIn(user, serviceProviders, workOrders)
   def fail(error: String): LoggedIn = LoggedIn(User.empty, Array.empty[User], Array.empty[WorkOrder], false, error)
 
+final case class UserSaved(id: Int, 
+                           success: Boolean = true, 
+                           error: String = "") extends Event:
+
+  def success(id: Int): UserSaved = UserSaved(id)
+  def fail(id: Int, error: String): UserSaved = UserSaved(id, false, error)
+
 /*
 export class WorkOrderSaved {
   constructor(public number: number,
@@ -44,20 +51,6 @@ export class WorkOrdersListed {
 
   static fail(userId: number, error: string): WorkOrdersListed {
     return new WorkOrdersListed(userId, [WorkOrder.empty()], false, error)
-  }
-}
-
-export class UserSaved {
-  constructor(public id: number, 
-              public success: boolean = true, 
-              public error: string = '') {}
-
-  static success(id: number): UserSaved {
-    return new UserSaved(id)
-  }
-
-  static fail(id: number, error: string): UserSaved {
-    return new UserSaved(id, false, error)
   }
 }
 */
