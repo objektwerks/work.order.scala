@@ -40,7 +40,7 @@ object Validators:
     def isGreaterThanOrEqualZero = value >= 0
 
   extension (user: User)
-    def isValid: Array[String] =
+    def validate: Array[String] =
       val errors = mutable.ArrayBuilder.make[String]
       if user.id.isNotGreaterThanZero then errors += idInvalid
       if !user.role.isRole then errors += roleInvalid
@@ -53,7 +53,7 @@ object Validators:
       errors.result()
 
   extension (workOrder: WorkOrder)
-    def isValid: Array[String] =
+    def validate: Array[String] =
       val errors = mutable.ArrayBuilder.make[String]
       if workOrder.number.isNotGreaterThanZero then errors += numberInvalid
       if workOrder.homeownerId.isNotGreaterThanZero then errors += idInvalid
@@ -67,7 +67,7 @@ object Validators:
       errors.result()
 
   extension (register: Register)
-    def isValid: Array[String] =
+    def validate: Array[String] =
       val errors = mutable.ArrayBuilder.make[String]
       if !register.role.isRole then errors += roleInvalid
       if !register.name.isName then errors += nameInvalid
@@ -76,7 +76,7 @@ object Validators:
       errors.result()
 
   extension (login: Login)
-    def isValid: Array[String] =
+    def validate: Array[String] =
       val errors = mutable.ArrayBuilder.make[String]
       if !login.emailAddress.isEmailAddress then errors += emailAddressInvalid
       if !login.pin.isPin then errors += pinInvalid
