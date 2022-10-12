@@ -7,6 +7,8 @@ import scala.util.Random
 val homeowner = "homeowner"
 val serviceProvider = "serviceprovider"
 
+sealed trait Entity
+
 object User:
   private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
   private val random = new Random
@@ -36,7 +38,7 @@ final case class User(id: Int,
                       streetAddress: String,
                       registered: String,
                       pin: String,
-                      license: String)
+                      license: String) extends Entity
 
 final case class WorkOrder(number: Int,
                            homeownerId: Int,
@@ -47,4 +49,4 @@ final case class WorkOrder(number: Int,
                            imageUrl: String,
                            resolution: String,
                            opened: String,
-                           closed: String)
+                           closed: String) extends Entity
