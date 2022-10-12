@@ -5,7 +5,7 @@ sealed trait Command
 final case class Register(role: String,
                           name: String,
                           emailAddress: String,
-                          streetAddress: String)
+                          streetAddress: String) extends Command
 
 final case class Login(emailAddress: String, pin: String) extends Command
 
