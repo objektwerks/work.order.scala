@@ -74,3 +74,10 @@ object Validators:
       if !register.emailAddress.isEmailAddress then errors += emailAddressInvalid
       if !register.streetAddress.isStreetAddress then errors += streetAddressInvalid
       errors.result()
+
+  extension (login: Login)
+    def isValid: Array[String] =
+      val errors = mutable.ArrayBuilder.make[String]
+      if !login.emailAddress.isEmailAddress then errors += emailAddressInvalid
+      if !login.pin.isPin then errors += pinInvalid
+      errors.result()
