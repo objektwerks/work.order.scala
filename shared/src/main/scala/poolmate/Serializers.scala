@@ -16,4 +16,5 @@ object Serializers:
 
   given registeredRW: ReadWriter[Registered] = macroRW
   given loggedInRW: ReadWriter[LoggedIn] = macroRW
-  given eventRW: ReadWriter[Event] = ReadWriter.merge( registeredRW, loggedInRW )
+  given userSavedRW: ReadWriter[UserSaved] = macroRW
+  given eventRW: ReadWriter[Event] = ReadWriter.merge( registeredRW, loggedInRW, userSavedRW )
