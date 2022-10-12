@@ -31,6 +31,8 @@ object User:
 
   def newLicense: String = UUID.randomUUID.toString
 
+  def empty: User = User(0, "", "", "", "", "", "", "")
+
 final case class User(id: Int,
                       role: String,
                       name: String,

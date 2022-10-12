@@ -8,37 +8,16 @@ final case class Registered(pin: String,
   def success(pin: String): Registered = Registered(pin)
   def fail(error: String): Registered = Registered("", false, error)
 
+final case class LoggedIn(user: User, 
+                          serviceProviders: Array[User], 
+                          workOrders: Array[WorkOrder], 
+                          success: Boolean = true, 
+                          error: String = "") extends Event:
+
+  def success(user: User, serviceProviders: Array[User], workOrders: Array[WorkOrder]): LoggedIn = LoggedIn(user, serviceProviders, workOrders)
+  def fail(error: String): LoggedIn = LoggedIn(User.empty, Array.empty[User], Array.empty[WorkOrder], false, error)
+
 /*
-export class Registered {
-  constructor(public pin: string,
-              public success: boolean = true,
-              public error: string = '') {}
-
-  static success(pin: string): Registered {
-    return new Registered(pin)
-  }
-  
-  static fail(error: string): Registered {
-    return new Registered('', false, error)
-  }
-}
-
-export class LoggedIn {
-  constructor(public user: User, 
-              public serviceProviders: User[], 
-              public workOrders: WorkOrder[], 
-              public success: boolean = true, 
-              public error: string = '') {}
-
-  static success(user: User, serviceProviders: User[], workOrders: WorkOrder[]): LoggedIn {
-    return new LoggedIn(user, serviceProviders, workOrders)  
-  }
-
-  static fail(error: string): LoggedIn {
-    return new LoggedIn(User.empty(), [], [], false, error)
-  }
-}
-
 export class WorkOrderSaved {
   constructor(public number: number,
               public success: boolean = true,
