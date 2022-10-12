@@ -18,7 +18,7 @@ object User:
 
   /**
    * 26 letters + 10 numbers + 18 special characters = 54 combinations
-   * 7 alphanumeric char pin = 54^7 ( 1,338,925,209,984 )
+   * 7 alphanumeric char pin = 54^7 ( 1,338,925,209,984 ) permutations
    */
   def newPin: String =
     Random.shuffle(
