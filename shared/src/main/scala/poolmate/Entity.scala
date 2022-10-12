@@ -4,6 +4,9 @@ import java.util.UUID
 
 import scala.util.Random
 
+val homeowner = "homeowner"
+val serviceProvider = "serviceprovider"
+
 object User:
   private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
   private val random = new Random
