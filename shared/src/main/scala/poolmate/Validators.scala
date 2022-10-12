@@ -20,7 +20,7 @@ object Validators:
 
   extension (value: String)
     def isName: Boolean = value.length >= 2 && value.length <= 64
-    def isRole: Boolean = value == homeowner || value == serviceProvider
+    def isRole: Boolean = value == Roles.homeowner || value == Roles.serviceProvider
     def isEmailAddress: Boolean = value.length >= 3 && value.length <= 128 && value.contains("@")
     def isStreetAddress: Boolean = value.length >= 6 && value.length <= 128
     def isRegistered: Boolean = value.length == 24
