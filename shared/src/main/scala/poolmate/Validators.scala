@@ -65,3 +65,12 @@ object Validators:
       if !workOrder.resolution.isResolution then errors += resolutionInvalid
       if !workOrder.opened.isOpened then errors += openedInvalid
       errors.result()
+
+  extension (register: Register)
+    def isValid: Array[String] =
+      val errors = mutable.ArrayBuilder.make[String]
+      if !register.role.isRole then errors += roleInvalid
+      if !register.name.isName then errors += nameInvalid
+      if !register.emailAddress.isEmailAddress then errors += emailAddressInvalid
+      if !register.streetAddress.isStreetAddress then errors += streetAddressInvalid
+      errors.result()
