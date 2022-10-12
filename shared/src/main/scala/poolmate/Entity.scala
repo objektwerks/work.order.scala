@@ -4,10 +4,11 @@ import java.util.UUID
 
 import scala.util.Random
 
-val homeowner = "homeowner"
-val serviceProvider = "serviceprovider"
-
 sealed trait Entity
+
+object Roles:
+  val homeowner = "homeowner"
+  val serviceProvider = "serviceprovider"
 
 object User:
   private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
