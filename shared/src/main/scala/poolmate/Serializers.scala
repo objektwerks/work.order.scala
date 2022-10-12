@@ -13,3 +13,6 @@ object Serializers:
   given saveWorkOrderRW: ReadWriter[SaveWorkOrder] = macroRW
   given listWorkOrdersRW: ReadWriter[ListWorkOrders] = macroRW
   given commandRW: ReadWriter[Command] = ReadWriter.merge( registerRW, loginRW, saveUserRW, saveWorkOrderRW, listWorkOrdersRW )
+
+  given registeredRW: ReadWriter[Registered] = macroRW
+  given eventRW: ReadWriter[Event] = ReadWriter.merge( registeredRW )
