@@ -9,22 +9,23 @@ object Validators:
   val emailAddressInvalid = "An email address must be at least 3 characters and inlcude an @ symbol."
   val streetAddressInvalid = "A street address must at least 6 characters."
   val pinInvalid = "A pin must be exactly 7 numbers, characters and/or symbols."
-  val datetimeInvalid = "A datetime must be 24-characters, using ISO standard: YYYY-MM-DDTHH:mm:ss.sssZ"
+  val registeredInvalid = "An registered date-time value must be 24 characters."
   val idInvalid = "An id must be greater than 0."
   val numberInvalid = "A number must be greater than 0."
-  val titleInvalid = "A title must be at least 3 characters and no more than 64 characters."
-  val issueInvalid = "An issue must be at least 3 characters and no more than 255 characters."
+  val titleInvalid = "A title must be at least 3 characters."
+  val issueInvalid = "An issue must be at least 3 characters."
   val imageUrlInvalid = "An image url must start with /images/"
-  val resolutionInvalid = "A resolution must be at least 2 characters and no more than 255 characters."
-  val openedInvalid = "An opened date-time value must be 24 characters"
+  val resolutionInvalid = "A resolution must be at least 2 characters."
+  val openedInvalid = "An opened date-time value must be 24 characters."
 
   extension (value: String)
-    def isLicense: Boolean = value.length == 36
-    def isEmailAddress: Boolean = value.length >= 3 && value.length <= 128 && value.contains("@")
-    def isStreetAddress: Boolean = value.length >= 6 && value.length <= 128
-    def isPin: Boolean = value.length == 7
     def isName: Boolean = value.length >= 2 && value.length <= 64
     def isRole: Boolean = value == homeowner || value == serviceProvider
+    def isEmailAddress: Boolean = value.length >= 3 && value.length <= 128 && value.contains("@")
+    def isStreetAddress: Boolean = value.length >= 6 && value.length <= 128
+    def isRegistered: Boolean = value.length == 24
+    def isPin: Boolean = value.length == 7
+    def isLicense: Boolean = value.length == 36
     def isTitle: Boolean = value.length >= 3 && value.length <= 64
     def isIssue: Boolean = value.length >= 3 && value.length <= 255
     def isResolution: Boolean = value.length >= 2 && value.length <= 255
@@ -41,6 +42,14 @@ object Validators:
   extension (user: User)
     def isValid: Array[String] =
       val errors = mutable.ArrayBuilder.make[String]
+      if user.id.isNotGreaterThanZero then errors += idInvalid
+      if !user.role.isRole then errors += roleInvalid
+      if !user.name.isName then errors += nameInvalid
+      if !user.emailAddress.isEmailAddress then errors += emailAddressInvalid
+      if !user.streetAddress.isStreetAddress then errors += streetAddressInvalid
+      if !user.registered.isRegistered then errors += registeredInvalid
+      if !user.pin.isPin then errors += pinInvalid
+      if !user.license.isLicense then errors += licenseInvalid
       errors.result()
 
   extension (workOrder: WorkOrder)
