@@ -28,19 +28,9 @@ final case class WorkOrderSaved(number: Int,
   def success(number: Int): WorkOrderSaved = WorkOrderSaved(number)
   def fail(number: Int, error: String): WorkOrderSaved = WorkOrderSaved(number, false, error)
 
-/*
-export class WorkOrdersListed {
-  constructor(public userId: number, 
-              public workOrders: WorkOrder[], 
-              public success: boolean = true, 
-              public error: string = '') {}
-
-  static success(userId: number, workOrders: WorkOrder[]): WorkOrdersListed {
-    return new WorkOrdersListed(userId, workOrders)
-  }
-
-  static fail(userId: number, error: string): WorkOrdersListed {
-    return new WorkOrdersListed(userId, [WorkOrder.empty()], false, error)
-  }
-}
-*/
+final case class WorkOrdersListed(userId: Int, 
+                                  workOrders: Array[WorkOrder], 
+                                  success: Boolean = true, 
+                                  error: String = "") extends Event:
+  def success(userId: Int, workOrders: Array[WorkOrder]): WorkOrdersListed = WorkOrdersListed(userId, workOrders)
+  def fail(userId: Int, error: String): WorkOrdersListed = WorkOrdersListed(userId, Array.empty[WorkOrder], false, error)
