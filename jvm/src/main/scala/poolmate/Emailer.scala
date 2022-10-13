@@ -66,5 +66,4 @@ final class Emailer(conf: Config) extends LazyLogging:
       messageId
     }.toEither
 
-  def send(emailAddress: String): Either[Throwable, Registered] =
-    retry[Either[Throwable, Registered]](1)(sendEmail(emailAddress))
+  def send(emailAddress: String): Either[Throwable, String] = retry[Either[Throwable, String]](1)(sendEmail(emailAddress))
