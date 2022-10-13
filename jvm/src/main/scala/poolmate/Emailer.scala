@@ -29,7 +29,7 @@ final class Emailer(conf: Config,
     .auth(to, password)
     .buildSmtpMailServer()
 
-  private def buildEmail(account: Account): Email = {
+  private def buildEmail(emailAddress: String): Email = {
     val html = s"""
                   |<!DOCTYPE html>
                   |<html lang="en">
@@ -46,7 +46,7 @@ final class Emailer(conf: Config,
                   |""".stripMargin
     Email.create()
       .from(from)
-      .to(account.emailAddress)
+      .to(emailAddress)
       .subject(subject)
       .htmlMessage(html, "UTF-8")
   }
@@ -59,25 +59,15 @@ final class Emailer(conf: Config,
       case Failure(error) => throw error
     }
 
-  private def sendEmail(join: Join): Either[Throwable, Joined] =
+  private def sendEmail(register: Register): Either[Throwable, Registered] =
     Using( smtpServer.createSession ) { session =>
       session.open()
 
-      var account = Account(emailAddress = join.emailAddress)
-      logger.info("*** EmailSender prepared account: {}", account)
-
-      val messageId = session.sendMail(buildEmail(account))
+      val messageId = session.sendMail(buildEmail(register.emailAddress))
       logger.info("*** EmailSender sent message id: {}", messageId)
-
-      account = store.addAccount(account)
-      logger.info("*** EmailSender added account: {}", account)
-
-      val email = poolmate.Email(messageId, account.license, account.emailAddress)
-      store.addEmail(email)
-      logger.info("*** EmailSender added email: {}", email)
       
-      Joined(account)
+      Registered("pin") // TODO
     }.toEither
 
-  def send(join: Join): Either[Throwable, Joined] =
-    retry[Either[Throwable, Joined]](1)(sendEmail(join))
+  def send(register: Register): Either[Throwable, Registered] =
+    retry[Either[Throwable, Registered]](1)(sendEmail(register))
