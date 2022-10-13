@@ -25,11 +25,11 @@ final class Store(conf: Config,
   private val initialSize = conf.getInt("db.initialSize")
   private val maxSize = conf.getInt("db.maxSize")
   private val connectionTimeoutMillis = conf.getLong("db.connectionTimeoutMillis")
-
   private val settings = ConnectionPoolSettings(
     initialSize = initialSize,
     maxSize = maxSize,
-    connectionTimeoutMillis = connectionTimeoutMillis)
+    connectionTimeoutMillis = connectionTimeoutMillis
+  )
 
   ConnectionPool.singleton(url, user, password, settings)
 
