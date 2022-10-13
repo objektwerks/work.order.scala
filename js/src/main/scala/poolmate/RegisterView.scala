@@ -10,23 +10,21 @@ import scala.concurrent.Future
 import Components.*
 import Error.*
 import Message.*
-import Validators.*
+import Validator.*
 
-object JoinView extends View:
-  def apply(emailAddressVar: Var[String], pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
+object RegisterView extends View:
+  def apply(): HtmlElement =
     val emailAddressErrorBus = new EventBus[String]
 
-    def handler(either: Either[Fault, Event]): Unit =
+    def handler(either: Either[Throwable, Event]): Unit =
       either match
         case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
         case Right(event) =>
           event match
-            case Joined(account) =>
+            case Registered(_, success, error) =>
               clearErrors()
-              accountVar.set(account)
-              pinVar.set(account.pin)
-              log(s"Join -> handler joined account: $account")
-              route(EnterPage)
+              log(s"Registered -> handler registered.")
+              route(LoginPage)
             case _ => log(s"Join -> handler failed: $event")
       
     div(

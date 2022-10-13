@@ -5,11 +5,11 @@ import com.raquo.laminar.api.L.*
 import org.scalajs.dom.console.log
 
 import Components.*
-import Validators.*
+import Validator.*
 
-object AccountView extends View:
-  def apply(accountVar: Var[Account]): HtmlElement =
-    def deactivateHandler(either: Either[Fault, Event]): Unit =
+object UserView extends View:
+  def apply(userVar: Var[User]): HtmlElement =
+    def deactivateHandler(either: Either[Throwable, Event]): Unit =
       either match
         case Left(fault) => errorBus.emit(s"Deactivate failed: ${fault.cause}")
         case Right(event) =>

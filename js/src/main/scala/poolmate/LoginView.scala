@@ -7,14 +7,14 @@ import org.scalajs.dom.console.log
 import Components.*
 import Error.*
 import Message.*
-import Validators.*
+import Validator.*
 
-object EnterView extends View:
-  def apply(emailAddressVar: Var[String], pinVar: Var[String], accountVar: Var[Account]): HtmlElement =
+object LoginView extends View:
+  def apply(): HtmlElement =
     val emailAddressErrorBus = new EventBus[String]
     val pinErrorBus = new EventBus[String]
 
-    def handler(either: Either[Fault, Event]): Unit =
+    def handler(either: Either[Throwable, Event]): Unit =
       either match
         case Left(fault) => errorBus.emit(s"Enter failed: ${fault.cause}")
         case Right(event) =>

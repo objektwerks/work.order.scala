@@ -13,7 +13,7 @@ import scala.concurrent.Future
 import scala.scalajs.js
 import scala.scalajs.js.Thenable.Implicits.*
 
-import Serializers.given
+import Serializer.given
 
 import upickle.default.*
 

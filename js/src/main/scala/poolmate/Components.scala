@@ -6,7 +6,6 @@ import scala.scalajs.js.Date
 
 object Components:
   private val inputCss = "w3-input w3-hover-light-gray w3-text-indigo"
-  private val currentYear = DateTime.currentYear
 
   def bar(elms: HtmlElement*): Div =
     div(cls("w3-bar"), elms)
@@ -41,13 +40,6 @@ object Components:
   def pin: Input =
     input(cls(inputCss), typ("text"), minLength(7), maxLength(7), required(true))
 
-  def year: Input =
-    input(
-      cls(inputCss), typ("number"), pattern("\\d*"),
-      stepAttr("1"), minAttr("1900"), maxAttr(currentYear.toString),
-      required(true)
-    )
-
   def date: Input =
     input(cls(inputCss), tpe("date"), required(true))
  
@@ -74,14 +66,3 @@ object Components:
 
   def item(strSignal: Signal[String]): Li =
     li(cls("w3-text-indigo w3-display-container"), child.text <-- strSignal)
-
-  def split[E <: Entity](entities: Var[Seq[E]], toEntityPage: Long => EntityPage): Signal[Seq[Li]] =
-    entities.signal.split(_.id)( (id, _, entitySignal) =>
-      item( entitySignal.map(_.display) ).amend {
-        onClick --> { _ =>
-          entities.now().find(_.id == id).foreach { entity =>
-            PageRouter.router.pushState(toEntityPage(id))
-          }
-        }
-      }
-    )
