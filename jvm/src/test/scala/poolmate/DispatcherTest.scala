@@ -31,3 +31,11 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   def testRegister(dispatcher: Dispatcher): Unit = ()
 
   def testLogin(dispatcher: Dispatcher): Unit = ()
+
+  def testSaveUser(dispatcher: Dispatcher): Unit = ()
+
+  def testAddWorkOrder(dispatcher: Dispatcher): Unit = ()
+
+  def testSaveWorkOrder(dispatcher: Dispatcher): Unit = ()
+
+  def testListWorkOrders(dispatcher: Dispatcher): Unit = ()
