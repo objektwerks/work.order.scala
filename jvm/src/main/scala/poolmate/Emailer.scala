@@ -43,7 +43,7 @@ final class Emailer(conf: Config) extends LazyLogging:
       recipients.foreach( recipient => email.to(recipient))
       session.open()
       val messageId = session.sendMail(email)
-      logger.info("*** Emailer sent message id: {}", messageId)
+      logger.info("*** Emailer subject: {} to: {} message id: {}", subject, recipients.mkString, messageId)
       messageId
     }.toEither
 
