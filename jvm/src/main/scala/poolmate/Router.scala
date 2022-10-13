@@ -10,7 +10,7 @@ import upickle.default.{read, write}
 
 import Serializers.given
 
-final class Router(dispatcher: Dispatcher, store: Store) extends Routes with LazyLogging:
+final class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   @cask.get("/now")
   def index() = Response(Instant.now.toString)
 
