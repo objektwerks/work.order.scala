@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
-import scala.concurrent.duration._
+import scala.concurrent.duration.*
 import scala.sys.process.Process
 
 import Validator.*
@@ -20,8 +20,9 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   val emailer = Emailer(conf)
   val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
-  val service = Service(store)
-  val dispatcher = Dispatcher(emailer, service)
+  val service = Service(emailer, store)
+  val dispatcher = Dispatcher(service)
+  val router = Router(dispatcher)
 
   test("dispatcher") {
     // TODO
@@ -29,4 +30,4 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
 
   def testRegister(dispatcher: Dispatcher): Unit = ()
 
-  def testLogin(dispatcher: Dispatcher, account: Account): Unit = ()
+  def testLogin(dispatcher: Dispatcher): Unit = ()

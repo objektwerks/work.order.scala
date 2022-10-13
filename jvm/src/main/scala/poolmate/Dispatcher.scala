@@ -2,7 +2,7 @@ package poolmate
 
 import Validator.*
 
-final class Dispatcher(emailer: Emailer, service: Service):
+final class Dispatcher(service: Service):
   def dispatch(command: Command): Event =
     command match
       case register: Register =>
