@@ -2,7 +2,7 @@ package poolmate
 
 import scala.collection.mutable
 
-object Validators:
+object Validator:
   val idInvalid = "An id must be greater than 0."
   val roleInvalid = "A role must be selected."
   val nameInvalid = "A name must be at least 2 characters."
