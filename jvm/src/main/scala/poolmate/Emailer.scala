@@ -14,41 +14,16 @@ import scala.util.{Failure, Success, Using, Try}
 
 final class Emailer(conf: Config) extends LazyLogging:
   private val host = conf.getString("email.host")
-  private val to = conf.getString("email.to")
+  private val port = conf.getInt("email.port")
+  private val sender = conf.getString("email.sender")
   private val password = conf.getString("email.password")
-  private val from = conf.getString("email.from")
-  private val subject = conf.getString("email.subject")
-  private val salutation = conf.getString("email.salutation")
-  private val message = conf.getString("email.message")
-  private val closing = conf.getString("email.closing")
 
   private val smtpServer: SmtpServer = MailServer.create()
-    .ssl(true)
     .host(host)
-    .auth(to, password)
+    .port(port)
+    .ssl(true)
+    .auth(sender, password)
     .buildSmtpMailServer()
-
-  private def buildEmail(emailAddress: String): Email = {
-    val html = s"""
-                  |<!DOCTYPE html>
-                  |<html lang="en">
-                  |<head>
-                  |<meta charset="utf-8">
-                  |<title>$subject</title>
-                  |</head>
-                  |<body>
-                  |<p>$salutation</p>
-                  |<p>$message</p>
-                  |<p>$closing</p>
-                  |</body>
-                  |</html>
-                  |""".stripMargin
-    Email.create()
-      .from(from)
-      .to(emailAddress)
-      .subject(subject)
-      .htmlMessage(html, "UTF-8")
-  }
 
   @tailrec
   private def retry[T](attempts: Int)(fn: => T): T =
@@ -58,12 +33,20 @@ final class Emailer(conf: Config) extends LazyLogging:
       case Failure(error) => throw error
     }
 
-  private def sendEmail(emailAddress: String): Either[Throwable, String] =
+  private def sendEmail(recipients: (String, String), subject: String, message: String): Either[Throwable, String] =
     Using( smtpServer.createSession ) { session =>
       session.open()
-      val messageId = session.sendMail(buildEmail(emailAddress))
+      val email = Email.create()
+        .from(sender)
+        .to(recipients._1)
+        .to(recipients._2)
+        .subject(subject)
+        .htmlMessage(message, "UTF-8")
+      val messageId = session.sendMail(email)
       logger.info("*** Emailer sent message id: {}", messageId)
       messageId
     }.toEither
 
-  def send(emailAddress: String): Either[Throwable, String] = retry[Either[Throwable, String]](1)(sendEmail(emailAddress))
+  // recipients: string, subject: string, html: string
+  def send(recipients: (String, String), subject: String, message: String): Either[Throwable, String] =
+    retry[Either[Throwable, String]](1)(sendEmail(recipients, subject, message))
