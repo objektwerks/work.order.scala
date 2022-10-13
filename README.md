@@ -105,8 +105,38 @@ Mysql Connection Error
 >Nodejs occassionally produces this error with Mysql: connect ECONNREFUSED ::1:3306
 >The solution is varied and fundamentally unknown.
 
-Documentation
--------------
+Date Time
+---------
+>ISO standard: YYYY-MM-DDTHH:mm:ss.sssZ
+
+Photos
+------
+>The following image file types are supported:
+1. **jpeg**
+2. **jpg**
+3. **png**
+>Only **1** image is allowed ***per*** work order. The app stores ***images*** in **WORK_ORDER_IMAGES_DIR** defined below.
+
+Environment
+-----------
+>The following environment variables ***must*** be defined:
+export WORK_ORDER_BIND_IP="127.0.0.1"
+export WORK_ORDER_PORT=3000
+export WORK_ORDER_DATABASE_URL="mysql://workorder:workorder@127.0.0.1:3306/work_order_db"
+export WORK_ORDER_EMAIL_HOST="youremailhost.com"
+export WORK_ORDER_EMAIL_PORT=587
+export WORK_ORDER_EMAIL_SENDER="youremailaddress@youremailhost.com"
+export WORK_ORDER_EMAIL_PASSWORD="youremailpassword"
+export WORK_ORDER_SERVICE_PROVIDER_EMAIL="testemailaddress1@youremailhost.com"
+export WORK_ORDER_HOME_OWNER_EMAIL="testemailaddress2@youremailhost.com"
+export WORK_ORDER_DIR=$HOME/.workorder
+export WORK_ORDER_IMAGES_DIR=$WORK_ORDER_DIR/images
+export WORK_ORDER_LOGS_DIR=$WORK_ORDER_DIR/logs
+>All variables are for production less: WORK_ORDER_SERVICE_PROVIDER_EMAIL and WORK_ORDER_HOME_OWNER_EMAIL, which are
+>for the integration test.
+
+Resources
+---------
 1. Cask - https://com-lihaoyi.github.io/cask/index.html
 2. uPickle - https://com-lihaoyi.github.io/upickle/
 3. Requests - https://github.com/com-lihaoyi/requests-scala
