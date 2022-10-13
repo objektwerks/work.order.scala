@@ -8,7 +8,7 @@ import java.time.Instant
 
 import upickle.default.{read, write}
 
-import Serializers.given
+import Serializer.given
 
 final class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
   @cask.get("/now")
