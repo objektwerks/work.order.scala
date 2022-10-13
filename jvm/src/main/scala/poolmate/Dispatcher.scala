@@ -6,4 +6,6 @@ final class Dispatcher(emailer: Emailer,
     command match
       case register: Register => service.register(register)
       case login: Login => service.login(login)
-      case _ =>
+      case saveUser: SaveUser =>
+      case saveWorkOrder: SaveWorkOrder =>
+      case listWorkOrders: ListWorkOrders =>
