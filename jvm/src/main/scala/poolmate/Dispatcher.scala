@@ -20,6 +20,9 @@ final class Dispatcher(emailer: Emailer, service: Service):
           if user.isValid then service.saveUser(saveUser)
           else UserSaved.fail(user.id, "User invalid.")
         else UserSaved.fail(user.id, "License invalid: ${saveUser.user.license}")
+
+      case addWorkOrder: AddWorkOrder =>
+        
       
       case saveWorkOrder: SaveWorkOrder =>
         service.saveWorkOrder(saveWorkOrder)
