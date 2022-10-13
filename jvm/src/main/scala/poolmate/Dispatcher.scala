@@ -22,7 +22,7 @@ final class Dispatcher(emailer: Emailer, service: Service):
         else UserSaved.fail(user.id, "License invalid: ${saveUser.user.license}")
 
       case addWorkOrder: AddWorkOrder =>
-        
+        service.addWorkOrder(addWorkOrder)
       
       case saveWorkOrder: SaveWorkOrder =>
         service.saveWorkOrder(saveWorkOrder)
