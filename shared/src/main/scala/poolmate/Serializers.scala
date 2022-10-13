@@ -1,8 +1,8 @@
 package poolmate
 
-object Serializers:
-  import upickle.default.*
+import upickle.default.*
 
+object Serializers:
   given userRW: ReadWriter[User] = macroRW
   given workOrderRW: ReadWriter[WorkOrder] = macroRW
   given entityRW: ReadWriter[Entity] = ReadWriter.merge( userRW, workOrderRW )
