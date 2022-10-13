@@ -9,28 +9,6 @@ import Validator.*
 
 object UserView extends View:
   def apply(userVar: Var[User]): HtmlElement =
-    def deactivateHandler(either: Either[Fault, Event]): Unit =
-      either match
-        case Left(fault) => errorBus.emit(s"Deactivate failed: ${fault.cause}")
-        case Right(event) =>
-          event match
-            case Deactivated(account) =>
-              clearErrors()
-              accountVar.set(account)
-              route(AppPage)
-            case _ => log(s"Account -> deactivate handler failed: $event")
- 
-    def reactivateHandler(either: Either[Fault, Event]): Unit =
-      either match
-        case Left(fault) => errorBus.emit(s"Reactivate failed: ${fault.cause}")
-        case Right(event) =>
-          event match
-            case Reactivated(account) =>
-              clearErrors()
-              accountVar.set(account)
-              route(AppPage)
-            case _ => log(s"Account -> reactivate handler failed: $event")
-
     div(
       bar(
         btn("App").amend {

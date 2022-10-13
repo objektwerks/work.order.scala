@@ -17,11 +17,11 @@ object LoginView extends View:
         case Left(fault) => errorBus.emit(s"Enter failed: ${fault.cause}")
         case Right(event) =>
           event match
-            case Entered(account) =>
+            case LoggedIn(_, _, _, _, _) =>
               clearErrors()
-              accountVar.set(account)
+              // TODO set model
               route(AppPage)
-            case _ => log(s"Enter -> handler failed: $event")
+            case _ => log(s"Login -> handler failed: $event")
       
     div(      
       hdr("Enter"),

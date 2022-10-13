@@ -15,6 +15,7 @@ object PageRouter:
     Route.static(RootPage, root / endOfSegments),
     Route.static(RegisterPage, root / "register" / endOfSegments),
     Route.static(LoginPage, root / "login" / endOfSegments),
+    Route.static(AppPage, root / "app" / endOfSegments),
     Route.static(UserPage, root / "user" / endOfSegments),
     Route.static(WorkOrdersPage, root / "workorders" / endOfSegments),
   )
@@ -32,5 +33,6 @@ object PageRouter:
   val splitter = SplitRender[Page, HtmlElement](router.$currentPage)
     .collectStatic(RootPage) { RootView() }
     .collectStatic(LoginPage) { LoginView() }
+    .collectStatic(AppPage) { AppView() }
     .collectStatic(UserPage) { UserView(Model.user) }
     .collectStatic(WorkOrdersPage) { WorkOrdersView(Model.workOrders) }

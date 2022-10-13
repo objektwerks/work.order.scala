@@ -9,72 +9,21 @@ import Validator.*
 
 object WorkOrdersView extends View:
   def apply(workOrdersVar: Var[Array[WorkOrder]]): HtmlElement =
-    def deactivateHandler(either: Either[Fault, Event]): Unit =
-      either match
-        case Left(fault) => errorBus.emit(s"Deactivate failed: ${fault.cause}")
-        case Right(event) =>
-          event match
-            case Deactivated(account) =>
-              clearErrors()
-              accountVar.set(account)
-              route(AppPage)
-            case _ => log(s"Account -> deactivate handler failed: $event")
- 
-    def reactivateHandler(either: Either[Fault, Event]): Unit =
-      either match
-        case Left(fault) => errorBus.emit(s"Reactivate failed: ${fault.cause}")
-        case Right(event) =>
-          event match
-            case Reactivated(account) =>
-              clearErrors()
-              accountVar.set(account)
-              route(AppPage)
-            case _ => log(s"Account -> reactivate handler failed: $event")
-
     div(
       bar(
         btn("App").amend {
           onClick --> { _ =>
             log("Account -> App menu item onClick")
-            route(AppPage)
+            route(RootPage)
           }
         }      
       ),
       div(
-        hdr("Account"),
-        lbl("License"),
-        rotxt.amend {
-          value <-- accountVar.signal.map(_.license)
-        },
-        lbl("Pin"),
-        rotxt.amend {
-          value <-- accountVar.signal.map(_.pin)
-        },
-        lbl("Activated"),
-        rotxt.amend {
-          value <-- accountVar.signal.map(_.activated.toString)
-        },
-        lbl("Deactivated"),
-        rotxt.amend {
-          value <-- accountVar.signal.map(_.deactivated.toString)
-        },
+        hdr("Work Orders"),
+        // List of opened and closed work orders.
         cbar(
-          btn("Deactivate").amend {
-            disabled <-- accountVar.signal.map { account => if account.isDeactivated then true else false }
-            onClick --> { _ =>
-              log("Account -> Deactivate button onClick")
-              val command = Deactivate(accountVar.now().license)
-              call(command, deactivateHandler)
-            }
-          },
-          btn("Reactivate").amend {
-            disabled <-- accountVar.signal.map { account => if account.isActivated then true else false }
-            onClick --> { _ =>
-              log("Account -> Reactivate button onClick")
-              val command = Reactivate(accountVar.now().license)
-              call(command, reactivateHandler)
-            }
-          }      
+          btn("New"),
+          btn("Refresh")
         )
       )
     )

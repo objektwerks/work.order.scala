@@ -8,5 +8,6 @@ sealed trait Page:
 case object RootPage extends Page
 case object RegisterPage extends Page
 case object LoginPage extends Page
+case object AppPage extends Page
 case object UserPage extends Page
 case object WorkOrdersPage extends Page
