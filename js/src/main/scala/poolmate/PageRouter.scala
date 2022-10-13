@@ -33,5 +33,4 @@ object PageRouter:
     .collectStatic(RootPage) { RootView() }
     .collectStatic(LoginPage) { LoginView() }
     .collectStatic(UserPage) { UserView(Model.user) }
-    .collectStatic(WorkOrdersPage) { WorkOrdersView(Model.pools, Model.accountVar) }
-    .collect[PoolPage] { page => PoolView(Model.pools.setSelectedEntityById(page.id), Model.accountVar) }
+    .collectStatic(WorkOrdersPage) { WorkOrdersView(Model.workOrders) }

@@ -8,7 +8,6 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 import Components.*
-import Error.*
 import Message.*
 import Validator.*
 
@@ -18,7 +17,7 @@ object RegisterView extends View:
 
     def handler(either: Either[Throwable, Event]): Unit =
       either match
-        case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
+        case Left(fault) => errorBus.emit(s"Register failed: ${fault.getMessage}")
         case Right(event) =>
           event match
             case Registered(_, success, error) =>
