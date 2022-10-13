@@ -52,3 +52,12 @@ final case class WorkOrdersListed(userId: Int,
 object WorkOrdersListed:
   def success(userId: Int, workOrders: Array[WorkOrder]): WorkOrdersListed = WorkOrdersListed(userId, workOrders)
   def fail(userId: Int, error: String): WorkOrdersListed = WorkOrdersListed(userId, Array.empty[WorkOrder], false, error)
+
+final case class Fault(dateOf: Int = DateTime.currentDate,
+                       timeOf: Int = DateTime.currentTime,
+                       nanoOf: Int = DateTime.nano,
+                       cause: String) extends Event
+
+object Fault:
+  def apply(message: String): Fault = Fault(cause = message)
+  def apply(throwable: Throwable): Fault = Fault(cause = throwable.getMessage)
