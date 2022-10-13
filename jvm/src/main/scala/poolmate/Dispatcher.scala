@@ -38,4 +38,9 @@ final class Dispatcher(emailer: Emailer, service: Service):
         else WorkOrderSaved.fail(workOrder.number, s"License is invalid: $license")
 
       case listWorkOrders: ListWorkOrders =>
-        service.listWorkOrders(listWorkOrders)
+        val userId = listWorkOrders.userId
+        val license = listWorkOrders.license
+        if license.isLicense && service.isLicenseValid(license) then
+          if userId.isGreaterThanZero then service.listWorkOrders(listWorkOrders)
+          else WorkOrdersListed.fail(userId, "User id is invalid.")
+        else WorkOrdersListed.fail(userId, s"License is invalid: $license")
