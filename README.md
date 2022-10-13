@@ -41,6 +41,16 @@ Package Client
 2. npx snowpack build
 > See **build** directory.
 
+Client
+------
+* Now
+* Command => Event
+
+Server
+------
+* Now: /now
+* Api: /command
+
 Config
 ------
 >See these files:
