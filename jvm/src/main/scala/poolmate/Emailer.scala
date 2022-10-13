@@ -32,7 +32,9 @@ final class Emailer(conf: Config) extends LazyLogging:
       case Failure(error) => throw error
     }
 
-  private def sendEmail(recipients: Array[String], subject: String, message: String): Either[Throwable, String] =
+  private def sendEmail(recipients: Array[String],
+                        subject: String,
+                        message: String): Either[Throwable, String] =
     Using( smtpServer.createSession ) { session =>
       val email = Email.create()
         .from(sender)
