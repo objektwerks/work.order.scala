@@ -15,8 +15,8 @@ import scala.io.StdIn
 object Server extends Main with LazyLogging:
   val conf = ConfigFactory.load("server.conf")
   
+  val emailer = Emailer(conf)
   val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
-  val emailer = Emailer(conf, store)
   val service = Service(store)
   val dispatcher = Dispatcher(emailer, service)
   val router = Router(dispatcher)
