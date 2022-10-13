@@ -2,6 +2,26 @@ Work Order
 ----------
 >**WIP** This is refactoring of the [work.order](https://github.com/objektwerks/work.order) project using Scalajs and Scala 3.
 
+Roles
+-----
+>A role can invoke a set of actions.
+1. **homeowner** — add, select and edit *work orders*
+2. **service provider** — select and edit *work orders*
+3. **app** - has super powers :)
+
+Features [ Roles ]
+------------------
+>A feature maps to a set of roles.
+1. **register user** — [ homeowner, service provider ]
+2. **login user** — [ homeowner, service provider ]
+3. **add work order** — [ homeowner ]
+4. **edit work order** — [ homeowner, service provider ]
+5. **list work orders** - [ homeowner, service provider ]
+6. **edit user** — [ homeowner, service provider ]
+7. **registration email notification*** - [ app ]
+8. **new work order email notification** - [ app ]
+9. **work order (updated and closed) email notifications** - [ app ]
+
 Install
 -------
 1. brew install postgresql
