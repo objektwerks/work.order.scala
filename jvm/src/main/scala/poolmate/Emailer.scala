@@ -58,15 +58,13 @@ final class Emailer(conf: Config) extends LazyLogging:
       case Failure(error) => throw error
     }
 
-  private def sendEmail(register: Register): Either[Throwable, Registered] =
+  private def sendEmail(emailAddress: String): Either[Throwable, String] =
     Using( smtpServer.createSession ) { session =>
       session.open()
-
-      val messageId = session.sendMail(buildEmail(register.emailAddress))
-      logger.info("*** EmailSender sent message id: {}", messageId)
-      
-      Registered("pin") // TODO
+      val messageId = session.sendMail(buildEmail(emailAddress))
+      logger.info("*** Emailer sent message id: {}", messageId)
+      messageId
     }.toEither
 
-  def send(register: Register): Either[Throwable, Registered] =
-    retry[Either[Throwable, Registered]](1)(sendEmail(register))
+  def send(emailAddress: String): Either[Throwable, Registered] =
+    retry[Either[Throwable, Registered]](1)(sendEmail(emailAddress))
