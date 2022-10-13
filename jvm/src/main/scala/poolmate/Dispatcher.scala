@@ -10,7 +10,8 @@ final class Dispatcher(emailer: Emailer, service: Service):
         else Registered.fail("Register is invalid.")
       
       case login: Login =>
-        service.login(login)
+        if login.isValid then service.login(login)
+        else LoggedIn.fail("Login is invalid.")
       
       case saveUser: SaveUser =>
         service.saveUser(saveUser)
