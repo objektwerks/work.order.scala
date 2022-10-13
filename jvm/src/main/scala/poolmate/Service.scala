@@ -1,6 +1,8 @@
 package poolmate
 
 final class Service(store: Store):
+  def isLicenseValid(license: String): Boolean = store.isLicenseValid(license)
+  
   def register(register: Register): Registered = Registered.success(User.newPin)
 
   def login(login: Login): LoggedIn = LoggedIn.success(User.empty, Array.empty[User], Array.empty[WorkOrder])
