@@ -34,7 +34,7 @@ final case class WorkOrderAdded(number: Int,
 
 object WorkOrderAdded:
   def success(number: Int): WorkOrderAdded = WorkOrderAdded(number)
-  def fail(number: Int, error: String): WorkOrderAdded = WorkOrderAdded(number, false, error)
+  def fail(error: String): WorkOrderAdded = WorkOrderAdded(0, false, error)
 
 final case class WorkOrderSaved(number: Int,
                                 success: Boolean = true,

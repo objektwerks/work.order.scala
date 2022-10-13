@@ -19,13 +19,23 @@ final class Dispatcher(emailer: Emailer, service: Service):
         if license.isLicense && service.isLicenseValid(license) then
           if user.isValid then service.saveUser(saveUser)
           else UserSaved.fail(user.id, "User invalid.")
-        else UserSaved.fail(user.id, "License invalid: ${saveUser.user.license}")
+        else UserSaved.fail(user.id, s"License invalid: $license")
 
       case addWorkOrder: AddWorkOrder =>
-        service.addWorkOrder(addWorkOrder)
+        val workOrder = addWorkOrder.workOrder
+        val license = addWorkOrder.license
+        if license.isLicense && service.isLicenseValid(license) then
+          if workOrder.isValid then service.addWorkOrder(addWorkOrder)
+          else WorkOrderAdded.fail("Work order is invalid.")
+        else WorkOrderAdded.fail(s"License is invalid: $license")
       
       case saveWorkOrder: SaveWorkOrder =>
-        service.saveWorkOrder(saveWorkOrder)
-      
+        val workOrder = saveWorkOrder.workOrder
+        val license = saveWorkOrder.license
+        if license.isLicense && service.isLicenseValid(license) then
+          if workOrder.isValid then service.saveWorkOrder(saveWorkOrder)
+          else WorkOrderSaved.fail(workOrder.number, "Work order is invalid.")
+        else WorkOrderSaved.fail(workOrder.number, s"License is invalid: $license")
+
       case listWorkOrders: ListWorkOrders =>
         service.listWorkOrders(listWorkOrders)
