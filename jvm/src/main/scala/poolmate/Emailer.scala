@@ -3,12 +3,11 @@ package poolmate
 import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
 
-import javax.mail.Flags
 import jodd.mail.{Email, ImapServer, MailServer, SmtpServer}
 import jodd.mail.EmailFilter._
 
 import scala.annotation.tailrec
-import scala.concurrent.duration._
+import scala.concurrent.duration.*
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Using, Try}
 
@@ -35,17 +34,17 @@ final class Emailer(conf: Config) extends LazyLogging:
 
   private def sendEmail(recipients: Array[String], subject: String, message: String): Either[Throwable, String] =
     Using( smtpServer.createSession ) { session =>
-      session.open()
       val email = Email.create()
         .from(sender)
         .subject(subject)
         .htmlMessage(message, "UTF-8")
       recipients.foreach( recipient => email.to(recipient))
+      session.open()
       val messageId = session.sendMail(email)
       logger.info("*** Emailer sent message id: {}", messageId)
       messageId
     }.toEither
 
-  // recipients: string, subject: string, html: string
-  def send(recipients: Array[String], subject: String, message: String): Either[Throwable, String] =
-    retry[Either[Throwable, String]](1)(sendEmail(recipients, subject, message))
+  def send(recipients: Array[String],
+           subject: String,
+           message: String): Either[Throwable, String] = retry(1)(sendEmail(recipients, subject, message))
