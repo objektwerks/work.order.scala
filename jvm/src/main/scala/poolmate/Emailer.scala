@@ -51,10 +51,10 @@ final class Emailer(conf: Config) extends LazyLogging:
   }
 
   @tailrec
-  private def retry[T](n: Int)(fn: => T): T =
+  private def retry[T](attempts: Int)(fn: => T): T =
     Try { fn } match {
       case Success(result) => result
-      case _ if n >= 1 => retry(n - 1)(fn)
+      case _ if attempts >= 1 => retry(attempts - 1)(fn)
       case Failure(error) => throw error
     }
 
