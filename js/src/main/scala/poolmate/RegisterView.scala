@@ -15,7 +15,7 @@ object RegisterView extends View:
   def apply(): HtmlElement =
     val emailAddressErrorBus = new EventBus[String]
 
-    def handler(either: Either[Throwable, Event]): Unit =
+    def handler(either: Either[Fault, Event]): Unit =
       either match
         case Left(fault) => errorBus.emit(s"Register failed: ${fault.getMessage}")
         case Right(event) =>

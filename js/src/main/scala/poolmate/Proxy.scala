@@ -40,7 +40,7 @@ object Proxy:
     }
 
   def call(command: Command,
-           handler: (either: Either[Throwable, Event]) => Unit) =
+           handler: (either: Either[Fault, Event]) => Unit) =
     val event = post(command)
     handle(event, handler)
 
@@ -64,11 +64,11 @@ object Proxy:
     }
 
   private def handle(future: Future[Event],
-                     handler: (either: Either[Throwable, Event]) => Unit): Unit =
+                     handler: (either: Either[Fault, Event]) => Unit): Unit =
     future map { event =>
       handler(
         event match
-          case fault: Throwable =>
+          case fault: Fault =>
             log(s"Proxy:handle fault: $fault")
             Left(fault)
           case event: Event =>

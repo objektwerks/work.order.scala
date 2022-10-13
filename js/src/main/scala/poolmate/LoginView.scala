@@ -12,7 +12,7 @@ object LoginView extends View:
     val emailAddressErrorBus = new EventBus[String]
     val pinErrorBus = new EventBus[String]
 
-    def handler(either: Either[Throwable, Event]): Unit =
+    def handler(either: Either[Fault, Event]): Unit =
       either match
         case Left(fault) => errorBus.emit(s"Enter failed: ${fault.cause}")
         case Right(event) =>

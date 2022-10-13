@@ -9,7 +9,7 @@ import Validator.*
 
 object WorkOrdersView extends View:
   def apply(workOrdersVar: Var[Array[WorkOrder]]): HtmlElement =
-    def deactivateHandler(either: Either[Throwable, Event]): Unit =
+    def deactivateHandler(either: Either[Fault, Event]): Unit =
       either match
         case Left(fault) => errorBus.emit(s"Deactivate failed: ${fault.cause}")
         case Right(event) =>
