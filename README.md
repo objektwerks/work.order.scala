@@ -73,6 +73,38 @@ Logs
 2. test.jvm.log
 3. test.shared.log
 
+Mysql Schema
+------------
+1. work_order_db
+2. user
+3. work_order
+>See **ddl.sql** for details.
+
+Mysql Setup
+-----------
+>Built using Mysql 8.0.30
+1. sudo mysql -u root
+2. \. user.sql
+8. \. ddl.sql
+
+Mysql Connection Url
+--------------------
+* mysql://workorder:workorder@127.0.0.1:3306/work_order_db
+
+Mysql Update
+------------
+1. mysql -u workorder -p
+2. \. ddl.sql
+
+Mysql Log
+---------
+>Apple M1, macOS, Big Sur - /opt/homebrew/var/mysql/computername.local.err
+
+Mysql Connection Error
+----------------------
+>Nodejs occassionally produces this error with Mysql: connect ECONNREFUSED ::1:3306
+>The solution is varied and fundamentally unknown.
+
 Documentation
 -------------
 1. Cask - https://com-lihaoyi.github.io/cask/index.html
