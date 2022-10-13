@@ -6,22 +6,21 @@ import com.typesafe.config.Config
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
-import scala.concurrent.duration._
-
 import io.undertow.Undertow
 import io.undertow.server.handlers.BlockingHandler
+
+import scala.concurrent.duration.*
 
 final class EmbeddedServer(conf: Config) extends Main with LazyLogging:
   val _host = conf.getString("host")
   val _port = conf.getInt("port")
-  
+
+  val emailer = Emailer(conf)
   val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
-  val emailSender = EmailSender(conf, store)
   val service = Service(store)
-  val authorizer = Authorizer(service)
-  val validator = Validator()
-  val dispatcher = Dispatcher(authorizer, validator, service, emailSender)
-  val router = Router(dispatcher, store)
+  val dispatcher = Dispatcher(emailer, service)
+  val router = Router(dispatcher)
+
   override val allRoutes = Seq(router)
 
   Main.silenceJboss()    
