@@ -33,20 +33,19 @@ final class Emailer(conf: Config) extends LazyLogging:
       case Failure(error) => throw error
     }
 
-  private def sendEmail(recipients: (String, String), subject: String, message: String): Either[Throwable, String] =
+  private def sendEmail(recipients: Array[String], subject: String, message: String): Either[Throwable, String] =
     Using( smtpServer.createSession ) { session =>
       session.open()
       val email = Email.create()
         .from(sender)
-        .to(recipients._1)
-        .to(recipients._2)
         .subject(subject)
         .htmlMessage(message, "UTF-8")
+      recipients.foreach( recipient => email.to(recipient))
       val messageId = session.sendMail(email)
       logger.info("*** Emailer sent message id: {}", messageId)
       messageId
     }.toEither
 
   // recipients: string, subject: string, html: string
-  def send(recipients: (String, String), subject: String, message: String): Either[Throwable, String] =
+  def send(recipients: Array[String], subject: String, message: String): Either[Throwable, String] =
     retry[Either[Throwable, String]](1)(sendEmail(recipients, subject, message))
