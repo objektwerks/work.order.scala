@@ -17,8 +17,7 @@ object Store:
       .expireAfterWrite(expireAfter)
       .build[String, String]()
 
-final class Store(conf: Config,
-                  cache: Cache[String, String]) extends LazyLogging:
+final class Store(conf: Config, cache: Cache[String, String]) extends LazyLogging:
   private val url = conf.getString("db.url")
   private val user = conf.getString("db.user")
   private val password = conf.getString("db.password")
@@ -40,7 +39,7 @@ final class Store(conf: Config,
         true
       case None =>
         val optionalLicense = DB readOnly { implicit session =>
-          sql"select license from account where license = $license"
+          sql"select license from user where license = $license"
             .map(rs => rs.string("license"))
             .single()
         }
