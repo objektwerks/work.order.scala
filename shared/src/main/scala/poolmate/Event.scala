@@ -28,6 +28,14 @@ object UserSaved:
   def success(id: Int): UserSaved = UserSaved(id)
   def fail(id: Int, error: String): UserSaved = UserSaved(id, false, error)
 
+final case class WorkOrderAdded(number: Int,
+                                success: Boolean = true,
+                                error: String = "") extends Event
+
+object WorkOrderAdded:
+  def success(number: Int): WorkOrderAdded = WorkOrderAdded(number)
+  def fail(number: Int, error: String): WorkOrderAdded = WorkOrderAdded(number, false, error)
+
 final case class WorkOrderSaved(number: Int,
                                 success: Boolean = true,
                                 error: String = "") extends Event
