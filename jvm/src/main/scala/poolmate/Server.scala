@@ -16,11 +16,9 @@ object Server extends Main with LazyLogging:
   val conf = ConfigFactory.load("server.conf")
   
   val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
-  val emailSender = Emailer(conf, store)
+  val emailer = Emailer(conf, store)
   val service = Service(store)
-  val validator = Validator()
-  val dispatcher = Dispatcher(validator, service, emailSender)
-
+  val dispatcher = Dispatcher(emailer, service)
   val router = Router(dispatcher)
 
   override val allRoutes = Seq(router)
