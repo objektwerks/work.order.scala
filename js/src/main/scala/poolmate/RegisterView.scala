@@ -8,31 +8,33 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 import Components.*
-import Message.*
 import Validator.*
 
 object RegisterView extends View:
   def apply(): HtmlElement =
+    val roleVar = Var("")
+    val nameVar = Var("")
+    val emailAddressVar = Var("")
+    val streetAddressVar = Var("")
     val emailAddressErrorBus = new EventBus[String]
 
     def handler(either: Either[Fault, Event]): Unit =
       either match
-        case Left(fault) => errorBus.emit(s"Register failed: ${fault.getMessage}")
+        case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
         case Right(event) =>
           event match
             case Registered(_, success, error) =>
               clearErrors()
               log(s"Registered -> handler registered.")
               route(LoginPage)
-            case _ => log(s"Join -> handler failed: $event")
+            case _ => log(s"Register -> handler failed: $event")
       
     div(
       hdr("Register"),
-      info(joinMessage),
+      info(registerMessage),
       err(errorBus),
       lbl("Email Address"),
       email.amend {
-        value <-- emailAddressVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
         onKeyUp.mapToValue --> { emailAddress =>
           if emailAddress.isEmailAddress
@@ -42,11 +44,10 @@ object RegisterView extends View:
       },
       err(emailAddressErrorBus),
       cbar(
-        btn("Join").amend {
-          disabled <-- emailAddressVar.signal.map(email => !email.isEmailAddress)
+        btn("Register").amend {
           onClick --> { _ =>
-            log(s"Join button onClick -> email address: ${emailAddressVar.now()}")
-            val command = Join(emailAddressVar.now())
+            log(s"Register button onClick -> email address: ${emailAddressVar.now()}")
+            val command = Register(roleVar.now(), nameVar.now(), emailAddressVar.now(), streetAddressVar.now())
             call(command, handler)
           }
         },
