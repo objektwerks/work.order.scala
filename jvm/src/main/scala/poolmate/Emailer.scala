@@ -32,7 +32,7 @@ final class Emailer(conf: Config) extends LazyLogging:
       case Failure(error) => throw error
     }
 
-  private def sendEmail(recipients: Array[String],
+  private def sendEmail(recipients: List[String],
                         subject: String,
                         message: String): Either[Throwable, String] =
     Using( smtpServer.createSession ) { session =>
@@ -47,6 +47,6 @@ final class Emailer(conf: Config) extends LazyLogging:
       messageId
     }.toEither
 
-  def send(recipients: Array[String],
+  def send(recipients: List[String],
            subject: String,
            message: String): Either[Throwable, String] = retry(1)(sendEmail(recipients, subject, message))
