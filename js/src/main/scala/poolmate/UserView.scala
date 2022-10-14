@@ -22,37 +22,20 @@ object UserView extends View:
         hdr("User"),
         lbl("License"),
         rotxt.amend {
-          value <-- accountVar.signal.map(_.license)
+          value <-- userVar.signal.map(_.license)
         },
         lbl("Pin"),
         rotxt.amend {
-          value <-- accountVar.signal.map(_.pin)
-        },
-        lbl("Activated"),
-        rotxt.amend {
-          value <-- accountVar.signal.map(_.activated.toString)
-        },
-        lbl("Deactivated"),
-        rotxt.amend {
-          value <-- accountVar.signal.map(_.deactivated.toString)
+          value <-- userVar.signal.map(_.pin)
         },
         cbar(
-          btn("Deactivate").amend {
-            disabled <-- accountVar.signal.map { account => if account.isDeactivated then true else false }
+          btn("Save").amend {
             onClick --> { _ =>
-              log("Account -> Deactivate button onClick")
-              val command = Deactivate(accountVar.now().license)
+              log("User -> Save button onClick")
+              val command = SaveUser(userVar.now())
               call(command, deactivateHandler)
             }
-          },
-          btn("Reactivate").amend {
-            disabled <-- accountVar.signal.map { account => if account.isActivated then true else false }
-            onClick --> { _ =>
-              log("Account -> Reactivate button onClick")
-              val command = Reactivate(accountVar.now().license)
-              call(command, reactivateHandler)
-            }
-          }      
+          } 
         )
       )
     )
