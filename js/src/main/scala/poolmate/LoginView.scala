@@ -8,7 +8,9 @@ import Components.*
 import Validator.*
 
 object LoginView extends View:
-  def apply(emailAddressVar: Var[String], pinVar: Var[String]): HtmlElement =
+  def apply(): HtmlElement =
+    val emailAddressVar = Var("")
+    val pinVar = Var("")
     val emailAddressErrorBus = new EventBus[String]
     val pinErrorBus = new EventBus[String]
 
@@ -27,7 +29,6 @@ object LoginView extends View:
       hdr("Login"),
       lbl("Email Address"),
       email.amend {
-        value <-- emailAddressVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
         onKeyUp.mapToValue --> { emailAddress =>
           if emailAddress.isEmailAddress 
@@ -39,7 +40,6 @@ object LoginView extends View:
       info(pinMessage),
       lbl("Pin"),
       pin.amend {
-        value <-- pinVar
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> pinVar
         onKeyUp.mapToValue --> { pin =>
           if pin.isPin
@@ -49,10 +49,10 @@ object LoginView extends View:
       },
       err(pinErrorBus),
       cbar(
-        btn("Enter").amend {
+        btn("Login").amend {
           disabled <-- pinVar.signal.map( pin => !pin.isPin )
           onClick --> { _ =>
-            log(s"Enter button onClick -> pin: ${pinVar.now()}")
+            log(s"Login button onClick -> pin: ${pinVar.now()}")
             val command = Login(emailAddressVar.now(), pinVar.now())
             call(command, handler)
           }

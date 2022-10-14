@@ -7,8 +7,6 @@ import org.scalajs.dom.File
 final case class ImageFile(number: Int, file: File, filename: String, url: String)
 
 object Model:
-  val emailAddress = Var("")
-  val pin = Var("")
   val user = Var(User.empty)
   val serviceProviders = Var(Array.empty[User])
   val workOrders = Var(Array.empty[WorkOrder])

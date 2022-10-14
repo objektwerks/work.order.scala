@@ -32,7 +32,7 @@ object PageRouter:
 
   val splitter = SplitRender[Page, HtmlElement](router.$currentPage)
     .collectStatic(RootPage) { RootView() }
-    .collectStatic(LoginPage) { LoginView(Model.emailAddress, Model.pin) }
+    .collectStatic(LoginPage) { LoginView() }
     .collectStatic(AppPage) { AppView() }
     .collectStatic(UserPage) { UserView(Model.user) }
     .collectStatic(WorkOrdersPage) { WorkOrdersView(Model.workOrders) }
