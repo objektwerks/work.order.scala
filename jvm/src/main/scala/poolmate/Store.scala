@@ -87,3 +87,18 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
         .map(rs => rs.string("emailAddress"))
         .list()
     }
+
+  def getUserByEmailAddressPin(emailAddress: String, pin: String): Option[User] =
+    DB readOnly { implicit session =>
+      sql"select * from user where emailAddress = $emailAddress and pin = $pin"
+        .map(rs => User(
+          rs.int("id"),
+          rs.string("role"),
+          rs.string("name"),
+          rs.string("emailAddress"),
+          rs.string("streetAddress"),
+          rs.string("registered"),
+          rs.string("pin"),
+          rs.string("license")))
+        .single()
+    }
