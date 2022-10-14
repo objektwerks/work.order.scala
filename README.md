@@ -105,7 +105,8 @@ Mysql Setup
 >Built using Mysql 8.0.30
 1. sudo mysql -u root
 2. \. user.sql
-8. \. ddl.sql
+3. \. ddl.sql
+4. exit
 
 Mysql Connection Url
 --------------------
@@ -115,6 +116,7 @@ Mysql Update
 ------------
 1. mysql -u workorder -p
 2. \. ddl.sql
+3. exit
 
 Mysql Log
 ---------
