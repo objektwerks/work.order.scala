@@ -9,6 +9,16 @@ import Validator.*
 
 object UserView extends View:
   def apply(userVar: Var[User]): HtmlElement =
+    def handler(either: Either[Fault, Event]): Unit =
+      either match
+        case Left(fault) => errorBus.emit(s"Save user failed: ${fault.cause}")
+        case Right(event) =>
+          event match
+            case UserSaved(_, _, _) =>
+              clearErrors()
+              route(AppPage)
+            case _ => log(s"UserView -> handler failed: $event")
+
     div(
       bar(
         btn("App").amend {
@@ -33,7 +43,7 @@ object UserView extends View:
             onClick --> { _ =>
               log("User -> Save button onClick")
               val command = SaveUser(userVar.now())
-              call(command, deactivateHandler)
+              call(command, handler)
             }
           } 
         )
