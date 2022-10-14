@@ -52,7 +52,8 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
   def listWorkOrders(userId: Int): List[WorkOrder] =
     DB readOnly { implicit session =>
       sql"select * from work_order where homeownerId = $userId or serviceProviderId = $userId order by opened desc"
-        .map(rs => WorkOrder(rs.int("number"),
+        .map(rs => WorkOrder(
+          rs.int("number"),
           rs.int("homeownerId"),
           rs.int("serviceProviderId"),
           rs.string("title"),
@@ -62,5 +63,20 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
           rs.string("resolution"),
           rs.string("opened"),
           rs.string("closed")))
+        .list()
+    }
+
+  def listUsersByRole(role: String): List[User] =
+    DB readOnly { implicit session =>
+      sql"select * from user where role = $role order by name asc"
+        .map(rs => User(
+          rs.int("id"),
+          rs.string("role"),
+          rs.string("name"),
+          rs.string("emailAddress"),
+          rs.string("streetAddress"),
+          rs.string("registered"),
+          rs.string("pin"),
+          rs.string("license")))
         .list()
     }
