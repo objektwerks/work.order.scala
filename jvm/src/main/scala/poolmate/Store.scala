@@ -124,3 +124,13 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
       .update()
     }
     ()
+
+  def addUser(user: User): User =
+    val id = DB localTx { implicit session =>
+      sql"""
+        insert into user (role, name, emailAddress, streetAddress, registered, pin) 
+        values(${user.role}, ${user.name}, ${user.emailAddress}, ${user.streetAddress}, ${user.registered}, ${user.pin})
+      """
+      .update()
+    }
+    user.copy(id = id)
