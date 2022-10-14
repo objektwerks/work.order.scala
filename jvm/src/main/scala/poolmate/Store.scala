@@ -134,3 +134,13 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
       .update()
     }
     user.copy(id = id)
+
+  def saveUser(user: User): Unit =
+    DB localTx { implicit session =>
+      sql"""
+        update user set role = ${user.role}, name = ${user.name}, emailAddress = ${user.emailAddress}, streetAddress = ${user.streetAddress},
+        registered = ${user.registered}, pin = ${user.pin} where id = ${user.id}
+      """
+      .update()
+    }
+    ()    
