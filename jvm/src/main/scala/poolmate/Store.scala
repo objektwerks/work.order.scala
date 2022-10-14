@@ -80,3 +80,10 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
           rs.string("license")))
         .list()
     }
+
+  def listEmailAddressesByIds(homeownerId: Int, serviceProviderId: Int): List[String] =
+    DB readOnly { implicit session =>
+      sql"select emailAddress from user where id in ($homeownerId, $serviceProviderId)"
+        .map(rs => rs.string("emailAddress"))
+        .list()
+    }
