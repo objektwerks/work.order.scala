@@ -48,3 +48,19 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
           logger.debug(s"*** store cache put: $license")
           true
         else false
+
+  def listWorkOrders(userId: Int): List[WorkOrder] =
+    DB readOnly { implicit session =>
+      sql"select * from work_order where homeownerId = $userId or serviceProviderId = $userId order by opened desc"
+        .map(rs => WorkOrder(rs.int("number"),
+          rs.int("homeownerId"),
+          rs.int("serviceProviderId"),
+          rs.string("title"),
+          rs.string("issue"),
+          rs.string("streetAddress"),
+          rs.string("imageUrl"),
+          rs.string("resolution"),
+          rs.string("opened"),
+          rs.string("closed")))
+        .list()
+    }
