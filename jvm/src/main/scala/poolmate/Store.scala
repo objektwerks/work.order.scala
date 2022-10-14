@@ -105,10 +105,22 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
 
   def addWorkOrder(workOrder: WorkOrder): WorkOrder =
     val number = DB localTx { implicit session =>
-      sql"""insert into work_order(homeownerId, serviceProviderId, title, issue, streetAddress, imageUrl, resolution, opened, closed) 
+      sql"""
+        insert into work_order(homeownerId, serviceProviderId, title, issue, streetAddress, imageUrl, resolution, opened, closed) 
         values(${workOrder.homeownerId}, ${workOrder.serviceProviderId}, ${workOrder.title}, ${workOrder.issue}, ${workOrder.streetAddress},
         ${workOrder.imageUrl}, ${workOrder.resolution}, ${workOrder.opened}, ${workOrder.closed})
         """
       .update()
     }
     workOrder.copy(number = number)
+
+  def saveWorkOrder(workOrder: WorkOrder): Unit =
+    DB localTx { implicit session =>
+      sql"""
+        update work_order set homeownerId = ${workOrder.homeownerId}, serviceProviderId = ${workOrder.serviceProviderId},
+        title = ${workOrder.title}, issue = ${workOrder.issue}, streetAddress = ${workOrder.streetAddress}, imageUrl = ${workOrder.imageUrl},
+        resolution = ${workOrder.resolution}, opened = ${workOrder.opened}, closed = ${workOrder.closed} where number = ${workOrder.number}
+      """
+      .update()
+    }
+    ()
