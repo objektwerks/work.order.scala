@@ -156,8 +156,8 @@ export WORK_ORDER_DIR=$HOME/.workorder
 export WORK_ORDER_IMAGES_DIR=$WORK_ORDER_DIR/images
 export WORK_ORDER_LOGS_DIR=$WORK_ORDER_DIR/logs
 
->All variables are for production less: WORK_ORDER_SERVICE_PROVIDER_EMAIL and WORK_ORDER_HOME_OWNER_EMAIL, which are
->for the integration test.
+>All variables are for production less: WORK_ORDER_SERVICE_PROVIDER_EMAIL and WORK_ORDER_HOME_OWNER_EMAIL,
+>which are for the integration test.
 
 Resources
 ---------
