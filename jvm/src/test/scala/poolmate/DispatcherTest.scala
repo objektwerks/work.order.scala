@@ -14,7 +14,7 @@ import scala.sys.process.Process
 import Validator.*
 
 class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
-  Process("psql -d poolmate -f ddl.sql").run().exitValue() // TODO
+  Process("mysql -u root < ddl.sql").run().exitValue()
 
   val conf = ConfigFactory.load("test.server.conf")
 
