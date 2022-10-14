@@ -102,3 +102,13 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
           rs.string("license")))
         .single()
     }
+
+  def addWorkOrder(workOrder: WorkOrder): WorkOrder =
+    val number = DB localTx { implicit session =>
+      sql"""insert into work_order(homeownerId, serviceProviderId, title, issue, streetAddress, imageUrl, resolution, opened, closed) 
+        values(${workOrder.homeownerId}, ${workOrder.serviceProviderId}, ${workOrder.title}, ${workOrder.issue}, ${workOrder.streetAddress},
+        ${workOrder.imageUrl}, ${workOrder.resolution}, ${workOrder.opened}, ${workOrder.closed})
+        """
+      .update()
+    }
+    workOrder.copy(number = number)
