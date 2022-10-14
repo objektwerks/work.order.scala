@@ -4,7 +4,7 @@ lazy val caskVersion = "0.8.3"
 lazy val laminarVersion = "0.14.5"
 lazy val waypointVersion = "0.5.0"
 lazy val upickleVersion = "2.0.0"
-lazy val postgresqlVersion = "42.4.0"
+lazy val mysqlVersion = "8.0.30"
 lazy val scalaJavaTimeVersion = "2.4.0"
 lazy val scalaTestVersion = "3.2.14"
 
@@ -65,7 +65,7 @@ lazy val jvm = (project in file("jvm"))
         "com.lihaoyi" %% "cask" % caskVersion,
         "com.lihaoyi" %% "upickle" % upickleVersion,
         "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
-        "org.postgresql" % "postgresql" % postgresqlVersion,
+        "mysql" % "mysql-connector-java" % mysqlVersion,
         "io.github.cquiroz" %% "scala-java-time" % "2.3.0",
         "com.github.blemale" %% "scaffeine" % "5.2.0",
         "org.jodd" % "jodd-mail" % "6.0.5",

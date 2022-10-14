@@ -19,7 +19,7 @@ object UserView extends View:
         }      
       ),
       div(
-        hdr("Account"),
+        hdr("User"),
         lbl("License"),
         rotxt.amend {
           value <-- accountVar.signal.map(_.license)
