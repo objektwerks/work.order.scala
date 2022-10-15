@@ -3,15 +3,14 @@ package poolmate
 import com.typesafe.scalalogging.LazyLogging
 
 import scala.util.Try
-import fansi.ErrorMode.Throw
 
 final class Service(emailer: Emailer, store: Store) extends LazyLogging:
-  val subjectRegistration = "Work Order Registration"
-  val subjectNotification = "Work Order Notification"
+  private val subjectRegistration = "Work Order Registration"
+  private val subjectNotification = "Work Order Notification"
 
-  def log(method: String, message: String): Unit = logger.info(s"*** $method: $message")
+  private def log(method: String, message: String): Unit = logger.info(s"*** $method: $message")
 
-  def logError(method: String, message:  String): Unit = logger.error(s"*** $method error: $message")
+  private def logError(method: String, message:  String): Unit = logger.error(s"*** $method error: $message")
 
   def isLicenseValid(license: String): Boolean = store.isLicenseValid(license)
 
@@ -20,12 +19,15 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
       val pin = User.newPin
       var user = new User(0, register.role, register.name, register.emailAddress, register.streetAddress, "", pin, "")
       val html = s"<p>Your new 7-character pin is: <b>$pin</b> Use it to login. Print this email, keep it in a safe place and <b>delete it!</b></p>"
-      emailer.send(List(register.emailAddress), subjectRegistration, html)
-      user = store.addUser(user)
-      log("register", "succeeded for: ${register.emailAddress}")
-      Registered.success(pin)
+      if emailer.send(List(register.emailAddress), subjectRegistration, html).isDefined then
+        user = store.addUser(user)
+        log("register", s"succeeded for: ${register.emailAddress}")
+        Registered.success(pin)
+      else
+        logError("register", s"failed for: ${register.emailAddress}")
+        Registered.fail(s"Register failed for: ${register.emailAddress}")
     }.recover { case error =>
-      logError("register", s"for: ${register.emailAddress} because: ${error.getMessage()}")
+      logError("register", s"failed for: ${register.emailAddress} because: ${error.getMessage()}")
       Registered.fail(s"Register failed for: ${register.emailAddress}")
     }.get
 
