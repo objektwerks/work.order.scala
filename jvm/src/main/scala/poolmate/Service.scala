@@ -17,10 +17,10 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
 
   def register(register: Register): Registered =
     val pin = User.newPin
+    var user = new User(0, register.role, register.name, register.emailAddress, register.streetAddress, "", pin, "")
+    val html = "<p>Your new 7-character pin is: <b>${pin}</b> Use it to login. Print this email, keep it in a safe place and <b>delete it!</b></p>"
+    emailer.send(List(register.emailAddress), subjectRegistration, html)
     Try {
-      var user = new User(0, register.role, register.name, register.emailAddress, register.streetAddress, "", pin, "")
-      val html = "<p>Your new 7-character pin is: <b>${pin}</b> Use it to login. Print this email, keep it in a safe place and <b>delete it!</b></p>"
-      emailer.send(List(register.emailAddress), subjectRegistration, html)
       user = store.addUser(user)
       log("register", "succeeded for: ${register.emailAddress}")
       Registered.success(pin)
