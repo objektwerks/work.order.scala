@@ -11,14 +11,14 @@ object Registered:
   def fail(error: String): Registered = Registered("", false, error)
 
 final case class LoggedIn(user: User, 
-                          serviceProviders: Array[User], 
-                          workOrders: Array[WorkOrder], 
+                          serviceProviders: List[User], 
+                          workOrders: List[WorkOrder], 
                           success: Boolean = true, 
                           error: String = "") extends Event
 
 object LoggedIn:
-  def success(user: User, serviceProviders: Array[User], workOrders: Array[WorkOrder]): LoggedIn = LoggedIn(user, serviceProviders, workOrders)
-  def fail(error: String): LoggedIn = LoggedIn(User.empty, Array.empty[User], Array.empty[WorkOrder], false, error)
+  def success(user: User, serviceProviders: List[User], workOrders: List[WorkOrder]): LoggedIn = LoggedIn(user, serviceProviders, workOrders)
+  def fail(error: String): LoggedIn = LoggedIn(User.empty, List.empty[User], List.empty[WorkOrder], false, error)
 
 final case class UserSaved(id: Int, 
                            success: Boolean = true, 
@@ -45,13 +45,13 @@ object WorkOrderSaved:
   def fail(number: Int, error: String): WorkOrderSaved = WorkOrderSaved(number, false, error)
 
 final case class WorkOrdersListed(userId: Int, 
-                                  workOrders: Array[WorkOrder], 
+                                  workOrders: List[WorkOrder], 
                                   success: Boolean = true, 
                                   error: String = "") extends Event
 
 object WorkOrdersListed:
-  def success(userId: Int, workOrders: Array[WorkOrder]): WorkOrdersListed = WorkOrdersListed(userId, workOrders)
-  def fail(userId: Int, error: String): WorkOrdersListed = WorkOrdersListed(userId, Array.empty[WorkOrder], false, error)
+  def success(userId: Int, workOrders: List[WorkOrder]): WorkOrdersListed = WorkOrdersListed(userId, workOrders)
+  def fail(userId: Int, error: String): WorkOrdersListed = WorkOrdersListed(userId, List.empty[WorkOrder], false, error)
 
 final case class Fault(dateOf: Int = DateTime.currentDate,
                        timeOf: Int = DateTime.currentTime,

@@ -31,7 +31,17 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
       Registered.fail(s"Register failed for: ${register.emailAddress}")
     }.get
 
-  def login(login: Login): LoggedIn = LoggedIn.success(User.empty, Array.empty[User], Array.empty[WorkOrder])
+  def login(login: Login): LoggedIn =
+    Try {
+      val user = store.getUserByEmailAddressPin(login.emailAddress, login.pin)
+      val serviceProviders = store.listUsersByRole(Roles.serviceProvider)
+      val workOrders = store.listWorkOrders(user.get.id)
+      log("login", s"succeeded for: ${login.emailAddress}")
+      LoggedIn.success(user.get, serviceProviders, workOrders)
+    }.recover { case error =>
+      logError("login", s"failed error: ${error} for: ${login.emailAddress}")
+      LoggedIn.fail(s"Login failed for: ${login.emailAddress}")
+    }.get
 
   def saveUser(saveUser: SaveUser): UserSaved = UserSaved.success(saveUser.user.id)
 
@@ -39,4 +49,4 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
 
   def saveWorkOrder(saveWorkOrder: SaveWorkOrder): WorkOrderSaved = WorkOrderSaved.success(saveWorkOrder.workOrder.number)
 
-  def listWorkOrders(listWorkOrders: ListWorkOrders): WorkOrdersListed = WorkOrdersListed.success(listWorkOrders.userId, Array.empty[WorkOrder])
+  def listWorkOrders(listWorkOrders: ListWorkOrders): WorkOrdersListed = WorkOrdersListed.success(listWorkOrders.userId, List.empty[WorkOrder])
