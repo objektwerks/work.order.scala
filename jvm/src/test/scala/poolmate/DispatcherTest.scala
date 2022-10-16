@@ -3,8 +3,6 @@ package poolmate
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
-import java.util.concurrent.TimeUnit
-
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
@@ -22,7 +20,6 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
   val service = Service(emailer, store)
   val dispatcher = Dispatcher(service)
-  val router = Router(dispatcher)
 
   test("dispatcher") {
     // TODO
