@@ -10,7 +10,7 @@ import upickle.default.{read, write}
 
 import Serializer.given
 
-final class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
+final class Router(handler: Handler) extends Routes with LazyLogging:
   @cask.get("/now")
   def index() = Response(Instant.now.toString)
 
@@ -19,7 +19,7 @@ final class Router(dispatcher: Dispatcher) extends Routes with LazyLogging:
     val command = read[Command](request.text())
     logger.debug(s"*** Command: $command")
 
-    val event = dispatcher.dispatch(command)
+    val event = handler.dispatch(command)
     logger.debug(s"*** Event: $event")
     write[Event](event)
 

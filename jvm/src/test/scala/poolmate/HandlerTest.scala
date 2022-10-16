@@ -11,7 +11,7 @@ import scala.sys.process.Process
 
 import Validator.*
 
-class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
+class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
   Process("mysql -u root < ddl.sql").run().exitValue()
 
   val conf = ConfigFactory.load("test.server.conf")
@@ -19,20 +19,20 @@ class DispatcherTest extends AnyFunSuite with Matchers with LazyLogging:
   val emailer = Emailer(conf)
   val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
   val service = Service(emailer, store)
-  val dispatcher = Dispatcher(service)
+  val handler = Handler(service)
 
-  test("dispatcher") {
+  test("handler") {
     // TODO
   }
 
-  def testRegister(dispatcher: Dispatcher): Unit = ()
+  def testRegister(handler: Handler): Unit = ()
 
-  def testLogin(dispatcher: Dispatcher): Unit = ()
+  def testLogin(handler: Handler): Unit = ()
 
-  def testSaveUser(dispatcher: Dispatcher): Unit = ()
+  def testSaveUser(handler: Handler): Unit = ()
 
-  def testAddWorkOrder(dispatcher: Dispatcher): Unit = ()
+  def testAddWorkOrder(handler: Handler): Unit = ()
 
-  def testSaveWorkOrder(dispatcher: Dispatcher): Unit = ()
+  def testSaveWorkOrder(handler: Handler): Unit = ()
 
-  def testListWorkOrders(dispatcher: Dispatcher): Unit = ()
+  def testListWorkOrders(handler: Handler): Unit = ()
