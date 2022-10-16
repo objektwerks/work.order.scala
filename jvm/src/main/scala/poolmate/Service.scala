@@ -54,8 +54,11 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
       UserSaved.fail(saveUser.user.id, "Save user failed.")
     }.get
 
-  def addWorkOrder(addWorkOrder: AddWorkOrder): WorkOrderAdded = WorkOrderAdded.success(addWorkOrder.workOrder.number)
+  def addWorkOrder(addWorkOrder: AddWorkOrder): WorkOrderAdded =
+    WorkOrderAdded.success(addWorkOrder.workOrder.number)
 
-  def saveWorkOrder(saveWorkOrder: SaveWorkOrder): WorkOrderSaved = WorkOrderSaved.success(saveWorkOrder.workOrder.number)
+  def saveWorkOrder(saveWorkOrder: SaveWorkOrder): WorkOrderSaved =
+    WorkOrderSaved.success(saveWorkOrder.workOrder.number)
 
-  def listWorkOrders(listWorkOrders: ListWorkOrders): WorkOrdersListed = WorkOrdersListed.success(listWorkOrders.userId, List.empty[WorkOrder])
+  def listWorkOrders(listWorkOrders: ListWorkOrders): WorkOrdersListed =
+    WorkOrdersListed.success(listWorkOrders.userId, List.empty[WorkOrder])
