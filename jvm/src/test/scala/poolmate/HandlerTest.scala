@@ -22,17 +22,8 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
   val handler = Handler(service)
 
   test("handler") {
-    // TODO
+    val serviceProviderEmail = conf.getString("email.serviceProviderEmail")
+    val homeownerEmail = conf.getString("email.homeownerEmail")
+
+    
   }
-
-  def testRegister(handler: Handler): Unit = ()
-
-  def testLogin(handler: Handler): Unit = ()
-
-  def testSaveUser(handler: Handler): Unit = ()
-
-  def testAddWorkOrder(handler: Handler): Unit = ()
-
-  def testSaveWorkOrder(handler: Handler): Unit = ()
-
-  def testListWorkOrders(handler: Handler): Unit = ()
