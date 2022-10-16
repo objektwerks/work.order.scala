@@ -3,7 +3,7 @@ package poolmate
 import Validator.*
 
 final class Handler(service: Service):
-  def dispatch(command: Command): Event =
+  def handle(command: Command): Event =
     command match
       case register: Register =>
         if register.isValid then service.register(register)

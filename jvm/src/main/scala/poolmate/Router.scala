@@ -19,7 +19,7 @@ final class Router(handler: Handler) extends Routes with LazyLogging:
     val command = read[Command](request.text())
     logger.debug(s"*** Command: $command")
 
-    val event = handler.dispatch(command)
+    val event = handler.handle(command)
     logger.debug(s"*** Event: $event")
     write[Event](event)
 
