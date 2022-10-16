@@ -44,37 +44,29 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
     }.get
 
   def saveUser(saveUser: SaveUser): UserSaved =
+    val user = saveUser.user
     Try {
-      val user = saveUser.user
       store.saveUser(user)
       log("saveUser", s"succeeded for user id: ${user.id}")
       UserSaved.success(user.id)
     }.recover { error =>
-      logError("saveUser", s"failed error: ${error} for: ${saveUser}")
-      UserSaved.fail(saveUser.user.id, "Save user failed.")
+      logError("saveUser", s"failed error: ${error} for: ${user}")
+      UserSaved.fail(user.id, "Save user failed.")
     }.get
 
   def addWorkOrder(addWorkOrder: AddWorkOrder): WorkOrderAdded =
-    WorkOrderAdded.success(addWorkOrder.workOrder.number)
-    let number = 0
-    try {
-      number = await store.addWorkOrder(saveWorkOrder.workOrder)
-      if (number > 0) {
-        log('addWorkOrder', `succeeded for number: ${number}`)
-        added = WorkOrderSaved.success(number)
-        const html = `<p>A new work order, number <b>${number}</b>, has been opened.</p>`
-        store.listEmailAddressesByIds(saveWorkOrder.workOrder.homeownerId, saveWorkOrder.workOrder.serviceProviderId).then(emailAddresses => {
-          emailer.send(emailAddresses, subjectNotification, html)
-        })
-      } else {
-        log('addWorkOrder', `failed for: ${saveWorkOrder}`)
-        added = WorkOrderSaved.fail(number, 'Add work order failed.')
-      }
-    } catch(error) {
-      logError('addWorkOrder', `failed error: ${error} for: ${saveWorkOrder}`)
-      added = WorkOrderSaved.fail(number, 'Add work order failed.')
-    }
-    return added
+    var workOrder = addWorkOrder.workOrder
+    Try {
+      workOrder = store.addWorkOrder(workOrder)
+      log("addWorkOrder", s"succeeded for number: ${workOrder.number}")
+      val recipients = store.listEmailAddressesByIds(workOrder.homeownerId, workOrder.serviceProviderId)
+      val html = s"<p>A new work order, number <b>${workOrder.number}</b>, has been opened.</p>"
+      if emailer.send(recipients, subjectNotification, html).isSuccess then WorkOrderAdded.success(workOrder.number)
+      else WorkOrderAdded.fail("add work order failed")
+    }.recover { case error =>
+      logError("addWorkOrder", "failed error: ${error} for: ${saveWorkOrder}")
+      WorkOrderAdded.fail("Add work order failed.")
+    }.get
 
   def saveWorkOrder(saveWorkOrder: SaveWorkOrder): WorkOrderSaved =
     WorkOrderSaved.success(saveWorkOrder.workOrder.number)
