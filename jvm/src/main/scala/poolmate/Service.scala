@@ -43,7 +43,16 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
       LoggedIn.fail(s"Login failed for: ${login.emailAddress}")
     }.get
 
-  def saveUser(saveUser: SaveUser): UserSaved = UserSaved.success(saveUser.user.id)
+  def saveUser(saveUser: SaveUser): UserSaved =
+    Try {
+      val user = saveUser.user
+      store.saveUser(user)
+      log("saveUser", s"succeeded for user id: ${user.id}")
+      UserSaved.success(user.id)
+    }.recover { error =>
+      logError("saveUser", s"failed error: ${error} for: ${saveUser}")
+      UserSaved.fail(saveUser.user.id, "Save user failed.")
+    }.get
 
   def addWorkOrder(addWorkOrder: AddWorkOrder): WorkOrderAdded = WorkOrderAdded.success(addWorkOrder.workOrder.number)
 
