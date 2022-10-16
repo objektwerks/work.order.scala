@@ -24,6 +24,8 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
   val handler = Handler(service)
 
   test("handler") {
+    println("*** running integration test ...")
+
     val serviceProviderEmail = conf.getString("email.serviceProviderEmail")
     val homeownerEmail = conf.getString("email.homeownerEmail")
 
@@ -72,4 +74,8 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
     handler.handle(ListWorkOrders(homeownerLoggedIn.user.id, homeownerLoggedIn.user.license)) match
       case workOrdersListed: WorkOrdersListed => workOrdersListed.success shouldBe true; workOrdersListed.workOrders.size shouldBe 1
       case _ => fail()
+
+    println("*** sending emails ...")
+    Thread.sleep(5000)
+    println("*** integration test complete!")
   }
