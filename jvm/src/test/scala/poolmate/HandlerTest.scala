@@ -55,7 +55,7 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
 
     // work order save
     workOrder = workOrder.copy(number = number, resolution = "fixed", closed = Instant.now().toString())
-    handler.handle(SaveWorkOrder(workOrder, homeownerLoggedIn.user.license)) match
+    handler.handle(SaveWorkOrder(workOrder, serviceProviderLoggedIn.user.license)) match
       case workOrderSaved: WorkOrderSaved => workOrderSaved.success shouldBe true
       case _ => fail()
     
