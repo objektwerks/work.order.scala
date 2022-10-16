@@ -98,7 +98,7 @@ Mysql Schema
 1. work_order_db
 2. user
 3. work_order
->See **ddl.sql** for details.
+>See **user.sql** and **ddl.sql** for details.
 
 Mysql Setup
 -----------
