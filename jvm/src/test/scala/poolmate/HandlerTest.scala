@@ -39,13 +39,11 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
       case _ => fail()
 
     // login
-    val serviceProviderLogin = Login(serviceProviderEmail, serviceProviderPin)
-    val serviceProviderLoggedIn = handler.handle(serviceProviderLogin) match
+    val serviceProviderLoggedIn = handler.handle(Login(serviceProviderEmail, serviceProviderPin)) match
       case loggedIn: LoggedIn => loggedIn.success shouldBe true; loggedIn
       case _ => fail()
     
-    val homeownerLogin = Login(homeownerEmail, homeownerPin)
-    val homeownerLoggedIn = handler.handle(homeownerLogin) match
+    val homeownerLoggedIn = handler.handle(Login(homeownerEmail, homeownerPin)) match
       case loggedIn: LoggedIn => loggedIn.success shouldBe true; loggedIn
       case _ => fail()
 
