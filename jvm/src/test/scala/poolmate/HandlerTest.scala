@@ -19,7 +19,7 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
   val conf = ConfigFactory.load("test.server.conf")
 
   val emailer = Emailer(conf)
-  val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
+  val store = Store(conf, Store.cache(minSize = 2, maxSize = 3, expireAfter = 1.hour))
   val service = Service(emailer, store)
   val handler = Handler(service)
 
