@@ -56,6 +56,25 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
 
   def addWorkOrder(addWorkOrder: AddWorkOrder): WorkOrderAdded =
     WorkOrderAdded.success(addWorkOrder.workOrder.number)
+    let number = 0
+    try {
+      number = await store.addWorkOrder(saveWorkOrder.workOrder)
+      if (number > 0) {
+        log('addWorkOrder', `succeeded for number: ${number}`)
+        added = WorkOrderSaved.success(number)
+        const html = `<p>A new work order, number <b>${number}</b>, has been opened.</p>`
+        store.listEmailAddressesByIds(saveWorkOrder.workOrder.homeownerId, saveWorkOrder.workOrder.serviceProviderId).then(emailAddresses => {
+          emailer.send(emailAddresses, subjectNotification, html)
+        })
+      } else {
+        log('addWorkOrder', `failed for: ${saveWorkOrder}`)
+        added = WorkOrderSaved.fail(number, 'Add work order failed.')
+      }
+    } catch(error) {
+      logError('addWorkOrder', `failed error: ${error} for: ${saveWorkOrder}`)
+      added = WorkOrderSaved.fail(number, 'Add work order failed.')
+    }
+    return added
 
   def saveWorkOrder(saveWorkOrder: SaveWorkOrder): WorkOrderSaved =
     WorkOrderSaved.success(saveWorkOrder.workOrder.number)
