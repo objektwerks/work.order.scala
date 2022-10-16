@@ -84,4 +84,12 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
     }.get
   
   def listWorkOrders(listWorkOrders: ListWorkOrders): WorkOrdersListed =
-    WorkOrdersListed.success(listWorkOrders.userId, List.empty[WorkOrder])
+    val userId = listWorkOrders.userId
+    Try {
+      val workOrders = store.listWorkOrders(userId)
+      log("listWorkOrders", s"succeeded for user id: ${userId}")
+      WorkOrdersListed.success(userId, workOrders)
+    }.recover { case error =>
+      logError("listWorkOrders", s"failed error: ${error} for user id: ${userId}")
+      WorkOrdersListed.fail(userId, "List work orders failed.")
+    }.get
