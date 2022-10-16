@@ -69,7 +69,19 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
     }.get
 
   def saveWorkOrder(saveWorkOrder: SaveWorkOrder): WorkOrderSaved =
-    WorkOrderSaved.success(saveWorkOrder.workOrder.number)
-
+    val workOrder = saveWorkOrder.workOrder
+    Try {
+      store.saveWorkOrder(workOrder)
+      log("saveWorkOrder", s"succeeded for number: ${workOrder.number}")
+      val recipients = store.listEmailAddressesByIds(workOrder.homeownerId, workOrder.serviceProviderId)
+      val updatedOrClosed = if workOrder.closed.length == 0 then "updated" else "closed"
+      val html = s"<p>Open work order, number <b>${saveWorkOrder.workOrder.number}</b>, has been ${updatedOrClosed}.</p>"
+      if emailer.send(recipients, subjectNotification, html).isSuccess then WorkOrderSaved.success(workOrder.number)
+      else WorkOrderSaved.fail(workOrder.number, "Save work order failed")
+    }.recover { case error =>
+      logError("saveWorkOrder", "failed error: ${error} for: ${saveWorkOrder}")
+      WorkOrderSaved.fail(workOrder.number, "Save work order failed.")
+    }.get
+  
   def listWorkOrders(listWorkOrders: ListWorkOrders): WorkOrdersListed =
     WorkOrdersListed.success(listWorkOrders.userId, List.empty[WorkOrder])
