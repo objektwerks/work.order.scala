@@ -3,6 +3,8 @@ package poolmate
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.time.Instant
 
 import org.scalatest.funsuite.AnyFunSuite
@@ -17,6 +19,9 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
   Process("mysql -u root < ddl.sql").run().exitValue()
 
   val conf = ConfigFactory.load("test.server.conf")
+
+  Files.createDirectories(Paths.get(conf.getString("dir")))
+  Files.createDirectories(Paths.get(conf.getString("imagesDir")))
 
   val emailer = Emailer(conf)
   val store = Store(conf, Store.cache(minSize = 2, maxSize = 3, expireAfter = 1.hour))
