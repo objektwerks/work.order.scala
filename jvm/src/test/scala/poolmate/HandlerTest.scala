@@ -46,9 +46,23 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
       case _ => fail()
 
     // work order add
-    var workOrder = WorkOrder(0, homeownerLoggedIn.user.id, serviceProviderLoggedIn.user.id, "sprinkler", "345 stone st", "broken", "", "", DateTime.now, "")
+    var workOrder = WorkOrder(
+      number = 0,
+      homeownerId = homeownerLoggedIn.user.id,
+      serviceProviderId = serviceProviderLoggedIn.user.id,
+      title = "sprinkler",
+      issue = "broken",
+      streetAddress = "345 stone st",
+      imageUrl = "",
+      resolution = "",
+      opened = DateTime.now,
+      closed = "")
+    println(s"*** handler test add work order: ${workOrder}")
     val number = handler.handle(AddWorkOrder(workOrder, homeownerLoggedIn.user.license)) match
-      case workOrderAdded: WorkOrderAdded => workOrderAdded.success shouldBe true; workOrderAdded.number
+      case workOrderAdded: WorkOrderAdded =>
+        println(s"*** handler test work order added: ${workOrderAdded}")
+        workOrderAdded.success shouldBe true
+        workOrderAdded.number
       case _ => fail()
 
     // work order save

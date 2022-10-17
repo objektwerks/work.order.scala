@@ -11,7 +11,7 @@ object Validator:
   val registeredInvalid = "An registered date-time value must be 24 characters."
   val pinInvalid = "A pin must be exactly 7 numbers, characters and/or symbols."
   val licenseInvalid = "A license must be 36 characters."
-  val numberInvalid = "A number must be greater than 0."
+  val numberInvalid = "A number must be equal to or greater than 0."
   val titleInvalid = "A title must be at least 3 characters."
   val issueInvalid = "An issue must be at least 3 characters."
   val imageUrlInvalid = "An image url must start with /images/"
@@ -57,7 +57,7 @@ object Validator:
     def isValid: Boolean = workOrder.validate.isEmpty
     def validate: Array[String] =
       val errors = mutable.ArrayBuilder.make[String]
-      if workOrder.number.isNotGreaterThanZero then errors += numberInvalid
+      if !workOrder.number.isGreaterThanOrEqualZero then errors += numberInvalid
       if workOrder.homeownerId.isNotGreaterThanZero then errors += idInvalid
       if workOrder.serviceProviderId.isNotGreaterThanZero then errors += idInvalid
       if !workOrder.title.isTitle then errors += titleInvalid
