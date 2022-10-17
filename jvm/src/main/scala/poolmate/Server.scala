@@ -19,6 +19,7 @@ object Server extends Main with LazyLogging:
 
   Files.createDirectories(Paths.get(conf.getString("dir")))
   Files.createDirectories(Paths.get(conf.getString("imagesDir")))
+  Files.createDirectories(Paths.get(conf.getString("logsDir")))
 
   val emailer = Emailer(conf)
   val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
