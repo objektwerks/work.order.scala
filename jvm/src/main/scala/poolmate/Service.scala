@@ -57,7 +57,6 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
   def addWorkOrder(addWorkOrder: AddWorkOrder): WorkOrderAdded =
     Try {
       val workOrder = store.addWorkOrder(addWorkOrder.workOrder)
-      println(s"*** service add work order: ${workOrder}")
       log("addWorkOrder", s"succeeded for number: ${workOrder.number}")
       val recipients = store.listEmailAddressesByIds(workOrder.homeownerId, workOrder.serviceProviderId)
       val html = s"<p>A new work order, number <b>${workOrder.number}</b>, has been opened.</p>"
