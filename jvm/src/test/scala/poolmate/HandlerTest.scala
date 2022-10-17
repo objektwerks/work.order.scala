@@ -7,20 +7,17 @@ import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
 import scala.concurrent.duration.*
-import scala.util.Random
 
 import Validator.*
 
 class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
   val conf = ConfigFactory.load("test.server.conf")
-  
+
   val emailer = Emailer(conf)
   Store.dirs(conf)
   val store = Store(conf, Store.cache(minSize = 2, maxSize = 3, expireAfter = 1.hour))
   val service = Service(emailer, store)
   val handler = Handler(service)
-
-  def randomString: String = Random.alphanumeric.take(6).mkString
 
   test("handler") {
     println("*** running integration test ...")
@@ -29,12 +26,12 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
     val homeownerEmail = conf.getString("email.homeownerEmail")
 
     // register
-    val serviceProviderRegister = Register(Roles.serviceProvider, randomString + " service", serviceProviderEmail, randomString + " address")
+    val serviceProviderRegister = Register(Roles.serviceProvider, "lawncare service", serviceProviderEmail, "123 green rd")
     val serviceProviderPin = handler.handle(serviceProviderRegister) match
       case registered: Registered => registered.success shouldBe true; registered.pin
       case _ => fail()
 
-    val homeownerRegister = Register(Roles.homeowner, randomString + " homeowner", homeownerEmail, randomString + " address")
+    val homeownerRegister = Register(Roles.homeowner, "fred flintstone", homeownerEmail, "345 stone st")
     val homeownerPin = handler.handle(homeownerRegister) match
       case registered: Registered => registered.success shouldBe true; registered.pin
       case _ => fail()
@@ -53,21 +50,23 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
       number = 0,
       homeownerId = homeownerLoggedIn.user.id,
       serviceProviderId = serviceProviderLoggedIn.user.id,
-      title = randomString + " title",
-      issue = randomString + " issue",
-      streetAddress = randomString + " address",
+      title = "sprinkler",
+      issue = "broken",
+      streetAddress = "345 stone st",
       imageUrl = "",
       resolution = "",
       opened = DateTime.now,
       closed = "")
+    println(s"*** handler test add work order: ${workOrder}")
     val number = handler.handle(AddWorkOrder(workOrder, homeownerLoggedIn.user.license)) match
       case workOrderAdded: WorkOrderAdded =>
+        println(s"*** handler test work order added: ${workOrderAdded}")
         workOrderAdded.success shouldBe true
         workOrderAdded.number
       case _ => fail()
 
     // work order save
-    workOrder = workOrder.copy(number = number, resolution = randomString + " resolution", closed = DateTime.now)
+    workOrder = workOrder.copy(number = number, resolution = "fixed", closed = DateTime.now)
     handler.handle(SaveWorkOrder(workOrder, serviceProviderLoggedIn.user.license)) match
       case workOrderSaved: WorkOrderSaved => workOrderSaved.success shouldBe true
       case _ => fail()
