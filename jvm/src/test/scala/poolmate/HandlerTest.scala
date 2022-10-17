@@ -7,6 +7,7 @@ import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
 import scala.concurrent.duration.*
+import scala.util.Random
 
 import Validator.*
 
@@ -19,6 +20,8 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
   val service = Service(emailer, store)
   val handler = Handler(service)
 
+  def randomString: String = Random.alphanumeric.take(6).mkString
+
   test("handler") {
     println("*** running integration test ...")
 
@@ -26,12 +29,12 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
     val homeownerEmail = conf.getString("email.homeownerEmail")
 
     // register
-    val serviceProviderRegister = Register(Roles.serviceProvider, "lawncare service", serviceProviderEmail, "123 green rd")
+    val serviceProviderRegister = Register(Roles.serviceProvider, randomString + " service", serviceProviderEmail, randomString + " address")
     val serviceProviderPin = handler.handle(serviceProviderRegister) match
       case registered: Registered => registered.success shouldBe true; registered.pin
       case _ => fail()
 
-    val homeownerRegister = Register(Roles.homeowner, "fred flintstone", homeownerEmail, "345 stone st")
+    val homeownerRegister = Register(Roles.homeowner, randomString + " homeowner", homeownerEmail, randomString + " address")
     val homeownerPin = handler.handle(homeownerRegister) match
       case registered: Registered => registered.success shouldBe true; registered.pin
       case _ => fail()
@@ -50,9 +53,9 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
       number = 0,
       homeownerId = homeownerLoggedIn.user.id,
       serviceProviderId = serviceProviderLoggedIn.user.id,
-      title = "sprinkler",
-      issue = "broken",
-      streetAddress = "345 stone st",
+      title = randomString + " title",
+      issue = randomString + " issue",
+      streetAddress = randomString + " address",
       imageUrl = "",
       resolution = "",
       opened = DateTime.now,
@@ -66,7 +69,7 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
       case _ => fail()
 
     // work order save
-    workOrder = workOrder.copy(number = number, resolution = "fixed", closed = DateTime.now)
+    workOrder = workOrder.copy(number = number, resolution = randomString + " resolution", closed = DateTime.now)
     handler.handle(SaveWorkOrder(workOrder, serviceProviderLoggedIn.user.license)) match
       case workOrderSaved: WorkOrderSaved => workOrderSaved.success shouldBe true
       case _ => fail()
@@ -86,6 +89,6 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
       case _ => fail()
 
     println("*** sending emails ...")
-    Thread.sleep(5000)
+    Thread.sleep(6000)
     println("*** integration test complete!")
   }
