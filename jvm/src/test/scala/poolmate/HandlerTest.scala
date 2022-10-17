@@ -3,9 +3,6 @@ package poolmate
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
-import java.nio.file.Files
-import java.nio.file.Paths
-
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
@@ -16,11 +13,8 @@ import Validator.*
 class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
   val conf = ConfigFactory.load("test.server.conf")
 
-  Files.createDirectories(Paths.get(conf.getString("dir")))
-  Files.createDirectories(Paths.get(conf.getString("imagesDir")))
-  Files.createDirectories(Paths.get(conf.getString("logsDir")))
-
   val emailer = Emailer(conf)
+  Store.dirs(conf)
   val store = Store(conf, Store.cache(minSize = 2, maxSize = 3, expireAfter = 1.hour))
   val service = Service(emailer, store)
   val handler = Handler(service)
