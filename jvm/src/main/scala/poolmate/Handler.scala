@@ -24,6 +24,7 @@ final class Handler(service: Service):
       case addWorkOrder: AddWorkOrder =>
         val workOrder = addWorkOrder.workOrder
         val license = addWorkOrder.license
+        println(s"*** handler add work order: ${addWorkOrder}")
         if license.isLicense && service.isLicenseValid(license) then
           if workOrder.isValid then service.addWorkOrder(addWorkOrder)
           else WorkOrderAdded.fail("Work order invalid.")

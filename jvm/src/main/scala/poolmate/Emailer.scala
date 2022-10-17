@@ -19,7 +19,6 @@ final class Emailer(conf: Config) extends LazyLogging:
 
   private val smtpServer: SmtpServer = MailServer.create()
     .host(host)
-    .port(port)
     .ssl(true)
     .auth(sender, password)
     .buildSmtpMailServer()
