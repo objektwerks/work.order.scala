@@ -16,22 +16,23 @@ object Validator:
   val issueInvalid = "An issue must be at least 3 characters."
   val imageUrlInvalid = "An image url must start with /images/"
   val resolutionInvalid = "A resolution must be at least 2 characters."
-  val openedInvalid = "An opened date-time value must be 24 characters."
+  val openedInvalid = "An opened date-time value must be 27 characters."
+  val closedInvalid = "An closed date-time value must be 27 characters."
 
   extension (value: String)
     def isName: Boolean = value.length >= 2 && value.length <= 64
     def isRole: Boolean = value == Roles.homeowner || value == Roles.serviceProvider
     def isEmailAddress: Boolean = value.length >= 3 && value.length <= 128 && value.contains("@")
     def isStreetAddress: Boolean = value.length >= 6 && value.length <= 128
-    def isRegistered: Boolean = value.length == 24
+    def isRegistered: Boolean = value.length == 27
     def isPin: Boolean = value.length == 7
     def isLicense: Boolean = value.length == 36
     def isTitle: Boolean = value.length >= 3 && value.length <= 64
     def isIssue: Boolean = value.length >= 3 && value.length <= 255
     def isResolution: Boolean = value.length >= 2 && value.length <= 255
     def isImageUrl: Boolean = value.startsWith("/images/")
-    def isOpened: Boolean = value.length == 24
-    def isClosed: Boolean = value.length == 24
+    def isOpened: Boolean = value.length == 27
+    def isClosed: Boolean = value.length == 27
 
   extension (value: Int)
     def isZero: Boolean = value == 0
@@ -57,15 +58,16 @@ object Validator:
     def isValid: Boolean = workOrder.validate.isEmpty
     def validate: Array[String] =
       val errors = mutable.ArrayBuilder.make[String]
-      if !workOrder.number.isGreaterThanOrEqualZero then errors += numberInvalid
+      // if workOrder.number.isGreaterThanZero then errors += numberInvalid
       if workOrder.homeownerId.isNotGreaterThanZero then errors += idInvalid
       if workOrder.serviceProviderId.isNotGreaterThanZero then errors += idInvalid
       if !workOrder.title.isTitle then errors += titleInvalid
       if !workOrder.issue.isIssue then errors += issueInvalid
       if !workOrder.streetAddress.isStreetAddress then errors += streetAddressInvalid
-      if !workOrder.imageUrl.isImageUrl then errors += imageUrlInvalid
-      if !workOrder.resolution.isResolution then errors += resolutionInvalid
+      // if !workOrder.imageUrl.isImageUrl then errors += imageUrlInvalid
+      // if !workOrder.resolution.isResolution then errors += resolutionInvalid
       if !workOrder.opened.isOpened then errors += openedInvalid
+      // if !workOrder.closed.isClosed then errors += closedInvalid
       errors.result()
 
   extension (register: Register)
