@@ -13,7 +13,7 @@ import Validator.*
 
 class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
   val conf = ConfigFactory.load("test.server.conf")
-
+  
   val emailer = Emailer(conf)
   Store.dirs(conf)
   val store = Store(conf, Store.cache(minSize = 2, maxSize = 3, expireAfter = 1.hour))
