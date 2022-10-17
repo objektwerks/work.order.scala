@@ -124,7 +124,7 @@ Mysql Log
 
 Date Time
 ---------
->ISO standard: YYYY-MM-DDTHH:mm:ss.sssZ
+>ISO standard: YYYY-MM-DDTHH:mm:ss.sssZ ( 2022-04-15T11:07:36.639Z )
 
 Photos
 ------

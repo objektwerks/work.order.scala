@@ -1,6 +1,7 @@
 package poolmate
 
 import java.time.*
+import java.time.format.DateTimeFormatter
 
 object DateTime:
   var zoneId = ZoneId.of("UTC", ZoneId.SHORT_IDS)
@@ -9,7 +10,6 @@ object DateTime:
   val yearFormatter = format.DateTimeFormatter.ofPattern("yyyy")
   val dateFormatter = format.DateTimeFormatter.ofPattern("yyyy-MM-dd")
   val timeFormatter = format.DateTimeFormatter.ofPattern("HH:mm")
-  val isoFormatter = format.DateTimeFormatter.ofPattern("YYYY-MM-DDTHH:mm:ss.sssZ")
 
   def currentYear: Int = LocalDate.now(zoneId).format(yearFormatter).toInt
 
@@ -61,6 +61,6 @@ object DateTime:
 
     LocalTime.of(hh.toInt, mm.toInt).format(timeFormatter)
 
-  def now: String = isoFormatter.format(Instant.now())
+  def now: String = ZonedDateTime.now( ZoneOffset.UTC ).format( DateTimeFormatter.ISO_INSTANT )
 
   def nano: Int = Instant.now().getNano
