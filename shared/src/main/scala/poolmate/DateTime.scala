@@ -9,6 +9,7 @@ object DateTime:
   val yearFormatter = format.DateTimeFormatter.ofPattern("yyyy")
   val dateFormatter = format.DateTimeFormatter.ofPattern("yyyy-MM-dd")
   val timeFormatter = format.DateTimeFormatter.ofPattern("HH:mm")
+  val isoFormatter = format.DateTimeFormatter.ofPattern("YYYY-MM-DDTHH:mm:ss.sssZ")
 
   def currentYear: Int = LocalDate.now(zoneId).format(yearFormatter).toInt
 
@@ -59,5 +60,7 @@ object DateTime:
       mm = localTimeAsString.substring(2, 4)
 
     LocalTime.of(hh.toInt, mm.toInt).format(timeFormatter)
+
+  def now: String = isoFormatter.format(Instant.now())
 
   def nano: Int = Instant.now().getNano

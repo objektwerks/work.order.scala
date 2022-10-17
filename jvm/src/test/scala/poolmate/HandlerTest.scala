@@ -5,19 +5,15 @@ import com.typesafe.scalalogging.LazyLogging
 
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.time.Instant
 
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
 import scala.concurrent.duration.*
-import scala.sys.process.Process
 
 import Validator.*
 
 class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
-  Process("mysql -u root < ddl.sql").run().exitValue()
-
   val conf = ConfigFactory.load("test.server.conf")
 
   Files.createDirectories(Paths.get(conf.getString("dir")))
@@ -55,13 +51,13 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
       case _ => fail()
 
     // work order add
-    var workOrder = WorkOrder(0, homeownerLoggedIn.user.id, serviceProviderLoggedIn.user.id, "sprinkler", "345 stone st", "broken", "", "", Instant.now().toString(), "")
+    var workOrder = WorkOrder(0, homeownerLoggedIn.user.id, serviceProviderLoggedIn.user.id, "sprinkler", "345 stone st", "broken", "", "", DateTime.now, "")
     val number = handler.handle(AddWorkOrder(workOrder, homeownerLoggedIn.user.license)) match
       case workOrderAdded: WorkOrderAdded => workOrderAdded.success shouldBe true; workOrderAdded.number
       case _ => fail()
 
     // work order save
-    workOrder = workOrder.copy(number = number, resolution = "fixed", closed = Instant.now().toString())
+    workOrder = workOrder.copy(number = number, resolution = "fixed", closed = DateTime.now)
     handler.handle(SaveWorkOrder(workOrder, serviceProviderLoggedIn.user.license)) match
       case workOrderSaved: WorkOrderSaved => workOrderSaved.success shouldBe true
       case _ => fail()

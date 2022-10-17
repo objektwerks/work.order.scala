@@ -17,7 +17,7 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
   def register(register: Register): Registered =
     Try {
       val pin = User.newPin
-      var user = new User(0, register.role, register.name, register.emailAddress, register.streetAddress, "", pin, "")
+      var user = User(0, register.role, register.name, register.emailAddress, register.streetAddress, DateTime.now, pin, "")
       val html = s"<p>Your new 7-character pin is: <b>$pin</b> Use it to login. Print this email, keep it in a safe place and <b>delete it!</b></p>"
       if emailer.send(List(register.emailAddress), subjectRegistration, html).isSuccess then
         user = store.addUser(user)
