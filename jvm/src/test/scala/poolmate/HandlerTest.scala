@@ -18,6 +18,7 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
 
   Files.createDirectories(Paths.get(conf.getString("dir")))
   Files.createDirectories(Paths.get(conf.getString("imagesDir")))
+  Files.createDirectories(Paths.get(conf.getString("logsDir")))
 
   val emailer = Emailer(conf)
   val store = Store(conf, Store.cache(minSize = 2, maxSize = 3, expireAfter = 1.hour))
