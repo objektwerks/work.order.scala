@@ -7,8 +7,6 @@ import com.typesafe.scalalogging.LazyLogging
 import io.undertow.Undertow
 import io.undertow.server.handlers.BlockingHandler
 
-import java.nio.file.Files
-import java.nio.file.Paths
 import java.util.concurrent.TimeUnit
 
 import scala.concurrent.duration.*
@@ -17,11 +15,8 @@ import scala.io.StdIn
 object Server extends Main with LazyLogging:
   val conf = ConfigFactory.load("server.conf")
 
-  Files.createDirectories(Paths.get(conf.getString("dir")))
-  Files.createDirectories(Paths.get(conf.getString("imagesDir")))
-  Files.createDirectories(Paths.get(conf.getString("logsDir")))
-
   val emailer = Emailer(conf)
+  Store.dirs(conf)
   val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
   val service = Service(emailer, store)
   val handler = Handler(service)

@@ -4,6 +4,9 @@ import com.github.blemale.scaffeine.{Cache, Scaffeine}
 import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
 
+import java.nio.file.Files
+import java.nio.file.Paths
+
 import scalikejdbc.*
 import scala.concurrent.duration.FiniteDuration
 
@@ -16,6 +19,11 @@ object Store:
       .maximumSize(maxSize)
       .expireAfterWrite(expireAfter)
       .build[String, String]()
+
+  def dirs(conf: Config): Unit =
+    Files.createDirectories(Paths.get(conf.getString("dir")))
+    Files.createDirectories(Paths.get(conf.getString("imagesDir")))
+    Files.createDirectories(Paths.get(conf.getString("logsDir")))
 
 final class Store(conf: Config, cache: Cache[String, String]) extends LazyLogging:
   private val url = conf.getString("db.url")
