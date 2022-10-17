@@ -13,7 +13,6 @@ import scala.util.{Failure, Success, Using, Try}
 
 final class Emailer(conf: Config) extends LazyLogging:
   private val host = conf.getString("email.host")
-  private val port = conf.getInt("email.port")
   private val sender = conf.getString("email.sender")
   private val password = conf.getString("email.password")
 
