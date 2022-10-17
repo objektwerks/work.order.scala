@@ -37,10 +37,11 @@ Build
 
 Test
 ----
+>Failed to successfully use scala.sys.process.Process to run mysql script.
 1. 1. mysql -u workorder -p
 2. \. ddl.sql
 3. exit
-4. sbt clean test fastLinkJS
+4. sbt clean test
 
 Dev
 ---
