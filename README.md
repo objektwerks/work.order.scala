@@ -37,7 +37,10 @@ Build
 
 Test
 ----
-1. sbt clean test fastLinkJS
+1. 1. mysql -u workorder -p
+2. \. ddl.sql
+3. exit
+4. sbt clean test fastLinkJS
 
 Dev
 ---
