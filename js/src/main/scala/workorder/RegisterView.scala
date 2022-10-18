@@ -23,7 +23,7 @@ object RegisterView extends View:
         case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
         case Right(event) =>
           event match
-            case Registered(_, success, error) =>
+            case Registered(_, _, _) =>
               clearErrors()
               log(s"Registered -> handler registered.")
               route(LoginPage)
