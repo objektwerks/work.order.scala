@@ -11,7 +11,7 @@ final class Handler(service: Service):
     if login.isValid then service.login(login)
     else LoggedIn.fail("Login invalid.")
   
-  case saveUser: SaveUser =>
+  def saveUser(saveUser: SaveUser): UserSaved =
     val user = saveUser.user
     val license = saveUser.user.license
     if license.isLicense && service.isLicenseValid(license) then
