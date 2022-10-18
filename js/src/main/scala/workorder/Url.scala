@@ -9,4 +9,4 @@ object Url:
   var workOrderAdd = ""
   var workOrderSave = ""
   var workOrdersList = ""
-  var command: String = ""
+  var command = ""
