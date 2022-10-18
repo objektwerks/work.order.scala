@@ -57,23 +57,61 @@ Features [ Roles ]
 >A feature maps to a set of roles.
 1. **register user** — [ homeowner, service provider ]
 2. **login user** — [ homeowner, service provider ]
-3. **add work order** — [ homeowner ]
-4. **edit work order** — [ homeowner, service provider ]
-5. **list work orders** - [ homeowner, service provider ]
-6. **edit user** — [ homeowner, service provider ]
+3. **edit user** — [ homeowner, service provider ]
+4. **add work order** — [ homeowner ]
+5. **edit work order** — [ homeowner, service provider ]
+6. **list work orders** - [ homeowner, service provider ]
 7. **registration email notification*** - [ app ]
 8. **new work order email notification** - [ app ]
 9. **work order (updated and closed) email notifications** - [ app ]
 
-Client
-------
-* Now
-* Command => Event
+Forms
+-----
+1. **register** — role, name, email address, street address
+2. **login**— email address, pin
+3. **user** - role, name, email address, street address, registered
+4. **work order** — number, homeowner, service provider, issue, street address, image url, resolution, opened, closed
 
-Server
+Routes
 ------
-* Now: /now
-* Api: /command
+1. post - /register
+2. post - /login
+3. post - /users/save
+4. post - /workorders/add
+5. post - /workorders/save
+6. post  - /workorders
+
+Sequences
+---------
+1. **client** --- register --> server --- registered ---> client --- email ---> homeowner or service provider
+2. **client** --- login --> server --- logged in --> client
+3. **client** --- save user --> server --- user saved --> client
+4. **client** --- (add) save work order --> server --- work order saved --> client --- email ---> homeowner and service provider
+5. **client** --- save work order --> server --- work order saved --> client --- email ---> homeowner and service provider
+6. **client** --- list work orders --> server --- work orders listed --> client
+
+Registration
+------------
+>A prospective user must register with a/an:
+1. role
+2. name
+3. email address
+4. street address
+>If the email address is valid, the new user will receive a ***pin*** via a **Work Order Registration** email.
+
+Authentication
+--------------
+>A user must login with a/an:
+1. email address
+2. pin
+
+Authorization
+-------------
+>The following routes are authorized by a user's **license**:
+1. /users/save
+2. /workorders/add
+3. /workorders/save
+4. /workorders
 
 Config
 ------
