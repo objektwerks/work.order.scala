@@ -18,6 +18,12 @@ final class Router(handler: Handler) extends Routes with LazyLogging:
   def register(request: Request) =
     val register = read[Register](request.text())
     val registered = handler.register(register)
-    write[Event](registered)
+    write[Registered](registered)
+
+  @cask.post("/login")
+  def login(request: Request) =
+    val login = read[Login](request.text())
+    val loggedIn = handler.login(login)
+    write[LoggedIn](loggedIn)
 
   initialize()
