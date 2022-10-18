@@ -14,13 +14,10 @@ final class Router(handler: Handler) extends Routes with LazyLogging:
   @cask.get("/now")
   def index() = Response(Instant.now.toString)
 
-  @cask.post("/command")
-  def command(request: Request) =
-    val command = read[Command](request.text())
-    logger.debug(s"*** Command: $command")
-
-    val event = handler.handle(command)
-    logger.debug(s"*** Event: $event")
-    write[Event](event)
+  @cask.post("/register")
+  def register(request: Request) =
+    val register = read[Register](request.text())
+    val registered = handler.register(register)
+    write[Event](registered)
 
   initialize()
