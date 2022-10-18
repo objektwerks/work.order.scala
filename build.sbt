@@ -59,7 +59,7 @@ lazy val jvm = (project in file("jvm"))
   .enablePlugins(JavaServerAppPackaging)
   .settings(common)
   .settings(
-    reStart / mainClass := Some("poolmate.Server"),
+    reStart / mainClass := Some("workorder.Server"),
     libraryDependencies ++= {
       Seq(
         "com.lihaoyi" %% "cask" % caskVersion,

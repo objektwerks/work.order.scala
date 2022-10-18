@@ -130,7 +130,7 @@ Cache
 
 Cors Handler
 ------------
-* See poolmate.CorsHandler and poolmate.Server
+* See workorder.CorsHandler and workorder.Server
 * Also see https://github.com/Download/undertow-cors-filter
 
 Logs
@@ -184,6 +184,7 @@ Photos
 Environment
 -----------
 >The following environment variables ***must*** be defined:
+
 export WORK_ORDER_DATABASE_URL="mysql://workorder:workorder@127.0.0.1:3306/work_order_db"
 export WORK_ORDER_DATABASE_USER="workorder"
 export WORK_ORDER_DATABASE_PASSWORD="workorder"
