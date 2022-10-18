@@ -33,7 +33,7 @@ object Proxy:
   def now: Future[String] =
     ( 
       for
-        response <- dom.fetch(Url.now)
+        response <- dom.fetch(Urls.now)
         text     <- response.text()
       yield text
     ).recover {
@@ -51,7 +51,7 @@ object Proxy:
     log(s"Proxy:post request: ${params.body}")
     (
       for
-        response <- dom.fetch(Url.command, params)
+        response <- dom.fetch(Urls.command, params)
         text     <- response.text()
       yield
         log(s"Proxy:post response: $text")
