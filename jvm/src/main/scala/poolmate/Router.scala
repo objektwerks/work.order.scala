@@ -26,4 +26,10 @@ final class Router(handler: Handler) extends Routes with LazyLogging:
     val loggedIn = handler.login(login)
     write[LoggedIn](loggedIn)
 
+  @cask.post("/user/save")
+  def saveUser(request: Request) =
+    val saveUser = read[SaveUser](request.text())
+    val userSaved = handler.saveUser(saveUser)
+    write[UserSaved](userSaved)
+
   initialize()
