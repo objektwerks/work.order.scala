@@ -12,7 +12,7 @@ import Serializer.given
 
 final class Router(handler: Handler) extends Routes with LazyLogging:
   @cask.get("/now")
-  def index() = Response(Instant.now.toString)
+  def now() = Response(Instant.now.toString)
 
   @cask.post("/register")
   def register(request: Request) =
