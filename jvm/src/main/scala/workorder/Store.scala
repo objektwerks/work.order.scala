@@ -42,17 +42,6 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
 
   ConnectionPool.singleton(url, user, password, settings)
 
-  def ddl(file: String): Unit =
-    val statements = Using( Source.fromFile(file, Codec.UTF8.name) ) { source =>
-      source.mkString.split(";").map(_.trim)
-    }.get
-    statements.foreach { statement =>
-      DB localTx { implicit session =>
-        println(s"$statement")
-        sql"$statement".execute()
-      }
-    }
-
   def isLicenseValid(license: String): Boolean =
     cache.getIfPresent(license) match
       case Some(_) =>
