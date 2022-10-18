@@ -5,7 +5,7 @@ Work Order
 
 Todo
 ----
-1. Forms
+1. Views
 
 Install
 -------
