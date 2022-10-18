@@ -10,12 +10,13 @@ import org.scalajs.dom.console.log
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
+import scala.language.postfixOps
 import scala.scalajs.js
 import scala.scalajs.js.Thenable.Implicits.*
 
-import Serializer.given
-
 import upickle.default.*
+
+import Serializer.given
 
 object Proxy:
   private val hdrs = new Headers {
