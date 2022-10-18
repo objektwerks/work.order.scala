@@ -7,7 +7,7 @@ final class Handler(service: Service):
     if register.isValid then service.register(register)
     else Registered.fail("Register invalid.")
   
-  case login: Login =>
+  def login(login: Login): LoggedIn =
     if login.isValid then service.login(login)
     else LoggedIn.fail("Login invalid.")
   
