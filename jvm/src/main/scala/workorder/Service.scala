@@ -27,7 +27,7 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
         logError("register", s"failed for: ${register.emailAddress}")
         Registered.fail(s"Register failed for: ${register.emailAddress}")
     }.recover { case error =>
-      logError("register", s"failed for: ${register.emailAddress} because: ${error.getMessage()}")
+      logError("register", s"failed for: ${register.emailAddress} because: ${error.getMessage}")
       Registered.fail(s"Register failed for: ${register.emailAddress}")
     }.get
 
@@ -39,7 +39,7 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
       log("login", s"succeeded for: ${login.emailAddress}")
       LoggedIn.success(user.get, serviceProviders, workOrders)
     }.recover { case error =>
-      logError("login", s"failed error: ${error} for: ${login.emailAddress}")
+      logError("login", s"failed error: $error for: ${login.emailAddress}")
       LoggedIn.fail(s"Login failed for: ${login.emailAddress}")
     }.get
 
@@ -50,7 +50,7 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
       log("saveUser", s"succeeded for user id: ${user.id}")
       UserSaved.success(user.id)
     }.recover { error =>
-      logError("saveUser", s"failed error: ${error} for: ${user}")
+      logError("saveUser", s"failed error: $error for: $user")
       UserSaved.fail(user.id, "Save user failed.")
     }.get
 
@@ -62,7 +62,7 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
       val html = s"<p>A new work order, number <b>${workOrder.number}</b>, has been opened.</p>"
       if emailer.send(recipients, subjectNotification, html).isSuccess then WorkOrderAdded.success(workOrder.number)
       else WorkOrderAdded.fail("add work order failed")
-    }.recover { case error =>
+    }.recover { case _ =>
       logError("addWorkOrder", "failed error: ${error} for: ${saveWorkOrder}")
       WorkOrderAdded.fail("Add work order failed.")
     }.get
@@ -73,11 +73,11 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
       store.saveWorkOrder(workOrder)
       log("saveWorkOrder", s"succeeded for number: ${workOrder.number}")
       val recipients = store.listEmailAddressesByIds(workOrder.homeownerId, workOrder.serviceProviderId)
-      val updatedOrClosed = if workOrder.closed.length == 0 then "updated" else "closed"
-      val html = s"<p>Open work order, number <b>${saveWorkOrder.workOrder.number}</b>, has been ${updatedOrClosed}.</p>"
+      val updatedOrClosed = if workOrder.closed.isEmpty then "updated" else "closed"
+      val html = s"<p>Open work order, number <b>${saveWorkOrder.workOrder.number}</b>, has been $updatedOrClosed.</p>"
       if emailer.send(recipients, subjectNotification, html).isSuccess then WorkOrderSaved.success(workOrder.number)
       else WorkOrderSaved.fail(workOrder.number, "Save work order failed")
-    }.recover { case error =>
+    }.recover { case _ =>
       logError("saveWorkOrder", "failed error: ${error} for: ${saveWorkOrder}")
       WorkOrderSaved.fail(workOrder.number, "Save work order failed.")
     }.get
@@ -86,9 +86,9 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
     val userId = listWorkOrders.userId
     Try {
       val workOrders = store.listWorkOrders(userId)
-      log("listWorkOrders", s"succeeded for user id: ${userId}")
+      log("listWorkOrders", s"succeeded for user id: $userId")
       WorkOrdersListed.success(userId, workOrders)
     }.recover { case error =>
-      logError("listWorkOrders", s"failed error: ${error} for user id: ${userId}")
+      logError("listWorkOrders", s"failed error: $error for user id: $userId")
       WorkOrdersListed.fail(userId, "List work orders failed.")
     }.get
