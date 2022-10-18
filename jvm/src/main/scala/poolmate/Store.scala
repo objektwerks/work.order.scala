@@ -48,8 +48,8 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
     }.get
     statements.foreach { statement =>
       DB localTx { implicit session =>
-        println(s"$statement;")
-        sql"$statement;".execute()
+        println(s"$statement")
+        sql"$statement".execute()
       }
     }
 
