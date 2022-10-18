@@ -16,7 +16,6 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
   val emailer = Emailer(conf)
   Store.dirs(conf)
   val store = Store(conf, Store.cache(minSize = 2, maxSize = 3, expireAfter = 1.hour))
-  //store.ddl("./ddl.sql")
   val service = Service(emailer, store)
   val handler = Handler(service)
 
