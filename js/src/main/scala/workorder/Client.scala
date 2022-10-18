@@ -18,7 +18,7 @@ class Client(rootUrl: String) extends js.Object:
   log("root url: ", Url.root)
   log("now url: ", Url.now)
   log("command url: ", Url.command)
-  log(s"server url: http: //${window.location.host}")
+  log(s"server url: http://${window.location.host}")
 
   Proxy.now.foreach( now => log(s"[now] $now") )
 
