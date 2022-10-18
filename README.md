@@ -1,7 +1,7 @@
 Work Order
 ----------
 >Work order (mobile) web app linking homeowners and service providers via work orders and email notification.
->Reimplementation of [work.order](https://github.com/objektwerks/work.order) using ScalaJs and Scala 3.
+>Reimplementation of [work.order](https://github.com/objektwerks/work.order) using Scala 3, ScalaJs, ScalikeJdbc and Mysql.
 
 Install
 -------
