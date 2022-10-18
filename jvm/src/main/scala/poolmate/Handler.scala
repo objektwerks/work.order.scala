@@ -19,7 +19,7 @@ final class Handler(service: Service):
       else UserSaved.fail(user.id, "User invalid.")
     else UserSaved.fail(user.id, s"License invalid: $license")
 
-  case addWorkOrder: AddWorkOrder =>
+  def addWorkOrder(addWorkOrder: AddWorkOrder): WorkOrderAdded =
     val workOrder = addWorkOrder.workOrder
     val license = addWorkOrder.license
     if license.isLicense && service.isLicenseValid(license) then
