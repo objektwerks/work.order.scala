@@ -44,4 +44,10 @@ final class Router(handler: Handler) extends Routes with LazyLogging:
     val workOrderSaved = handler.saveWorkOrder(saveWorkOrder)
     write[WorkOrderSaved](workOrderSaved)
 
+  @cask.post("/workorders")
+  def listWorkOrders(request: Request) =
+    val listWorkOrders = read[ListWorkOrders](request.text())
+    val workOrdersListed = handler.listWorkOrders(listWorkOrders)
+    write[WorkOrdersListed](workOrdersListed)
+
   initialize()
