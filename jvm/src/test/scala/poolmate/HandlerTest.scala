@@ -28,23 +28,19 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
 
     // register
     val serviceProviderRegister = Register(Roles.serviceProvider, "lawncare service", serviceProviderEmail, "123 green rd")
-    val serviceProviderPin = handler.handle(serviceProviderRegister) match
-      case registered: Registered => registered.success shouldBe true; registered.pin
-      case _ => fail()
+    val serviceProviderRegistered = handler.register(serviceProviderRegister)
+    serviceProviderRegistered.success shouldBe true
 
     val homeownerRegister = Register(Roles.homeowner, "fred flintstone", homeownerEmail, "345 stone st")
-    val homeownerPin = handler.handle(homeownerRegister) match
-      case registered: Registered => registered.success shouldBe true; registered.pin
-      case _ => fail()
+    val homeownerRegistered = handler.register(homeownerRegister)
+    homeownerRegistered.success shouldBe true
 
     // login
-    val serviceProviderLoggedIn = handler.handle(Login(serviceProviderEmail, serviceProviderPin)) match
-      case loggedIn: LoggedIn => loggedIn.success shouldBe true; loggedIn
-      case _ => fail()
+    val serviceProviderLoggedIn = handler.login(Login(serviceProviderEmail, serviceProviderRegistered.pin))
+    serviceProviderLoggedIn.success shouldBe true
     
-    val homeownerLoggedIn = handler.handle(Login(homeownerEmail, homeownerPin)) match
-      case loggedIn: LoggedIn => loggedIn.success shouldBe true; loggedIn
-      case _ => fail()
+    val homeownerLoggedIn = handler.login(Login(homeownerEmail, homeownerRegistered.pin))
+    homeownerLoggedIn.success shouldBe true
 
     // work order add
     var workOrder = WorkOrder(
@@ -58,31 +54,25 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
       resolution = "",
       opened = DateTime.now,
       closed = "")
-    val number = handler.handle(AddWorkOrder(workOrder, homeownerLoggedIn.user.license)) match
-      case workOrderAdded: WorkOrderAdded =>
-        workOrderAdded.success shouldBe true
-        workOrderAdded.number
-      case _ => fail()
+    val workOrderAdded = handler.addWorkOrder(AddWorkOrder(workOrder, homeownerLoggedIn.user.license))
+    workOrderAdded.success shouldBe true
 
     // work order save
-    workOrder = workOrder.copy(number = number, resolution = "fixed", closed = DateTime.now)
-    handler.handle(SaveWorkOrder(workOrder, serviceProviderLoggedIn.user.license)) match
-      case workOrderSaved: WorkOrderSaved => workOrderSaved.success shouldBe true
-      case _ => fail()
+    workOrder = workOrder.copy(number = workOrderAdded.number, resolution = "fixed", closed = DateTime.now)
+    val workOrderSaved = handler.saveWorkOrder(SaveWorkOrder(workOrder, serviceProviderLoggedIn.user.license))
+    workOrderSaved.success shouldBe true
     
     // user save
-    handler.handle(SaveUser(serviceProviderLoggedIn.user)) match
-      case userSaved: UserSaved => userSaved.success shouldBe true
-      case _ => fail()
+    val serviceProviderSaved = handler.saveUser(SaveUser(serviceProviderLoggedIn.user))
+    serviceProviderSaved.success shouldBe true
 
-    handler.handle(SaveUser(homeownerLoggedIn.user)) match
-      case userSaved: UserSaved => userSaved.success shouldBe true
-      case _ => fail()
+    val homeownerSaved = handler.saveUser(SaveUser(homeownerLoggedIn.user))
+    homeownerSaved.success shouldBe true
 
     // work orders list
-    handler.handle(ListWorkOrders(homeownerLoggedIn.user.id, homeownerLoggedIn.user.license)) match
-      case workOrdersListed: WorkOrdersListed => workOrdersListed.success shouldBe true; workOrdersListed.workOrders.size shouldBe 1
-      case _ => fail()
+    val workOrdersListed = handler.listWorkOrders(ListWorkOrders(homeownerLoggedIn.user.id, homeownerLoggedIn.user.license))
+    workOrdersListed.success shouldBe true
+    workOrdersListed.workOrders.size shouldBe 1
 
     println("*** sending emails ...")
     Thread.sleep(6000)
