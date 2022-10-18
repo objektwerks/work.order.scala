@@ -44,7 +44,7 @@ final class Emailer(conf: Config) extends LazyLogging:
       logger.info("*** Emailer subject: {} to: {} message id: {}", subject, recipients.mkString, messageId)
       messageId
     }.recover { error =>
-      logger.error("*** Emailer subject: {} to: {} failed: {}",  subject, recipients.mkString, error.getMessage())
+      logger.error("*** Emailer subject: {} to: {} failed: {}",  subject, recipients.mkString, error.getMessage)
       ""
     }
 
