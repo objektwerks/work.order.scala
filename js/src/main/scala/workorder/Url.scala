@@ -1,6 +1,12 @@
 package workorder
 
 object Url:
-  var root: String = ""
-  var now: String = ""
+  var root = ""
+  var now = ""
+  var register = ""
+  var login = ""
+  var userSave = ""
+  var workOrderAdd = ""
+  var workOrderSave = ""
+  var workOrdersList = ""
   var command: String = ""
