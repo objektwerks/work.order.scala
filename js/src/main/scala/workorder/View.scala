@@ -6,8 +6,6 @@ import org.scalajs.dom.console
 
 trait View:
   protected[this] val errorBus = new EventBus[String]
-
-  def call(command: Command, handler: (event: Either[Fault, Event]) => Unit): Unit = Proxy.call(command, handler)
   
   def route(page: Page): Unit = PageRouter.router.pushState(page)
 

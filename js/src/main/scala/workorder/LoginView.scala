@@ -51,7 +51,6 @@ object LoginView extends View:
           onClick --> { _ =>
             log(s"Login button onClick -> pin: ${pinVar.now()}")
             val command = Login(emailAddressVar.now(), pinVar.now())
-            call(command, handler)
           }
         }
       )
