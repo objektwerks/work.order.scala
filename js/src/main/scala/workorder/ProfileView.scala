@@ -7,7 +7,7 @@ import org.scalajs.dom.console.log
 import Components.*
 import Validator.*
 
-object UserView extends View:
+object ProfileView extends View:
   def apply(userVar: Var[User]): HtmlElement =
     def handler(either: Either[Fault, Event]): Unit =
       either match

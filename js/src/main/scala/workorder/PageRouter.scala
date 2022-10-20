@@ -33,5 +33,6 @@ object PageRouter:
     .collectStatic(RootPage) { RootView() }
     .collectStatic(LoginPage) { LoginView() }
     .collectStatic(RegisterPage) { RegisterView() }
-    .collectStatic(ProfilePage) { UserView(Model.user) }
+    .collectStatic(AppPage) { AppView() }
+    .collectStatic(ProfilePage) { ProfileView(Model.user) }
     .collectStatic(WorkOrdersPage) { WorkOrdersView(Model.workOrders) }
