@@ -36,3 +36,13 @@ object Fetcher:
 	  method = HttpMethod.POST
 	  headers = formDataHeaders
 	}
+
+	def now: Future[String] =
+	  ( 
+	    for
+	      response <- dom.fetch(Urls.now)
+	      text     <- response.text()
+	    yield text
+	  ).recover {
+	    case failure: Exception => s"Now failed: ${failure.getMessage}"
+	  }
