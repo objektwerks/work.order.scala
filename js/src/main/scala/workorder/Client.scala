@@ -13,7 +13,7 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 class Client(rootUrl: String) extends js.Object:
   Urls.set(rootUrl)
 
-  // User fetcher instead: Proxy.now.foreach( now => log(s"[now] $now") )
+  Fetcher.now.foreach( now => log(s"[now] $now") )
 
   render(
     container = document.getElementById("content"),
