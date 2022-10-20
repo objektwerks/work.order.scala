@@ -7,15 +7,14 @@ import org.scalajs.dom.console.log
 import Components.*
 import Validator.*
 
-object WorkOrdersView extends View:
-  def apply(workOrdersVar: Var[Array[WorkOrder]]): HtmlElement =
+object WorkOrderView extends View:
+  def apply(workOrderVar: Var[WorkOrder]): HtmlElement =
     div(
       div(
         hdr("Work Orders"),
-        // List of opened and closed work orders
+        // work order
         cbar(
-          btn("New"),
-          btn("Refresh")
+          btn("Save")
         )
       )
     )
