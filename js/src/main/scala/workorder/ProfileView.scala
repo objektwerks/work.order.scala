@@ -43,6 +43,7 @@ object ProfileView extends View:
             onClick --> { _ =>
               log("User -> Save button onClick")
               val command = SaveUser(userVar.now())
+              call(command, handler)
             }
           } 
         )
