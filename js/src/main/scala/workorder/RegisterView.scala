@@ -18,6 +18,8 @@ object RegisterView extends View:
     val streetAddressVar = Var("")
     val roleErrorBus = new EventBus[String]
     val nameErrorBus = new EventBus[String]
+    val emailAddressErrorBus = new EventBus[String]
+    val streetAddressErrorBus = new EventBus[String]
 
 
     def handler(either: Either[Fault, Event]): Unit =
@@ -48,6 +50,24 @@ object RegisterView extends View:
         }
       },
       err(nameErrorBus),
+      lbl("Email Address"),
+      email.amend {
+        onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
+        onKeyUp.mapToValue --> { emailAddress =>
+          if emailAddress.isEmailAddress then clear(emailAddressErrorBus) 
+          else emit(emailAddressErrorBus, emailAddressInvalid)
+        }
+      },
+      err(emailAddressErrorBus),
+      lbl("Street Address"),
+      email.amend {
+        onInput.mapToValue.filter(_.nonEmpty).setAsValue --> streetAddressVar
+        onKeyUp.mapToValue --> { streetAddress =>
+          if streetAddress.isStreetAddress then clear(streetAddressErrorBus) 
+          else emit(streetAddressErrorBus, streetAddressInvalid)
+        }
+      },
+      err(emailAddressErrorBus),
       cbar(
         btn("Register").amend {
           onClick --> { _ =>
