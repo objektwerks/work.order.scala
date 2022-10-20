@@ -17,7 +17,8 @@ object PageRouter:
     Route.static(LoginPage, root / "login" / endOfSegments),
     Route.static(AppPage, root / "app" / endOfSegments),
     Route.static(ProfilePage, root / "profile" / endOfSegments),
-    Route.static(WorkOrdersPage, root / "workorders" / endOfSegments)
+    Route.static(WorkOrdersPage, root / "workorders" / endOfSegments),
+    Route.static(WorkOrderPage, root / "workorder" / endOfSegments)
   )
 
   val router = new com.raquo.waypoint.Router[Page](
@@ -37,3 +38,4 @@ object PageRouter:
     .collectStatic(AppPage) { AppMenu() }
     .collectStatic(ProfilePage) { ProfileView(Model.user) }
     .collectStatic(WorkOrdersPage) { WorkOrdersView(Model.workOrders) }
+    .collectStatic(WorkOrderPage) { WorkOrderView(Model.workOrder) }

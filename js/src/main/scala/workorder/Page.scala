@@ -11,3 +11,4 @@ case object LoginPage extends Page
 case object AppPage extends Page
 case object ProfilePage extends Page
 case object WorkOrdersPage extends Page
+case object WorkOrderPage extends Page
