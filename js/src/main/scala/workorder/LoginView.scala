@@ -31,8 +31,7 @@ object LoginView extends View:
       email.amend {
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
         onKeyUp.mapToValue --> { emailAddress =>
-          if emailAddress.isEmailAddress 
-          then clear(emailAddressErrorBus) 
+          if emailAddress.isEmailAddress then clear(emailAddressErrorBus) 
           else emit(emailAddressErrorBus, emailAddressInvalid)
         }
       },
@@ -41,8 +40,7 @@ object LoginView extends View:
       pin.amend {
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> pinVar
         onKeyUp.mapToValue --> { pin =>
-          if pin.isPin
-          then clear(pinErrorBus)
+          if pin.isPin then clear(pinErrorBus)
           else emit(pinErrorBus, pinInvalid)
         }      
       },
