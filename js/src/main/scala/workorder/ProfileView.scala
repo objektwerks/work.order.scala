@@ -23,7 +23,7 @@ object ProfileView extends View:
       bar(
         btn("App").amend {
           onClick --> { _ =>
-            log("Account -> App menu item onClick")
+            log("Profile -> App menu item onClick")
             route(AppPage)
           }
         }      

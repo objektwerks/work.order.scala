@@ -10,11 +10,17 @@ import Validator.*
 object WorkOrderView extends View:
   def apply(workOrderVar: Var[WorkOrder]): HtmlElement =
     div(
-      div(
-        hdr("Work Orders"),
-        // work order
-        cbar(
-          btn("Save")
-        )
+      bar(
+        btn("App").amend {
+          onClick --> { _ =>
+            log("WorkOrder -> App menu item onClick")
+            route(AppPage)
+          }
+        }      
+      ),
+      hdr("Work Orders"),
+      // work order
+      cbar(
+        btn("Save")
       )
     )
