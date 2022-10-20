@@ -15,6 +15,7 @@ object PageRouter:
     Route.static(RootPage, root / endOfSegments),
     Route.static(RegisterPage, root / "register" / endOfSegments),
     Route.static(LoginPage, root / "login" / endOfSegments),
+    Route.static(AppPage, root / "app" / endOfSegments),
     Route.static(ProfilePage, root / "profile" / endOfSegments),
     Route.static(WorkOrdersPage, root / "workorders" / endOfSegments)
   )
