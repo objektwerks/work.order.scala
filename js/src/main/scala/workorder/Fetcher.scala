@@ -48,7 +48,7 @@ object Fetcher:
     }
 
   def call(command: Command, handler: (either: Either[Fault, Event]) => Unit) =
-    val event = post(command, jsonParameters) // TODO!
+    val event = post(command, jsonParameters) // TODO for form data support!
     handle(event, handler)
 
   private def post(command: Command, params: RequestInit): Future[Event] =
