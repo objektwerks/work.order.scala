@@ -16,6 +16,6 @@ class Client(rootUrl: String) extends js.Object:
   Proxy.now.foreach( now => log(s"[now] $now") )
 
   render(
-    container = document.getElementById("container"),
+    container = document.getElementById("content"),
     rootNode = div( child <-- PageRouter.splitter.$view )
   )

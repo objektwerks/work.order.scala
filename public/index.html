@@ -10,12 +10,13 @@
         <link rel="stylesheet" type="text/css" href="w3c.css">
     </head>
     <body>
-        <div class="w3-container" style="font-size: 15px; color: indigo">
+        <header class="w3-container w3-indigo">
             <img src="logo.png">
             <label>Work Order</label>
-        </div>
-        <div id="container" class="w3-container"></div>
-        <div class="w3-container" style="font-size: 11px; color: indigo">Copyright &copy; 2022 Objektwerks</div>
+        </header>
+        <nav id="menu" class="w3-bar w3-indigo"></nav>
+        <section id="content" class="w3-container"></section>
+        <footer class="w3-container" style="font-size: 11px; color: indigo">Copyright &copy; 2022 Objektwerks</footer>
         <script type="text/javascript" src="main.js"></script>
         <script>
             new Client("http://localhost:7272");
