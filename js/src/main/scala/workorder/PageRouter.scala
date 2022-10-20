@@ -34,6 +34,6 @@ object PageRouter:
     .collectStatic(RootPage) { RootMenu() }
     .collectStatic(LoginPage) { LoginView() }
     .collectStatic(RegisterPage) { RegisterView() }
-    .collectStatic(AppPage) { AppView() }
+    .collectStatic(AppPage) { AppMenu() }
     .collectStatic(ProfilePage) { ProfileView(Model.user) }
     .collectStatic(WorkOrdersPage) { WorkOrdersView(Model.workOrders) }

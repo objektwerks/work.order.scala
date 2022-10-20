@@ -7,7 +7,7 @@ import org.scalajs.dom.console.log
 import Components.*
 import Validator.*
 
-object AppView extends View:
+object AppMenu extends View:
   def apply(): HtmlElement =
     div(
       bar(
