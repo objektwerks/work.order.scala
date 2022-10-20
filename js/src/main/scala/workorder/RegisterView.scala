@@ -72,6 +72,7 @@ object RegisterView extends View:
           onClick --> { _ =>
             log(s"Register button onClick -> email address: ${emailAddressVar.now()}")
             val command = Register(roleVar.now(), nameVar.now(), emailAddressVar.now(), streetAddressVar.now())
+            call(command, handler)
           }
         },
       )
