@@ -11,10 +11,10 @@ object AppView extends View:
   def apply(): HtmlElement =
     div(
       bar(
-        btn("User").amend {
+        btn("Profile").amend {
           onClick --> { _ =>
-            log("App -> User menu item onClick")
-            route(UserPage)
+            log("App -> Profile menu item onClick")
+            route(ProfilePage)
           }
         },
         rbtn("Work Orders").amend {
