@@ -31,7 +31,6 @@ object RegisterView extends View:
       
     div(
       hdr("Register"),
-      info(registerMessage),
       err(errorBus),
       lbl("Email Address"),
       email.amend {
@@ -39,7 +38,7 @@ object RegisterView extends View:
         onKeyUp.mapToValue --> { emailAddress =>
           if emailAddress.isEmailAddress
           then clear(emailAddressErrorBus)
-          else emit(emailAddressErrorBus, emailAddressError)
+          else emit(emailAddressErrorBus, emailAddressInvalid)
         }
       },
       err(emailAddressErrorBus),

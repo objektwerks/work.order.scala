@@ -4,7 +4,7 @@ import com.raquo.laminar.api.L.*
 
 import org.scalajs.dom.console
 
-trait View extends Messages:
+trait View:
   protected[this] val errorBus = new EventBus[String]
 
   def call(command: Command, handler: (event: Either[Fault, Event]) => Unit): Unit = Proxy.call(command, handler)
