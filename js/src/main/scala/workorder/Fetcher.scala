@@ -104,12 +104,12 @@ object Fetcher:
     }
 
   private def addWorkOrderToFormData(addWorkOrder: AddWorkOrder, imageFile: Option[ImageFile]): FormData =
-    val imageUrl = if imageFile.isDefined then imageFile.get.url else ""
+    val imageUrl = imageFile.fold("")(i => i.url)
     val workOrder = addWorkOrder.workOrder.copy(imageUrl = imageUrl)
     workOrderToFormData(addWorkOrder.copy(workOrder = workOrder), imageFile)
 
   private def saveWorkOrderToFormData(saveWorkOrder: SaveWorkOrder, imageFile: Option[ImageFile]): FormData =
-    val imageUrl = if imageFile.isDefined then imageFile.get.url else ""
+    val imageUrl = imageFile.fold("")(i => i.url)
     val workOrder = saveWorkOrder.workOrder.copy(imageUrl = imageUrl)
     workOrderToFormData(saveWorkOrder.copy(workOrder = workOrder), imageFile)
 
