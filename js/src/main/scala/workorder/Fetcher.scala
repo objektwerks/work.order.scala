@@ -94,12 +94,21 @@ object Fetcher:
       )
     }
 
-  private def workOrderToFormData(workOrder: WorkOrder, imageFile: Option[ImageFile], license: String): FormData =
+  private def addWorkOrderToFormData(addWorkOrder: AddWorkOrder, imageFile: Option[ImageFile]): FormData =
+    val imageUrl = if imageFile.isDefined then imageFile.get.url else ""
+    val workOrder = addWorkOrder.workOrder.copy(imageUrl = imageUrl)
+    workOrderToFormData(addWorkOrder.copy(workOrder = workOrder), imageFile)
+
+  private def saveWorkOrderToFormData(saveWorkOrder: SaveWorkOrder, imageFile: Option[ImageFile]): FormData =
+    val imageUrl = if imageFile.isDefined then imageFile.get.url else ""
+    val workOrder = saveWorkOrder.workOrder.copy(imageUrl = imageUrl)
+    workOrderToFormData(saveWorkOrder.copy(workOrder = workOrder), imageFile)
+
+  private def workOrderToFormData(command: Command, imageFile: Option[ImageFile]): FormData =
     val formData = new FormData()
     log(s"*** fetcher: model image file: $imageFile")
     if (imageFile.isDefined) then
       val image = imageFile.get
-      // workOrder.imageUrl = image.url
       formData.append("imageFileName", image.filename)
       formData.append("image", image.file, image.filename)
       log(s"*** fetcher: real image file: ${image.filename}")
@@ -109,6 +118,6 @@ object Fetcher:
       formData.append("imageFileName", filename)
       formData.append("image", file, filename)
       log("*** fetcher: fake image file:", filename)
-    formData.append("saveWorkOrderAsJson", write[Command](new SaveWorkOrder(workOrder, license)))
+    formData.append("workOrderAsJson", write[Command](command))
     log(s"formdata: $formData")
     formData
