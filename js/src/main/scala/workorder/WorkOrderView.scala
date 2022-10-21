@@ -8,7 +8,7 @@ import Components.*
 import Validator.*
 
 object WorkOrderView extends View:
-  def apply(workOrderVar: Var[WorkOrder]): HtmlElement =
+  def apply(userVar: Var[User], workOrderVar: Var[WorkOrder]): HtmlElement =
     div(
       bar(
         btn("Work Orders").amend {
@@ -18,7 +18,7 @@ object WorkOrderView extends View:
           }
         }      
       ),
-      hdr("Work Orders"),
+      hdr("Work Order"),
       // work order
       cbar(
         btn("Save")

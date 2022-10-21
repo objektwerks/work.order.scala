@@ -38,4 +38,4 @@ object PageRouter:
     .collectStatic(AppPage) { AppMenu() }
     .collectStatic(ProfilePage) { ProfileView(Model.user) }
     .collectStatic(WorkOrdersPage) { WorkOrdersView(Model.workOrders) }
-    .collectStatic(WorkOrderPage) { WorkOrderView(Model.workOrder) }
+    .collectStatic(WorkOrderPage) { WorkOrderView(Model.user, Model.workOrder) }
