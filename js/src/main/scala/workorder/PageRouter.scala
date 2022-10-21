@@ -13,12 +13,12 @@ object PageRouter:
 
   val routes = List(
     Route.static(RootPage, root / endOfSegments),
-    Route.static(RegisterPage, root / "register" / endOfSegments),
-    Route.static(LoginPage, root / "login" / endOfSegments),
-    Route.static(AppPage, root / "app" / endOfSegments),
-    Route.static(ProfilePage, root / "profile" / endOfSegments),
-    Route.static(WorkOrdersPage, root / "workorders" / endOfSegments),
-    Route.static(WorkOrderPage, root / "workorder" / endOfSegments)
+    Route.static(RegisterPage, root / endOfSegments),
+    Route.static(LoginPage, root / endOfSegments),
+    Route.static(AppPage, root / endOfSegments),
+    Route.static(ProfilePage, root / endOfSegments),
+    Route.static(WorkOrdersPage, root / endOfSegments),
+    Route.static(WorkOrderPage, root / endOfSegments)
   )
 
   val router = new com.raquo.waypoint.Router[Page](
