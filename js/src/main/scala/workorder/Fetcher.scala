@@ -48,22 +48,30 @@ object Fetcher:
     }
 
   def call(command: Command, handler: (either: Either[Fault, Event]) => Unit) =
-    val event = post(command, jsonParameters) // TODO for form data support!
+    val event: Future[Event] = command match
+      case Register(_, _, _, _) => post(command, jsonParameters, Urls.register)
+      case Login(_, _) => post(command, jsonParameters, Urls.login)
+      case SaveUser(_) => post(command, jsonParameters, Urls.userSave)
+      case AddWorkOrder(_, _) => post(command, jsonParameters, Urls.workOrderAdd)  // TODO for form data support!
+      case SaveWorkOrder(_, _) => post(command, jsonParameters, Urls.workOrderSave)  // TODO for form data support!
+      case ListWorkOrders(_, _) => post(command, jsonParameters, Urls.workOrdersList)
+
     handle(event, handler)
 
-  private def post(command: Command, params: RequestInit): Future[Event] =
+  private def post(command: Command, parameters: RequestInit, url: String): Future[Event] =
     log(s"Proxy:post command: $command")
-    params.body = write[Command](command)
-    log(s"Proxy:post params: $params")
+    parameters.body = write[Command](command)
+    log(s"Proxy:post params: $parameters")
+    log(s"Proxy:post url: $url")
     (
       for
-        response <- dom.fetch(Urls.command, params)
+        response <- dom.fetch(url, parameters)
         text <- response.text()
       yield
         log(s"Proxy:post text: $text")
         val event = read[Event](text)
-          log (s"Proxy:post event: $event")
-          event
+        log (s"Proxy:post event: $event")
+        event
       ).recover {
       case failure: Exception =>
         log(s"Proxy:post failure: ${failure.getCause}")
