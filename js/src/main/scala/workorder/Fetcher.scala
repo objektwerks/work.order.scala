@@ -28,12 +28,12 @@ object Fetcher:
       js.Array("Accept", "application/json")
     )
   }
-  val formDataHeaders = new Headers {
-    js.Array()
-  }
   val jsonParameters = new RequestInit {
     method = HttpMethod.POST
     headers = jsonHeaders
+  }
+  val formDataHeaders = new Headers {
+    js.Array()
   }
   val formDataParameters = new RequestInit {
     method = HttpMethod.POST
