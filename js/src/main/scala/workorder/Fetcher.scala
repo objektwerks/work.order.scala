@@ -46,8 +46,8 @@ object Fetcher:
         response <- dom.fetch(Urls.now)
         text <- response.text()
       yield text
-      ).recover {
-      case failure: Exception => s"Now failed: ${failure.getMessage}"
+    ).recover { case error: Exception =>
+      s"Now failed: ${error.getMessage}"
     }
 
   // TODO
@@ -88,7 +88,7 @@ object Fetcher:
       ).recover { case error: Exception =>
         log(s"Proxy:post failure: ${error.getCause}")
         Fault(error)
-    }
+      }
 
   private def handle(future: Future[Event], handler: (either: Either[Fault, Event]) => Unit): Unit =
     future map { event =>
