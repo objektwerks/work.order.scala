@@ -57,10 +57,10 @@ object Fetcher:
       case SaveUser(_) => post(command, jsonParameters, Urls.userSave)
       case AddWorkOrder(_, _) =>
         post(command, jsonParameters, Urls.workOrderAdd)
-        // TODO addWorkOrderToFormData(...)
+        // TODO addWorkOrderToFormData(command, Model.imageFile)
       case SaveWorkOrder(_, _) =>
         post(command, jsonParameters, Urls.workOrderSave)
-        // TODO saveWorkOrderToFormData(...)
+        // TODO saveWorkOrderToFormData(command, Model.imageFile)
       case ListWorkOrders(_, _) => post(command, jsonParameters, Urls.workOrdersList)
 
     handle(event, handler)
