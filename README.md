@@ -123,7 +123,7 @@ Authorization
 Page Flow
 ---------
 1. RootMenu ( LoginPage, RegisterPage )
-2. RegisterPate -> LoginPage
+2. RegisterPage -> LoginPage
 3. LoginPage -> AppMenu ( ProfilePage, WorkOrdersPage )
 
 Config

@@ -10,6 +10,14 @@ import Validator.*
 object WorkOrdersView extends View:
   def apply(workOrdersVar: Var[Array[WorkOrder]]): HtmlElement =
     div(
+      bar(
+        btn("App").amend {
+          onClick --> { _ =>
+            log("Work Orders -> App menu item onClick")
+            route(AppPage)
+          }
+        }      
+      ),
       div(
         hdr("Work Orders"),
         // List of opened and closed work orders
