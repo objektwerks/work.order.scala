@@ -76,7 +76,8 @@ Forms
 1. **register** — role, name, email address, street address
 2. **login**— email address, pin
 3. **user** - role, name, email address, street address, registered
-4. **work order** — number, homeowner, service provider, issue, street address, image url, resolution, opened, closed
+4. **work orders** - list of open and closed work orders
+5. **work order** — number, homeowner, service provider, issue, street address, image url, resolution, opened, closed
 
 Routes
 ------
