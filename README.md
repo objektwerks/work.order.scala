@@ -71,6 +71,15 @@ Features [ Roles ]
 8. **new work order email notification** - [ app ]
 9. **work order (updated and closed) email notifications** - [ app ]
 
+Page Flow
+---------
+1. RootMenu ( LoginPage, RegisterPage )
+2. RegisterPage -> LoginPage
+3. LoginPage -> AppMenu ( ProfilePage, WorkOrdersPage )
+4. ProfilePage -> AppMenu
+5. WorkOrdersPage -> AppMenu
+6. WorkOrderPage -> WorkOrdersPage
+
 Forms
 -----
 1. **register** — role, name, email address, street address
@@ -119,15 +128,6 @@ Authorization
 2. /workorders/add
 3. /workorders/save
 4. /workorders
-
-Page Flow
----------
-1. RootMenu ( LoginPage, RegisterPage )
-2. RegisterPage -> LoginPage
-3. LoginPage -> AppMenu ( ProfilePage, WorkOrdersPage )
-4. ProfilePage -> AppMenu
-5. WorkOrdersPage -> AppMenu
-6. WorkOrderPage -> WorkOrdersPage
 
 Config
 ------
