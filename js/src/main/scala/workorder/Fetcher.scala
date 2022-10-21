@@ -55,8 +55,12 @@ object Fetcher:
       case Register(_, _, _, _) => post(command, jsonParameters, Urls.register)
       case Login(_, _) => post(command, jsonParameters, Urls.login)
       case SaveUser(_) => post(command, jsonParameters, Urls.userSave)
-      case AddWorkOrder(_, _) => post(command, jsonParameters, Urls.workOrderAdd)  // TODO for form data support!
-      case SaveWorkOrder(_, _) => post(command, jsonParameters, Urls.workOrderSave)  // TODO for form data support!
+      case AddWorkOrder(_, _) =>
+        post(command, jsonParameters, Urls.workOrderAdd)
+        // TODO addWorkOrderToFormData(...)
+      case SaveWorkOrder(_, _) =>
+        post(command, jsonParameters, Urls.workOrderSave)
+        // TODO saveWorkOrderToFormData(...)
       case ListWorkOrders(_, _) => post(command, jsonParameters, Urls.workOrdersList)
 
     handle(event, handler)
