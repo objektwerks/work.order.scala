@@ -120,8 +120,8 @@ Authorization
 3. /workorders/save
 4. /workorders
 
-UI Flow
--------
+Page Flow
+---------
 1. RootMenu ( LoginPage, RegisterPage )
 2. RegisterPate -> LoginPage
 3. LoginPage -> AppPage
