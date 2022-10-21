@@ -124,7 +124,7 @@ Page Flow
 ---------
 1. RootMenu ( LoginPage, RegisterPage )
 2. RegisterPate -> LoginPage
-3. LoginPage -> AppPage
+3. LoginPage -> AppMenu ( ProfilePage, WorkOrdersPage )
 
 Config
 ------
