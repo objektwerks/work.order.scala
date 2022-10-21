@@ -50,27 +50,31 @@ object Fetcher:
       case failure: Exception => s"Now failed: ${failure.getMessage}"
     }
 
+  // TODO
   def call(command: Command, handler: (either: Either[Fault, Event]) => Unit) =
     val event: Future[Event] = command match
       case Register(_, _, _, _) => post(command, jsonParameters, Urls.register)
       case Login(_, _) => post(command, jsonParameters, Urls.login)
       case SaveUser(_) => post(command, jsonParameters, Urls.userSave)
       case AddWorkOrder(_, _) =>
-        // TODO val formData = addWorkOrderToFormData(addWorkOrder, Model.imageFile)
-        // TODO post(formData, formDataParameters, Urls.workOrderAdd)
+        // addWorkOrder: AddWorkOrder =>
+        // val formData = addWorkOrderToFormData(addWorkOrder, Model.imageFile)
+        // post(formData, formDataParameters, Urls.workOrderAdd)
         post(command, jsonParameters, Urls.workOrderAdd)
       case SaveWorkOrder(_, _) =>
-        // TODO val formData = saveWorkOrderToFormData(command, Model.imageFile)
-        // TODO post(formData, formDataParameters, Urls.workOrderAdd)
+        // saveWorkOrder: SaveWorkOrder =>
+        // val formData = saveWorkOrderToFormData(command, Model.imageFile)
+        // post(formData, formDataParameters, Urls.workOrderAdd)
         post(command, jsonParameters, Urls.workOrderSave)
       case ListWorkOrders(_, _) => post(command, jsonParameters, Urls.workOrdersList)
 
     handle(event, handler)
 
+  // TODO
   private def post(command: Command, parameters: RequestInit, url: String): Future[Event] =
     parameters.body = write[Command](command)
-    // TODO command: FormData | Command
-    // TODO parameters.body = if command.isInstanceOf[FormData] then command.asInstanceOf[FormData] else write[Command](command.asInstanceOf[Command]) 
+    // command: FormData | Command
+    // parameters.body = if command.isInstanceOf[FormData] then command.asInstanceOf[FormData] else write[Command](command.asInstanceOf[Command]) 
     log(s"Proxy:post command: $command url: $url parameters: $parameters")
     (
       for
