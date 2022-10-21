@@ -3,6 +3,9 @@ package workorder
 import com.raquo.laminar.api.L._
 
 import org.scalajs.dom
+import org.scalajs.dom.BlobPart
+import org.scalajs.dom.File
+import org.scalajs.dom.FormData
 import org.scalajs.dom.Headers
 import org.scalajs.dom.HttpMethod
 import org.scalajs.dom.RequestInit
@@ -90,3 +93,22 @@ object Fetcher:
             Right(event)
       )
     }
+
+  private def workOrderToFormData(workOrder: WorkOrder, imageFile: Option[ImageFile], license: String): FormData =
+    val formData = new FormData()
+    log(s"*** fetcher: model image file: $imageFile")
+    if (imageFile.isDefined) then
+      val image = imageFile.get
+      // workOrder.imageUrl = image.url
+      formData.append("imageFileName", image.filename)
+      formData.append("image", image.file, image.filename)
+      log(s"*** fetcher: real image file: ${image.filename}")
+    else
+      val filename = s"z-${DateTime.now}.txt"
+      val file = new File(new js.Array(0), "delete me!")
+      formData.append("imageFileName", filename)
+      formData.append("image", file, filename)
+      log("*** fetcher: fake image file:", filename)
+    formData.append("saveWorkOrderAsJson", write[Command](new SaveWorkOrder(workOrder, license)))
+    log(s"formdata: $formData")
+    formData
