@@ -127,6 +127,7 @@ Page Flow
 3. LoginPage -> AppMenu ( ProfilePage, WorkOrdersPage )
 4. ProfilePage -> AppMenu
 5. WorkOrdersPage -> AppMenu
+6. WorkOrderPage -> WorkOrdersPage
 
 Config
 ------
