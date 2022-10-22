@@ -16,14 +16,14 @@ object LoginView extends View:
 
     def handler(either: Either[Fault, Event]): Unit =
       either match
-        case Left(fault) => errorBus.emit(s"Enter failed: ${fault.cause}")
+        case Left(fault) => errorBus.emit(s"Login failed: ${fault.cause}")
         case Right(event) =>
           event match
             case LoggedIn(_, _, _, _, _) =>
               clearErrors()
               // TODO set model
               route(WorkOrdersPage)
-            case _ => log(s"Login -> handler failed: $event")
+            case _ => log("login view: handler failed: %o", event)
       
     div(      
       hdr("Login"),
@@ -49,7 +49,7 @@ object LoginView extends View:
         btn("Login").amend {
           disabled <-- pinVar.signal.map( pin => !pin.isPin )
           onClick --> { _ =>
-            log(s"Login button onClick -> pin: ${pinVar.now()}")
+            log("login view: button onClick, email: %s pin: %s", emailAddressVar.now(), pinVar.now())
             val command = Login(emailAddressVar.now(), pinVar.now())
             call(command, handler)
           }
