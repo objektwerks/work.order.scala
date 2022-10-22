@@ -71,14 +71,14 @@ Features [ Roles ]
 8. **new work order email notification** - [ app ]
 9. **work order (updated and closed) email notifications** - [ app ]
 
-Page Flow
----------
-1. RootMenu ( LoginPage, RegisterPage )
+Page ( Menu ) Flow
+------------------
+1. RootPage ( LoginPage, RegisterPage )
 2. RegisterPage -> LoginPage
-3. LoginPage -> AppMenu ( ProfilePage, WorkOrdersPage )
-4. ProfilePage -> AppMenu
-5. WorkOrdersPage -> AppMenu
-6. WorkOrderPage -> WorkOrdersPage
+3. LoginPage -> WorkOrdersPage
+4. WorkOrdersPage ( Profile Page ) -> WorkOrderPage | ProfilePage
+5. WorkOrderPage ( WorkOrdersPage ) -> WorkOrdersPage
+6. ProfilePage ( WorkOrdersPage ) -> WorkOrdersPage
 
 Forms
 -----

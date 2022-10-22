@@ -11,10 +11,10 @@ object WorkOrdersView extends View:
   def apply(workOrdersVar: Var[Array[WorkOrder]]): HtmlElement =
     div(
       bar(
-        btn("App").amend {
+        btn("Profile").amend {
           onClick --> { _ =>
-            log("Work Orders -> App menu item onClick")
-            route(AppPage)
+            log("Work Orders -> Profile menu item onClick")
+            route(ProfilePage)
           }
         }      
       ),

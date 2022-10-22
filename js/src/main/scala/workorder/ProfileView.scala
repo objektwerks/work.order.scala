@@ -21,10 +21,10 @@ object ProfileView extends View:
 
     div(
       bar(
-        btn("App").amend {
+        btn("Work Orders").amend {
           onClick --> { _ =>
-            log("Profile -> App menu item onClick")
-            route(AppPage)
+            log("Profile -> Work Orders menu item onClick")
+            route(WorkOrdersPage)
           }
         }      
       ),
