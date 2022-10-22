@@ -58,12 +58,12 @@ object Fetcher:
       case SaveUser(_) => post(command, jsonParameters, Urls.userSave)
       case AddWorkOrder(_, _) =>
         // addWorkOrder: AddWorkOrder =>
-        // val formData = addWorkOrderToFormData(addWorkOrder, Model.imageFile)
+        // val formData = addWorkOrderToFormData(addWorkOrder)
         // post(formData, formDataParameters, Urls.workOrderAdd)
         post(command, jsonParameters, Urls.workOrderAdd)
       case SaveWorkOrder(_, _) =>
         // saveWorkOrder: SaveWorkOrder =>
-        // val formData = saveWorkOrderToFormData(command, Model.imageFile)
+        // val formData = saveWorkOrderToFormData(command)
         // post(formData, formDataParameters, Urls.workOrderAdd)
         post(command, jsonParameters, Urls.workOrderSave)
       case ListWorkOrders(_, _) => post(command, jsonParameters, Urls.workOrdersList)
@@ -103,13 +103,13 @@ object Fetcher:
       )
     }
 
-  private def addWorkOrderToFormData(addWorkOrder: AddWorkOrder, imageFile: Option[ImageFile]): FormData =
-    val workOrder = addWorkOrder.workOrder.copy(imageUrl = imageFile.fold("")(i => i.url))
-    workOrderToFormData(addWorkOrder.copy(workOrder = workOrder), imageFile)
+  private def addWorkOrderToFormData(addWorkOrder: AddWorkOrder): FormData =
+    val workOrder = addWorkOrder.workOrder.copy(imageUrl = Model.imageFileUrl)
+    workOrderToFormData(addWorkOrder.copy(workOrder = workOrder), Model.imageFile)
 
-  private def saveWorkOrderToFormData(saveWorkOrder: SaveWorkOrder, imageFile: Option[ImageFile]): FormData =
-    val workOrder = saveWorkOrder.workOrder.copy(imageUrl = imageFile.fold("")(i => i.url))
-    workOrderToFormData(saveWorkOrder.copy(workOrder = workOrder), imageFile)
+  private def saveWorkOrderToFormData(saveWorkOrder: SaveWorkOrder): FormData =
+    val workOrder = saveWorkOrder.workOrder.copy(imageUrl = Model.imageFileUrl)
+    workOrderToFormData(saveWorkOrder.copy(workOrder = workOrder), Model.imageFile)
 
   private def workOrderToFormData(command: AddWorkOrder | SaveWorkOrder, imageFile: Option[ImageFile]): FormData =
     val formData = new FormData()
