@@ -17,13 +17,13 @@ object ProfileView extends View:
             case UserSaved(_, _, _) =>
               clearErrors()
               route(WorkOrdersPage)
-            case _ => log(s"Profile -> handler failed: $event")
+            case _ => log("profile view: handler failed: %o", event)
 
     div(
       bar(
         btn("Work Orders").amend {
           onClick --> { _ =>
-            log("Profile -> Work Orders menu item onClick")
+            log("profile view: work orders menu item onClick")
             route(WorkOrdersPage)
           }
         }      
@@ -41,7 +41,7 @@ object ProfileView extends View:
         cbar(
           btn("Save").amend {
             onClick --> { _ =>
-              log("Profile -> Save button onClick")
+              log("profile view: save button onClick, user: %o", Model.userVar.now())
               val command = SaveUser(Model.userVar.now())
               call(command, handler)
             }
