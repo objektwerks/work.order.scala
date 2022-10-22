@@ -23,12 +23,12 @@ object Urls:
     workOrderSave = s"$root/workorder/save"
     workOrdersList = s"$root/workorders"
 
-    log("root url: ", root)
-    log("now url: ", now)
-    log("register url: ", register)
-    log("login url: ", login)
-    log("userSave url: ", userSave)
-    log("workOrderAdd url: ", workOrderAdd)
-    log("workOrderSave url: ", workOrderSave)
-    log("workOrdersList url: ", workOrdersList)
+    log("root url: %s", root)
+    log("now url: %s", now)
+    log("register url: %s", register)
+    log("login url: %s", login)
+    log("userSave url: %s", userSave)
+    log("workOrderAdd url: %s", workOrderAdd)
+    log("workOrderSave url: %s", workOrderSave)
+    log("workOrdersList url: %s", workOrdersList)
     log(s"server url: http://${window.location.host}")
