@@ -16,9 +16,9 @@ import scala.concurrent.Future
 import scala.scalajs.js
 import scala.scalajs.js.Thenable.Implicits.*
 
-import Serializer.given
-
 import upickle.default.{read, write}
+
+import Serializer.given
 
 object Fetcher:
   val post = "post"
