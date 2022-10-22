@@ -1,6 +1,7 @@
 .*
 !.gitignore
 !.jvmopts
+*.iml
 *.log
 build/
 node_modules
