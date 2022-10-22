@@ -28,9 +28,9 @@ object RegisterView extends View:
           event match
             case Registered(_, _, _) =>
               clearErrors()
-              log(s"Registered -> handler registered.")
+              log("register view: handler registered.")
               route(LoginPage)
-            case _ => log(s"Register -> handler failed: $event")
+            case _ => log("register view: handler failed: %o", event)
       
     div(
       hdr("Register"),
@@ -70,8 +70,8 @@ object RegisterView extends View:
       cbar(
         btn("Register").amend {
           onClick --> { _ =>
-            log(s"Register button onClick -> email address: ${emailAddressVar.now()}")
             val command = Register(roleVar.now(), nameVar.now(), emailAddressVar.now(), streetAddressVar.now())
+            log("register view: button onClick command: %o", command)
             call(command, handler)
           }
         },

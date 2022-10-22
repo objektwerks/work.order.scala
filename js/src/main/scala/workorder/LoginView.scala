@@ -49,8 +49,8 @@ object LoginView extends View:
         btn("Login").amend {
           disabled <-- pinVar.signal.map( pin => !pin.isPin )
           onClick --> { _ =>
-            log("login view: button onClick, email: %s pin: %s", emailAddressVar.now(), pinVar.now())
             val command = Login(emailAddressVar.now(), pinVar.now())
+            log("login view: button onClick command: %o", command)
             call(command, handler)
           }
         }

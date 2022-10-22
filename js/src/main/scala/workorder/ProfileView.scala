@@ -41,8 +41,8 @@ object ProfileView extends View:
         cbar(
           btn("Save").amend {
             onClick --> { _ =>
-              log("profile view: save button onClick, user: %o", Model.userVar.now())
               val command = SaveUser(Model.userVar.now())
+              log("profile view: save button onClick command: %o", command)
               call(command, handler)
             }
           } 
