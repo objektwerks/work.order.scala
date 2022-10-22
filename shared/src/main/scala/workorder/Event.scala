@@ -1,6 +1,8 @@
 package workorder
 
-sealed trait Event
+sealed trait Event:
+  val success: Boolean
+  val error: String
 
 final case class Registered(pin: String,
                             success: Boolean = true,
@@ -56,7 +58,9 @@ object WorkOrdersListed:
 final case class Fault(dateOf: Int = DateTime.currentDate,
                        timeOf: Int = DateTime.currentTime,
                        nanoOf: Int = DateTime.nano,
-                       cause: String) extends Event
+                       cause: String,
+                       success: Boolean = true,
+                       error: String = "") extends Event
 
 object Fault:
   def apply(message: String): Fault = Fault(cause = message)
