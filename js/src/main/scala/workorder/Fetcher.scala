@@ -41,14 +41,11 @@ object Fetcher:
   }
 
   def now: Future[String] =
-    (
-      for
+    ( for
         response <- dom.fetch(Urls.now)
         text <- response.text()
       yield text
-    ).recover { case error: Exception =>
-      s"Now failed: ${error.getMessage}"
-    }
+    ).recover { case error: Exception => s"Now failed: ${error.getMessage}" }
 
   // Uncomment to enable client formdata support.
   def call(command: Command, handler: Either[Fault, Event] => Unit) =
