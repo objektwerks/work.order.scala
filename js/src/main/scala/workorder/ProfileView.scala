@@ -16,7 +16,7 @@ object ProfileView extends View:
           event match
             case UserSaved(_, _, _) =>
               clearErrors()
-              route(AppPage)
+              route(WorkOrdersPage)
             case _ => log(s"Profile -> handler failed: $event")
 
     div(

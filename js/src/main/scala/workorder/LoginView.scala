@@ -22,7 +22,7 @@ object LoginView extends View:
             case LoggedIn(_, _, _, _, _) =>
               clearErrors()
               // TODO set model
-              route(AppPage)
+              route(WorkOrdersPage)
             case _ => log(s"Login -> handler failed: $event")
       
     div(      

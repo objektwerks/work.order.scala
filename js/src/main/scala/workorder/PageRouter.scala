@@ -15,7 +15,6 @@ object PageRouter:
     Route.static(RootPage, root / endOfSegments),
     Route.static(RegisterPage, root / endOfSegments),
     Route.static(LoginPage, root / endOfSegments),
-    Route.static(AppPage, root / endOfSegments),
     Route.static(ProfilePage, root / endOfSegments),
     Route.static(WorkOrdersPage, root / endOfSegments),
     Route.static(WorkOrderPage, root / endOfSegments)
@@ -35,7 +34,6 @@ object PageRouter:
     .collectStatic(RootPage) { RootMenu() }
     .collectStatic(LoginPage) { LoginView() }
     .collectStatic(RegisterPage) { RegisterView() }
-    .collectStatic(AppPage) { AppMenu() }
     .collectStatic(ProfilePage) { ProfileView(Model.user) }
     .collectStatic(WorkOrdersPage) { WorkOrdersView(Model.workOrders) }
     .collectStatic(WorkOrderPage) { WorkOrderView(Model.user, Model.workOrder) }
