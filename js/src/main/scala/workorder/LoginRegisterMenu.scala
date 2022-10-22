@@ -6,7 +6,7 @@ import org.scalajs.dom.console.log
 
 import Components.*
 
-object RootMenu extends View:
+object LoginRegisterMenu extends View:
   def apply(): HtmlElement =
     div(
       bar(

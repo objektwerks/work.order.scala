@@ -12,7 +12,7 @@ object PageRouter:
   given pageRW: ReadWriter[Page] = macroRW
 
   val routes = List(
-    Route.static(RootPage, root / endOfSegments),
+    Route.static(LoginRegisterPage, root / endOfSegments),
     Route.static(RegisterPage, root / endOfSegments),
     Route.static(LoginPage, root / endOfSegments),
     Route.static(ProfilePage, root / endOfSegments),
@@ -31,7 +31,7 @@ object PageRouter:
   )
 
   val splitter = SplitRender[Page, HtmlElement](router.$currentPage)
-    .collectStatic(RootPage) { RootMenu() }
+    .collectStatic(LoginRegisterPage) { LoginRegisterMenu() }
     .collectStatic(LoginPage) { LoginView() }
     .collectStatic(RegisterPage) { RegisterView() }
     .collectStatic(ProfilePage) { ProfileView() }
