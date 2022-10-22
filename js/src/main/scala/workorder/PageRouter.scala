@@ -31,7 +31,7 @@ object PageRouter:
   )
 
   val splitter = SplitRender[Page, HtmlElement](router.$currentPage)
-    .collectStatic(LoginRegisterPage) { LoginRegisterMenu() }
+    .collectStatic(LoginRegisterPage) { LoginRegisterView() }
     .collectStatic(LoginPage) { LoginView() }
     .collectStatic(RegisterPage) { RegisterView() }
     .collectStatic(ProfilePage) { ProfileView() }
