@@ -71,17 +71,17 @@ object Fetcher:
     parameters.body = write[Command](command)
     // command: FormData | Command
     // parameters.body = if command.isInstanceOf[FormData] then command.asInstanceOf[FormData] else write[Command](command.asInstanceOf[Command]) 
-    log("Proxy:post command: %s url: %s parameters: %s", command, url, parameters)
+    log("fetcher:post command: %s url: %s parameters: %s", command, url, parameters)
     (
       for
         response <- dom.fetch(url, parameters)
         text <- response.text()
         event = read[Event](text)
       yield
-        log("Proxy:post text: %s event: %o", text, event)
+        log("fetcher:post text: %s event: %o", text, event)
         event
       ).recover { case error: Exception =>
-        log("Proxy:post failure: %s", error.getCause)
+        log("fetcher:post failure: %s", error.getCause)
         Fault(error)
       }
 
@@ -90,10 +90,10 @@ object Fetcher:
       handler(
         event match
           case fault: Fault =>
-            log("Proxy:handle fault: %o", fault)
+            log("fetcher:handle fault: %o", fault)
             Left(fault)
           case event: Event =>
-            log("Proxy:handle event: %o", event)
+            log("fetcher:handle event: %o", event)
             Right(event)
       )
     }
@@ -109,20 +109,20 @@ object Fetcher:
   private def workOrderToFormData(command: AddWorkOrder | SaveWorkOrder): FormData =
     val formData = new FormData()
     val imageFile = Model.imageFile
-    log("*** fetcher: model image file: %o", imageFile)
+    log("fetcher: model image file: %o", imageFile)
     if imageFile.isDefined then
       val image = imageFile.get
       formData.append("imageFileName", image.filename)
       formData.append("image", image.file, image.filename)
-      log("*** fetcher: real image file: %s", image.filename)
+      log("fetcher: real image file: %s", image.filename)
     else
       val filename = s"z-${DateTime.now}.txt"
       val file = new File(new js.Array(0), "delete me!")
       formData.append("imageFileName", filename)
       formData.append("image", file, filename)
-      log("*** fetcher: fake image file: %s", filename)
+      log("fetcher: fake image file: %s", filename)
     command match
       case addWorkOrder: AddWorkOrder =>  formData.append("addWorkOrderAsJson", write[AddWorkOrder](addWorkOrder))
       case saveWorkOrder: SaveWorkOrder => formData.append("saveWorkOrderAsJson", write[SaveWorkOrder](saveWorkOrder))
-    log("formdata: %o", formData)
+    log("fetcher:workOrderToFormData formdata: %o", formData)
     formData
