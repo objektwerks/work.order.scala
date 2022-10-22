@@ -12,7 +12,6 @@ object Urls:
   var workOrderAdd = ""
   var workOrderSave = ""
   var workOrdersList = ""
-  var command = ""
 
   def set(rootUrl: String): Unit =
     root = rootUrl
@@ -23,7 +22,6 @@ object Urls:
     workOrderAdd = s"$root/workorder/add"
     workOrderSave = s"$root/workorder/save"
     workOrdersList = s"$root/workorders"
-    command = s"$root/command"
 
     log("root url: ", root)
     log("now url: ", now)
