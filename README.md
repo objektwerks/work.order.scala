@@ -73,7 +73,7 @@ Features [ Roles ]
 
 Page ( Menu ) Flow
 ------------------
-1. RootPage ( LoginPage, RegisterPage )
+1. LoginRegisterPage ( LoginPage, RegisterPage )
 2. RegisterPage -> LoginPage
 3. LoginPage -> WorkOrdersPage
 4. WorkOrdersPage ( Profile Page ) -> WorkOrderPage | ProfilePage
