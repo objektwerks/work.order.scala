@@ -31,5 +31,4 @@ object Urls:
     log("workOrderAdd url: ", workOrderAdd)
     log("workOrderSave url: ", workOrderSave)
     log("workOrdersList url: ", workOrdersList)
-    log("command url: ", command)
     log(s"server url: http://${window.location.host}")
