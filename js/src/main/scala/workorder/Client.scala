@@ -12,7 +12,7 @@ import scala.scalajs.js.annotation.JSExportTopLevel
 @JSExportTopLevel("Client")
 class Client(rootUrl: String) extends js.Object:
   Urls.set(rootUrl)
-  Fetcher.now.foreach( now => log(s"[now] $now") )
+  Fetcher.now.foreach( now => log("[now] ", now) )
 
   render(
     container = document.getElementById("content"),
