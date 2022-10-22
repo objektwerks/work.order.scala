@@ -21,7 +21,6 @@ import upickle.default.{read, write}
 import Serializer.given
 
 object Fetcher:
-  val post = "post"
   val jsonHeaders = new Headers {
     js.Array(
       js.Array("Content-Type", "application/json; charset=UTF-8"),
