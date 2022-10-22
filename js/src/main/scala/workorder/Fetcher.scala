@@ -105,16 +105,17 @@ object Fetcher:
 
   private def addWorkOrderToFormData(addWorkOrder: AddWorkOrder): FormData =
     val workOrder = addWorkOrder.workOrder.copy(imageUrl = Model.imageFileUrl)
-    workOrderToFormData(addWorkOrder.copy(workOrder = workOrder), Model.imageFile)
+    workOrderToFormData(addWorkOrder.copy(workOrder = workOrder))
 
   private def saveWorkOrderToFormData(saveWorkOrder: SaveWorkOrder): FormData =
     val workOrder = saveWorkOrder.workOrder.copy(imageUrl = Model.imageFileUrl)
-    workOrderToFormData(saveWorkOrder.copy(workOrder = workOrder), Model.imageFile)
+    workOrderToFormData(saveWorkOrder.copy(workOrder = workOrder))
 
-  private def workOrderToFormData(command: AddWorkOrder | SaveWorkOrder, imageFile: Option[ImageFile]): FormData =
+  private def workOrderToFormData(command: AddWorkOrder | SaveWorkOrder): FormData =
     val formData = new FormData()
+    val imageFile = Model.imageFile
     log(s"*** fetcher: model image file: $imageFile")
-    if (imageFile.isDefined) then
+    if imageFile.isDefined then
       val image = imageFile.get
       formData.append("imageFileName", image.filename)
       formData.append("image", image.file, image.filename)
