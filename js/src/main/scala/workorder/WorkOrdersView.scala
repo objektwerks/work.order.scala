@@ -13,7 +13,7 @@ object WorkOrdersView extends View:
       bar(
         btn("Profile").amend {
           onClick --> { _ =>
-            log("Work Orders -> Profile menu item onClick")
+            log("work orders view: profile menu item onClick")
             route(ProfilePage)
           }
         }      
