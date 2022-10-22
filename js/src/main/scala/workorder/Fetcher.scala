@@ -50,7 +50,7 @@ object Fetcher:
       s"Now failed: ${error.getMessage}"
     }
 
-  // TODO
+  // Uncomment to enable client formdata support.
   def call(command: Command, handler: (either: Either[Fault, Event]) => Unit) =
     val event: Future[Event] = command match
       case Register(_, _, _, _) => post(command, jsonParameters, Urls.register)
@@ -70,7 +70,7 @@ object Fetcher:
 
     handle(event, handler)
 
-  // TODO
+  // Uncomment to enable client formdata support.
   private def post(command: Command, parameters: RequestInit, url: String): Future[Event] =
     parameters.body = write[Command](command)
     // command: FormData | Command
