@@ -94,7 +94,7 @@ object Fetcher:
             Left(fault)
           case event: Event =>
             log("fetcher:handle event: %o", event)
-            Right(event)
+            if event.success then Right(event) else Left(Fault(event.error))
       )
     }
 
