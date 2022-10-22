@@ -1,7 +1,6 @@
 package workorder
 
-import com.raquo.laminar.api.L._
-
+import com.raquo.laminar.api.L.*
 import org.scalajs.dom
 import org.scalajs.dom.BlobPart
 import org.scalajs.dom.File
@@ -13,6 +12,7 @@ import org.scalajs.dom.console.log
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
+import scala.language.postfixOps
 import scala.scalajs.js
 import scala.scalajs.js.Thenable.Implicits.*
 
@@ -50,7 +50,7 @@ object Fetcher:
     }
 
   // Uncomment to enable client formdata support.
-  def call(command: Command, handler: (either: Either[Fault, Event]) => Unit) =
+  def call(command: Command, handler: Either[Fault, Event] => Unit) =
     val event: Future[Event] = command match
       case Register(_, _, _, _) => post(command, jsonParameters, Urls.register)
       case Login(_, _) => post(command, jsonParameters, Urls.login)
@@ -82,14 +82,14 @@ object Fetcher:
       yield
         log(s"Proxy:post text: $text")
         val event = read[Event](text)
-        log (s"Proxy:post event: $event")
+        log(s"Proxy:post event: $event")
         event
       ).recover { case error: Exception =>
         log(s"Proxy:post failure: ${error.getCause}")
         Fault(error)
       }
 
-  private def handle(future: Future[Event], handler: (either: Either[Fault, Event]) => Unit): Unit =
+  private def handle(future: Future[Event], handler: Either[Fault, Event] => Unit): Unit =
     future map { event =>
       handler(
         event match
@@ -125,7 +125,8 @@ object Fetcher:
       formData.append("imageFileName", filename)
       formData.append("image", file, filename)
       log("*** fetcher: fake image file:", filename)
-    if command.isInstanceOf[AddWorkOrder] then formData.append("addWorkOrderAsJson", write[AddWorkOrder](command.asInstanceOf[AddWorkOrder]))
-    else formData.append("saveWorkOrderAsJson", write[SaveWorkOrder](command.asInstanceOf[SaveWorkOrder]))
+    command match
+      case addWorkOrder: AddWorkOrder =>  formData.append("addWorkOrderAsJson", write[AddWorkOrder](addWorkOrder))
+      case saveWorkOrder: SaveWorkOrder => formData.append("saveWorkOrderAsJson", write[SaveWorkOrder](saveWorkOrder))
     log(s"formdata: $formData")
     formData
