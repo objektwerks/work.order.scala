@@ -8,7 +8,7 @@ import Components.*
 import Validator.*
 
 object ProfileView extends View:
-  def apply(userVar: Var[User]): HtmlElement =
+  def apply(): HtmlElement =
     def handler(either: Either[Fault, Event]): Unit =
       either match
         case Left(fault) => errorBus.emit(s"Save profile failed: ${fault.cause}")
@@ -32,17 +32,17 @@ object ProfileView extends View:
         hdr("Profile"),
         lbl("License"),
         rotxt.amend {
-          value <-- userVar.signal.map(_.license)
+          value <-- Model.userVar.signal.map(_.license)
         },
         lbl("Pin"),
         rotxt.amend {
-          value <-- userVar.signal.map(_.pin)
+          value <-- Model.userVar.signal.map(_.pin)
         },
         cbar(
           btn("Save").amend {
             onClick --> { _ =>
               log("Profile -> Save button onClick")
-              val command = SaveUser(userVar.now())
+              val command = SaveUser(Model.userVar.now())
               call(command, handler)
             }
           } 

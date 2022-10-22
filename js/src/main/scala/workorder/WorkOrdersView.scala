@@ -8,7 +8,7 @@ import Components.*
 import Validator.*
 
 object WorkOrdersView extends View:
-  def apply(workOrdersVar: Var[Array[WorkOrder]]): HtmlElement =
+  def apply(): HtmlElement =
     div(
       bar(
         btn("Profile").amend {
