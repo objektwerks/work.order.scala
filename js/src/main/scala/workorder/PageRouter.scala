@@ -20,7 +20,7 @@ object PageRouter:
     Route.static(WorkOrderPage, root / endOfSegments)
   )
 
-  val router = new com.raquo.waypoint.Router[Page](
+  val router = com.raquo.waypoint.Router[Page](
     routes = routes,
     serializePage = page => write(page)(pageRW),
     deserializePage = pageAsString => read(pageAsString)(pageRW),
