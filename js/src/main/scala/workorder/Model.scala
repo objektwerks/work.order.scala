@@ -12,3 +12,5 @@ object Model:
   val workOrdersVar = Var(Array.empty[WorkOrder])
   val workOrderVar = Var(WorkOrder.empty)
   val imageFile: Option[ImageFile] = None
+
+  def imageFileUrl: String = imageFile.fold("")(i => i.url)
