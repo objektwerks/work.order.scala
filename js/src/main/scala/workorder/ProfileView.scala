@@ -31,13 +31,13 @@ object ProfileView extends View:
       div(
         hdr("Profile"),
         err(errorBus),
-        lbl("License"),
+        lbl("Role"),
         rotxt.amend {
-          value <-- Model.userVar.signal.map(_.license)
+          value <-- Model.userVar.signal.map(_.role)
         },
-        lbl("Pin"),
+        lbl("Name"),
         rotxt.amend {
-          value <-- Model.userVar.signal.map(_.pin)
+          value <-- Model.userVar.signal.map(_.name)
         },
         cbar(
           btn("Save").amend {
