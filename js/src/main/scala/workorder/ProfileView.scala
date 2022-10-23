@@ -44,10 +44,19 @@ object ProfileView extends View:
         },
         lbl("Email Address"),
         email.amend {
-          onInput.mapToValue.filter(_.nonEmpty) --> { name => Model.userVar.update(user => user.copy(name = name)) }
+          onInput.mapToValue.filter(_.nonEmpty) --> { emailAddress => Model.userVar.update(user => user.copy(emailAddress = emailAddress)) }
           onKeyUp.mapToValue --> { value =>
             if value.isEmailAddress then clear(emailAddressErrorBus)
             else emit(emailAddressErrorBus, emailAddressInvalid)
+          }
+        },
+        err(emailAddressErrorBus),
+        lbl("Street Address"),
+        email.amend {
+          onInput.mapToValue.filter(_.nonEmpty) --> { streetAddress => Model.userVar.update(user => user.copy(streetAddress = streetAddress)) }
+          onKeyUp.mapToValue --> { value =>
+            if value.isStreetAddress then clear(streetAddressErrorBus)
+            else emit(streetAddressErrorBus, streetAddressInvalid)
           }
         },
         err(emailAddressErrorBus),
