@@ -16,7 +16,6 @@ object RegisterView extends View:
     val nameVar = Var("")
     val emailAddressVar = Var("")
     val streetAddressVar = Var("")
-    val roleErrorBus = new EventBus[String]
     val nameErrorBus = new EventBus[String]
     val emailAddressErrorBus = new EventBus[String]
     val streetAddressErrorBus = new EventBus[String]
@@ -38,13 +37,12 @@ object RegisterView extends View:
       lbl("Role"),
       email.amend {
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> roleVar
-        // onSelect TODO!
       },
       lbl("Name"),
       email.amend {
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> nameVar
-        onKeyUp.mapToValue --> { name =>
-          if name.isName then clear(nameErrorBus) 
+        onKeyUp.mapToValue --> { value =>
+          if value.isName then clear(nameErrorBus)
           else emit(nameErrorBus, nameInvalid)
         }
       },
@@ -52,8 +50,8 @@ object RegisterView extends View:
       lbl("Email Address"),
       email.amend {
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
-        onKeyUp.mapToValue --> { emailAddress =>
-          if emailAddress.isEmailAddress then clear(emailAddressErrorBus) 
+        onKeyUp.mapToValue --> { value =>
+          if value.isEmailAddress then clear(emailAddressErrorBus)
           else emit(emailAddressErrorBus, emailAddressInvalid)
         }
       },
@@ -61,8 +59,8 @@ object RegisterView extends View:
       lbl("Street Address"),
       email.amend {
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> streetAddressVar
-        onKeyUp.mapToValue --> { streetAddress =>
-          if streetAddress.isStreetAddress then clear(streetAddressErrorBus) 
+        onKeyUp.mapToValue --> { value =>
+          if value.isStreetAddress then clear(streetAddressErrorBus)
           else emit(streetAddressErrorBus, streetAddressInvalid)
         }
       },
