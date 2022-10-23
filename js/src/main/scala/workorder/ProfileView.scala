@@ -62,6 +62,7 @@ object ProfileView extends View:
         err(emailAddressErrorBus),
         cbar(
           btn("Save").amend {
+            disabled <-- Model.userVar.signal.map { user => !user.isValid }
             onClick --> { _ =>
               val command = SaveUser(Model.userVar.now())
               log("profile view: save button onClick command: %o", command)
