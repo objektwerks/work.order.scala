@@ -42,8 +42,8 @@ object Validator:
 
   extension (user: User)
     def isValid: Boolean = user.validate.isEmpty
-    def validate: Array[String] =
-      val errors = mutable.ArrayBuilder.make[String]
+    def validate: List[String] =
+      val errors = mutable.ListBuffer[String]()
       if user.id.isNotGreaterThanZero then errors += idInvalid
       if !user.role.isRole then errors += roleInvalid
       if !user.name.isName then errors += nameInvalid
@@ -56,8 +56,8 @@ object Validator:
 
   extension (workOrder: WorkOrder)
     def isValid: Boolean = workOrder.validate.isEmpty
-    def validate: Array[String] =
-      val errors = mutable.ArrayBuilder.make[String]
+    def validate: List[String] =
+      val errors = mutable.ListBuffer[String]()
       // if workOrder.number.isGreaterThanZero then errors += numberInvalid
       if workOrder.homeownerId.isNotGreaterThanZero then errors += idInvalid
       if workOrder.serviceProviderId.isNotGreaterThanZero then errors += idInvalid
@@ -72,8 +72,8 @@ object Validator:
 
   extension (register: Register)
     def isValid: Boolean = register.validate.isEmpty
-    def validate: Array[String] =
-      val errors = mutable.ArrayBuilder.make[String]
+    def validate: List[String] =
+      val errors = mutable.ListBuffer[String]()
       if !register.role.isRole then errors += roleInvalid
       if !register.name.isName then errors += nameInvalid
       if !register.emailAddress.isEmailAddress then errors += emailAddressInvalid
@@ -82,8 +82,8 @@ object Validator:
 
   extension (login: Login)
     def isValid: Boolean = login.validate.isEmpty
-    def validate: Array[String] =
-      val errors = mutable.ArrayBuilder.make[String]
+    def validate: List[String] =
+      val errors = mutable.ListBuffer[String]()
       if !login.emailAddress.isEmailAddress then errors += emailAddressInvalid
       if !login.pin.isPin then errors += pinInvalid
       errors.result()
