@@ -51,3 +51,5 @@ object Components:
       cls("w3-container w3-border-white w3-text-red"),
       ul(cls("w3-ul w3-hoverable"))
     )
+
+  def list(items: Signal[Seq[Li]]): HtmlElement = ul(cls("w3-ul w3-hoverable"), children <-- items)
