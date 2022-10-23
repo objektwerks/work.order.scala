@@ -8,8 +8,6 @@ import org.scalatest.matchers.should.Matchers
 
 import scala.concurrent.duration.*
 
-import Validator.*
-
 class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
   val conf = ConfigFactory.load("test.server.conf")
 
