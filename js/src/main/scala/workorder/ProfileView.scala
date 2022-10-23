@@ -15,7 +15,7 @@ object ProfileView extends View:
         case Right(event) =>
           event match
             case UserSaved(_, _, _) =>
-              clearErrors()
+              clearErrorBus()
               route(WorkOrdersPage)
             case _ => log("profile view: handler failed: %o", event)
 

@@ -18,7 +18,7 @@ object LoginView extends View:
         case Right(event) =>
           event match
             case LoggedIn(user, serviceProviders, workOrders, _, _) =>
-              clearErrors()
+              clearErrorBus()
               Model.userVar.set(user)
               Model.serviceProvidersVar.set(serviceProviders)
               Model.workOrdersVar.set(workOrders)

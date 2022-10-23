@@ -27,7 +27,7 @@ object RegisterView extends View:
         case Right(event) =>
           event match
             case Registered(_, _, _) =>
-              clearErrors()
+              clearErrorBus()
               log("register view: handler registered.")
               route(LoginPage)
             case _ => log("register view: handler failed: %o", event)
