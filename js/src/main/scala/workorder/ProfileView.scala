@@ -9,6 +9,9 @@ import Validator.*
 
 object ProfileView extends View:
   def apply(): HtmlElement =
+    val emailAddressErrorBus = new EventBus[String]
+    val streetAddressErrorBus = new EventBus[String]
+
     def handler(either: Either[Fault, Event]): Unit =
       either match
         case Left(fault) => errorBus.emit(s"Save profile failed: ${fault.cause}")
@@ -39,6 +42,15 @@ object ProfileView extends View:
         rotxt.amend {
           value <-- Model.userVar.signal.map(_.name)
         },
+        lbl("Email Address"),
+        email.amend {
+          onInput.mapToValue.filter(_.nonEmpty) --> { name => Model.userVar.update(user => user.copy(name = name)) }
+          onKeyUp.mapToValue --> { value =>
+            if value.isEmailAddress then clear(emailAddressErrorBus)
+            else emit(emailAddressErrorBus, emailAddressInvalid)
+          }
+        },
+        err(emailAddressErrorBus),
         cbar(
           btn("Save").amend {
             onClick --> { _ =>
