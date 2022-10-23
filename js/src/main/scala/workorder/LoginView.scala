@@ -39,8 +39,11 @@ object LoginView extends View:
           onClick --> { _ =>
             val command = Login(emailAddressVar.now(), pinVar.now())
             val errors = command.validate
-            log("login view: login button onClick command: %o", command)
-            call(command, handler)
+            if errors.nonEmpty then
+              errors.foreach(errorBus.emit)
+            else
+              log("login view: login button onClick command: %o", command)
+              call(command, handler)
           }
         }
       )
