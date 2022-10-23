@@ -44,4 +44,10 @@ object Components:
     h5(cls("w3-indigo"), text)
 
   def err(errBus: EventBus[String]): Div =
-    div(cls("w3-red"), child.text <-- errBus.events)
+    div(cls("w3-border-white w3-text-red"), child.text <-- errBus.events)
+
+  def errs(): Div =
+    div(
+      cls("w3-container w3-border-white w3-text-red"),
+      ul(cls("w3-ul w3-hoverable"))
+    )
