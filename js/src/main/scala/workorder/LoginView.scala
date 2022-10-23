@@ -50,7 +50,9 @@ object LoginView extends View:
       err(pinErrorBus),
       cbar(
         btn("Login").amend {
-          disabled <-- pinVar.signal.map( pin => !pin.isPin )
+          disabled <-- emailAddressVar.signal.combineWithFn(pinVar.signal) {
+            (email, pin) => !(email.isEmailAddress && pin.isPin)
+          }
           onClick --> { _ =>
             val command = Login(emailAddressVar.now(), pinVar.now())
             log("login view: login button onClick command: %o", command)
