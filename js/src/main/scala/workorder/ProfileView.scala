@@ -30,6 +30,7 @@ object ProfileView extends View:
       ),
       div(
         hdr("Profile"),
+        err(errorBus),
         lbl("License"),
         rotxt.amend {
           value <-- Model.userVar.signal.map(_.license)
