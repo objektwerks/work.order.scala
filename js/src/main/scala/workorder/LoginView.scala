@@ -1,9 +1,7 @@
 package workorder
 
 import com.raquo.laminar.api.L.*
-
 import org.scalajs.dom.console.log
-
 import Components.*
 import Validator.*
 
@@ -29,6 +27,7 @@ object LoginView extends View:
       
     div(      
       hdr("Login"),
+      err(errorBus),
       lbl("Email Address"),
       email.amend {
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
