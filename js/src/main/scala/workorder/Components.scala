@@ -46,9 +46,4 @@ object Components:
   def err(errBus: EventBus[String]): Div =
     div(cls("w3-container w3-border-white w3-text-red"), child.text <-- errBus.events)
 
-  def errs(errors: Signal[List[Li]]): Div =
-    div(cls("w3-container w3-border-white "),
-      ul(cls("w3-ul w3-hoverable w3-text-red"), children <-- errors)
-    )
-
   def list(items: Signal[Seq[Li]]): HtmlElement = ul(cls("w3-ul w3-hoverable"), children <-- items)
