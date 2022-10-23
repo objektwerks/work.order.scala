@@ -9,6 +9,7 @@ sealed trait Entity
 object Roles:
   val homeowner = "homeowner"
   val serviceProvider = "serviceprovider"
+  val readonly = "readonly"
 
 object User:
   private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
