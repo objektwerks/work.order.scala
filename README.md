@@ -82,9 +82,9 @@ Page ( Menu ) Flow
 
 Forms
 -----
-1. **register** — role, name, email address, street address
-2. **login**— email address, pin
-3. **user** - role, name, email address, street address, registered
+1. **register** — role, value, email address, street address
+2. **login**— email address, value
+3. **user** - role, value, email address, street address, registered
 4. **work orders** - list of open and closed work orders
 5. **work order** — number, homeowner, service provider, issue, street address, image url, resolution, opened, closed
 
@@ -110,16 +110,16 @@ Registration
 ------------
 >A prospective user must register with a/an:
 1. role
-2. name
+2. value
 3. email address
 4. street address
->If the email address is valid, the new user will receive a ***pin*** via a **Work Order Registration** email.
+>If the email address is valid, the new user will receive a ***value*** via a **Work Order Registration** email.
 
 Authentication
 --------------
 >A user must login with a/an:
 1. email address
-2. pin
+2. value
 
 Authorization
 -------------

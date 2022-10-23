@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <appender name="file" class="ch.qos.logback.core.FileAppender">
+    <appender value="file" class="ch.qos.logback.core.FileAppender">
         <file>./target/test.shared.log</file>
         <append>true</append>
         <encoder>

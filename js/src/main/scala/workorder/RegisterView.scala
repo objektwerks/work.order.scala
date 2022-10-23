@@ -67,6 +67,9 @@ object RegisterView extends View:
       err(emailAddressErrorBus),
       cbar(
         btn("Register").amend {
+          disabled <-- nameVar.signal.combineWithFn(emailAddressVar.signal, streetAddressVar.signal) {
+            (name, email, street) => !(name.isName && email.isEmailAddress && street.isStreetAddress)
+          }
           onClick --> { _ =>
             val command = Register(roleVar.now(), nameVar.now(), emailAddressVar.now(), streetAddressVar.now())
             log("register view: button onClick command: %o", command)
