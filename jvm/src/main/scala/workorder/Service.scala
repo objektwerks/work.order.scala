@@ -34,10 +34,11 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
   def login(login: Login): LoggedIn =
     Try {
       val user = store.getUserByEmailAddressPin(login.emailAddress, login.pin)
+      val homeowners = store.listUsersByRole(Roles.homeowner)
       val serviceProviders = store.listUsersByRole(Roles.serviceProvider)
       val workOrders = store.listWorkOrders(user.get.id)
       log("login", s"succeeded for: ${login.emailAddress}")
-      LoggedIn.success(user.get, serviceProviders, workOrders)
+      LoggedIn.success(user.get, homeowners, serviceProviders, workOrders)
     }.recover { case error =>
       logError("login", s"failed error: $error for: ${login.emailAddress}")
       LoggedIn.fail(s"Login failed for: ${login.emailAddress}")

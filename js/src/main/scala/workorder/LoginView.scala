@@ -19,9 +19,10 @@ object LoginView extends View:
         case Left(fault) => errorBus.emit(s"Login failed: ${fault.cause}")
         case Right(event) =>
           event match
-            case LoggedIn(user, serviceProviders, workOrders, _, _) =>
+            case LoggedIn(user, homeowners, serviceProviders, workOrders, _, _) =>
               clearErrorBus()
               Model.userVar.set(user)
+              Model.homeownersVar.set(homeowners)
               Model.serviceProvidersVar.set(serviceProviders)
               Model.workOrdersVar.set(workOrders)
               route(WorkOrdersPage)

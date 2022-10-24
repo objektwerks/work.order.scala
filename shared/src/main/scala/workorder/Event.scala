@@ -12,15 +12,16 @@ object Registered:
   def success(pin: String): Registered = Registered(pin)
   def fail(error: String): Registered = Registered("", false, error)
 
-final case class LoggedIn(user: User, 
+final case class LoggedIn(user: User,
+                          homeowners: List[User],
                           serviceProviders: List[User], 
                           workOrders: List[WorkOrder], 
                           success: Boolean = true, 
                           error: String = "") extends Event
 
 object LoggedIn:
-  def success(user: User, serviceProviders: List[User], workOrders: List[WorkOrder]): LoggedIn = LoggedIn(user, serviceProviders, workOrders)
-  def fail(error: String): LoggedIn = LoggedIn(User.empty, List.empty[User], List.empty[WorkOrder], false, error)
+  def success(user: User, homeowners: List[User], serviceProviders: List[User], workOrders: List[WorkOrder]): LoggedIn = LoggedIn(user, homeowners, serviceProviders, workOrders)
+  def fail(error: String): LoggedIn = LoggedIn(User.empty, List.empty[User], List.empty[User], List.empty[WorkOrder], false, error)
 
 final case class UserSaved(id: Int, 
                            success: Boolean = true, 

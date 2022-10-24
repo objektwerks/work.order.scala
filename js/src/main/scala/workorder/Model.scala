@@ -8,6 +8,7 @@ final case class ImageFile(number: Int, file: File, filename: String, url: Strin
 
 object Model:
   val userVar = Var(User.empty)
+  val homeownersVar = Var(List.empty[User])
   val serviceProvidersVar = Var(List.empty[User])
   val workOrdersVar = Var(List.empty[WorkOrder])
   val workOrderVar = Var(WorkOrder.empty)

@@ -78,7 +78,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
 
   def listUsersByRole(role: String): List[User] =
     DB readOnly { implicit session =>
-      sql"select * from user where role = $role order by name asc"
+      sql"select id, role, name, emailAddress, streetAddress, registered from user where role = $role order by name asc"
         .map(rs => User(
           rs.int("id"),
           rs.string("role"),
@@ -86,8 +86,8 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
           rs.string("emailAddress"),
           rs.string("streetAddress"),
           rs.string("registered"),
-          rs.string("pin"),
-          rs.string("license")))
+          "",
+          ""))
         .list()
     }
 
