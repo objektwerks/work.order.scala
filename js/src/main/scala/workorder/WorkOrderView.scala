@@ -26,7 +26,7 @@ object WorkOrderView extends View:
               clearErrorBus()
               route(WorkOrdersPage)
             case _ => log("work order view: handler failed: %o", event)
-    // TODO role? add? save?
+    // TODO role? add? edit? readonly?
     div(
       bar(
         btn("Work Orders").amend {
@@ -39,10 +39,21 @@ object WorkOrderView extends View:
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(_.number.toString)
       },
+      lbl("Title"),
+      txt.amend {
+        onInput.mapToValue.filter(_.nonEmpty) --> { value =>
+          Model.workOrderVar.update(workOrder => workOrder.copy(title = value))
+        }
+        onKeyUp.mapToValue --> { value =>
+          if value.isTitle then clear(titleErrorBus)
+          else emit(titleErrorBus, titleInvalid)
+        }
+      },
+      err(titleErrorBus),
       lbl("Street Address"),
       street.amend {
-        onInput.mapToValue.filter(_.nonEmpty) --> { streetAddress =>
-          Model.workOrderVar.update(workOrder => workOrder.copy(streetAddress = streetAddress))
+        onInput.mapToValue.filter(_.nonEmpty) --> { value =>
+          Model.workOrderVar.update(workOrder => workOrder.copy(streetAddress = value))
         }
         onKeyUp.mapToValue --> { value =>
           if value.isStreetAddress then clear(streetAddressErrorBus)
