@@ -13,8 +13,6 @@ object WorkOrderView extends View:
     val issueErrorBus = new EventBus[String]
     val streetAddressErrorBus = new EventBus[String]
     val resolutionErrorBus = new EventBus[String]
-    val openedErrorBus = new EventBus[String]
-    val closedErrorBus = new EventBus[String]
 
     def handler(either: Either[Fault, Event]): Unit =
       either match
@@ -82,6 +80,10 @@ object WorkOrderView extends View:
         }
       },
       err(resolutionErrorBus),
+      lbl("Opened"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(_.opened)
+      },
       cbar(
         btn("Save").amend {
           disabled <-- Model.workOrderVar.signal.map { workOrder => !workOrder.isValid }
