@@ -39,7 +39,7 @@ object RegisterView extends View:
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> roleVar
       },
       lbl("Name"),
-      email.amend {
+      txt.amend {
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> nameVar
         onKeyUp.mapToValue --> { value =>
           if value.isName then clear(nameErrorBus)
@@ -48,7 +48,7 @@ object RegisterView extends View:
       },
       err(nameErrorBus),
       lbl("Email Address"),
-      email.amend {
+      txt.amend {
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> emailAddressVar
         onKeyUp.mapToValue --> { value =>
           if value.isEmailAddress then clear(emailAddressErrorBus)
@@ -57,7 +57,7 @@ object RegisterView extends View:
       },
       err(emailAddressErrorBus),
       lbl("Street Address"),
-      email.amend {
+      txt.amend {
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> streetAddressVar
         onKeyUp.mapToValue --> { value =>
           if value.isStreetAddress then clear(streetAddressErrorBus)
