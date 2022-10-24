@@ -58,6 +58,11 @@ object Components:
       option(Roles.serviceProvider)
     )
 
+  def list(items: List[String]): Select =
+    select(cls("w3-select w3-text-indigo"),
+      children <-- Var(items.map(item => option(item))).signal
+    )
+
   def list(items: Signal[List[Li]]): HtmlElement =
     ul(cls("w3-ul w3-hoverable"), children <-- items)
 
