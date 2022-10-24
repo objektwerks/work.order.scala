@@ -16,6 +16,8 @@ object Model:
 
   def imageFileUrl: String = imageFile.fold("")(i => i.url)
 
+  def homeownerName(id: Int): String = homeownersVar.now().find(_.id == id).fold("")(_.name)
+
   def serviceProviderName(id: Int): String = serviceProvidersVar.now().find(_.id == id).fold("")(_.name)
 
   def openWorkOrders: List[WorkOrder] = workOrdersVar.now().filter(workOrder => workOrder.closed.isEmpty)
