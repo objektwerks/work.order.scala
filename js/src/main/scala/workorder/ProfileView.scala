@@ -25,10 +25,7 @@ object ProfileView extends View:
     div(
       bar(
         btn("Work Orders").amend {
-          onClick --> { _ =>
-            log("profile view: work orders menu item onClick")
-            route(WorkOrdersPage)
-          }
+          onClick --> { _ => route(WorkOrdersPage) }
         }      
       ),
       div(
