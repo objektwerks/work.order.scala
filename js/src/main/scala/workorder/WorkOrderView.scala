@@ -84,6 +84,10 @@ object WorkOrderView extends View:
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(_.opened)
       },
+      lbl("Closed"), // TODO Need checkbox!
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(_.closed)
+      },
       cbar(
         btn("Save").amend {
           disabled <-- Model.workOrderVar.signal.map { workOrder => !workOrder.isValid }
