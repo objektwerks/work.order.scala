@@ -71,6 +71,17 @@ object WorkOrderView extends View:
         }
       },
       err(streetAddressErrorBus),
+      lbl("Resolution"),
+      txtarea().amend {
+        onInput.mapToValue.filter(_.nonEmpty) --> { value =>
+          Model.workOrderVar.update(workOrder => workOrder.copy(resolution = value))
+        }
+        onKeyUp.mapToValue --> { value =>
+          if value.isResolution then clear(resolutionErrorBus)
+          else emit(resolutionErrorBus, titleInvalid)
+        }
+      },
+      err(resolutionErrorBus),
       cbar(
         btn("Save").amend {
           disabled <-- Model.workOrderVar.signal.map { workOrder => !workOrder.isValid }
