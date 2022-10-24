@@ -20,7 +20,10 @@ object WorkOrdersView extends View:
       ),
       div(
         hdr("Work Orders"),
-        // List of opened and closed work orders
+        lbl("Open"),
+        list(listWorkOrders(Model.openWorkOrders)),
+        lbl("Closed"),
+        list(listWorkOrders(Model.closedWorkOrders)),
         cbar(
           btn("New"),
           btn("Refresh")
