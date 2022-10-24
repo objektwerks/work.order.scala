@@ -58,10 +58,7 @@ object Components:
   def list(items: Signal[List[Li]]): HtmlElement =
     ul(cls("w3-ul w3-hoverable"), children <-- items)
 
-  def item(strSignal: Signal[String]): Li =
-    li(cls("w3-text-indigo w3-display-container"), child.text <-- strSignal)
-
-  def split(workOrder: WorkOrder, serviceProviders: Var[List[User]]): Signal[List[Li]] =
+  def listServiceProviders(workOrder: WorkOrder, serviceProviders: Var[List[User]]): Signal[List[Li]] =
     serviceProviders.signal.split(_.id)((id, _, serviceProviderSignal) =>
       item(serviceProviderSignal.map(_.name)).amend {
         onClick --> { _ =>
@@ -72,7 +69,7 @@ object Components:
       }
     )
 
-  def split(workOrders: Var[List[WorkOrder]]): Signal[List[Li]] =
+  def listWorkOrders(workOrders: Var[List[WorkOrder]]): Signal[List[Li]] =
     workOrders.signal.split(_.number)((number, _, workOrderSignal) =>
       item(workOrderSignal.map(_.title)).amend {
         onClick --> { _ =>
@@ -83,3 +80,6 @@ object Components:
         }
       }
     )
+
+  def item(strSignal: Signal[String]): Li =
+    li(cls("w3-text-indigo w3-display-container"), child.text <-- strSignal)
