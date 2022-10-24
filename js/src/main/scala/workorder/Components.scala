@@ -58,12 +58,12 @@ object Components:
   def list(items: Signal[List[Li]]): HtmlElement =
     ul(cls("w3-ul w3-hoverable"), children <-- items)
 
-  def listServiceProviders(workOrder: WorkOrder, serviceProviders: Var[List[User]]): Signal[List[Li]] =
+  def listServiceProviders(serviceProviders: Var[List[User]]): Signal[List[Li]] =
     serviceProviders.signal.split(_.id)((id, _, serviceProviderSignal) =>
       item(serviceProviderSignal.map(_.name)).amend {
         onClick --> { _ =>
           serviceProviders.now().find(_.id == id).foreach { serviceProvider =>
-            Model.workOrderVar.set(workOrder.copy(serviceProviderId = serviceProvider.id))
+            Model.workOrderVar.update(workOrder => workOrder.copy(serviceProviderId = serviceProvider.id))
           }
         }
       }
