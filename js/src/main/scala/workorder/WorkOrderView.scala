@@ -10,7 +10,7 @@ import Validator.*
 object WorkOrderView extends View:
   def apply(): HtmlElement =
     val titleErrorBus = new EventBus[String]
-    val issueEventBus = new EventBus[String]
+    val issueErrorBus = new EventBus[String]
     val streetAddressErrorBus = new EventBus[String]
     val imageUrlErrorBus = new EventBus[String]
     val resolutionErrorBus = new EventBus[String]
@@ -50,6 +50,17 @@ object WorkOrderView extends View:
         }
       },
       err(titleErrorBus),
+      lbl("Issue"),
+      txt.amend {
+        onInput.mapToValue.filter(_.nonEmpty) --> { value =>
+          Model.workOrderVar.update(workOrder => workOrder.copy(issue = value))
+        }
+        onKeyUp.mapToValue --> { value =>
+          if value.isIssue then clear(issueErrorBus)
+          else emit(titleErrorBus, issueInvalid)
+        }
+      },
+      err(issueErrorBus),
       lbl("Street Address"),
       street.amend {
         onInput.mapToValue.filter(_.nonEmpty) --> { value =>
