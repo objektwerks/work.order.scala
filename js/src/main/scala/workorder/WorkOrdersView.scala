@@ -28,11 +28,13 @@ object WorkOrdersView extends View:
           btn("New").amend {
             onClick --> { _ =>
               log("work ordesr view: new button onClick")
+              // TODO
             }
           }),
           btn("Refresh").amend {
             onClick --> { _ =>
               log("work ordesr view: refresh button onClick")
+              // TODO
             }
           }),
         )
