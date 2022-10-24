@@ -9,6 +9,16 @@ import Validator.*
 
 object WorkOrdersView extends View:
   def apply(): HtmlElement =
+    def handler(either: Either[Fault, Event]): Unit =
+      either match
+        case Left(fault) => errorBus.emit(s"Refresh work orders failed: ${fault.cause}")
+        case Right(event) =>
+          event match
+            case WorkOrdersListed(_, workOrders: List[WorkOrder], _, _) =>
+              clearErrorBus()
+              Model.workOrdersVar.set(workOrders)
+            case _ => log(s"ork orders view: handler failed: $event")
+
     div(
       bar(
         btn("Profile").amend {
@@ -28,7 +38,7 @@ object WorkOrdersView extends View:
           btn("New").amend {
             onClick --> { _ =>
               log("work ordesr view: new button onClick")
-              // TODO
+              route(WorkOrderPage)
             }
           }),
           btn("Refresh").amend {
