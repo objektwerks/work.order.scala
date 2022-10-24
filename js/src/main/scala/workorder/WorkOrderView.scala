@@ -12,7 +12,6 @@ object WorkOrderView extends View:
     val titleErrorBus = new EventBus[String]
     val issueErrorBus = new EventBus[String]
     val streetAddressErrorBus = new EventBus[String]
-    val imageUrlErrorBus = new EventBus[String]
     val resolutionErrorBus = new EventBus[String]
     val openedErrorBus = new EventBus[String]
     val closedErrorBus = new EventBus[String]
