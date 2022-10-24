@@ -14,3 +14,7 @@ object Model:
   val imageFile: Option[ImageFile] = None
 
   def imageFileUrl: String = imageFile.fold("")(i => i.url)
+
+  def openWorkOrders: List[WorkOrder] = workOrdersVar.now().filter(workOrder => workOrder.closed.isEmpty)
+
+  def closedWorkOrders: List[WorkOrder] = workOrdersVar.now().filter(workOrder => workOrder.closed.nonEmpty)
