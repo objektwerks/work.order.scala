@@ -48,3 +48,18 @@ object Components:
 
   def list(items: Signal[Seq[Li]]): HtmlElement =
     ul(cls("w3-ul w3-hoverable"), children <-- items)
+
+  def item(strSignal: Signal[String]): Li =
+    li(cls("w3-text-indigo w3-display-container"), child.text <-- strSignal)
+
+  def split(workOrders: Var[Seq[WorkOrder]]): Signal[Seq[Li]] =
+    workOrders.signal.split(_.number)((number, _, workOrderSignal) =>
+      item(workOrderSignal.map(_.title)).amend {
+        onClick --> { _ =>
+          workOrders.now().find(_.number == number).foreach { workOrder =>
+            Model.workOrderVar.set(workOrder)
+            PageRouter.router.pushState(WorkOrderPage)
+          }
+        }
+      }
+    )
