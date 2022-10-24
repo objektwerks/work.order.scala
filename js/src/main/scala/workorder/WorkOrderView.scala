@@ -11,6 +11,15 @@ object WorkOrderView extends View:
   def apply(): HtmlElement =
     val streetAddressErrorBus = new EventBus[String]
 
+    def handler(either: Either[Fault, Event]): Unit =
+      either match
+        case Left(fault) => errorBus.emit(s"Save work order failed: ${fault.cause}")
+        case Right(event) =>
+          event match
+            case WorkOrderAdded(_, _, _) | WorkOrderSaved(_, _, _) =>
+              clearErrorBus()
+              route(WorkOrdersPage)
+            case _ => log("work order view: handler failed: %o", event)
     div(
       bar(
         btn("Work Orders").amend {
