@@ -32,6 +32,10 @@ object WorkOrderView extends View:
       ),
       hdr("Work Order"),
       err(errorBus),
+      lbl("Number"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(_.number.toString)
+      },
       lbl("Street Address"),
       street.amend {
         onInput.mapToValue.filter(_.nonEmpty) --> { streetAddress =>
