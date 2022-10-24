@@ -25,8 +25,14 @@ object WorkOrdersView extends View:
         lbl("Closed"),
         list(listWorkOrders(Model.closedWorkOrders)),
         cbar(
-          btn("New"),
-          btn("Refresh")
+          btn("New").amend {
+            onClick --> { _ =>
+              log("work ordesr view: new button onClick")
+            }
+          }),
+          btn("Refresh").amend {
+            onClick --> { _ =>
+              log("work ordesr view: refresh button onClick")
+            }
+          }),
         )
-      )
-    )
