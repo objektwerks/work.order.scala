@@ -9,7 +9,13 @@ import Validator.*
 
 object WorkOrderView extends View:
   def apply(): HtmlElement =
+    val titleErrorBus = new EventBus[String]
+    val issueEventBus = new EventBus[String]
     val streetAddressErrorBus = new EventBus[String]
+    val imageUrlErrorBus = new EventBus[String]
+    val resolutionErrorBus = new EventBus[String]
+    val openedErrorBus = new EventBus[String]
+    val closedErrorBus = new EventBus[String]
 
     def handler(either: Either[Fault, Event]): Unit =
       either match
