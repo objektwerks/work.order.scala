@@ -46,13 +46,19 @@ object Components:
   def err(errBus: EventBus[String]): Div =
     div(cls("w3-container w3-border-white w3-text-red"), child.text <-- errBus.events)
 
-  def list(items: Signal[Seq[Li]]): HtmlElement =
+  def roles: Select =
+    select(cls("w3-select w3-text-indigo"),
+      option(Roles.homeowner, selected(true)),
+      option(Roles.serviceProvider)
+    )
+
+  def list(items: Signal[List[Li]]): HtmlElement =
     ul(cls("w3-ul w3-hoverable"), children <-- items)
 
   def item(strSignal: Signal[String]): Li =
     li(cls("w3-text-indigo w3-display-container"), child.text <-- strSignal)
 
-  def split(workOrders: Var[Seq[WorkOrder]]): Signal[Seq[Li]] =
+  def split(workOrders: Var[List[WorkOrder]]): Signal[List[Li]] =
     workOrders.signal.split(_.number)((number, _, workOrderSignal) =>
       item(workOrderSignal.map(_.title)).amend {
         onClick --> { _ =>

@@ -35,8 +35,8 @@ object RegisterView extends View:
       hdr("Register"),
       err(errorBus),
       lbl("Role"),
-      email.amend {
-        onInput.mapToValue.filter(_.nonEmpty).setAsValue --> roleVar
+      roles.amend {
+        onSelect.mapToValue.setAsValue --> roleVar
       },
       lbl("Name"),
       txt.amend {
