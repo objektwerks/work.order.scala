@@ -23,7 +23,7 @@ object WorkOrderView extends View:
       hdr("Work Order"),
       err(errorBus),
       lbl("Street Address"),
-      email.amend {
+      street.amend {
         onInput.mapToValue.filter(_.nonEmpty) --> { streetAddress =>
           Model.workOrderVar.update(workOrder => workOrder.copy(streetAddress = streetAddress))
         }

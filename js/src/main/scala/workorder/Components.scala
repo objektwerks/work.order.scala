@@ -46,6 +46,9 @@ object Components:
   def err(errBus: EventBus[String]): Div =
     div(cls("w3-container w3-border-white w3-text-red"), child.text <-- errBus.events)
 
+  def street: Input =
+    input(cls(inputCss), minLength(7), required(true))
+
   def roles: Select =
     select(cls("w3-select w3-text-indigo"),
       option(Roles.homeowner, selected(true)),

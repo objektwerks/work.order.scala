@@ -40,6 +40,7 @@ object RegisterView extends View:
       },
       lbl("Name"),
       txt.amend {
+        minLength(2)
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> nameVar
         onKeyUp.mapToValue --> { value =>
           if value.isName then clear(nameErrorBus)
@@ -57,14 +58,14 @@ object RegisterView extends View:
       },
       err(emailAddressErrorBus),
       lbl("Street Address"),
-      txt.amend {
+      street.amend {
         onInput.mapToValue.filter(_.nonEmpty).setAsValue --> streetAddressVar
         onKeyUp.mapToValue --> { value =>
           if value.isStreetAddress then clear(streetAddressErrorBus)
           else emit(streetAddressErrorBus, streetAddressInvalid)
         }
       },
-      err(emailAddressErrorBus),
+      err(streetAddressErrorBus),
       cbar(
         btn("Register").amend {
           disabled <-- nameVar.signal.combineWithFn(emailAddressVar.signal, streetAddressVar.signal) {

@@ -54,7 +54,7 @@ object ProfileView extends View:
         },
         err(emailAddressErrorBus),
         lbl("Street Address"),
-        email.amend {
+        street.amend {
           onInput.mapToValue.filter(_.nonEmpty) --> { streetAddress =>
             Model.userVar.update(user => user.copy(streetAddress = streetAddress))
           }
