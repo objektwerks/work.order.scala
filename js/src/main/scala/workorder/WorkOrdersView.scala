@@ -17,7 +17,7 @@ object WorkOrdersView extends View:
             case WorkOrdersListed(_, workOrders: List[WorkOrder], _, _) =>
               clearErrorBus()
               Model.workOrdersVar.set(workOrders)
-            case _ => log(s"ork orders view: handler failed: $event")
+            case _ => log("work orders view: handler failed: %o", event)
 
     div(
       bar(
@@ -37,14 +37,16 @@ object WorkOrdersView extends View:
         cbar(
           btn("New").amend {
             onClick --> { _ =>
-              log("work ordesr view: new button onClick")
+              log("work orders view: new button onClick")
               route(WorkOrderPage)
             }
           }),
           btn("Refresh").amend {
             onClick --> { _ =>
-              log("work ordesr view: refresh button onClick")
-              // TODO
+              log("work orders view: refresh button onClick")
+              val user = Model.userVar.now()
+              val command = ListWorkOrders(user.id, user.license)
+              call(command, handler)
             }
           }),
         )
