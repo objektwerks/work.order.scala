@@ -20,6 +20,7 @@ object WorkOrderView extends View:
               clearErrorBus()
               route(WorkOrdersPage)
             case _ => log("work order view: handler failed: %o", event)
+    // TODO role?
     div(
       bar(
         btn("Work Orders").amend {
@@ -45,7 +46,7 @@ object WorkOrderView extends View:
       cbar(
         btn("Save").amend {
           disabled <-- Model.workOrderVar.signal.map { workOrder => !workOrder.isValid }
-          onClick --> { _ =>
+          onClick --> { _ => // TODO Add or Save
             val command = SaveWorkOrder(Model.workOrderVar.now(), Model.userVar.now().license)
             log("work order view: save button onClick command: %o", command)
             call(command, handler)
