@@ -20,7 +20,7 @@ object WorkOrderView extends View:
               clearErrorBus()
               route(WorkOrdersPage)
             case _ => log("work order view: handler failed: %o", event)
-    // TODO role?
+    // TODO role? add? save?
     div(
       bar(
         btn("Work Orders").amend {
