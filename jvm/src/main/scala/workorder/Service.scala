@@ -39,6 +39,10 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
           don't list service providers
           list all homeowners in assigned work orders
           ( join user.homeownerid on workorder.homeownerid where workorder.serviceproviderid = user.id )
+          select *
+          from users
+          inner join work_orders ON users.homeownerId = work_orders.homeownerId
+          where work_orders.serviceProviderId = user.id;
         homeowner:
           don't list homeowners
           list all service providers
