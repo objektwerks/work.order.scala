@@ -24,10 +24,7 @@ object WorkOrderView extends View:
     div(
       bar(
         btn("Work Orders").amend {
-          onClick --> { _ =>
-            log("work order view: work orders menu item onClick")
-            route(WorkOrdersPage)
-          }
+          onClick --> { _ => route(WorkOrdersPage) }
         }      
       ),
       hdr("Work Order"),
