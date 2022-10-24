@@ -19,6 +19,9 @@ object Components:
   def rbtn(text: String): Button =
     button(cls("w3-button w3-round w3-indigo w3-right"), text)
 
+  def checkbox: Input =
+    input(cls("w3-input"), tpe("checkbox"))
+
   def lbl(text: String): Label =
     label(cls("w3-left-align w3-text-indigo"), text)
 
