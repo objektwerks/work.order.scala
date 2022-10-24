@@ -36,6 +36,8 @@ object WorkOrderView extends View:
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(_.number.toString)
       },
+      lbl("Service Providers"),
+      list( listServiceProviders(Model.serviceProvidersVar) ),
       lbl("Title"),
       txt.amend {
         onInput.mapToValue.filter(_.nonEmpty) --> { value =>
