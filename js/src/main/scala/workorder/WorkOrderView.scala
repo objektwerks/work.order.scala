@@ -36,6 +36,14 @@ object WorkOrderView extends View:
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(_.number.toString)
       },
+      lbl("Homeowner"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(workOrder => Model.homeownerName(workOrder.homeownerId))
+      },
+      lbl("Service Provider"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(workOrder => Model.serviceProviderName(workOrder.serviceProviderId))
+      },
       lbl("Service Providers"),
       list( listServiceProviders(Model.serviceProvidersVar) ),
       lbl("Title"),
