@@ -20,6 +20,9 @@ object WorkOrderView extends View:
     val issueErrorBus = new EventBus[String]
     val streetAddressErrorBus = new EventBus[String]
 
+    Model.workOrderVar.update(workOrder => workOrder.copy(homeownerId = Model.userVar.now().id))
+    Model.workOrderVar.update(workOrder => workOrder.copy(opened = DateTime.now))
+
     div(
       bar(
         btn("Work Orders").amend {
