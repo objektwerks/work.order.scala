@@ -211,10 +211,12 @@ object WorkOrderView extends View:
         event match
           case WorkOrderAdded(number, _, _) =>
             clearErrorBus()
+            log("work order view: add succeeded.")
             Model.addWorkOrder(Model.workOrderVar.now().copy(number = number))
             route(WorkOrdersPage)
           case WorkOrderSaved(_, _, _) =>
             clearErrorBus()
+            log("work order view: save succeeded.")
             Model.updateWorkOrder(Model.workOrderVar.now())
             route(WorkOrdersPage)
           case _ => log("work order view: handler failed: %o", event)
