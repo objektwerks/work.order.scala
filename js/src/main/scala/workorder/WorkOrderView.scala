@@ -11,15 +11,14 @@ object WorkOrderView extends View:
   def apply(): HtmlElement =
     val role = Model.userVar.now().role
     Model.workOrderMode match
-      case Mode.add => add(role)
+      case Mode.add => add()
       case Mode.edit => edit(role)
       case Mode.readonly => readonly()
 
-  def add(role: String): HtmlElement =
+  def add(): HtmlElement =
     val titleErrorBus = new EventBus[String]
     val issueErrorBus = new EventBus[String]
     val streetAddressErrorBus = new EventBus[String]
-    val resolutionErrorBus = new EventBus[String]
 
     div(
       bar(
@@ -29,14 +28,6 @@ object WorkOrderView extends View:
       ),
       hdr("Work Order"),
       err(errorBus),
-      lbl("Number"),
-      rotxt.amend {
-        value <-- Model.workOrderVar.signal.map(_.number.toString)
-      },
-      lbl("Homeowner"),
-      rotxt.amend {
-        value <-- Model.workOrderVar.signal.map(workOrder => Model.userName(workOrder.homeownerId))
-      },
       lbl("Service Providers"),
       list( listServiceProviders(Model.serviceProvidersVar) ),
       lbl("Title"),
@@ -72,25 +63,6 @@ object WorkOrderView extends View:
         }
       },
       err(streetAddressErrorBus),
-      lbl("Resolution"),
-      txtarea().amend {
-        onInput.mapToValue.filter(_.nonEmpty) --> { value =>
-          Model.workOrderVar.update(workOrder => workOrder.copy(resolution = value))
-        }
-        onKeyUp.mapToValue --> { value =>
-          if value.isResolution then clear(resolutionErrorBus)
-          else emit(resolutionErrorBus, titleInvalid)
-        }
-      },
-      err(resolutionErrorBus),
-      lbl("Opened"),
-      rotxt.amend {
-        value <-- Model.workOrderVar.signal.map(_.opened)
-      },
-      lbl("Closed"), // TODO Need checkbox!
-      rotxt.amend {
-        value <-- Model.workOrderVar.signal.map(_.closed)
-      },
       cbar(
         btn("Save").amend {
           disabled <-- Model.workOrderVar.signal.map { workOrder => !workOrder.isValid }
