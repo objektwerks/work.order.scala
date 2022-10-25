@@ -36,6 +36,7 @@ object WorkOrdersView extends View:
         list(listWorkOrders(Model.closedWorkOrders)),
         cbar(
           btn("New").amend {
+            disabled <-- Model.userVar.signal.map(user => user.role == Roles.serviceProvider)
             onClick --> { _ =>
               log("work orders view: new button onClick")
               route(WorkOrderPage)
