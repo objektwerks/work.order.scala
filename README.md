@@ -10,7 +10,7 @@ Note
 
 Todo
 ----
-1. Testing
+1. UI testing
 
 Install
 -------
