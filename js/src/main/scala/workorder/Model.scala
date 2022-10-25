@@ -8,17 +8,20 @@ final case class ImageFile(number: Int, file: File, filename: String, url: Strin
 
 object Model:
   val userVar = Var(User.empty)
-  val homeownersVar = Var(List.empty[User])
-  val serviceProvidersVar = Var(List.empty[User])
+  val usersVar = Var(List.empty[User])
   val workOrdersVar = Var(List.empty[WorkOrder])
   val workOrderVar = Var(WorkOrder.empty)
   val imageFile: Option[ImageFile] = None
 
   def imageFileUrl: String = imageFile.fold("")(i => i.url)
 
-  def homeownerName(id: Int): String = homeownersVar.now().find(_.id == id).fold("")(_.name)
+  def homeownersVar: Var[List[User]] = Var(usersVar.now().filter(user => user.role == Roles.serviceProvider))
 
-  def serviceProviderName(id: Int): String = serviceProvidersVar.now().find(_.id == id).fold("")(_.name)
+  def serviceProvidersVar: Var[List[User]] = Var(usersVar.now().filter(user => user.role == Roles.serviceProvider))
+
+  def homeownerName(id: Int): String = usersVar.now().find(_.id == id).fold("")(_.name)
+
+  def serviceProviderName(id: Int): String = usersVar.now().find(_.id == id).fold("")(_.name)
 
   def openWorkOrders: Var[List[WorkOrder]] = Var(workOrdersVar.now().filter(workOrder => workOrder.closed.isEmpty))
 
