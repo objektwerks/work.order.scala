@@ -11,7 +11,7 @@ object Model:
   val usersVar = Var(List.empty[User])
   val workOrdersVar = Var(List.empty[WorkOrder])
   val workOrderVar = Var(WorkOrder.empty)
-  val workOrderMode = Var(Mode.readonly)
+  var workOrderMode = Mode.readonly
   val imageFile: Option[ImageFile] = None
 
   def addWorkOrder(workOrder: WorkOrder): Unit = workOrdersVar.update(_ :+ workOrder)
