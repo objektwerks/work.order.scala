@@ -37,6 +37,8 @@ object WorkOrderView extends View:
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(workOrder => Model.userName(workOrder.homeownerId))
       },
+      lbl("Service Providers"),
+      list( listServiceProviders(Model.serviceProvidersVar) ),
     )
 
   def edit(role: String): HtmlElement =
@@ -61,6 +63,10 @@ object WorkOrderView extends View:
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(workOrder => Model.userName(workOrder.homeownerId))
       },
+      lbl("Service Provider"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(workOrder => Model.userName(workOrder.serviceProviderId))
+      },
     )
 
   def readonly(): HtmlElement =
@@ -72,6 +78,10 @@ object WorkOrderView extends View:
       lbl("Homeowner"),
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(workOrder => Model.userName(workOrder.homeownerId))
+      },
+      lbl("Service Provider"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(workOrder => Model.userName(workOrder.serviceProviderId))
       },
     )
 
@@ -87,16 +97,6 @@ object WorkOrderView extends View:
 
   def refactor(): HtmlElement =
     div(
-      lbl("Homeowner"),
-      rotxt.amend {
-        value <-- Model.workOrderVar.signal.map(workOrder => Model.userName(workOrder.homeownerId))
-      },
-      lbl("Service Provider"),
-      rotxt.amend {
-        value <-- Model.workOrderVar.signal.map(workOrder => Model.userName(workOrder.serviceProviderId))
-      },
-      lbl("Service Providers"),
-      list( listServiceProviders(Model.serviceProvidersVar) ),
       lbl("Title"),
       txt.amend {
         onInput.mapToValue.filter(_.nonEmpty) --> { value =>
