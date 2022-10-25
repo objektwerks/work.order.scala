@@ -76,9 +76,29 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
         .list()
     }
 
-  def listUsersByRole(role: String): List[User] =
+  def listHomeownersInWorkOrdersByServiceProviderId(userId: Int): List[User] =
     DB readOnly { implicit session =>
-      sql"select id, role, name, emailAddress, streetAddress, registered from user where role = $role order by name asc"
+      sql"""select * from users
+            inner join work_orders ON users.homeownerId = work_orders.homeownerId
+            where work_orders.serviceProviderId = $userId
+            order by name asc"""
+      .map(rs => User(
+        rs.int("id"),
+        rs.string("role"),
+        rs.string("name"),
+        rs.string("emailAddress"),
+        rs.string("streetAddress"),
+        rs.string("registered"),
+        "",
+        ""))
+        .list()
+    }
+
+  def listServiceProviders(): List[User] =
+    DB readOnly { implicit session =>
+      sql"""select id, role, name, emailAddress, streetAddress, registered from user
+            where role = ${Roles.serviceProvider}
+            order by name asc"""
         .map(rs => User(
           rs.int("id"),
           rs.string("role"),
