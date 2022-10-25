@@ -20,6 +20,14 @@ object Model:
     removeWorkOrder(workOrder.number)
     addWorkOrder(workOrder)
 
+  def updateWorkOrder(updatedWorkOrder: WorkOrder): Unit =
+    workOrdersVar.update { workOrders =>
+      workOrders.map { workOrder =>
+        if workOrder.number == updatedWorkOrder.number then updatedWorkOrder
+        else workOrder
+      }
+    }
+
   def removeWorkOrder(number: Int): Unit = workOrdersVar.update(_.filterNot(_.number == number))
 
   def userName(id: Int): String = usersVar.now().find(_.id == id).fold("")(_.name)
