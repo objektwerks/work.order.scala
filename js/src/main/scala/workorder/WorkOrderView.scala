@@ -61,6 +61,17 @@ object WorkOrderView extends View:
         }
       },
       err(issueErrorBus),
+      lbl("Street Address"),
+      street.amend {
+        onInput.mapToValue.filter(_.nonEmpty) --> { value =>
+          Model.workOrderVar.update(workOrder => workOrder.copy(streetAddress = value))
+        }
+        onKeyUp.mapToValue --> { value =>
+          if value.isStreetAddress then clear(streetAddressErrorBus)
+          else emit(streetAddressErrorBus, streetAddressInvalid)
+        }
+      },
+      err(streetAddressErrorBus),
     )
 
   def edit(role: String): HtmlElement =
@@ -104,6 +115,17 @@ object WorkOrderView extends View:
         }
       },
       err(issueErrorBus),
+      lbl("Street Address"),
+      street.amend {
+        onInput.mapToValue.filter(_.nonEmpty) --> { value =>
+          Model.workOrderVar.update(workOrder => workOrder.copy(streetAddress = value))
+        }
+        onKeyUp.mapToValue --> { value =>
+          if value.isStreetAddress then clear(streetAddressErrorBus)
+          else emit(streetAddressErrorBus, streetAddressInvalid)
+        }
+      },
+      err(streetAddressErrorBus),
     )
 
   def readonly(): HtmlElement =
@@ -158,17 +180,6 @@ object WorkOrderView extends View:
 
   def refactor(): HtmlElement =
     div(
-      lbl("Street Address"),
-      street.amend {
-        onInput.mapToValue.filter(_.nonEmpty) --> { value =>
-          Model.workOrderVar.update(workOrder => workOrder.copy(streetAddress = value))
-        }
-        onKeyUp.mapToValue --> { value =>
-          if value.isStreetAddress then clear(streetAddressErrorBus)
-          else emit(streetAddressErrorBus, streetAddressInvalid)
-        }
-      },
-      err(streetAddressErrorBus),
       lbl("Resolution"),
       txtarea().amend {
         onInput.mapToValue.filter(_.nonEmpty) --> { value =>
