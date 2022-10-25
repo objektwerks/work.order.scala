@@ -16,6 +16,12 @@ object Model:
 
   def addWorkOrder(workOrder: WorkOrder): Unit = workOrdersVar.update(_ :+ workOrder)
 
+  def saveWorkOrder(workOrder: WorkOrder): Unit =
+    removeWorkOrder(workOrder.number)
+    addWorkOrder(workOrder)
+
+  def removeWorkOrder(number: Int): Unit = workOrdersVar.update(_.filterNot(_.number == number))
+
   def userName(id: Int): String = usersVar.now().find(_.id == id).fold("")(_.name)
 
   def homeownersVar: Var[List[User]] = Var(usersVar.now().filter(user => user.role == Roles.homeowner))
