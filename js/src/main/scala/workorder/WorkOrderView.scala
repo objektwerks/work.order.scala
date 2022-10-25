@@ -22,7 +22,17 @@ object WorkOrderView extends View:
     val resolutionErrorBus = new EventBus[String]
 
     div(
-
+      bar(
+        btn("Work Orders").amend {
+          onClick --> { _ => route(WorkOrdersPage) }
+        }      
+      ),
+      hdr("Work Order"),
+      err(errorBus),
+      lbl("Number"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(_.number.toString)
+      },
     )
 
   def edit(role: String): HtmlElement =
@@ -32,7 +42,17 @@ object WorkOrderView extends View:
     val resolutionErrorBus = new EventBus[String]
     
     div(
-
+      bar(
+        btn("Work Orders").amend {
+          onClick --> { _ => route(WorkOrdersPage) }
+        }      
+      ),
+      hdr("Work Order"),
+      err(errorBus),
+      lbl("Number"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(_.number.toString)
+      },
     )
 
   def readonly(): HtmlElement =
@@ -52,17 +72,6 @@ object WorkOrderView extends View:
 
   def refactor(): HtmlElement =
     div(
-      bar(
-        btn("Work Orders").amend {
-          onClick --> { _ => route(WorkOrdersPage) }
-        }      
-      ),
-      hdr("Work Order"),
-      err(errorBus),
-      lbl("Number"),
-      rotxt.amend {
-        value <-- Model.workOrderVar.signal.map(_.number.toString)
-      },
       lbl("Homeowner"),
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(workOrder => Model.userName(workOrder.homeownerId))
