@@ -67,7 +67,7 @@ object WorkOrderView extends View:
       },
       err(streetAddressErrorBus),
       cbar(
-        btn("Save").amend {
+        btn("Add").amend {
           disabled <-- Model.workOrderVar.signal.map { workOrder => !workOrder.isValid }
           onClick --> { _ =>
             val command = AddWorkOrder(Model.workOrderVar.now(), Model.userVar.now().license)
