@@ -7,7 +7,7 @@ import org.scalajs.dom.console.log
 import Components.*
 import Validator.*
 
-object WorkOrderView extends View:
+object WorkOrderView extends View: // Account for Model and User.role!
   def apply(): HtmlElement =
     val titleErrorBus = new EventBus[String]
     val issueErrorBus = new EventBus[String]
@@ -101,7 +101,7 @@ object WorkOrderView extends View:
       cbar(
         btn("Save").amend {
           disabled <-- Model.workOrderVar.signal.map { workOrder => !workOrder.isValid }
-          onClick --> { _ => // TODO Add or Save
+          onClick --> { _ =>
             val command = SaveWorkOrder(Model.workOrderVar.now(), Model.userVar.now().license)
             log("work order view: save button onClick command: %o", command)
             call(command, handler)

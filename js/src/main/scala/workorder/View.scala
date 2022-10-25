@@ -2,10 +2,10 @@ package workorder
 
 import com.raquo.laminar.api.L.*
 
-trait View:
-  enum Mode:
-    case add, edit, readonly
+enum Mode:
+  case add, edit, readonly
 
+trait View:
   protected[this] val errorBus = new EventBus[String]
 
   def call(command: Command, handler: Either[Fault, Event] => Unit): Unit = Fetcher.call(command, handler)

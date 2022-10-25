@@ -11,6 +11,7 @@ object Model:
   val usersVar = Var(List.empty[User])
   val workOrdersVar = Var(List.empty[WorkOrder])
   val workOrderVar = Var(WorkOrder.empty)
+  val workOrderMode = Var(Mode.readonly)
   val imageFile: Option[ImageFile] = None
 
   def imageFileUrl: String = imageFile.fold("")(i => i.url)
