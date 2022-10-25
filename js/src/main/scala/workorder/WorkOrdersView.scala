@@ -28,27 +28,26 @@ object WorkOrdersView extends View:
           }
         }      
       ),
-      div(
-        hdr("Work Orders"),
-        lbl("Open"),
-        list(listWorkOrders(Model.openWorkOrders)),
-        lbl("Closed"),
-        list(listWorkOrders(Model.closedWorkOrders)),
-        cbar(
-          btn("New").amend {
-            disabled <-- Model.userVar.signal.map(user => user.role == Roles.serviceProvider)
-            onClick --> { _ =>
-              log("work orders view: new button onClick")
-              Model.workOrderVar.set(WorkOrder.empty)
-              route(WorkOrderPage)
-            }
-          }),
-          btn("Refresh").amend {
-            onClick --> { _ =>
-              log("work orders view: refresh button onClick")
-              val user = Model.userVar.now()
-              val command = ListWorkOrders(user.id, user.license)
-              call(command, handler)
-            }
-          }),
-        )
+      hdr("Work Orders"),
+      lbl("Open"),
+      list(listWorkOrders(Model.openWorkOrders)),
+      lbl("Closed"),
+      list(listWorkOrders(Model.closedWorkOrders)),
+      cbar(
+        btn("New").amend {
+          disabled <-- Model.userVar.signal.map(user => user.role == Roles.serviceProvider)
+          onClick --> { _ =>
+            log("work orders view: new button onClick")
+            Model.workOrderVar.set(WorkOrder.empty)
+            route(WorkOrderPage)
+          }
+        }),
+        btn("Refresh").amend {
+          onClick --> { _ =>
+            log("work orders view: refresh button onClick")
+            val user = Model.userVar.now()
+            val command = ListWorkOrders(user.id, user.license)
+            call(command, handler)
+          }
+        }
+      )
