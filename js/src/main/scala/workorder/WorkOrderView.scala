@@ -7,8 +7,10 @@ import org.scalajs.dom.console.log
 import Components.*
 import Validator.*
 
-object WorkOrderView extends View: // Account for Model and User.role!
+object WorkOrderView extends View:
   def apply(): HtmlElement =
+    // Build custom view for each mode and role!
+
     val titleErrorBus = new EventBus[String]
     val issueErrorBus = new EventBus[String]
     val streetAddressErrorBus = new EventBus[String]
