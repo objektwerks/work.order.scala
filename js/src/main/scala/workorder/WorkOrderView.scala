@@ -33,6 +33,10 @@ object WorkOrderView extends View:
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(_.number.toString)
       },
+      lbl("Homeowner"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(workOrder => Model.userName(workOrder.homeownerId))
+      },
     )
 
   def edit(role: String): HtmlElement =
@@ -53,11 +57,22 @@ object WorkOrderView extends View:
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(_.number.toString)
       },
+      lbl("Homeowner"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(workOrder => Model.userName(workOrder.homeownerId))
+      },
     )
 
   def readonly(): HtmlElement =
     div(
-
+      lbl("Number"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(_.number.toString)
+      },
+      lbl("Homeowner"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(workOrder => Model.userName(workOrder.homeownerId))
+      },
     )
 
   def handler(either: Either[Fault, Event]): Unit =
