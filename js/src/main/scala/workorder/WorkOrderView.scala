@@ -110,6 +110,7 @@ object WorkOrderView extends View:
       },
       lbl("Issue"),
       txtarea().amend {
+        readOnly( (role == Roles.serviceProvider) )
         onInput.mapToValue.filter(_.nonEmpty) --> { value =>
           Model.workOrderVar.update(workOrder => workOrder.copy(issue = value))
         }
