@@ -128,6 +128,22 @@ object WorkOrderView extends View:
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(_.issue)
       },
+      lbl("Street Address"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(_.streetAddress)
+      },
+      lbl("Resolution"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(_.resolution)
+      },
+      lbl("Opened"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(_.opened)
+      },
+      lbl("Closed"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(_.closed)
+      },
     )
 
   def handler(either: Either[Fault, Event]): Unit =
