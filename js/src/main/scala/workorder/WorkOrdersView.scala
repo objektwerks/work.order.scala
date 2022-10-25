@@ -39,6 +39,7 @@ object WorkOrdersView extends View:
             disabled <-- Model.userVar.signal.map(user => user.role == Roles.serviceProvider)
             onClick --> { _ =>
               log("work orders view: new button onClick")
+              Model.workOrderVar.set(WorkOrder.empty)
               route(WorkOrderPage)
             }
           }),
