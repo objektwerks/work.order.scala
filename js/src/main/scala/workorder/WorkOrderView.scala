@@ -9,8 +9,28 @@ import Validator.*
 
 object WorkOrderView extends View:
   def apply(): HtmlElement =
-    // Build custom view for each mode and role!
+    val role = Model.userVar.now().role
+    Model.workOrderMode match
+      case Mode.add => add(role)
+      case Mode.edit => edit(role)
+      case Mode.readonly => readonly()
 
+  def add(role: String): HtmlElement =
+    div(
+
+    )
+
+  def edit(role: String): HtmlElement =
+    div(
+
+    )
+
+  def readonly(): HtmlElement =
+    div(
+
+    )
+
+  def refactor(): HtmlElement =
     val titleErrorBus = new EventBus[String]
     val issueErrorBus = new EventBus[String]
     val streetAddressErrorBus = new EventBus[String]
