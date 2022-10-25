@@ -134,6 +134,7 @@ object WorkOrderView extends View:
       err(streetAddressErrorBus),
       lbl("Resolution"),
       txtarea().amend {
+        readOnly( (role == Roles.homeowner) )
         onInput.mapToValue.filter(_.nonEmpty) --> { value =>
           Model.workOrderVar.update(workOrder => workOrder.copy(resolution = value))
         }
