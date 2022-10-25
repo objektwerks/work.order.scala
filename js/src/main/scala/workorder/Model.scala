@@ -14,6 +14,8 @@ object Model:
   val workOrderMode = Var(Mode.readonly)
   val imageFile: Option[ImageFile] = None
 
+  def addWorkOrder(workOrder: WorkOrder): Unit = workOrdersVar.update(_ :+ workOrder)
+
   def userName(id: Int): String = usersVar.now().find(_.id == id).fold("")(_.name)
 
   def homeownersVar: Var[List[User]] = Var(usersVar.now().filter(user => user.role == Roles.homeowner))
