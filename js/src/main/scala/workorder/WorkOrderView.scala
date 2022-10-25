@@ -99,7 +99,8 @@ object WorkOrderView extends View:
             log("work order view: save button onClick command: %o", command)
             call(command, handler)
           }
-        })
+        }
+      )
     )
 
   def edit(role: String): HtmlElement =
@@ -181,7 +182,8 @@ object WorkOrderView extends View:
             log("work order view: save button onClick command: %o", command)
             call(command, handler)
           }
-        })
+        }
+      )
     )
 
   def readonly(): HtmlElement =
