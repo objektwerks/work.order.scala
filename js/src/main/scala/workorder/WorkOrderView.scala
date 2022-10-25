@@ -209,7 +209,8 @@ object WorkOrderView extends View:
       case Left(fault) => errorBus.emit(s"Save work order failed: ${fault.cause}")
       case Right(event) =>
         event match
-          case WorkOrderAdded(_, _, _) | WorkOrderSaved(_, _, _) =>
+          case WorkOrderAdded(number, _, _) =>
             clearErrorBus()
+            Model.addWorkOrder(Model.workOrderVar.now().copy(number = number))
             route(WorkOrdersPage)
           case _ => log("work order view: handler failed: %o", event)
