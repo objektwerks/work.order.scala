@@ -20,8 +20,8 @@ object RegisterView extends View:
     val emailAddressErrorBus = new EventBus[String]
     val streetAddressErrorBus = new EventBus[String]
 
-    def handler(either: Either[Fault, Event]): Unit =
-      either match
+    def handler(result: Either[Fault, Event]): Unit =
+      result match
         case Left(fault) => errorBus.emit(s"Register failed: ${fault.cause}")
         case Right(event) =>
           event match
