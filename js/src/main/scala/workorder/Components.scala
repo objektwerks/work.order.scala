@@ -5,8 +5,6 @@ import com.raquo.laminar.api.L.*
 import scala.scalajs.js.Date
 
 object Components:
-  private val inputCss = "w3-input w3-hover-light-gray w3-text-indigo"
-
   def bar(elms: HtmlElement*): Div =
     div(cls("w3-bar"), elms)
 
@@ -26,7 +24,7 @@ object Components:
     label(cls("w3-left-align w3-text-indigo"), text)
 
   def txt: Input =
-    input(cls(inputCss), required(true))
+    input(cls("w3-input w3-hover-light-gray w3-text-indigo"), required(true))
 
   def rotxt: Input =
     input(cls("w3-input w3-light-gray w3-text-indigo"), readOnly(true))
@@ -35,19 +33,19 @@ object Components:
     textArea(cls("w3-hover-light-gray w3-text-indigo"), rows(rowCount))
 
   def rotxtarea(rowCount: Int = 2, isReadOnly: Boolean = false): TextArea =
-    textArea(cls("w3-hover-light-gray w3-text-indigo"), rows(rowCount), readOnly(true))
+    textArea(cls("w3-light-gray w3-text-indigo"), rows(rowCount), readOnly(true))
 
   def email: Input =
-    input(cls(inputCss), typ("email"), minLength(3), required(true))
+    input(cls("w3-input w3-hover-light-gray w3-text-indigo"), typ("email"), minLength(3), required(true))
 
   def pin: Input =
-    input(cls(inputCss), typ("text"), minLength(7), maxLength(7), required(true))
+    input(cls("w3-input w3-hover-light-gray w3-text-indigo"), typ("text"), minLength(7), maxLength(7), required(true))
 
   def int: Input =
-    input(cls(inputCss), typ("number"), pattern("\\d*"), stepAttr("1"), required(true))
+    input(cls("w3-input w3-hover-light-gray w3-text-indigo"), typ("number"), pattern("\\d*"), stepAttr("1"), required(true))
 
   def dbl: Input =
-    input(cls(inputCss), typ("number"), pattern("[0-9]+([.,][0-9]+)?"), stepAttr("0.01"), required(true))
+    input(cls("w3-input w3-hover-light-gray w3-text-indigo"), typ("number"), pattern("[0-9]+([.,][0-9]+)?"), stepAttr("0.01"), required(true))
 
   def hdr(text: String): HtmlElement =
     h5(cls("w3-indigo"), text)
@@ -56,7 +54,7 @@ object Components:
     div(cls("w3-container w3-border-white w3-text-red"), child.text <-- errBus.events)
 
   def street: Input =
-    input(cls(inputCss), minLength(7), required(true))
+    input(cls("w3-input w3-hover-light-gray w3-text-indigo"), minLength(7), required(true))
 
   def roles: Select =
     select(cls("w3-select w3-text-indigo"),
