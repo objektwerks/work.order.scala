@@ -94,5 +94,5 @@ object Components:
       }
     )
 
-  def item(strSignal: Signal[String]): Li =
-    li(cls("w3-text-indigo w3-display-container"), child.text <-- strSignal)
+  def item(stringSignal: Signal[String]): Li =
+    li(cls("w3-text-indigo w3-display-container"), child.text <-- stringSignal)
