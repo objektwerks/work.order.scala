@@ -72,6 +72,17 @@ object WorkOrderView extends View:
         }
       },
       err(streetAddressErrorBus),
+      lbl("Resolution"),
+      txtarea().amend {
+        onInput.mapToValue.filter(_.nonEmpty) --> { value =>
+          Model.workOrderVar.update(workOrder => workOrder.copy(resolution = value))
+        }
+        onKeyUp.mapToValue --> { value =>
+          if value.isResolution then clear(resolutionErrorBus)
+          else emit(resolutionErrorBus, titleInvalid)
+        }
+      },
+      err(resolutionErrorBus),
     )
 
   def edit(role: String): HtmlElement =
@@ -126,6 +137,17 @@ object WorkOrderView extends View:
         }
       },
       err(streetAddressErrorBus),
+      lbl("Resolution"),
+      txtarea().amend {
+        onInput.mapToValue.filter(_.nonEmpty) --> { value =>
+          Model.workOrderVar.update(workOrder => workOrder.copy(resolution = value))
+        }
+        onKeyUp.mapToValue --> { value =>
+          if value.isResolution then clear(resolutionErrorBus)
+          else emit(resolutionErrorBus, titleInvalid)
+        }
+      },
+      err(resolutionErrorBus),
     )
 
   def readonly(): HtmlElement =
@@ -180,17 +202,6 @@ object WorkOrderView extends View:
 
   def refactor(): HtmlElement =
     div(
-      lbl("Resolution"),
-      txtarea().amend {
-        onInput.mapToValue.filter(_.nonEmpty) --> { value =>
-          Model.workOrderVar.update(workOrder => workOrder.copy(resolution = value))
-        }
-        onKeyUp.mapToValue --> { value =>
-          if value.isResolution then clear(resolutionErrorBus)
-          else emit(resolutionErrorBus, titleInvalid)
-        }
-      },
-      err(resolutionErrorBus),
       lbl("Opened"),
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(_.opened)
