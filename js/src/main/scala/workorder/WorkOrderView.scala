@@ -91,6 +91,15 @@ object WorkOrderView extends View:
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(_.closed)
       },
+      cbar(
+        btn("Save").amend {
+          disabled <-- Model.workOrderVar.signal.map { workOrder => !workOrder.isValid }
+          onClick --> { _ =>
+            val command = AddWorkOrder(Model.workOrderVar.now(), Model.userVar.now().license)
+            log("work order view: save button onClick command: %o", command)
+            call(command, handler)
+          }
+        })
     )
 
   def edit(role: String): HtmlElement =
@@ -164,6 +173,15 @@ object WorkOrderView extends View:
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(_.closed)
       },
+      cbar(
+        btn("Save").amend {
+          disabled <-- Model.workOrderVar.signal.map { workOrder => !workOrder.isValid }
+          onClick --> { _ =>
+            val command = SaveWorkOrder(Model.workOrderVar.now(), Model.userVar.now().license)
+            log("work order view: save button onClick command: %o", command)
+            call(command, handler)
+          }
+        })
     )
 
   def readonly(): HtmlElement =
