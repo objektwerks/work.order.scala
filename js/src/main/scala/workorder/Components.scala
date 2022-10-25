@@ -31,8 +31,11 @@ object Components:
   def rotxt: Input =
     input(cls("w3-input w3-light-gray w3-text-indigo"), readOnly(true))
 
-  def txtarea(rowCount: Int = 2, isReadOnly: Boolean = false): TextArea =
-    textArea(cls("w3-hover-light-gray w3-text-indigo"), rows(rowCount), readOnly(isReadOnly))
+  def txtarea(rowCount: Int = 2): TextArea =
+    textArea(cls("w3-hover-light-gray w3-text-indigo"), rows(rowCount))
+
+  def rotxtarea(rowCount: Int = 2, isReadOnly: Boolean = false): TextArea =
+    textArea(cls("w3-hover-light-gray w3-text-indigo"), rows(rowCount), readOnly(true))
 
   def email: Input =
     input(cls(inputCss), typ("email"), minLength(3), required(true))
