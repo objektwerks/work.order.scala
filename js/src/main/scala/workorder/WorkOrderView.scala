@@ -216,4 +216,5 @@ object WorkOrderView extends View:
           case WorkOrderSaved(_, _, _) =>
             clearErrorBus()
             Model.updateWorkOrder(Model.workOrderVar.now())
+            route(WorkOrdersPage)
           case _ => log("work order view: handler failed: %o", event)
