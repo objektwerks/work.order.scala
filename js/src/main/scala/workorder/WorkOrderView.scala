@@ -16,11 +16,21 @@ object WorkOrderView extends View:
       case Mode.readonly => readonly()
 
   def add(role: String): HtmlElement =
+    val titleErrorBus = new EventBus[String]
+    val issueErrorBus = new EventBus[String]
+    val streetAddressErrorBus = new EventBus[String]
+    val resolutionErrorBus = new EventBus[String]
+
     div(
 
     )
 
   def edit(role: String): HtmlElement =
+    val titleErrorBus = new EventBus[String]
+    val issueErrorBus = new EventBus[String]
+    val streetAddressErrorBus = new EventBus[String]
+    val resolutionErrorBus = new EventBus[String]
+    
     div(
 
     )
@@ -30,22 +40,17 @@ object WorkOrderView extends View:
 
     )
 
-  def refactor(): HtmlElement =
-    val titleErrorBus = new EventBus[String]
-    val issueErrorBus = new EventBus[String]
-    val streetAddressErrorBus = new EventBus[String]
-    val resolutionErrorBus = new EventBus[String]
+  def handler(either: Either[Fault, Event]): Unit =
+    either match
+      case Left(fault) => errorBus.emit(s"Save work order failed: ${fault.cause}")
+      case Right(event) =>
+        event match
+          case WorkOrderAdded(_, _, _) | WorkOrderSaved(_, _, _) =>
+            clearErrorBus()
+            route(WorkOrdersPage)
+          case _ => log("work order view: handler failed: %o", event)
 
-    def handler(either: Either[Fault, Event]): Unit =
-      either match
-        case Left(fault) => errorBus.emit(s"Save work order failed: ${fault.cause}")
-        case Right(event) =>
-          event match
-            case WorkOrderAdded(_, _, _) | WorkOrderSaved(_, _, _) =>
-              clearErrorBus()
-              route(WorkOrdersPage)
-            case _ => log("work order view: handler failed: %o", event)
-    // TODO role? add? edit? readonly?
+  def refactor(): HtmlElement =
     div(
       bar(
         btn("Work Orders").amend {
