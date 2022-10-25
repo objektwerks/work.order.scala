@@ -10,7 +10,7 @@ Todo
 
 Install
 -------
-1. brew install postgresql
+1. brew install mysql
 2. brew install node
 3. npm install ( in project root directory )
 >See **package.json** for installable dependencies.
