@@ -14,16 +14,14 @@ object Model:
   val workOrderMode = Var(Mode.readonly)
   val imageFile: Option[ImageFile] = None
 
-  def imageFileUrl: String = imageFile.fold("")(i => i.url)
+  def userName(id: Int): String = usersVar.now().find(_.id == id).fold("")(_.name)
 
-  def homeownersVar: Var[List[User]] = Var(usersVar.now().filter(user => user.role == Roles.serviceProvider))
+  def homeownersVar: Var[List[User]] = Var(usersVar.now().filter(user => user.role == Roles.homeowner))
 
   def serviceProvidersVar: Var[List[User]] = Var(usersVar.now().filter(user => user.role == Roles.serviceProvider))
-
-  def homeownerName(id: Int): String = usersVar.now().find(_.id == id).fold("")(_.name)
-
-  def serviceProviderName(id: Int): String = usersVar.now().find(_.id == id).fold("")(_.name)
 
   def openWorkOrders: Var[List[WorkOrder]] = Var(workOrdersVar.now().filter(workOrder => workOrder.closed.isEmpty))
 
   def closedWorkOrders: Var[List[WorkOrder]] = Var(workOrdersVar.now().filter(workOrder => workOrder.closed.nonEmpty))
+
+  def imageFileUrl: String = imageFile.fold("")(_.url)

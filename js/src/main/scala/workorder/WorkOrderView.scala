@@ -40,11 +40,11 @@ object WorkOrderView extends View:
       },
       lbl("Homeowner"),
       rotxt.amend {
-        value <-- Model.workOrderVar.signal.map(workOrder => Model.homeownerName(workOrder.homeownerId))
+        value <-- Model.workOrderVar.signal.map(workOrder => Model.userName(workOrder.homeownerId))
       },
       lbl("Service Provider"),
       rotxt.amend {
-        value <-- Model.workOrderVar.signal.map(workOrder => Model.serviceProviderName(workOrder.serviceProviderId))
+        value <-- Model.workOrderVar.signal.map(workOrder => Model.userName(workOrder.serviceProviderId))
       },
       lbl("Service Providers"),
       list( listServiceProviders(Model.serviceProvidersVar) ),
