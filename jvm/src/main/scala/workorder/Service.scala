@@ -31,27 +31,23 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
       Registered.fail(s"Register failed for: ${register.emailAddress}")
     }.get
 
+  /**
+   *  service provider:
+   *    don't list service providers
+   *    list all homeowners in assigned work orders
+   *  homeowner:
+   *    don't list homeowners
+   *    list all service providers
+   */
   def login(login: Login): LoggedIn =
     Try {
-      val user = store.getUserByEmailAddressPin(login.emailAddress, login.pin)
-      /* TODO based on user role list users by:
-        service provider:
-          don't list service providers
-          list all homeowners in assigned work orders
-          ( join user.homeownerid on workorder.homeownerid where workorder.serviceproviderid = user.id )
-          select *
-          from users
-          inner join work_orders ON users.homeownerId = work_orders.homeownerId
-          where work_orders.serviceProviderId = user.id;
-        homeowner:
-          don't list homeowners
-          list all service providers
-      */
-      val homeowners = store.listUsersByRole(Roles.homeowner)
-      val serviceProviders = store.listUsersByRole(Roles.serviceProvider)
-      val workOrders = store.listWorkOrders(user.get.id)
+      val user = store.getUserByEmailAddressPin(login.emailAddress, login.pin).get
+      val users = user.role match
+        case Roles.serviceProvider => store.listHomeownersInWorkOrdersByServiceProviderId(user.id)
+        case Roles.homeowner => store.listServiceProviders()
+      val workOrders = store.listWorkOrders(user.id)
       log("login", s"succeeded for: ${login.emailAddress}")
-      LoggedIn.success(user.get, homeowners, serviceProviders, workOrders)
+      LoggedIn.success(user, users, workOrders)
     }.recover { case error =>
       logError("login", s"failed error: $error for: ${login.emailAddress}")
       LoggedIn.fail(s"Login failed for: ${login.emailAddress}")
