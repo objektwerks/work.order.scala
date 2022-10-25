@@ -122,6 +122,7 @@ object WorkOrderView extends View:
       err(issueErrorBus),
       lbl("Street Address"),
       street.amend {
+        readOnly( (role == Roles.serviceProvider) )
         onInput.mapToValue.filter(_.nonEmpty) --> { value =>
           Model.workOrderVar.update(workOrder => workOrder.copy(streetAddress = value))
         }
