@@ -21,7 +21,7 @@ object LoginView extends View:
           event match
             case LoggedIn(user, users, workOrders, _, _) =>
               clearErrorBus()
-              log("login view: succeded.")
+              log("login view: succeeded.")
               Model.userVar.set(user)
               Model.workOrdersVar.set(workOrders)
               route(WorkOrdersPage)
