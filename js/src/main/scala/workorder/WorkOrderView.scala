@@ -110,7 +110,7 @@ object WorkOrderView extends View:
       },
       lbl("Issue"),
       txtarea().amend {
-        readOnly( (role == Roles.serviceProvider) )
+        readOnly( role == Roles.serviceProvider )
         onInput.mapToValue.filter(_.nonEmpty) --> { value =>
           Model.workOrderVar.update(workOrder => workOrder.copy(issue = value))
         }
@@ -122,7 +122,7 @@ object WorkOrderView extends View:
       err(issueErrorBus),
       lbl("Street Address"),
       street.amend {
-        readOnly( (role == Roles.serviceProvider) )
+        readOnly( role == Roles.serviceProvider )
         onInput.mapToValue.filter(_.nonEmpty) --> { value =>
           Model.workOrderVar.update(workOrder => workOrder.copy(streetAddress = value))
         }
@@ -134,7 +134,7 @@ object WorkOrderView extends View:
       err(streetAddressErrorBus),
       lbl("Resolution"),
       txtarea().amend {
-        readOnly( (role == Roles.homeowner) )
+        readOnly( role == Roles.homeowner )
         onInput.mapToValue.filter(_.nonEmpty) --> { value =>
           Model.workOrderVar.update(workOrder => workOrder.copy(resolution = value))
         }
