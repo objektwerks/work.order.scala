@@ -213,7 +213,7 @@ object WorkOrderView extends View:
         value <-- Model.workOrderVar.signal.map(_.streetAddress)
       },
       lbl("Resolution"),
-      rotxt.amend {
+      rotxtarea().amend {
         value <-- Model.workOrderVar.signal.map(_.resolution)
       },
       lbl("Opened"),
