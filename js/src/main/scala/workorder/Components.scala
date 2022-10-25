@@ -87,6 +87,7 @@ object Components:
         onClick --> { _ =>
           workOrders.now().find(_.number == number).foreach { workOrder =>
             Model.workOrderVar.set(workOrder)
+            Model.workOrderMode = Mode.edit
             PageRouter.router.pushState(WorkOrderPage)
           }
         }
