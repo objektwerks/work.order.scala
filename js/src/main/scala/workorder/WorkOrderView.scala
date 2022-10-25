@@ -204,8 +204,8 @@ object WorkOrderView extends View:
       },
     )
 
-  def handler(either: Either[Fault, Event]): Unit =
-    either match
+  def handler(result: Either[Fault, Event]): Unit =
+    result match
       case Left(fault) => errorBus.emit(s"Save work order failed: ${fault.cause}")
       case Right(event) =>
         event match
