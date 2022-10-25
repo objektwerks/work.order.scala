@@ -1,6 +1,6 @@
 Work Order
 ----------
->Work order (mobile) web app linking homeowners and service providers via work orders and email notification.
+>Web ( mobile ) app linking homeowners and service providers via work orders and email notification.
 >Reimplementation of [work.order](https://github.com/objektwerks/work.order) using Scala 3, ScalaJs, Cask, uPickle,
 >Scalikejdbc, Laminar, Waypoint, W3.CSS, Scaffeine, JoddMail, Mysql and Snowpack.
 
