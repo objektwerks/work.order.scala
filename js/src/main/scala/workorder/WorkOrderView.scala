@@ -83,6 +83,14 @@ object WorkOrderView extends View:
         }
       },
       err(resolutionErrorBus),
+      lbl("Opened"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(_.opened)
+      },
+      lbl("Closed"), // TODO Need checkbox!
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(_.closed)
+      },
     )
 
   def edit(role: String): HtmlElement =
@@ -148,6 +156,14 @@ object WorkOrderView extends View:
         }
       },
       err(resolutionErrorBus),
+      lbl("Opened"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(_.opened)
+      },
+      lbl("Closed"), // TODO Need checkbox!
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(_.closed)
+      },
     )
 
   def readonly(): HtmlElement =
@@ -202,14 +218,6 @@ object WorkOrderView extends View:
 
   def refactor(): HtmlElement =
     div(
-      lbl("Opened"),
-      rotxt.amend {
-        value <-- Model.workOrderVar.signal.map(_.opened)
-      },
-      lbl("Closed"), // TODO Need checkbox!
-      rotxt.amend {
-        value <-- Model.workOrderVar.signal.map(_.closed)
-      },
       cbar(
         btn("Save").amend {
           disabled <-- Model.workOrderVar.signal.map { workOrder => !workOrder.isValid }
