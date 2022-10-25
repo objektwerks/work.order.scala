@@ -50,6 +50,17 @@ object WorkOrderView extends View:
         }
       },
       err(titleErrorBus),
+      lbl("Issue"),
+      txtarea().amend {
+        onInput.mapToValue.filter(_.nonEmpty) --> { value =>
+          Model.workOrderVar.update(workOrder => workOrder.copy(issue = value))
+        }
+        onKeyUp.mapToValue --> { value =>
+          if value.isIssue then clear(issueErrorBus)
+          else emit(titleErrorBus, issueInvalid)
+        }
+      },
+      err(issueErrorBus),
     )
 
   def edit(role: String): HtmlElement =
@@ -82,6 +93,17 @@ object WorkOrderView extends View:
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(_.title)
       },
+      lbl("Issue"),
+      txtarea().amend {
+        onInput.mapToValue.filter(_.nonEmpty) --> { value =>
+          Model.workOrderVar.update(workOrder => workOrder.copy(issue = value))
+        }
+        onKeyUp.mapToValue --> { value =>
+          if value.isIssue then clear(issueErrorBus)
+          else emit(titleErrorBus, issueInvalid)
+        }
+      },
+      err(issueErrorBus),
     )
 
   def readonly(): HtmlElement =
@@ -102,6 +124,10 @@ object WorkOrderView extends View:
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(_.title)
       },
+      lbl("Issue"),
+      rotxt.amend {
+        value <-- Model.workOrderVar.signal.map(_.issue)
+      },
     )
 
   def handler(either: Either[Fault, Event]): Unit =
@@ -116,17 +142,6 @@ object WorkOrderView extends View:
 
   def refactor(): HtmlElement =
     div(
-      lbl("Issue"),
-      txt.amend {
-        onInput.mapToValue.filter(_.nonEmpty) --> { value =>
-          Model.workOrderVar.update(workOrder => workOrder.copy(issue = value))
-        }
-        onKeyUp.mapToValue --> { value =>
-          if value.isIssue then clear(issueErrorBus)
-          else emit(titleErrorBus, issueInvalid)
-        }
-      },
-      err(issueErrorBus),
       lbl("Street Address"),
       street.amend {
         onInput.mapToValue.filter(_.nonEmpty) --> { value =>
