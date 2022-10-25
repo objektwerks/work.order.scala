@@ -32,10 +32,10 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
     }.get
 
   /**
-   *  service provider:
+   *  user.role == service provider:
    *    don't list service providers
-   *    list all homeowners in assigned work orders
-   *  homeowner:
+   *    list all homeowners in assigned work orders to a single service provider
+   *  user.role == homeowner:
    *    don't list homeowners
    *    list all service providers
    */
