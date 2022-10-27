@@ -23,6 +23,7 @@ object LoginView extends View:
               clearErrorBus()
               log("login view: succeeded.")
               Model.userVar.set(user)
+              Model.usersVar.set(users)
               Model.workOrdersVar.set(workOrders)
               route(WorkOrdersPage)
             case _ =>
