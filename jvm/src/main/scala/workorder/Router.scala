@@ -16,32 +16,26 @@ final class Router(handler: Handler) extends Routes with LazyLogging:
 
   @cask.post("/register")
   def register(request: Request) =
-    val registered = handler.register( read[Register](request.text()) )
-    write[Registered](registered)
+    write[Registered]( handler.register( read[Register](request.text()) ) )
 
   @cask.post("/login")
   def login(request: Request) =
-    val loggedIn = handler.login( read[Login](request.text()) )
-    write[LoggedIn](loggedIn)
+    write[LoggedIn]( handler.login( read[Login](request.text()) ) )
 
   @cask.post("/user/save")
   def saveUser(request: Request) =
-    val userSaved = handler.saveUser( read[SaveUser](request.text()) )
-    write[UserSaved](userSaved)
+    write[UserSaved]( handler.saveUser( read[SaveUser](request.text()) ) )
 
   @cask.post("/workorder/add")
   def addWorkOrder(request: Request) =
-    val workOrderAdded = handler.addWorkOrder( read[AddWorkOrder](request.text()) )
-    write[WorkOrderAdded](workOrderAdded)
+    write[WorkOrderAdded]( handler.addWorkOrder( read[AddWorkOrder](request.text()) ) )
 
   @cask.post("/workorder/save")
   def saveWorkOrder(request: Request) =
-    val workOrderSaved = handler.saveWorkOrder( read[SaveWorkOrder](request.text()) )
-    write[WorkOrderSaved](workOrderSaved)
+    write[WorkOrderSaved]( handler.saveWorkOrder( read[SaveWorkOrder](request.text()) ) )
 
   @cask.post("/workorders")
   def listWorkOrders(request: Request) =
-    val workOrdersListed = handler.listWorkOrders( read[ListWorkOrders](request.text()) )
-    write[WorkOrdersListed](workOrdersListed)
+    write[WorkOrdersListed]( handler.listWorkOrders( read[ListWorkOrders](request.text()) ) )
 
   initialize()
