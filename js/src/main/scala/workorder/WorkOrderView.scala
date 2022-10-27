@@ -150,6 +150,7 @@ object WorkOrderView extends View:
       },
       lbl("Closed"),
       checkbox.amend {
+        value("Check to Close Work Order")
         readOnly( role == Roles.homeowner )
         checked <-- Model.workOrderVar.signal.map { _.closed.nonEmpty }
         onChange.mapToChecked --> { value =>
