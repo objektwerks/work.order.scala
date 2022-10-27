@@ -41,12 +41,6 @@ object Components:
   def pin: Input =
     input(cls("w3-input w3-hover-light-gray w3-text-indigo"), typ("text"), minLength(7), maxLength(7), required(true))
 
-  def int: Input =
-    input(cls("w3-input w3-hover-light-gray w3-text-indigo"), typ("number"), pattern("\\d*"), stepAttr("1"), required(true))
-
-  def dbl: Input =
-    input(cls("w3-input w3-hover-light-gray w3-text-indigo"), typ("number"), pattern("[0-9]+([.,][0-9]+)?"), stepAttr("0.01"), required(true))
-
   def hdr(text: String): HtmlElement =
     h5(cls("w3-indigo"), text)
 
@@ -69,6 +63,9 @@ object Components:
 
   def list(items: Signal[List[Li]]): HtmlElement =
     ul(cls("w3-ul w3-hoverable"), children <-- items)
+
+  def item(stringSignal: Signal[String]): Li =
+    li(cls("w3-text-indigo w3-display-container"), child.text <-- stringSignal)
 
   def listServiceProviders(serviceProviders: Var[List[User]]): Signal[List[Li]] =
     serviceProviders.signal.split(_.id)((id, _, serviceProviderSignal) =>
@@ -93,6 +90,3 @@ object Components:
         }
       }
     )
-
-  def item(stringSignal: Signal[String]): Li =
-    li(cls("w3-text-indigo w3-display-container"), child.text <-- stringSignal)
