@@ -80,7 +80,7 @@ object Components:
 
   def listWorkOrders(workOrders: Var[List[WorkOrder]]): Signal[List[Li]] =
     workOrders.signal.split(_.number)((number, _, workOrderSignal) =>
-      item(workOrderSignal.map(_.title)).amend {
+      item(workOrderSignal.map(wo => s"${wo.number} - ${wo.title}")).amend {
         onClick --> { _ =>
           workOrders.now().find(_.number == number).foreach { workOrder =>
             Model.workOrderVar.set(workOrder)
