@@ -140,7 +140,7 @@ object WorkOrderView extends View:
         }
         onKeyUp.mapToValue --> { value =>
           if value.isResolution then clear(resolutionErrorBus)
-          else emit(resolutionErrorBus, titleInvalid)
+          else emit(resolutionErrorBus, resolutionInvalid)
         }
       },
       err(resolutionErrorBus),
