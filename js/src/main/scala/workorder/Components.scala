@@ -87,7 +87,7 @@ object Components:
         onClick --> { _ =>
           workOrders.now().find(_.number == number).foreach { workOrder =>
             Model.workOrderVar.set(workOrder)
-            Model.workOrderMode = Mode.edit
+            Model.workOrderMode = if workOrder.closed.isEmpty then Mode.edit else Mode.readonly
             PageRouter.router.pushState(WorkOrderPage)
           }
         }
