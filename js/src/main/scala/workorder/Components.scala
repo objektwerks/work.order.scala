@@ -32,7 +32,7 @@ object Components:
   def txtarea(rowCount: Int = 2): TextArea =
     textArea(cls("w3-hover-light-gray w3-text-indigo"), rows(rowCount))
 
-  def rotxtarea(rowCount: Int = 2, isReadOnly: Boolean = false): TextArea =
+  def rotxtarea(rowCount: Int = 2): TextArea =
     textArea(cls("w3-light-gray w3-text-indigo"), rows(rowCount), readOnly(true))
 
   def email: Input =
