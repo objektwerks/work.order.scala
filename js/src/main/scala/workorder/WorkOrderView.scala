@@ -148,7 +148,7 @@ object WorkOrderView extends View:
       rotxt.amend {
         value <-- Model.workOrderVar.signal.map(_.opened)
       },
-      lbl("Closed"), // TODO Need checkbox!
+      lbl("Closed"),
       checkbox.amend {
         readOnly( role == Roles.homeowner )
         value <-- Model.workOrderVar.signal.map(_.closed)
