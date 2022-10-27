@@ -151,7 +151,11 @@ object WorkOrderView extends View:
       lbl("Closed"),
       checkbox.amend {
         readOnly( role == Roles.homeowner )
-        value <-- Model.workOrderVar.signal.map(_.closed)
+        checked <-- Model.workOrderVar.signal.map { _.closed.nonEmpty }
+        onChange.mapToChecked --> { value =>
+          val datetime = if value then DateTime.now else ""
+          Model.workOrderVar.update(workOrder => workOrder.copy(closed = datetime))
+        }
       },
       cbar(
         btn("Save").amend {
