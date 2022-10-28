@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <appender value="file" class="ch.qos.logback.core.FileAppender">
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
         <file>./target/test.jvm.log</file>
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>

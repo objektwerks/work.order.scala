@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <timestamp key="datetime" datePattern="yyyyMMdd.HHmmss" />
-    <appender value="file" class="ch.qos.logback.core.FileAppender">
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
         <file>~/.workorder/logs/${datetime}.log</file>
         <append>true</append>
         <encoder>
