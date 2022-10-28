@@ -30,9 +30,13 @@ object WorkOrdersView extends View:
       ),
       hdr("Work Orders"),
       lbl("Open"),
-      list(listWorkOrders(Model.openWorkOrders)),
+      div(
+        list(listWorkOrders(Model.openWorkOrders))
+      ),
       lbl("Closed"),
-      list(listWorkOrders(Model.closedWorkOrders)),
+      div(
+        list(listWorkOrders(Model.closedWorkOrders))
+      ),
       cbar(
         btn("New").amend {
           disabled <-- Model.userVar.signal.map(user => user.role == Roles.serviceProvider)
