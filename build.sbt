@@ -1,4 +1,4 @@
-name := "work.order.x"
+name := "work.order.scala"
 
 lazy val caskVersion = "0.8.3"
 lazy val laminarVersion = "0.14.5"
