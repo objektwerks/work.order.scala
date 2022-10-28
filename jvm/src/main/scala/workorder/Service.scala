@@ -41,6 +41,7 @@ final class Service(emailer: Emailer, store: Store) extends LazyLogging:
    */
   def login(login: Login): LoggedIn =
     Try {
+      log("login", s"$login")
       val user = store.getUserByEmailAddressPin(login.emailAddress, login.pin).get
       val users = user.role match
         case Roles.serviceProvider => store.listHomeownersInWorkOrdersByServiceProviderId(user.id)
