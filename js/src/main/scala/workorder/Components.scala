@@ -66,14 +66,3 @@ object Components:
 
   def item(stringSignal: Signal[String]): Li =
     li(cls("w3-text-indigo w3-display-container"), child.text <-- stringSignal)
-
-  def listServiceProviders(serviceProviders: Var[List[User]]): Signal[List[Li]] =
-    serviceProviders.signal.split(_.id)((id, _, serviceProviderSignal) =>
-      item(serviceProviderSignal.map(_.name)).amend {
-        onClick --> { _ =>
-          serviceProviders.now().find(_.id == id).foreach { serviceProvider =>
-            Model.workOrderVar.update(workOrder => workOrder.copy(serviceProviderId = serviceProvider.id))
-          }
-        }
-      }
-    )

@@ -23,6 +23,17 @@ object WorkOrderView extends View:
     Model.workOrderVar.update(workOrder => workOrder.copy(homeownerId = Model.userVar.now().id))
     Model.workOrderVar.update(workOrder => workOrder.copy(opened = DateTime.now))
 
+    def listServiceProviders(serviceProviders: Var[List[User]]): Signal[List[Li]] =
+      serviceProviders.signal.split(_.id)((id, _, serviceProviderSignal) =>
+        item(serviceProviderSignal.map(_.name)).amend {
+          onClick --> { _ =>
+            serviceProviders.now().find(_.id == id).foreach { serviceProvider =>
+              Model.workOrderVar.update(workOrder => workOrder.copy(serviceProviderId = serviceProvider.id))
+            }
+          }
+        }
+      )
+
     div(
       bar(
         btn("Work Orders").amend {
