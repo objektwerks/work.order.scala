@@ -78,9 +78,9 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
 
   def listHomeownersInWorkOrdersByServiceProviderId(userId: Int): List[User] =
     DB readOnly { implicit session =>
-      sql"""select * from users
-            inner join work_orders ON users.homeownerId = work_orders.homeownerId
-            where work_orders.serviceProviderId = $userId
+      sql"""select * from user
+            inner join work_order ON user.homeownerId = work_order.homeownerId
+            where work_order.serviceProviderId = $userId
             order by name asc"""
       .map(rs => User(
         rs.int("id"),
