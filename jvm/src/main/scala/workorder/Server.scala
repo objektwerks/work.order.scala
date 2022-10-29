@@ -13,14 +13,14 @@ import scala.concurrent.duration.*
 import scala.io.StdIn
 
 object Server extends Main with LazyLogging:
-  val conf = ConfigFactory.load("server.conf")
+  private val conf = ConfigFactory.load("server.conf")
 
-  val emailer = Emailer(conf)
+  private val emailer = Emailer(conf)
   Store.dirs(conf)
-  val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
-  val service = Service(emailer, store)
-  val handler = Handler(service)
-  val router = Router(handler)
+  private val store = Store(conf, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
+  private val service = Service(emailer, store)
+  private val handler = Handler(service)
+  private val router = Router(handler)
 
   override val allRoutes = Seq(router)
   
