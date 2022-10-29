@@ -17,30 +17,30 @@ import Serializer.given
 */
 final class Router(handler: Handler) extends Routes with LazyLogging:
   @cask.get("/now")
-  def now() = Response(Instant.now.toString)
+  def now(): Response[String] = Response(Instant.now.toString)
 
   @cask.post("/register")
-  def register(request: Request) =
+  def register(request: Request): String =
     write[Registered]( handler.register( read[Register](request.text()) ) )
 
   @cask.post("/login")
-  def login(request: Request) =
+  def login(request: Request): String =
     write[LoggedIn]( handler.login( read[Login](request.text()) ) )
 
   @cask.post("/user/save")
-  def saveUser(request: Request) =
+  def saveUser(request: Request): String =
     write[UserSaved]( handler.saveUser( read[SaveUser](request.text()) ) )
 
   @cask.post("/workorder/add") // only setup for a possible image file
-  def addWorkOrder(request: Request) =
+  def addWorkOrder(request: Request): String =
     write[WorkOrderAdded]( handler.addWorkOrder( read[AddWorkOrder](request.text()) ) )
 
   @cask.post("/workorder/save") // only setup for a possible image file
-  def saveWorkOrder(request: Request) =
+  def saveWorkOrder(request: Request): String =
     write[WorkOrderSaved]( handler.saveWorkOrder( read[SaveWorkOrder](request.text()) ) )
 
   @cask.post("/workorders")
-  def listWorkOrders(request: Request) =
+  def listWorkOrders(request: Request): String =
     write[WorkOrdersListed]( handler.listWorkOrders( read[ListWorkOrders](request.text()) ) )
 
   initialize()
