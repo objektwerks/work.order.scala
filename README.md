@@ -10,7 +10,8 @@ Note
 
 Todo
 ----
-1. UI testing
+1. Test UI
+2. Implement image file support in Router; and enable in Fetcher.
 
 Install
 -------
