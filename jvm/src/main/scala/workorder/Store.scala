@@ -7,10 +7,11 @@ import com.typesafe.scalalogging.LazyLogging
 import java.nio.file.Files
 import java.nio.file.Paths
 
-import scalikejdbc.*
 import scala.concurrent.duration.FiniteDuration
 import scala.io.{Codec, Source}
+import scala.language.postfixOps
 import scala.util.Using
+import scalikejdbc.*
 
 object Store:
   def cache(minSize: Int,
@@ -53,11 +54,11 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
             .map(rs => rs.string("license"))
             .single()
         }
-        if optionalLicense.isDefined then
+        optionalLicense.fold(false)(license =>
           cache.put(license, license)
           logger.debug(s"*** store cache put: $license")
           true
-        else false
+        )
 
   def listWorkOrders(userId: Int): List[WorkOrder] =
     DB readOnly { implicit session =>
