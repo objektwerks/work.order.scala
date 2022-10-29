@@ -48,7 +48,7 @@ final class Store(conf: Config, cache: Cache[String, String]) extends LazyLoggin
         logger.debug(s"*** store cache get: $license")
         true
       case None =>
-        val optionalLicense = DB readOnly { implicit session =>
+        val optionalLicense: Option[String] = DB readOnly { implicit session =>
           sql"select license from user where license = $license"
             .map(rs => rs.string("license"))
             .single()
