@@ -12,6 +12,7 @@ Todo
 ----
 1. Test UI
 2. Implement image file support in Router; and enable in Fetcher.
+>See: https://com-lihaoyi.github.io/cask/ ( search for: upload )
 
 Install
 -------
