@@ -13,8 +13,8 @@ import Serializer.given
 /* Note: This router can be readily set up as:
    https://github.com/objektwerks/poolmate.x/blob/main/jvm/src/main/scala/poolmate/Router.scala
    But this router is a replica of: https://github.com/objektwerks/work.order for various reasons,
-   to include the optional support of images. Image file support is implemented in js/Fetcher. But
-   it is not implemented in this router. Scala has no JS multer library. :) TODO!
+   to include the optional support for images. Image file support is implemented in js/Fetcher. But
+   it is not yet implemented in this router. Scala has no JS multer library. :) TODO!
 */
 final class Router(handler: Handler) extends Routes with LazyLogging:
   @cask.get("/now")
