@@ -55,9 +55,7 @@ object WorkOrdersListed:
   def success(userId: Int, workOrders: List[WorkOrder]): WorkOrdersListed = WorkOrdersListed(userId, workOrders)
   def fail(userId: Int, error: String): WorkOrdersListed = WorkOrdersListed(userId, List.empty[WorkOrder], false, error)
 
-final case class Fault(dateOf: Int = DateTime.currentDate,
-                       timeOf: Int = DateTime.currentTime,
-                       nanoOf: Int = DateTime.nano,
+final case class Fault(datetime: String = DateTime.now,
                        cause: String,
                        success: Boolean = true,
                        error: String = "") extends Event
