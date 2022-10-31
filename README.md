@@ -1,5 +1,5 @@
-Work Order
-----------
+Work Order Scala
+----------------
 >Web ( mobile ) app linking homeowners and service providers via work orders and email notification
 >using Scala 3, ScalaJs, Cask, uPickle, Scalikejdbc, Laminar, Waypoint, W3.CSS, Scaffeine, JoddMail,
 >Mysql and Snowpack.
