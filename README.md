@@ -202,26 +202,28 @@ Environment
 -----------
 >The following environment variables ***must*** be defined:
 
-export WORK_ORDER_DATABASE_URL="mysql://workorder:workorder@127.0.0.1:3306/work_order_db"
-export WORK_ORDER_DATABASE_USER="workorder"
-export WORK_ORDER_DATABASE_PASSWORD="workorder"
-export WORK_ORDER_DATABASE_POOL_INITIAL_SIZE=9
-export WORK_ORDER_DATABASE_POOL_MAX_SIZE=32
-export WORK_ORDER_DATABASE_POOL_CONNECTION_TIMEOUT_MILLIS=30000
+* export WORK_ORDER_DATABASE_URL="mysql://workorder:workorder@127.0.0.1:3306/work_order_db"
+* export WORK_ORDER_DATABASE_USER="workorder"
+* export WORK_ORDER_DATABASE_PASSWORD="workorder"
+* export WORK_ORDER_DATABASE_POOL_INITIAL_SIZE=9
+* export WORK_ORDER_DATABASE_POOL_MAX_SIZE=32
+* export WORK_ORDER_DATABASE_POOL_CONNECTION_TIMEOUT_MILLIS=30000
 
-export WORK_ORDER_EMAIL_HOST="youremailhost.com"
-export WORK_ORDER_EMAIL_PORT=587
-export WORK_ORDER_EMAIL_SENDER="youremailaddress@youremailhost.com"
-export WORK_ORDER_EMAIL_PASSWORD="youremailpassword"
+* export WORK_ORDER_EMAIL_HOST="youremailhost.com"
+* export WORK_ORDER_EMAIL_PORT=587
+* export WORK_ORDER_EMAIL_SENDER="youremailaddress@youremailhost.com"
+* export WORK_ORDER_EMAIL_PASSWORD="youremailpassword"
 
-export WORK_ORDER_SERVICE_PROVIDER_EMAIL="testemailaddress1@youremailhost.com"
-export WORK_ORDER_HOME_OWNER_EMAIL="testemailaddress2@youremailhost.com"
+* export WORK_ORDER_SERVICE_PROVIDER_EMAIL="testemailaddress1@youremailhost.com"
+* export WORK_ORDER_HOME_OWNER_EMAIL="testemailaddress2@youremailhost.com"
 
-export WORK_ORDER_DIR=$HOME/.workorder
-export WORK_ORDER_IMAGES_DIR=$WORK_ORDER_DIR/images
-export WORK_ORDER_LOGS_DIR=$WORK_ORDER_DIR/logs
+* export WORK_ORDER_DIR=$HOME/.workorder
+* export WORK_ORDER_IMAGES_DIR=$WORK_ORDER_DIR/images
+* export WORK_ORDER_LOGS_DIR=$WORK_ORDER_DIR/logs
 
->All variables are for production less: WORK_ORDER_SERVICE_PROVIDER_EMAIL and WORK_ORDER_HOME_OWNER_EMAIL,
+>All variables are for production, less:
+* WORK_ORDER_SERVICE_PROVIDER_EMAIL
+* WORK_ORDER_HOME_OWNER_EMAIL,
 >which are for the integration test.
 
 Resources
