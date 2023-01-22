@@ -6,7 +6,7 @@ lazy val waypointVersion = "0.5.0"
 lazy val upickleVersion = "2.0.0"
 lazy val mysqlVersion = "8.0.30"
 lazy val scalaJavaTimeVersion = "2.4.0"
-lazy val scalaTestVersion = "3.2.14"
+lazy val scalaTestVersion = "3.2.15"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
