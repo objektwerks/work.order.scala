@@ -2,6 +2,8 @@ package workorder
 
 import com.raquo.laminar.api.L.*
 
+import Page.{*, given}
+
 enum Mode:
   case add, edit, readonly
 
