@@ -9,8 +9,6 @@ import upickle.default.*
 import Serializer.given
 
 object PageRouter:
-  given pageRW: ReadWriter[Page] = macroRW
-
   val routes = List(
     Route.static(LoginRegisterPage, root / endOfSegments),
     Route.static(RegisterPage, root / endOfSegments),

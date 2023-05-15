@@ -2,6 +2,11 @@ package workorder
 
 import com.raquo.laminar.api.L.*
 
+import upickle.default.*
+
+object Page:
+  given pageRW: ReadWriter[Page] = macroRW
+
 sealed trait Page:
   val title = "Work Order"
 
