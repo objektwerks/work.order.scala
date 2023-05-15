@@ -5,6 +5,7 @@ import com.raquo.laminar.api.L.*
 import org.scalajs.dom.console.log
 
 import Components.*
+import Page.{*, given}
 
 object LoginRegisterView extends View:
   def apply(): HtmlElement =
