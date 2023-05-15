@@ -1,7 +1,5 @@
 package workorder
 
-import com.raquo.laminar.api.L.*
-
 import upickle.default.*
 
 sealed trait Page:
