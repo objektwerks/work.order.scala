@@ -7,12 +7,12 @@ import upickle.default.*
 object Page:
   given pageRW: ReadWriter[Page] = macroRW
 
-sealed trait Page:
-  val title = "Work Order"
+  sealed trait Page:
+    val title = "Work Order"
 
-case object LoginRegisterPage extends Page
-case object RegisterPage extends Page
-case object LoginPage extends Page
-case object ProfilePage extends Page
-case object WorkOrdersPage extends Page
-case object WorkOrderPage extends Page
+  case object LoginRegisterPage extends Page
+  case object RegisterPage extends Page
+  case object LoginPage extends Page
+  case object ProfilePage extends Page
+  case object WorkOrdersPage extends Page
+  case object WorkOrderPage extends Page
