@@ -5,7 +5,7 @@ import com.raquo.laminar.api.L.*
 import org.scalajs.dom.console.log
 
 import Components.*
-import Page.{*, given}
+import Page.*
 import Validator.*
 
 object LoginView extends View:
@@ -26,7 +26,7 @@ object LoginView extends View:
               Model.userVar.set(user)
               Model.usersVar.set(users)
               Model.workOrdersVar.set(workOrders)
-              route(WorkOrdersPage)
+              route(WorkOrdersPage())
             case _ =>
               log("login view: failed: %o", event)
               errorBus.emit(s"Login failed: $event")

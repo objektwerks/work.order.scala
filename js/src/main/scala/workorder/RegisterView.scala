@@ -8,7 +8,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 import Components.*
-import Page.{*, given}
+import Page.*
 import Validator.*
 
 object RegisterView extends View:
@@ -29,7 +29,7 @@ object RegisterView extends View:
             case Registered(_, _, _) =>
               clearErrorBus()
               log("register view: succeeded.")
-              route(LoginPage)
+              route(LoginPage())
             case _ => log("register view: failed: %o", event)
       
     div(

@@ -5,7 +5,7 @@ import com.raquo.laminar.api.L.*
 import org.scalajs.dom.console.log
 
 import Components.*
-import Page.{*, given}
+import Page.*
 import Validator.*
 
 object ProfileView extends View:
@@ -21,13 +21,13 @@ object ProfileView extends View:
             case UserSaved(_, _, _) =>
               clearErrorBus()
               log("profile view: succeeded.")
-              route(WorkOrdersPage)
+              route(WorkOrdersPage())
             case _ => log("profile view: failed: %o", event)
 
     div(
       bar(
         btn("Work Orders").amend {
-          onClick --> { _ => route(WorkOrdersPage) }
+          onClick --> { _ => route(WorkOrdersPage()) }
         }      
       ),
       div(

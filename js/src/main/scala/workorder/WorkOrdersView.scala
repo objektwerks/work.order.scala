@@ -5,7 +5,7 @@ import com.raquo.laminar.api.L.*
 import org.scalajs.dom.console.log
 
 import Components.*
-import Page.{*, given}
+import Page.*
 import Validator.*
 
 object WorkOrdersView extends View:
@@ -27,7 +27,7 @@ object WorkOrdersView extends View:
             workOrders.now().find(_.number == number).foreach { workOrder =>
               Model.workOrderVar.set(workOrder)
               Model.workOrderMode = if workOrder.closed.isEmpty then Mode.edit else Mode.readonly
-              PageRouter.router.pushState(WorkOrderPage)
+              PageRouter.router.pushState(WorkOrderPage())
             }
           }
         }
@@ -38,7 +38,7 @@ object WorkOrdersView extends View:
         btn("Profile").amend {
           onClick --> { _ =>
             log("work orders view: profile menu item onClick")
-            route(ProfilePage)
+            route(ProfilePage())
           }
         }      
       ),
@@ -57,7 +57,7 @@ object WorkOrdersView extends View:
           onClick --> { _ =>
             log("work orders view: new button onClick")
             Model.workOrderVar.set(WorkOrder.empty)
-            route(WorkOrderPage)
+            route(WorkOrderPage())
           }
         }),
         btn("Refresh").amend {

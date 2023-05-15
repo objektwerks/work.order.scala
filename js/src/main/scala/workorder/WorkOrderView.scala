@@ -5,7 +5,7 @@ import com.raquo.laminar.api.L.*
 import org.scalajs.dom.console.log
 
 import Components.*
-import Page.{*, given}
+import Page.*
 import Validator.*
 
 object WorkOrderView extends View:
@@ -38,7 +38,7 @@ object WorkOrderView extends View:
     div(
       bar(
         btn("Work Orders").amend {
-          onClick --> { _ => route(WorkOrdersPage) }
+          onClick --> { _ => route(WorkOrdersPage()) }
         }      
       ),
       hdr("Work Order"),
@@ -99,7 +99,7 @@ object WorkOrderView extends View:
     div(
       bar(
         btn("Work Orders").amend {
-          onClick --> { _ => route(WorkOrdersPage) }
+          onClick --> { _ => route(WorkOrdersPage()) }
         }      
       ),
       hdr("Work Order"),
@@ -231,10 +231,10 @@ object WorkOrderView extends View:
             clearErrorBus()
             log("work order view: add succeeded.")
             Model.addWorkOrder(Model.workOrderVar.now().copy(number = number))
-            route(WorkOrdersPage)
+            route(WorkOrdersPage())
           case WorkOrderSaved(_, _, _) =>
             clearErrorBus()
             log("work order view: save succeeded.")
             Model.updateWorkOrder(Model.workOrderVar.now())
-            route(WorkOrdersPage)
+            route(WorkOrdersPage())
           case _ => log("work order view: handler failed: %o", event)

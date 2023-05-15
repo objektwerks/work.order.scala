@@ -5,14 +5,22 @@ import com.raquo.laminar.api.L.*
 import upickle.default.*
 
 object Page:
-  given pageRW: ReadWriter[Page] = macroRW
-
   sealed trait Page:
     val title = "Work Order"
 
-  case object LoginRegisterPage extends Page
-  case object RegisterPage extends Page
-  case object LoginPage extends Page
-  case object ProfilePage extends Page
-  case object WorkOrdersPage extends Page
-  case object WorkOrderPage extends Page
+  case class LoginRegisterPage() extends Page
+  case class RegisterPage() extends Page
+  case class LoginPage() extends Page
+  case class ProfilePage() extends Page
+  case class WorkOrdersPage() extends Page
+  case class WorkOrderPage() extends Page
+  
+  given LoginRegisterPageRW: ReadWriter[LoginRegisterPage] = macroRW
+  given RegisterPageRW: ReadWriter[RegisterPage] = macroRW
+  given LoginPageRW: ReadWriter[LoginPage] = macroRW
+  given ProfilePageRW: ReadWriter[ProfilePage] = macroRW
+  given WorkOrdersPageRW: ReadWriter[WorkOrdersPage] = macroRW
+  given WorkOrderPageRW: ReadWriter[WorkOrderPage] = macroRW
+  given pageRW: ReadWriter[Page] = ReadWriter.merge(
+    LoginRegisterPageRW, RegisterPageRW, LoginPageRW, ProfilePageRW, WorkOrdersPageRW, WorkOrderPageRW
+  )

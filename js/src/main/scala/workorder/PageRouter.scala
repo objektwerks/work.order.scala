@@ -6,17 +6,17 @@ import com.raquo.waypoint.*
 
 import upickle.default.*
 
-import Page.{*, given}
+import Page.*
 import Serializer.given
 
 object PageRouter:
   val routes = List(
-    Route.static(LoginRegisterPage, root / endOfSegments),
-    Route.static(RegisterPage, root / endOfSegments),
-    Route.static(LoginPage, root / endOfSegments),
-    Route.static(ProfilePage, root / endOfSegments),
-    Route.static(WorkOrdersPage, root / endOfSegments),
-    Route.static(WorkOrderPage, root / endOfSegments)
+    Route.static(LoginRegisterPage(), root / endOfSegments),
+    Route.static(RegisterPage(), root / endOfSegments),
+    Route.static(LoginPage(), root / endOfSegments),
+    Route.static(ProfilePage(), root / endOfSegments),
+    Route.static(WorkOrdersPage(), root / endOfSegments),
+    Route.static(WorkOrderPage(), root / endOfSegments)
   )
 
   val router = com.raquo.waypoint.Router[Page](
@@ -30,9 +30,9 @@ object PageRouter:
   )
 
   val splitter = SplitRender[Page, HtmlElement](router.currentPageSignal)
-    .collectStatic(LoginRegisterPage) { LoginRegisterView() }
-    .collectStatic(LoginPage) { LoginView() }
-    .collectStatic(RegisterPage) { RegisterView() }
-    .collectStatic(ProfilePage) { ProfileView() }
-    .collectStatic(WorkOrdersPage) { WorkOrdersView() }
-    .collectStatic(WorkOrderPage) { WorkOrderView() }
+    .collectStatic(LoginRegisterPage()) { LoginRegisterView() }
+    .collectStatic(LoginPage()) { LoginView() }
+    .collectStatic(RegisterPage()) { RegisterView() }
+    .collectStatic(ProfilePage()) { ProfileView() }
+    .collectStatic(WorkOrdersPage()) { WorkOrdersView() }
+    .collectStatic(WorkOrderPage()) { WorkOrderView() }

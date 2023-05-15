@@ -2,7 +2,7 @@ package workorder
 
 import com.raquo.laminar.api.L.*
 
-import Page.{*, given}
+import Page.Page
 
 enum Mode:
   case add, edit, readonly
