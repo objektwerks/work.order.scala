@@ -6,6 +6,7 @@ import com.raquo.waypoint.*
 
 import upickle.default.*
 
+import Page.given
 import Serializer.given
 
 object PageRouter:
