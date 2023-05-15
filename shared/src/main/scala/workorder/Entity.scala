@@ -1,7 +1,5 @@
 package workorder
 
-import java.util.UUID
-
 import scala.util.Random
 
 sealed trait Entity
