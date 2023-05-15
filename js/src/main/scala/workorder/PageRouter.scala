@@ -7,7 +7,6 @@ import com.raquo.waypoint.*
 import upickle.default.*
 
 import Page.*
-import Serializer.given
 
 object PageRouter:
   val routes = List(

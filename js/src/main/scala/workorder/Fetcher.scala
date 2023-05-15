@@ -96,6 +96,7 @@ object Fetcher:
       )
     }
 
+  /* Unused methods errors!
   private def addWorkOrderToFormData(addWorkOrder: AddWorkOrder): FormData =
     val workOrder = addWorkOrder.workOrder.copy(imageUrl = Model.imageFileUrl)
     workOrderToFormData(addWorkOrder.copy(workOrder = workOrder))
@@ -103,6 +104,7 @@ object Fetcher:
   private def saveWorkOrderToFormData(saveWorkOrder: SaveWorkOrder): FormData =
     val workOrder = saveWorkOrder.workOrder.copy(imageUrl = Model.imageFileUrl)
     workOrderToFormData(saveWorkOrder.copy(workOrder = workOrder))
+  */
 
   private def workOrderToFormData(command: AddWorkOrder | SaveWorkOrder): FormData =
     val formData = new FormData()
