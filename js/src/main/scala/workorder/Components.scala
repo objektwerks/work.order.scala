@@ -2,8 +2,6 @@ package workorder
 
 import com.raquo.laminar.api.L.*
 
-import scala.scalajs.js.Date
-
 object Components:
   def bar(elms: HtmlElement*): Div =
     div(cls("w3-bar"), elms)

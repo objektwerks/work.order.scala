@@ -6,7 +6,7 @@ import com.raquo.waypoint.*
 
 import upickle.default.*
 
-import Page.*
+import Page.given
 
 object PageRouter:
   val routes = List(
