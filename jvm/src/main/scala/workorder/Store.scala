@@ -8,9 +8,7 @@ import java.nio.file.Files
 import java.nio.file.Paths
 
 import scala.concurrent.duration.FiniteDuration
-import scala.io.{Codec, Source}
 import scala.language.postfixOps
-import scala.util.Using
 import scalikejdbc.*
 
 object Store:
