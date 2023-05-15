@@ -5,6 +5,7 @@ import com.raquo.laminar.api.L.*
 import org.scalajs.dom.console.log
 
 import Components.*
+import Page.{*, given}
 import Validator.*
 
 object WorkOrdersView extends View:
