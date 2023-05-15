@@ -8,6 +8,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 import Components.*
+import Page.{*, given}
 import Validator.*
 
 object RegisterView extends View:
