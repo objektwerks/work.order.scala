@@ -1,8 +1,8 @@
 name := "work.order.scala"
 
 lazy val caskVersion = "0.9.1"
-lazy val laminarVersion = "15.0.1"
-lazy val waypointVersion = "6.0.0"
+lazy val laminarVersion = "16.0.0"
+lazy val waypointVersion = "7.0.0"
 lazy val upickleVersion = "3.1.0"
 lazy val mysqlVersion = "8.0.32"
 lazy val scalaJavaTimeVersion = "2.5.0"
