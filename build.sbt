@@ -69,7 +69,7 @@ lazy val jvm = (project in file("jvm"))
         "com.lihaoyi" %% "upickle" % upickleVersion,
         "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
         "mysql" % "mysql-connector-java" % mysqlVersion,
-        "io.github.cquiroz" %% "scala-java-time" % "2.4.0",
+        "io.github.cquiroz" %% "scala-java-time" % "2.5.0",
         "com.github.blemale" %% "scaffeine" % "5.2.0",
         "org.jodd" % "jodd-mail" % "6.0.5",
         "com.typesafe" % "config" % "1.4.2",
