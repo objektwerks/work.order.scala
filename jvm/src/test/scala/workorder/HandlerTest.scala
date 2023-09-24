@@ -8,7 +8,7 @@ import org.scalatest.matchers.should.Matchers
 
 import scala.concurrent.duration.*
 
-class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
+final class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
   val conf = ConfigFactory.load("test.server.conf")
 
   val emailer = Emailer(conf)
@@ -17,7 +17,7 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
   val service = Service(emailer, store)
   val handler = Handler(service)
 
-  test("handler") {
+  test("handler"):
     println("*** handler integration test running...")
 
     val serviceProviderEmail = conf.getString("email.serviceProviderEmail")
@@ -72,4 +72,3 @@ class HandlerTest extends AnyFunSuite with Matchers with LazyLogging:
     workOrdersListed.workOrders.size shouldBe 1
 
     println("*** handler integration test complete!")
-  }
