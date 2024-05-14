@@ -4,7 +4,7 @@ lazy val caskVersion = "0.9.2"
 lazy val laminarVersion = "17.0.0"
 lazy val waypointVersion = "8.0.0"
 lazy val upickleVersion = "3.3.0"
-lazy val mysqlVersion = "8.2.0"
+lazy val mysqlVersion = "8.3.0"
 lazy val scalaJavaTimeVersion = "2.5.0"
 lazy val scalaTestVersion = "3.2.18"
 
