@@ -5,7 +5,7 @@ lazy val laminarVersion = "17.2.1"
 lazy val waypointVersion = "8.0.1" // Don't upgrade due to breaking changes!
 lazy val upickleVersion = "4.3.2"
 lazy val mysqlVersion = "9.0.1"
-lazy val scalaJavaTimeVersion = "2.6.0"
+lazy val scalaJavaTimeVersion = "1.0.0"
 lazy val scalaTestVersion = "3.2.19"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
